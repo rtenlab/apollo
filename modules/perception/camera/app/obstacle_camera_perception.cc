@@ -63,7 +63,7 @@ bool ObstacleCameraPerception::Init(
     detector_init_options.gpu_id = perception_param_.gpu_id();
 
     model = common::SensorManager::Instance()->GetUndistortCameraModel(
-        detector_param.camera_name());  // FIXME: 
+        detector_param.camera_name());
     auto pinhole = static_cast<base::PinholeCameraModel *>(model.get());
     name_intrinsic_map_.insert(std::pair<std::string, Eigen::Matrix3f>(
         detector_param.camera_name(), pinhole->get_intrinsic_params()));
