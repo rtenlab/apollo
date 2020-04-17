@@ -1,0 +1,879 @@
+==31187== NVPROF is profiling process 31187, command: ./camera_app_obstacle_camera_perception_test
+[NVBLAS] NVBLAS_CONFIG_FILE environment variable is NOT set : relying on default config filename 'nvblas.conf'
+[NVBLAS] Cannot open default config file 'nvblas.conf'
+[NVBLAS] Config parsed
+[NVBLAS] CPU Blas library need to be provided
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0416 22:03:57.470481 31187 object_pool_types.cc:33] []Initialize base object pool (malloc).
+Running main() from gmock_main.cc
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from ObstacleCameraPerceptionTest
+[ RUN      ] ObstacleCameraPerceptionTest.perception_test
+[0;33mW0416 22:03:57.492354 31187 environment.h:33] []Environment variable [MODULE_PATH] not set, fallback to 
+[m[0;33mW0416 22:03:57.492381 31187 environment.h:33] []Environment variable [CYBER_PATH] not set, fallback to 
+[mI0416 22:03:57.494197 31187 sensor_manager.cc:97] []Init sensor_manager success.
+==31187== Warning: Profiling results might be incorrect with current version of nvcc compiler used to compile cuda app. Compile with nvcc compiler 9.0 or later version to get correct profiling results. Ignore this warning if code is already compiled with the recommended nvcc version 
+I0416 22:03:57.817898 31187 yolo_obstacle_detector.cc:52] []image_height=1080, image_width=1920, roi_ratio=0.4
+I0416 22:03:57.817953 31187 yolo_obstacle_detector.cc:55] []offset_y=312, height=576, width=1440
+I0416 22:03:57.817996 31187 util.cc:60] []Supported types: 
+I0416 22:03:57.818006 31187 util.cc:67] []		CAR
+I0416 22:03:57.818009 31187 util.cc:67] []		VAN
+I0416 22:03:57.818011 31187 util.cc:67] []		BUS
+I0416 22:03:57.818014 31187 util.cc:67] []		TRUCK
+I0416 22:03:57.818017 31187 util.cc:67] []		CYCLIST
+I0416 22:03:57.818019 31187 util.cc:67] []		TRICYCLIST
+I0416 22:03:57.818022 31187 util.cc:67] []		PEDESTRIAN
+I0416 22:03:57.818023 31187 util.cc:67] []		TRAFFICCONE
+I0416 22:03:57.818027 31187 util.cc:69] []		8 in total.
+I0416 22:03:57.818032 31187 util.cc:80] []Expand nums: 
+I0416 22:03:57.818082 31187 util.cc:83] []		0
+I0416 22:03:57.818109 31187 util.cc:83] []		0
+I0416 22:03:57.818112 31187 util.cc:83] []		0
+I0416 22:03:57.818115 31187 util.cc:83] []		0
+I0416 22:03:57.818118 31187 util.cc:83] []		0
+I0416 22:03:57.818120 31187 util.cc:83] []		0
+I0416 22:03:57.818123 31187 util.cc:83] []		0.00416667
+I0416 22:03:57.818127 31187 util.cc:83] []		0.00416667
+I0416 22:03:57.818135 31187 yolo_obstacle_detector.cc:127] []model_type=RTNetInt8
+WARNING: The Permute Plugin is being deprecated and will be removed in the next TensorRT release. Please use the TensorRT Shuffle layer for Permute operation
+WARNING: The Permute Plugin is being deprecated and will be removed in the next TensorRT release. Please use the TensorRT Shuffle layer for Permute operation
+WARNING: The Permute Plugin is being deprecated and will be removed in the next TensorRT release. Please use the TensorRT Shuffle layer for Permute operation
+WARNING: The Permute Plugin is being deprecated and will be removed in the next TensorRT release. Please use the TensorRT Shuffle layer for Permute operation
+WARNING: The Permute Plugin is being deprecated and will be removed in the next TensorRT release. Please use the TensorRT Shuffle layer for Permute operation
+WARNING: The Permute Plugin is being deprecated and will be removed in the next TensorRT release. Please use the TensorRT Shuffle layer for Permute operation
+WARNING: The Permute Plugin is being deprecated and will be removed in the next TensorRT release. Please use the TensorRT Shuffle layer for Permute operation
+WARNING: The Permute Plugin is being deprecated and will be removed in the next TensorRT release. Please use the TensorRT Shuffle layer for Permute operation
+WARNING: The Permute Plugin is being deprecated and will be removed in the next TensorRT release. Please use the TensorRT Shuffle layer for Permute operation
+WARNING: The Permute Plugin is being deprecated and will be removed in the next TensorRT release. Please use the TensorRT Shuffle layer for Permute operation
+WARNING: The Permute Plugin is being deprecated and will be removed in the next TensorRT release. Please use the TensorRT Shuffle layer for Permute operation
+WARNING: The Permute Plugin is being deprecated and will be removed in the next TensorRT release. Please use the TensorRT Shuffle layer for Permute operation
+WARNING: The Permute Plugin is being deprecated and will be removed in the next TensorRT release. Please use the TensorRT Shuffle layer for Permute operation
+I0416 22:03:57.848858 31187 rt_net.cc:722] []Erase output: detect1_ori_conf_pred
+I0416 22:03:57.848872 31187 rt_net.cc:722] []Erase output: detect2_cls_pred
+I0416 22:03:57.848875 31187 rt_net.cc:722] []Erase output: detect2_dim_pred
+I0416 22:03:57.848877 31187 rt_net.cc:722] []Erase output: detect2_loc_pred
+I0416 22:03:57.848879 31187 rt_net.cc:722] []Erase output: detect2_obj_pred
+I0416 22:03:57.848882 31187 rt_net.cc:722] []Erase output: detect2_ori_conf_pred
+I0416 22:03:57.848884 31187 rt_net.cc:722] []Erase output: detect2_ori_pred
+I0416 22:03:57.848887 31187 rt_net.cc:722] []Erase output: detect3_cls_pred
+I0416 22:03:57.848889 31187 rt_net.cc:722] []Erase output: detect3_dim_pred
+I0416 22:03:57.848891 31187 rt_net.cc:722] []Erase output: detect3_loc_pred
+I0416 22:03:57.848894 31187 rt_net.cc:722] []Erase output: detect3_obj_pred
+I0416 22:03:57.848896 31187 rt_net.cc:722] []Erase output: detect3_ori_conf_pred
+I0416 22:03:57.848898 31187 rt_net.cc:722] []Erase output: detect3_ori_pred
+I0416 22:03:57.848902 31187 rt_net.cc:722] []Erase output: lof_pred
+I0416 22:03:57.848904 31187 rt_net.cc:722] []Erase output: lor_pred
+[0;33mW0416 22:03:57.849125 31187 rt_net.cc:666] []Device Not Supports Int8 Mode. Use FP32 Mode.
+[mI0416 22:04:13.100662 31187 omt_obstacle_tracker.cc:41] []load omt parameters from /apollo/modules/perception/production/data/perception/camera/models/omt_obstacle_tracker/config.pt 
+img_capability: 14 
+lost_age: 3 
+reserve_age: 5 
+border: 20 
+target_thresh: 0.6 
+correct_type: 0
+I0416 22:04:13.105971 31187 multicue_obstacle_transformer.cc:35] []Load transformer parameters from /apollo/modules/perception/production/data/perception/camera/models/multicue_obstacle_transformer/config.pt 
+min dimension: 0 
+do template search: 1
+I0416 22:04:13.106019 31187 location_refiner_obstacle_postprocessor.cc:40] []Load postprocessor parameters from /apollo/modules/perception/production/data/perception/camera/models/location_refiner_obstacle_postprocessor/config.pt 
+min_dist_to_camera: 30 
+roi_h2bottom_scale: 0.5
+I0416 22:04:13.106025 31187 obstacle_camera_perception.cc:135] []No feature config found.
+I0416 22:04:13.106030 31187 obstacle_camera_perception.cc:206] []lane_detector_name: DenselineLaneDetector
+I0416 22:04:13.106139 31187 denseline_lane_detector.cc:40] []denseline param: model_param {
+  model_name: "denseline"
+  proto_file: "deploy.prototxt"
+  weight_file: "deploy.caffemodel"
+  resize_scale: 0.8
+  input_offset_y: 440
+  input_offset_x: 0
+  crop_height: 640
+  crop_width: 1920
+  mean_b: 95
+  mean_g: 99
+  mean_r: 96
+  is_bgr: true
+  model_type: "RTNetInt8"
+}
+net_param {
+  in_blob: "data"
+  out_blob: "conv_out"
+  internal_blob_int8: "reduce1_add"
+  internal_blob_int8: "reduce2_add"
+  internal_blob_int8: "reduce3_add"
+  internal_blob_int8: "reduce4_add"
+  internal_blob_int8: "res6b_input_64"
+  internal_blob_int8: "res5b_input_32"
+  internal_blob_int8: "res4d_input_16"
+  internal_blob_int8: "res3c_input_8"
+}
+[0;31mE0416 22:04:13.106144 31187 denseline_lane_detector.cc:51] []options.intrinsic is nullptr!
+[mI0416 22:04:13.106150 31187 denseline_lane_detector.cc:61] []input_height: 1080
+I0416 22:04:13.106153 31187 denseline_lane_detector.cc:62] []input_width: 1920
+I0416 22:04:13.106261 31187 denseline_lane_detector.cc:93] []GPU: GeForce GTX 1070 Ti
+I0416 22:04:13.106267 31187 denseline_lane_detector.cc:103] []net input blobs: data
+I0416 22:04:13.106269 31187 denseline_lane_detector.cc:106] []net output blobs: conv_out
+I0416 22:04:13.106271 31187 denseline_lane_detector.cc:106] []net output blobs: reduce1_add
+I0416 22:04:13.106287 31187 denseline_lane_detector.cc:106] []net output blobs: reduce2_add
+I0416 22:04:13.106290 31187 denseline_lane_detector.cc:106] []net output blobs: reduce3_add
+I0416 22:04:13.106292 31187 denseline_lane_detector.cc:106] []net output blobs: reduce4_add
+I0416 22:04:13.106294 31187 denseline_lane_detector.cc:106] []net output blobs: res6b_input_64
+I0416 22:04:13.106297 31187 denseline_lane_detector.cc:106] []net output blobs: res5b_input_32
+I0416 22:04:13.106298 31187 denseline_lane_detector.cc:106] []net output blobs: res4d_input_16
+I0416 22:04:13.106300 31187 denseline_lane_detector.cc:106] []net output blobs: res3c_input_8
+I0416 22:04:13.106302 31187 denseline_lane_detector.cc:110] []model_type: RTNetInt8
+I0416 22:04:13.149195 31187 denseline_lane_detector.cc:126] []input_reshape: 1, 3, 512, 1536
+[0;33mW0416 22:04:13.157685 31187 rt_net.cc:666] []Device Not Supports Int8 Mode. Use FP32 Mode.
+[mI0416 22:04:25.666905 31187 denseline_lane_detector.cc:137] []data: 3 512 1536
+I0416 22:04:25.666935 31187 denseline_lane_detector.cc:143] []conv_out : 9 64 192
+I0416 22:04:25.666939 31187 denseline_lane_detector.cc:143] []reduce1_add : 324 8 24
+I0416 22:04:25.666940 31187 denseline_lane_detector.cc:143] []reduce2_add : 216 16 48
+I0416 22:04:25.666944 31187 denseline_lane_detector.cc:143] []reduce3_add : 144 32 96
+I0416 22:04:25.666945 31187 denseline_lane_detector.cc:143] []reduce4_add : 96 64 192
+I0416 22:04:25.666947 31187 denseline_lane_detector.cc:143] []res6b_input_64 : 324 8 24
+I0416 22:04:25.666949 31187 denseline_lane_detector.cc:143] []res5b_input_32 : 216 16 48
+I0416 22:04:25.666951 31187 denseline_lane_detector.cc:143] []res4d_input_16 : 144 32 96
+I0416 22:04:25.666954 31187 denseline_lane_detector.cc:143] []res3c_input_8 : 96 64 192
+I0416 22:04:25.666960 31187 obstacle_camera_perception.cc:212] []Detector: DenselineLaneDetector
+I0416 22:04:25.667044 31187 denseline_lane_postprocessor.cc:48] [] offset_x=0 offset_y=440 crop_w=1920 crop_h=640
+I0416 22:04:25.667047 31187 denseline_lane_postprocessor.cc:55] []postprocessor_config: /apollo/modules/perception/production/data/perception/camera/models/lane_postprocessor/denseline/config.pt
+I0416 22:04:25.667131 31187 denseline_lane_postprocessor.cc:64] []lane_postprocessor param: omit_bottom_line_num: 3
+laneline_map_score_thresh: 0.6
+laneline_point_score_thresh: 0.4
+laneline_point_min_num_thresh: 2
+cc_valid_pixels_ratio: 2
+laneline_reject_dist_thresh: 50
+I0416 22:04:25.667137 31187 obstacle_camera_perception.cc:232] []lane_postprocessor: DenselineLanePostprocessor
+I0416 22:04:25.667172 31187 obstacle_camera_perception.cc:277] []calibration_service: OnlineCalibrationService
+I0416 22:04:25.667421 31187 object_template_manager.cc:174] []Init object_template_manager success.
+222222222222222222222222222222222222222222222222222222222222
+I0416 22:04:25.724593 31187 camera_app_obstacle_camera_perception_test.cc:137] []image: 0
+I0416 22:04:25.733187 31187 data_provider.cc:146] []Fill in GPU mode ...
+I0416 22:04:25.733666 31187 data_provider.cc:186] []Done! (1)
+I0416 22:04:25.733678 31187 data_provider.cc:241] []GetImage ...
+I0416 22:04:25.733681 31187 data_provider.cc:268] []	cropping ...
+I0416 22:04:25.733685 31187 data_provider.cc:271] []Done!
+I0416 22:04:25.733690 31187 denseline_lane_detector.cc:178] []input_blob: 3 512 1536
+I0416 22:04:25.733839 31187 denseline_lane_detector.cc:196] []resize gpu finish.
+I0416 22:04:25.742596 31187 denseline_lane_detector.cc:199] []infer finish.
+I0416 22:04:25.743425 31187 common_functions.cc:173] []subset number = 1
+I0416 22:04:25.743436 31187 common_functions.cc:198] []cc number = 1
+I0416 22:04:25.743439 31187 denseline_lane_postprocessor.cc:362] []pixels_size < valid_pixels_num.
+I0416 22:04:25.743443 31187 denseline_lane_postprocessor.cc:369] []valid_ccs_num is 0.
+I0416 22:04:25.743448 31187 laneline_calibrator.cc:44] []Failed to get the ego lane.
+I0416 22:04:25.743450 31187 online_calibration_service.cc:188] []camera_ground_height: 1.6 meter.
+I0416 22:04:25.743460 31187 online_calibration_service.cc:190] []pitch_angle: 0 degree.
+I0416 22:04:25.743477 31187 yolo_obstacle_detector.cc:327] []Start: 0.003ms
+I0416 22:04:25.743482 31187 data_provider.cc:241] []GetImage ...
+I0416 22:04:25.743485 31187 data_provider.cc:268] []	cropping ...
+I0416 22:04:25.743489 31187 data_provider.cc:271] []Done!
+I0416 22:04:25.743491 31187 yolo_obstacle_detector.cc:335] []GetImageBlob: 0.014ms
+I0416 22:04:25.743510 31187 yolo_obstacle_detector.cc:338] []Resize: 0.019ms
+I0416 22:04:25.753577 31187 yolo_obstacle_detector.cc:342] []Network Forward: 10.066ms
+I0416 22:04:25.759120 31187 yolo_obstacle_detector.cc:348] []GetObj: 5.541ms
+I0416 22:04:25.759135 31187 region_output.cc:263] []3 of 3 obstacles kept
+I0416 22:04:25.759138 31187 region_output.cc:265] []Number of detected obstacles: 3
+I0416 22:04:25.759140 31187 yolo_obstacle_detector.cc:352] []Post1: 0.023ms
+I0416 22:04:25.759749 31187 yolo_obstacle_detector.cc:354] []Extract: 0.607ms
+I0416 22:04:25.759760 31187 yolo_obstacle_detector.cc:381] []Post2: 0.013ms
+I0416 22:04:25.759827 31187 omt_obstacle_tracker.cc:341] []Target 0 is created by 0 (0)
+I0416 22:04:25.759835 31187 omt_obstacle_tracker.cc:341] []Target 1 is created by 0 (2)
+I0416 22:04:25.759837 31187 omt_obstacle_tracker.cc:386] []Create 2 new target
+I0416 22:04:25.759882 31187 location_refiner_obstacle_postprocessor.cc:72] []Camera k matrix input to obstacle postprocessor: 
+1983.97, 0, 998.341
+0, 1981.63, 621.618
+0, 0, 1
+I0416 22:04:25.759893 31187 location_refiner_obstacle_postprocessor.cc:157] []diff on camera z: -1.94616
+I0416 22:04:25.759896 31187 location_refiner_obstacle_postprocessor.cc:158] []Obj center from postprocessor: 0015.8691 -0.716203 0-1.33296
+I0416 22:04:25.759919 31187 omt_obstacle_tracker.cc:462] []Create 0 new target
+I0416 22:04:25.759923 31187 target.cc:169] []dir 0 -2.95478 0.186815
+I0416 22:04:25.759935 31187 target.cc:169] []dir 1 -2.86835 0.27324
+I0416 22:04:25.759970 31187 camera_app_obstacle_camera_perception_test.cc:137] []image: 1
+I0416 22:04:25.767709 31187 data_provider.cc:146] []Fill in GPU mode ...
+I0416 22:04:25.768172 31187 data_provider.cc:186] []Done! (1)
+I0416 22:04:25.768180 31187 data_provider.cc:241] []GetImage ...
+I0416 22:04:25.768183 31187 data_provider.cc:268] []	cropping ...
+I0416 22:04:25.768188 31187 data_provider.cc:271] []Done!
+I0416 22:04:25.768193 31187 denseline_lane_detector.cc:178] []input_blob: 3 512 1536
+I0416 22:04:25.768216 31187 denseline_lane_detector.cc:196] []resize gpu finish.
+I0416 22:04:25.777012 31187 denseline_lane_detector.cc:199] []infer finish.
+I0416 22:04:25.777691 31187 common_functions.cc:173] []subset number = 1
+I0416 22:04:25.777704 31187 common_functions.cc:198] []cc number = 1
+I0416 22:04:25.777706 31187 denseline_lane_postprocessor.cc:362] []pixels_size < valid_pixels_num.
+I0416 22:04:25.777709 31187 denseline_lane_postprocessor.cc:369] []valid_ccs_num is 0.
+I0416 22:04:25.777714 31187 laneline_calibrator.cc:44] []Failed to get the ego lane.
+I0416 22:04:25.777716 31187 online_calibration_service.cc:188] []camera_ground_height: 1.6 meter.
+I0416 22:04:25.777721 31187 online_calibration_service.cc:190] []pitch_angle: 0 degree.
+I0416 22:04:25.777732 31187 yolo_obstacle_detector.cc:327] []Start: 0.002ms
+I0416 22:04:25.777735 31187 data_provider.cc:241] []GetImage ...
+I0416 22:04:25.777738 31187 data_provider.cc:268] []	cropping ...
+I0416 22:04:25.777741 31187 data_provider.cc:271] []Done!
+I0416 22:04:25.777743 31187 yolo_obstacle_detector.cc:335] []GetImageBlob: 0.012ms
+I0416 22:04:25.777760 31187 yolo_obstacle_detector.cc:338] []Resize: 0.016ms
+I0416 22:04:25.787820 31187 yolo_obstacle_detector.cc:342] []Network Forward: 10.06ms
+I0416 22:04:25.790645 31187 yolo_obstacle_detector.cc:348] []GetObj: 2.824ms
+I0416 22:04:25.790655 31187 region_output.cc:263] []3 of 4 obstacles kept
+I0416 22:04:25.790724 31187 region_output.cc:265] []Number of detected obstacles: 3
+I0416 22:04:25.790726 31187 yolo_obstacle_detector.cc:352] []Post1: 0.082ms
+I0416 22:04:25.790823 31187 yolo_obstacle_detector.cc:354] []Extract: 0.097ms
+I0416 22:04:25.790830 31187 yolo_obstacle_detector.cc:381] []Post2: 0.008ms
+I0416 22:04:25.790940 31187 omt_obstacle_tracker.cc:216] []Target 1 match 1 (1)at 0.862529 size: 2
+I0416 22:04:25.790946 31187 omt_obstacle_tracker.cc:216] []Target 0 match 1 (0)at 0.852136 size: 2
+I0416 22:04:25.790949 31187 omt_obstacle_tracker.cc:386] []Create 0 new target
+I0416 22:04:25.790987 31187 location_refiner_obstacle_postprocessor.cc:72] []Camera k matrix input to obstacle postprocessor: 
+1983.97, 0, 998.341
+0, 1981.63, 621.618
+0, 0, 1
+I0416 22:04:25.790997 31187 location_refiner_obstacle_postprocessor.cc:157] []diff on camera z: -0.363268
+I0416 22:04:25.790999 31187 location_refiner_obstacle_postprocessor.cc:158] []Obj center from postprocessor: 0015.7747 -0.317782 0-1.07069
+I0416 22:04:25.791011 31187 omt_obstacle_tracker.cc:462] []Create 0 new target
+I0416 22:04:25.791014 31187 target.cc:169] []dir 0 -2.94894 0.188567
+I0416 22:04:25.791030 31187 target.cc:169] []dir 1 -2.7346 0.313231
+I0416 22:04:25.791043 31187 camera_app_obstacle_camera_perception_test.cc:137] []image: 2
+I0416 22:04:25.798877 31187 data_provider.cc:146] []Fill in GPU mode ...
+I0416 22:04:25.799337 31187 data_provider.cc:186] []Done! (1)
+I0416 22:04:25.799345 31187 data_provider.cc:241] []GetImage ...
+I0416 22:04:25.799346 31187 data_provider.cc:268] []	cropping ...
+I0416 22:04:25.799350 31187 data_provider.cc:271] []Done!
+I0416 22:04:25.799353 31187 denseline_lane_detector.cc:178] []input_blob: 3 512 1536
+I0416 22:04:25.799376 31187 denseline_lane_detector.cc:196] []resize gpu finish.
+I0416 22:04:25.808173 31187 denseline_lane_detector.cc:199] []infer finish.
+I0416 22:04:25.808863 31187 common_functions.cc:173] []subset number = 3
+I0416 22:04:25.808878 31187 common_functions.cc:198] []cc number = 3
+I0416 22:04:25.808881 31187 denseline_lane_postprocessor.cc:362] []pixels_size < valid_pixels_num.
+I0416 22:04:25.808884 31187 denseline_lane_postprocessor.cc:362] []pixels_size < valid_pixels_num.
+I0416 22:04:25.808887 31187 denseline_lane_postprocessor.cc:362] []pixels_size < valid_pixels_num.
+I0416 22:04:25.808888 31187 denseline_lane_postprocessor.cc:369] []valid_ccs_num is 0.
+I0416 22:04:25.808893 31187 laneline_calibrator.cc:44] []Failed to get the ego lane.
+I0416 22:04:25.808897 31187 online_calibration_service.cc:188] []camera_ground_height: 1.6 meter.
+I0416 22:04:25.808902 31187 online_calibration_service.cc:190] []pitch_angle: 0 degree.
+I0416 22:04:25.808912 31187 yolo_obstacle_detector.cc:327] []Start: 0.002ms
+I0416 22:04:25.808915 31187 data_provider.cc:241] []GetImage ...
+I0416 22:04:25.808917 31187 data_provider.cc:268] []	cropping ...
+I0416 22:04:25.808920 31187 data_provider.cc:271] []Done!
+I0416 22:04:25.808923 31187 yolo_obstacle_detector.cc:335] []GetImageBlob: 0.011ms
+I0416 22:04:25.808938 31187 yolo_obstacle_detector.cc:338] []Resize: 0.016ms
+I0416 22:04:25.818939 31187 yolo_obstacle_detector.cc:342] []Network Forward: 9.999ms
+I0416 22:04:25.821637 31187 yolo_obstacle_detector.cc:348] []GetObj: 2.698ms
+I0416 22:04:25.821647 31187 region_output.cc:263] []3 of 4 obstacles kept
+I0416 22:04:25.821655 31187 region_output.cc:265] []Number of detected obstacles: 3
+I0416 22:04:25.821656 31187 yolo_obstacle_detector.cc:352] []Post1: 0.021ms
+I0416 22:04:25.821745 31187 yolo_obstacle_detector.cc:354] []Extract: 0.088ms
+I0416 22:04:25.821753 31187 yolo_obstacle_detector.cc:381] []Post2: 0.008ms
+I0416 22:04:25.821863 31187 omt_obstacle_tracker.cc:216] []Target 1 match 2 (1)at 0.896671 size: 3
+I0416 22:04:25.821871 31187 omt_obstacle_tracker.cc:216] []Target 0 match 2 (0)at 0.875329 size: 3
+I0416 22:04:25.821875 31187 omt_obstacle_tracker.cc:386] []Create 0 new target
+I0416 22:04:25.821908 31187 location_refiner_obstacle_postprocessor.cc:72] []Camera k matrix input to obstacle postprocessor: 
+1983.97, 0, 998.341
+0, 1981.63, 621.618
+0, 0, 1
+I0416 22:04:25.821918 31187 location_refiner_obstacle_postprocessor.cc:157] []diff on camera z: -0.368883
+I0416 22:04:25.821920 31187 location_refiner_obstacle_postprocessor.cc:158] []Obj center from postprocessor: 0016.0026 -0.164108 0-1.07091
+I0416 22:04:25.821931 31187 obstacle_reference.cc:103] []Target: 0 can be Ref. Type: CAR
+I0416 22:04:25.821941 31187 obstacle_reference.cc:103] []Target: 1 can be Ref. Type: CAR
+I0416 22:04:25.821945 31187 omt_obstacle_tracker.cc:462] []Create 0 new target
+I0416 22:04:25.821949 31187 target.cc:169] []dir 0 -2.95088 0.189209
+I0416 22:04:25.821960 31187 target.cc:169] []dir 1 -2.75024 0.336765
+I0416 22:04:25.821972 31187 camera_app_obstacle_camera_perception_test.cc:137] []image: 3
+I0416 22:04:25.829705 31187 data_provider.cc:146] []Fill in GPU mode ...
+I0416 22:04:25.830165 31187 data_provider.cc:186] []Done! (1)
+I0416 22:04:25.830173 31187 data_provider.cc:241] []GetImage ...
+I0416 22:04:25.830175 31187 data_provider.cc:268] []	cropping ...
+I0416 22:04:25.830179 31187 data_provider.cc:271] []Done!
+I0416 22:04:25.830183 31187 denseline_lane_detector.cc:178] []input_blob: 3 512 1536
+I0416 22:04:25.830204 31187 denseline_lane_detector.cc:196] []resize gpu finish.
+I0416 22:04:25.838984 31187 denseline_lane_detector.cc:199] []infer finish.
+I0416 22:04:25.839671 31187 common_functions.cc:173] []subset number = 3
+I0416 22:04:25.839684 31187 common_functions.cc:198] []cc number = 3
+I0416 22:04:25.839686 31187 denseline_lane_postprocessor.cc:362] []pixels_size < valid_pixels_num.
+I0416 22:04:25.839689 31187 denseline_lane_postprocessor.cc:362] []pixels_size < valid_pixels_num.
+I0416 22:04:25.839690 31187 denseline_lane_postprocessor.cc:362] []pixels_size < valid_pixels_num.
+I0416 22:04:25.839692 31187 denseline_lane_postprocessor.cc:369] []valid_ccs_num is 0.
+I0416 22:04:25.839696 31187 laneline_calibrator.cc:44] []Failed to get the ego lane.
+I0416 22:04:25.839699 31187 online_calibration_service.cc:188] []camera_ground_height: 1.6 meter.
+I0416 22:04:25.839704 31187 online_calibration_service.cc:190] []pitch_angle: 0 degree.
+I0416 22:04:25.839715 31187 yolo_obstacle_detector.cc:327] []Start: 0.002ms
+I0416 22:04:25.839718 31187 data_provider.cc:241] []GetImage ...
+I0416 22:04:25.839720 31187 data_provider.cc:268] []	cropping ...
+I0416 22:04:25.839723 31187 data_provider.cc:271] []Done!
+I0416 22:04:25.839725 31187 yolo_obstacle_detector.cc:335] []GetImageBlob: 0.011ms
+I0416 22:04:25.839741 31187 yolo_obstacle_detector.cc:338] []Resize: 0.016ms
+I0416 22:04:25.849834 31187 yolo_obstacle_detector.cc:342] []Network Forward: 10.092ms
+I0416 22:04:25.852572 31187 yolo_obstacle_detector.cc:348] []GetObj: 2.737ms
+I0416 22:04:25.852582 31187 region_output.cc:263] []3 of 3 obstacles kept
+I0416 22:04:25.852586 31187 region_output.cc:265] []Number of detected obstacles: 3
+I0416 22:04:25.852588 31187 yolo_obstacle_detector.cc:352] []Post1: 0.017ms
+I0416 22:04:25.852684 31187 yolo_obstacle_detector.cc:354] []Extract: 0.096ms
+I0416 22:04:25.852691 31187 yolo_obstacle_detector.cc:381] []Post2: 0.008ms
+I0416 22:04:25.852813 31187 omt_obstacle_tracker.cc:216] []Target 0 match 3 (0)at 0.888961 size: 4
+I0416 22:04:25.852820 31187 omt_obstacle_tracker.cc:216] []Target 1 match 3 (1)at 0.884614 size: 4
+I0416 22:04:25.852824 31187 omt_obstacle_tracker.cc:386] []Create 0 new target
+I0416 22:04:25.852860 31187 location_refiner_obstacle_postprocessor.cc:72] []Camera k matrix input to obstacle postprocessor: 
+1983.97, 0, 998.341
+0, 1981.63, 621.618
+0, 0, 1
+I0416 22:04:25.852870 31187 location_refiner_obstacle_postprocessor.cc:157] []diff on camera z: -0.334261
+I0416 22:04:25.852874 31187 location_refiner_obstacle_postprocessor.cc:158] []Obj center from postprocessor: 0016.8984 0.0461312 0-1.03961
+I0416 22:04:25.852885 31187 obstacle_reference.cc:103] []Target: 0 can be Ref. Type: CAR
+I0416 22:04:25.852888 31187 obstacle_reference.cc:103] []Target: 1 can be Ref. Type: CAR
+I0416 22:04:25.852891 31187 omt_obstacle_tracker.cc:462] []Create 0 new target
+I0416 22:04:25.852895 31187 target.cc:169] []dir 0 -2.93894 0.193242
+I0416 22:04:25.852907 31187 target.cc:169] []dir 1 -2.71451 0.363967
+I0416 22:04:25.852921 31187 camera_app_obstacle_camera_perception_test.cc:137] []image: 4
+I0416 22:04:25.860769 31187 data_provider.cc:146] []Fill in GPU mode ...
+I0416 22:04:25.861232 31187 data_provider.cc:186] []Done! (1)
+I0416 22:04:25.861248 31187 data_provider.cc:241] []GetImage ...
+I0416 22:04:25.861250 31187 data_provider.cc:268] []	cropping ...
+I0416 22:04:25.861255 31187 data_provider.cc:271] []Done!
+I0416 22:04:25.861259 31187 denseline_lane_detector.cc:178] []input_blob: 3 512 1536
+I0416 22:04:25.861284 31187 denseline_lane_detector.cc:196] []resize gpu finish.
+I0416 22:04:25.870079 31187 denseline_lane_detector.cc:199] []infer finish.
+I0416 22:04:25.870767 31187 common_functions.cc:173] []subset number = 1
+I0416 22:04:25.870779 31187 common_functions.cc:198] []cc number = 1
+I0416 22:04:25.870780 31187 denseline_lane_postprocessor.cc:362] []pixels_size < valid_pixels_num.
+I0416 22:04:25.870784 31187 denseline_lane_postprocessor.cc:369] []valid_ccs_num is 0.
+I0416 22:04:25.870788 31187 laneline_calibrator.cc:44] []Failed to get the ego lane.
+I0416 22:04:25.870791 31187 online_calibration_service.cc:188] []camera_ground_height: 1.6 meter.
+I0416 22:04:25.870797 31187 online_calibration_service.cc:190] []pitch_angle: 0 degree.
+I0416 22:04:25.870810 31187 yolo_obstacle_detector.cc:327] []Start: 0.002ms
+I0416 22:04:25.870812 31187 data_provider.cc:241] []GetImage ...
+I0416 22:04:25.870815 31187 data_provider.cc:268] []	cropping ...
+I0416 22:04:25.870818 31187 data_provider.cc:271] []Done!
+I0416 22:04:25.870820 31187 yolo_obstacle_detector.cc:335] []GetImageBlob: 0.011ms
+I0416 22:04:25.870838 31187 yolo_obstacle_detector.cc:338] []Resize: 0.017ms
+I0416 22:04:25.880831 31187 yolo_obstacle_detector.cc:342] []Network Forward: 9.992ms
+I0416 22:04:25.883549 31187 yolo_obstacle_detector.cc:348] []GetObj: 2.718ms
+I0416 22:04:25.883560 31187 region_output.cc:263] []3 of 3 obstacles kept
+I0416 22:04:25.883563 31187 region_output.cc:265] []Number of detected obstacles: 3
+I0416 22:04:25.883565 31187 yolo_obstacle_detector.cc:352] []Post1: 0.018ms
+I0416 22:04:25.883667 31187 yolo_obstacle_detector.cc:354] []Extract: 0.101ms
+I0416 22:04:25.883674 31187 yolo_obstacle_detector.cc:381] []Post2: 0.008ms
+I0416 22:04:25.883824 31187 omt_obstacle_tracker.cc:216] []Target 1 match 4 (1)at 0.89523 size: 5
+I0416 22:04:25.883832 31187 omt_obstacle_tracker.cc:216] []Target 0 match 4 (0)at 0.893551 size: 5
+I0416 22:04:25.883836 31187 omt_obstacle_tracker.cc:386] []Create 0 new target
+I0416 22:04:25.883874 31187 location_refiner_obstacle_postprocessor.cc:72] []Camera k matrix input to obstacle postprocessor: 
+1983.97, 0, 998.341
+0, 1981.63, 621.618
+0, 0, 1
+I0416 22:04:25.883884 31187 location_refiner_obstacle_postprocessor.cc:157] []diff on camera z: -0.455235
+I0416 22:04:25.883888 31187 location_refiner_obstacle_postprocessor.cc:158] []Obj center from postprocessor: 017.7425 0.252236 -1.09651
+I0416 22:04:25.883898 31187 obstacle_reference.cc:103] []Target: 0 can be Ref. Type: CAR
+I0416 22:04:25.883901 31187 obstacle_reference.cc:103] []Target: 1 can be Ref. Type: CAR
+I0416 22:04:25.883904 31187 omt_obstacle_tracker.cc:462] []Create 0 new target
+I0416 22:04:25.883908 31187 target.cc:169] []dir 0 -2.94003 0.195739
+I0416 22:04:25.883919 31187 target.cc:169] []dir 1 -2.75898 0.369596
+I0416 22:04:25.883932 31187 camera_app_obstacle_camera_perception_test.cc:137] []image: 5
+I0416 22:04:25.891716 31187 data_provider.cc:146] []Fill in GPU mode ...
+I0416 22:04:25.892177 31187 data_provider.cc:186] []Done! (1)
+I0416 22:04:25.892184 31187 data_provider.cc:241] []GetImage ...
+I0416 22:04:25.892186 31187 data_provider.cc:268] []	cropping ...
+I0416 22:04:25.892190 31187 data_provider.cc:271] []Done!
+I0416 22:04:25.892194 31187 denseline_lane_detector.cc:178] []input_blob: 3 512 1536
+I0416 22:04:25.892215 31187 denseline_lane_detector.cc:196] []resize gpu finish.
+I0416 22:04:25.901017 31187 denseline_lane_detector.cc:199] []infer finish.
+I0416 22:04:25.901755 31187 common_functions.cc:173] []subset number = 3
+I0416 22:04:25.901774 31187 common_functions.cc:198] []cc number = 3
+I0416 22:04:25.901777 31187 denseline_lane_postprocessor.cc:362] []pixels_size < valid_pixels_num.
+I0416 22:04:25.901780 31187 denseline_lane_postprocessor.cc:362] []pixels_size < valid_pixels_num.
+I0416 22:04:25.901844 31187 denseline_lane_postprocessor.cc:110] [][AfterProcess2D]lane_lines_num: 2
+I0416 22:04:25.901851 31187 laneline_calibrator.cc:44] []Failed to get the ego lane.
+I0416 22:04:25.901855 31187 online_calibration_service.cc:188] []camera_ground_height: 1.6 meter.
+I0416 22:04:25.901860 31187 online_calibration_service.cc:190] []pitch_angle: 0 degree.
+I0416 22:04:25.901886 31187 yolo_obstacle_detector.cc:327] []Start: 0.004ms
+I0416 22:04:25.901890 31187 data_provider.cc:241] []GetImage ...
+I0416 22:04:25.901892 31187 data_provider.cc:268] []	cropping ...
+I0416 22:04:25.901896 31187 data_provider.cc:271] []Done!
+I0416 22:04:25.901898 31187 yolo_obstacle_detector.cc:335] []GetImageBlob: 0.012ms
+I0416 22:04:25.901919 31187 yolo_obstacle_detector.cc:338] []Resize: 0.02ms
+I0416 22:04:25.912010 31187 yolo_obstacle_detector.cc:342] []Network Forward: 10.09ms
+I0416 22:04:25.914826 31187 yolo_obstacle_detector.cc:348] []GetObj: 2.816ms
+I0416 22:04:25.914836 31187 region_output.cc:263] []4 of 4 obstacles kept
+I0416 22:04:25.914839 31187 region_output.cc:265] []Number of detected obstacles: 4
+I0416 22:04:25.914842 31187 yolo_obstacle_detector.cc:352] []Post1: 0.017ms
+I0416 22:04:25.915045 31187 yolo_obstacle_detector.cc:354] []Extract: 0.203ms
+I0416 22:04:25.915055 31187 yolo_obstacle_detector.cc:381] []Post2: 0.009ms
+I0416 22:04:25.915221 31187 omt_obstacle_tracker.cc:216] []Target 1 match 5 (3)at 0.891352 size: 6
+I0416 22:04:25.915228 31187 omt_obstacle_tracker.cc:216] []Target 0 match 5 (0)at 0.888803 size: 6
+I0416 22:04:25.915232 31187 omt_obstacle_tracker.cc:386] []Create 0 new target
+I0416 22:04:25.915271 31187 location_refiner_obstacle_postprocessor.cc:72] []Camera k matrix input to obstacle postprocessor: 
+1983.97, 0, 998.341
+0, 1981.63, 621.618
+0, 0, 1
+I0416 22:04:25.915280 31187 location_refiner_obstacle_postprocessor.cc:157] []diff on camera z: 0
+I0416 22:04:25.915283 31187 location_refiner_obstacle_postprocessor.cc:158] []Obj center from postprocessor: 022.7036 0.585278 -1.49445
+I0416 22:04:25.915294 31187 obstacle_reference.cc:103] []Target: 0 can be Ref. Type: CAR
+I0416 22:04:25.915297 31187 obstacle_reference.cc:103] []Target: 1 can be Ref. Type: VAN
+I0416 22:04:25.915300 31187 omt_obstacle_tracker.cc:462] []Create 0 new target
+I0416 22:04:25.915303 31187 target.cc:169] []dir 0 -2.92203 0.202885
+I0416 22:04:25.915316 31187 target.cc:169] []dir 1 -2.70204 0.390658
+I0416 22:04:25.915329 31187 camera_app_obstacle_camera_perception_test.cc:137] []image: 6
+I0416 22:04:25.923100 31187 data_provider.cc:146] []Fill in GPU mode ...
+I0416 22:04:25.923559 31187 data_provider.cc:186] []Done! (1)
+I0416 22:04:25.923566 31187 data_provider.cc:241] []GetImage ...
+I0416 22:04:25.923569 31187 data_provider.cc:268] []	cropping ...
+I0416 22:04:25.923573 31187 data_provider.cc:271] []Done!
+I0416 22:04:25.923578 31187 denseline_lane_detector.cc:178] []input_blob: 3 512 1536
+I0416 22:04:25.923599 31187 denseline_lane_detector.cc:196] []resize gpu finish.
+I0416 22:04:25.932415 31187 denseline_lane_detector.cc:199] []infer finish.
+I0416 22:04:25.933117 31187 common_functions.cc:173] []subset number = 3
+I0416 22:04:25.933131 31187 common_functions.cc:198] []cc number = 3
+I0416 22:04:25.933135 31187 denseline_lane_postprocessor.cc:362] []pixels_size < valid_pixels_num.
+I0416 22:04:25.933137 31187 denseline_lane_postprocessor.cc:362] []pixels_size < valid_pixels_num.
+I0416 22:04:25.933177 31187 denseline_lane_postprocessor.cc:110] [][AfterProcess2D]lane_lines_num: 2
+I0416 22:04:25.933183 31187 laneline_calibrator.cc:44] []Failed to get the ego lane.
+I0416 22:04:25.933187 31187 online_calibration_service.cc:188] []camera_ground_height: 1.6 meter.
+I0416 22:04:25.933190 31187 online_calibration_service.cc:190] []pitch_angle: 0 degree.
+I0416 22:04:25.933215 31187 yolo_obstacle_detector.cc:327] []Start: 0.002ms
+I0416 22:04:25.933218 31187 data_provider.cc:241] []GetImage ...
+I0416 22:04:25.933221 31187 data_provider.cc:268] []	cropping ...
+I0416 22:04:25.933224 31187 data_provider.cc:271] []Done!
+I0416 22:04:25.933226 31187 yolo_obstacle_detector.cc:335] []GetImageBlob: 0.012ms
+I0416 22:04:25.933252 31187 yolo_obstacle_detector.cc:338] []Resize: 0.026ms
+I0416 22:04:25.943325 31187 yolo_obstacle_detector.cc:342] []Network Forward: 10.07ms
+I0416 22:04:25.946103 31187 yolo_obstacle_detector.cc:348] []GetObj: 2.779ms
+I0416 22:04:25.946118 31187 region_output.cc:263] []3 of 4 obstacles kept
+I0416 22:04:25.946121 31187 region_output.cc:265] []Number of detected obstacles: 3
+I0416 22:04:25.946123 31187 yolo_obstacle_detector.cc:352] []Post1: 0.022ms
+I0416 22:04:25.946214 31187 yolo_obstacle_detector.cc:354] []Extract: 0.09ms
+I0416 22:04:25.946223 31187 yolo_obstacle_detector.cc:381] []Post2: 0.008ms
+I0416 22:04:25.946414 31187 omt_obstacle_tracker.cc:216] []Target 1 match 6 (2)at 0.896659 size: 7
+I0416 22:04:25.946422 31187 omt_obstacle_tracker.cc:216] []Target 0 match 6 (0)at 0.887864 size: 7
+I0416 22:04:25.946426 31187 omt_obstacle_tracker.cc:386] []Create 0 new target
+I0416 22:04:25.946461 31187 location_refiner_obstacle_postprocessor.cc:72] []Camera k matrix input to obstacle postprocessor: 
+1983.97, 0, 998.341
+0, 1981.63, 621.618
+0, 0, 1
+I0416 22:04:25.946470 31187 location_refiner_obstacle_postprocessor.cc:157] []diff on camera z: 0
+I0416 22:04:25.946473 31187 location_refiner_obstacle_postprocessor.cc:158] []Obj center from postprocessor: 023.6966 0.877533 0-1.4578
+I0416 22:04:25.946485 31187 obstacle_reference.cc:103] []Target: 0 can be Ref. Type: CAR
+I0416 22:04:25.946488 31187 obstacle_reference.cc:103] []Target: 1 can be Ref. Type: VAN
+I0416 22:04:25.946499 31187 omt_obstacle_tracker.cc:462] []Create 0 new target
+I0416 22:04:25.946502 31187 target.cc:169] []dir 0 -2.93585 0.203743
+I0416 22:04:25.946514 31187 target.cc:169] []dir 1 -2.74308 0.393024
+I0416 22:04:25.946527 31187 camera_app_obstacle_camera_perception_test.cc:137] []image: 7
+I0416 22:04:25.954289 31187 data_provider.cc:146] []Fill in GPU mode ...
+I0416 22:04:25.954751 31187 data_provider.cc:186] []Done! (1)
+I0416 22:04:25.954757 31187 data_provider.cc:241] []GetImage ...
+I0416 22:04:25.954759 31187 data_provider.cc:268] []	cropping ...
+I0416 22:04:25.954764 31187 data_provider.cc:271] []Done!
+I0416 22:04:25.954767 31187 denseline_lane_detector.cc:178] []input_blob: 3 512 1536
+I0416 22:04:25.954789 31187 denseline_lane_detector.cc:196] []resize gpu finish.
+I0416 22:04:25.963574 31187 denseline_lane_detector.cc:199] []infer finish.
+I0416 22:04:25.964265 31187 common_functions.cc:173] []subset number = 3
+I0416 22:04:25.964278 31187 common_functions.cc:198] []cc number = 3
+I0416 22:04:25.964282 31187 denseline_lane_postprocessor.cc:362] []pixels_size < valid_pixels_num.
+I0416 22:04:25.964283 31187 denseline_lane_postprocessor.cc:362] []pixels_size < valid_pixels_num.
+I0416 22:04:25.964285 31187 denseline_lane_postprocessor.cc:362] []pixels_size < valid_pixels_num.
+I0416 22:04:25.964287 31187 denseline_lane_postprocessor.cc:369] []valid_ccs_num is 0.
+I0416 22:04:25.964293 31187 laneline_calibrator.cc:44] []Failed to get the ego lane.
+I0416 22:04:25.964295 31187 online_calibration_service.cc:188] []camera_ground_height: 1.6 meter.
+I0416 22:04:25.964299 31187 online_calibration_service.cc:190] []pitch_angle: 0 degree.
+I0416 22:04:25.964310 31187 yolo_obstacle_detector.cc:327] []Start: 0.002ms
+I0416 22:04:25.964313 31187 data_provider.cc:241] []GetImage ...
+I0416 22:04:25.964315 31187 data_provider.cc:268] []	cropping ...
+I0416 22:04:25.964319 31187 data_provider.cc:271] []Done!
+I0416 22:04:25.964321 31187 yolo_obstacle_detector.cc:335] []GetImageBlob: 0.011ms
+I0416 22:04:25.964339 31187 yolo_obstacle_detector.cc:338] []Resize: 0.017ms
+I0416 22:04:25.974366 31187 yolo_obstacle_detector.cc:342] []Network Forward: 10.027ms
+I0416 22:04:25.977169 31187 yolo_obstacle_detector.cc:348] []GetObj: 2.803ms
+I0416 22:04:25.977178 31187 region_output.cc:263] []5 of 5 obstacles kept
+I0416 22:04:25.977181 31187 region_output.cc:265] []Number of detected obstacles: 5
+I0416 22:04:25.977185 31187 yolo_obstacle_detector.cc:352] []Post1: 0.016ms
+I0416 22:04:25.977373 31187 yolo_obstacle_detector.cc:354] []Extract: 0.189ms
+I0416 22:04:25.977389 31187 yolo_obstacle_detector.cc:381] []Post2: 0.016ms
+I0416 22:04:25.977622 31187 omt_obstacle_tracker.cc:216] []Target 1 match 7 (4)at 0.90249 size: 8
+I0416 22:04:25.977628 31187 omt_obstacle_tracker.cc:216] []Target 0 match 7 (0)at 0.890061 size: 8
+I0416 22:04:25.977632 31187 omt_obstacle_tracker.cc:386] []Create 0 new target
+I0416 22:04:25.977676 31187 location_refiner_obstacle_postprocessor.cc:72] []Camera k matrix input to obstacle postprocessor: 
+1983.97, 0, 998.341
+0, 1981.63, 621.618
+0, 0, 1
+I0416 22:04:25.977686 31187 location_refiner_obstacle_postprocessor.cc:157] []diff on camera z: 0
+I0416 22:04:25.977689 31187 location_refiner_obstacle_postprocessor.cc:158] []Obj center from postprocessor: 024.1791 01.15896 -1.44739
+I0416 22:04:25.977700 31187 obstacle_reference.cc:103] []Target: 0 can be Ref. Type: CAR
+I0416 22:04:25.977703 31187 obstacle_reference.cc:103] []Target: 1 can be Ref. Type: VAN
+I0416 22:04:25.977713 31187 omt_obstacle_tracker.cc:462] []Create 0 new target
+I0416 22:04:25.977717 31187 target.cc:169] []dir 0 -2.91932 0.209303
+I0416 22:04:25.977728 31187 target.cc:169] []dir 1 -2.78534 0.381961
+I0416 22:04:25.977741 31187 camera_app_obstacle_camera_perception_test.cc:137] []image: 8
+I0416 22:04:25.985500 31187 data_provider.cc:146] []Fill in GPU mode ...
+I0416 22:04:25.985960 31187 data_provider.cc:186] []Done! (1)
+I0416 22:04:25.985967 31187 data_provider.cc:241] []GetImage ...
+I0416 22:04:25.985970 31187 data_provider.cc:268] []	cropping ...
+I0416 22:04:25.985975 31187 data_provider.cc:271] []Done!
+I0416 22:04:25.985977 31187 denseline_lane_detector.cc:178] []input_blob: 3 512 1536
+I0416 22:04:25.985998 31187 denseline_lane_detector.cc:196] []resize gpu finish.
+I0416 22:04:25.994889 31187 denseline_lane_detector.cc:199] []infer finish.
+I0416 22:04:25.995573 31187 common_functions.cc:173] []subset number = 3
+I0416 22:04:25.995584 31187 common_functions.cc:198] []cc number = 3
+I0416 22:04:25.995587 31187 denseline_lane_postprocessor.cc:362] []pixels_size < valid_pixels_num.
+I0416 22:04:25.995589 31187 denseline_lane_postprocessor.cc:362] []pixels_size < valid_pixels_num.
+I0416 22:04:25.995591 31187 denseline_lane_postprocessor.cc:362] []pixels_size < valid_pixels_num.
+I0416 22:04:25.995594 31187 denseline_lane_postprocessor.cc:369] []valid_ccs_num is 0.
+I0416 22:04:25.995599 31187 laneline_calibrator.cc:44] []Failed to get the ego lane.
+I0416 22:04:25.995601 31187 online_calibration_service.cc:188] []camera_ground_height: 1.6 meter.
+I0416 22:04:25.995605 31187 online_calibration_service.cc:190] []pitch_angle: 0 degree.
+I0416 22:04:25.995615 31187 yolo_obstacle_detector.cc:327] []Start: 0.002ms
+I0416 22:04:25.995618 31187 data_provider.cc:241] []GetImage ...
+I0416 22:04:25.995620 31187 data_provider.cc:268] []	cropping ...
+I0416 22:04:25.995623 31187 data_provider.cc:271] []Done!
+I0416 22:04:25.995625 31187 yolo_obstacle_detector.cc:335] []GetImageBlob: 0.011ms
+I0416 22:04:25.995642 31187 yolo_obstacle_detector.cc:338] []Resize: 0.016ms
+I0416 22:04:26.005810 31187 yolo_obstacle_detector.cc:342] []Network Forward: 10.166ms
+I0416 22:04:26.008589 31187 yolo_obstacle_detector.cc:348] []GetObj: 2.779ms
+I0416 22:04:26.008599 31187 region_output.cc:263] []4 of 4 obstacles kept
+I0416 22:04:26.008602 31187 region_output.cc:265] []Number of detected obstacles: 4
+I0416 22:04:26.008605 31187 yolo_obstacle_detector.cc:352] []Post1: 0.017ms
+I0416 22:04:26.008697 31187 yolo_obstacle_detector.cc:354] []Extract: 0.092ms
+I0416 22:04:26.008705 31187 yolo_obstacle_detector.cc:381] []Post2: 0.008ms
+I0416 22:04:26.008961 31187 omt_obstacle_tracker.cc:216] []Target 1 match 8 (3)at 0.903252 size: 9
+I0416 22:04:26.008970 31187 omt_obstacle_tracker.cc:216] []Target 0 match 8 (0)at 0.891981 size: 9
+I0416 22:04:26.008973 31187 omt_obstacle_tracker.cc:386] []Create 0 new target
+I0416 22:04:26.009017 31187 location_refiner_obstacle_postprocessor.cc:72] []Camera k matrix input to obstacle postprocessor: 
+1983.97, 0, 998.341
+0, 1981.63, 621.618
+0, 0, 1
+I0416 22:04:26.009027 31187 location_refiner_obstacle_postprocessor.cc:157] []diff on camera z: -2.76497
+I0416 22:04:26.009037 31187 location_refiner_obstacle_postprocessor.cc:158] []Obj center from postprocessor: 021.0605 01.18698 -1.39603
+I0416 22:04:26.009047 31187 obstacle_reference.cc:103] []Target: 0 can be Ref. Type: CAR
+I0416 22:04:26.009050 31187 obstacle_reference.cc:103] []Target: 1 can be Ref. Type: VAN
+I0416 22:04:26.009060 31187 omt_obstacle_tracker.cc:462] []Create 0 new target
+I0416 22:04:26.009063 31187 target.cc:169] []dir 0 -2.93738 0.207777
+I0416 22:04:26.009075 31187 target.cc:169] []dir 1 -2.88477 0.344429
+I0416 22:04:26.009090 31187 camera_app_obstacle_camera_perception_test.cc:137] []image: 9
+I0416 22:04:26.016870 31187 data_provider.cc:146] []Fill in GPU mode ...
+I0416 22:04:26.017330 31187 data_provider.cc:186] []Done! (1)
+I0416 22:04:26.017336 31187 data_provider.cc:241] []GetImage ...
+I0416 22:04:26.017339 31187 data_provider.cc:268] []	cropping ...
+I0416 22:04:26.017343 31187 data_provider.cc:271] []Done!
+I0416 22:04:26.017347 31187 denseline_lane_detector.cc:178] []input_blob: 3 512 1536
+I0416 22:04:26.017369 31187 denseline_lane_detector.cc:196] []resize gpu finish.
+I0416 22:04:26.026262 31187 denseline_lane_detector.cc:199] []infer finish.
+I0416 22:04:26.026940 31187 common_functions.cc:173] []subset number = 2
+I0416 22:04:26.026952 31187 common_functions.cc:198] []cc number = 2
+I0416 22:04:26.026954 31187 denseline_lane_postprocessor.cc:362] []pixels_size < valid_pixels_num.
+I0416 22:04:26.026957 31187 denseline_lane_postprocessor.cc:362] []pixels_size < valid_pixels_num.
+I0416 22:04:26.026959 31187 denseline_lane_postprocessor.cc:369] []valid_ccs_num is 0.
+I0416 22:04:26.026963 31187 laneline_calibrator.cc:44] []Failed to get the ego lane.
+I0416 22:04:26.026966 31187 online_calibration_service.cc:188] []camera_ground_height: 1.6 meter.
+I0416 22:04:26.026970 31187 online_calibration_service.cc:190] []pitch_angle: 0 degree.
+I0416 22:04:26.026980 31187 yolo_obstacle_detector.cc:327] []Start: 0.002ms
+I0416 22:04:26.026984 31187 data_provider.cc:241] []GetImage ...
+I0416 22:04:26.026986 31187 data_provider.cc:268] []	cropping ...
+I0416 22:04:26.026989 31187 data_provider.cc:271] []Done!
+I0416 22:04:26.026991 31187 yolo_obstacle_detector.cc:335] []GetImageBlob: 0.011ms
+I0416 22:04:26.027009 31187 yolo_obstacle_detector.cc:338] []Resize: 0.016ms
+I0416 22:04:26.037097 31187 yolo_obstacle_detector.cc:342] []Network Forward: 10.088ms
+I0416 22:04:26.039782 31187 yolo_obstacle_detector.cc:348] []GetObj: 2.685ms
+I0416 22:04:26.039793 31187 region_output.cc:263] []4 of 4 obstacles kept
+I0416 22:04:26.039795 31187 region_output.cc:265] []Number of detected obstacles: 4
+I0416 22:04:26.039798 31187 yolo_obstacle_detector.cc:352] []Post1: 0.017ms
+I0416 22:04:26.039887 31187 yolo_obstacle_detector.cc:354] []Extract: 0.089ms
+I0416 22:04:26.039894 31187 yolo_obstacle_detector.cc:381] []Post2: 0.008ms
+I0416 22:04:26.040179 31187 omt_obstacle_tracker.cc:216] []Target 0 match 9 (0)at 0.892564 size: 10
+I0416 22:04:26.040186 31187 omt_obstacle_tracker.cc:216] []Target 1 match 9 (2)at 0.88817 size: 10
+I0416 22:04:26.040190 31187 omt_obstacle_tracker.cc:386] []Create 0 new target
+I0416 22:04:26.040230 31187 location_refiner_obstacle_postprocessor.cc:72] []Camera k matrix input to obstacle postprocessor: 
+1983.97, 0, 998.341
+0, 1981.63, 621.618
+0, 0, 1
+I0416 22:04:26.040239 31187 location_refiner_obstacle_postprocessor.cc:157] []diff on camera z: -2.99234
+I0416 22:04:26.040242 31187 location_refiner_obstacle_postprocessor.cc:158] []Obj center from postprocessor: 22.6567 1.50708 -1.4019
+I0416 22:04:26.040253 31187 obstacle_reference.cc:103] []Target: 0 can be Ref. Type: CAR
+I0416 22:04:26.040256 31187 obstacle_reference.cc:103] []Target: 1 can be Ref. Type: VAN
+I0416 22:04:26.040266 31187 omt_obstacle_tracker.cc:462] []Create 0 new target
+I0416 22:04:26.040268 31187 target.cc:169] []dir 0 3.14159 0.145943
+I0416 22:04:26.040280 31187 target.cc:169] []dir 1 -2.89185 0.315886
+[       OK ] ObstacleCameraPerceptionTest.perception_test (28557 ms)
+[----------] 1 test from ObstacleCameraPerceptionTest (28557 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (28557 ms total)
+[  PASSED  ] 1 test.
+==31187== Profiling application: ./camera_app_obstacle_camera_perception_test
+==31187== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   14.69%  657.13ms      2592  253.52us  16.781us  4.9952ms  maxwell_gcgemm_32x32_nt
+                    8.03%  359.22ms      9303  38.612us     704ns  6.9807ms  [CUDA memcpy HtoD]
+                    6.06%  270.96ms      4314  62.810us  57.358us  374.28us  maxwell_gcgemm_64x64_nt
+                    3.07%  137.19ms       160  857.45us  13.546us  5.7628ms  void fft2d_r2c_32x32<float, bool=0, unsigned int=1, bool=1>(float2*, float const *, int, int, int, int, int, int, int, int, int, cudnn::reduced_divisor, bool, int2, int, int)
+                    1.68%  75.071ms       302  248.58us  17.966us  1.3291ms  trt_maxwell_scudnn_128x64_relu_small_nn_v1
+                    1.51%  67.648ms       204  331.61us  22.194us  2.0373ms  trt_maxwell_scudnn_128x128_relu_small_nn_v1
+                    1.39%  62.086ms       182  341.13us  22.546us  2.0704ms  trt_maxwell_scudnn_128x128_relu_medium_nn_v1
+                    1.35%  60.325ms       360  167.57us  37.886us  931.59us  trt_maxwell_scudnn_winograd_128x128_ldg1_ldg4_relu_tile148n_nt_v1
+                    1.33%  59.635ms       282  211.47us  38.751us  944.40us  trtwell_scudnn_winograd_128x128_ldg1_ldg4_mobile_relu_tile148t_nt
+                    1.29%  57.589ms       122  472.04us  133.07us  2.0837ms  trt_maxwell_scudnn_128x128_relu_large_nn_v1
+                    1.29%  57.567ms       214  269.00us  22.193us  1.2848ms  trt_maxwell_scudnn_128x32_relu_small_nn_v1
+                    1.26%  56.374ms      6702  8.4110us  3.8110us  59.920us  void fft2d_r2c_32x32<float, bool=0, unsigned int=0, bool=0>(float2*, float const *, int, int, int, int, int, int, int, int, int, cudnn::reduced_divisor, bool, int2, int, int)
+                    1.26%  56.364ms        16  3.5228ms  2.5912ms  4.6398ms  maxwell_cgemm_32x64_tn
+                    1.16%  52.036ms        96  542.04us  243.59us  1.3775ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=7, int=5, int=1, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    1.16%  52.035ms       192  271.02us  23.987us  1.5594ms  trt_maxwell_scudnn_128x32_relu_medium_nn_v1
+                    1.10%  49.196ms       896  54.906us  1.8890us  557.63us  void op_generic_tensor_kernel<int=2, float, float, float, int=256, cudnnGenericOp_t=0, cudnnNanPropagation_t=0, cudnnDimOrder_t=0, int=0>(cudnnTensorStruct, float*, cudnnTensorStruct, float const *, cudnnTensorStruct, float const *, float, float, float, float, dimArray, reducedDivisorArray, bool)
+                    1.05%  46.866ms       193  242.83us  19.055us  1.3720ms  trt_maxwell_scudnn_128x64_relu_medium_nn_v1
+                    1.04%  46.611ms        96  485.53us  201.15us  1.2786ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=4, int=8, int=1, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    1.03%  45.871ms       122  375.99us  79.039us  1.5773ms  trt_maxwell_scudnn_128x32_relu_large_nn_v1
+                    1.00%  44.684ms      4570  9.7770us  4.5150us  36.958us  void fft2d_c2r_32x32<float, bool=0, bool=0, unsigned int=0, bool=0, bool=0>(float*, float2 const *, int, int, int, int, int, int, int, int, int, float, float, cudnn::reduced_divisor, bool, float*, float*, int2, int, int)
+                    0.95%  42.627ms       122  349.40us  123.49us  1.4054ms  trt_maxwell_scudnn_128x64_relu_large_nn_v1
+                    0.93%  41.538ms        46  903.00us  234.20us  3.7241ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=4>, fused::KpqkPtrWriter<float, int=1, int=4>, float, float, int=5, int=7, int=4, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=4, int=1Type>, float)
+                    0.92%  41.219ms      7795  5.2870us     800ns  267.73us  [CUDA memcpy DtoD]
+                    0.91%  40.764ms        96  424.62us  73.466us  1.4964ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=7, int=8, int=4, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.86%  38.271ms       600  63.784us  1.3770us  542.06us  void op_generic_tensor_kernel<int=2, float, float, float, int=256, cudnnGenericOp_t=8, cudnnNanPropagation_t=1, cudnnDimOrder_t=0, int=1>(cudnnTensorStruct, float*, cudnnTensorStruct, float const *, cudnnTensorStruct, float const *, float, float, float, float, dimArray, reducedDivisorArray, bool)
+                    0.81%  36.412ms       210  173.39us  47.141us  1.3670ms  void im2col4d_kernel<float, int>(im2col4d_params, cudnnConvolutionStruct, cudnnTensor4dStruct, float const *, float*, int)
+                    0.77%  34.371ms        48  716.05us  270.17us  2.3824ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=4>, fused::KpqkPtrWriter<float, int=1, int=4>, float, float, int=4, int=5, int=1, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=4, int=1Type>, float)
+                    0.76%  33.881ms        42  806.69us  92.234us  2.4180ms  void cudnn::detail::implicit_convolve_sgemm<float, float, int=512, int=6, int=8, int=3, int=3, int=5, int=1, bool=1, bool=0, bool=1>(int, int, int, float const *, int, float*, cudnn::detail::implicit_convolve_sgemm<float, float, int=512, int=6, int=8, int=3, int=3, int=5, int=1, bool=1, bool=0, bool=1>*, kernel_conv_params, int, float, float, int, float, float, int, int)
+                    0.74%  32.951ms        40  823.77us  23.988us  3.5045ms  void fft2d_r2c_32x32<float, bool=0, unsigned int=1, bool=0>(float2*, float const *, int, int, int, int, int, int, int, int, int, cudnn::reduced_divisor, bool, int2, int, int)
+                    0.73%  32.766ms        86  381.00us  71.352us  906.77us  void cudnn::detail::implicit_convolve_sgemm<float, float, int=128, int=6, int=7, int=3, int=3, int=5, int=1, bool=1, bool=0, bool=1>(int, int, int, float const *, int, float*, cudnn::detail::implicit_convolve_sgemm<float, float, int=128, int=6, int=7, int=3, int=3, int=5, int=1, bool=1, bool=0, bool=1>*, kernel_conv_params, int, float, float, int, float, float, int, int)
+                    0.72%  32.274ms        36  896.51us  123.27us  2.8954ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=6, int=8, int=8, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.68%  30.309ms        62  488.85us  69.079us  2.2796ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=5, int=7, int=8, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.65%  29.279ms       100  292.79us  129.90us  1.1718ms  maxwell_scudnn_128x128_relu_small_nn
+                    0.65%  28.945ms        46  629.24us  161.34us  2.5525ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=4>, fused::KpqkPtrWriter<float, int=1, int=4>, float, float, int=4, int=5, int=2, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=4, int=1Type>, float)
+                    0.63%  28.411ms        48  591.90us  80.705us  2.4502ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=4, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=4, int=8, int=1, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.62%  27.522ms        46  598.29us  140.05us  2.3320ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=4>, fused::KpqkPtrWriter<float, int=1, int=4>, float, float, int=2, int=5, int=2, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=4, int=1Type>, float)
+                    0.60%  26.962ms        48  561.71us  247.53us  1.6500ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=5, int=7, int=1, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.58%  25.756ms        46  559.91us  127.81us  2.2154ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=4>, fused::KpqkPtrWriter<float, int=1, int=4>, float, float, int=2, int=7, int=2, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=4, int=1Type>, float)
+                    0.56%  25.194ms        44  572.59us  90.312us  1.9985ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=7, int=6, int=8, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.56%  24.985ms        48  520.53us  186.49us  1.3993ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=7, int=4, int=1, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.55%  24.608ms        48  512.66us  185.52us  1.4050ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=7, int=3, int=1, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.54%  24.344ms        48  507.17us  212.39us  1.4298ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=5, int=5, int=1, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.54%  24.220ms        48  504.59us  34.940us  1.7345ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=4, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=7, int=1, int=1, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.54%  24.128ms        42  574.47us  78.399us  1.8769ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=3, int=7, int=8, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.53%  23.636ms        48  492.42us  185.52us  1.3127ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=4, int=7, int=1, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.52%  23.403ms        50  468.05us  73.082us  1.4653ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=7, int=4, int=1, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.52%  23.191ms        44  527.08us  85.476us  1.9158ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=7, int=7, int=8, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.52%  23.117ms        50  462.34us  79.199us  1.3501ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=7, int=5, int=1, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.51%  22.622ms        44  514.13us  75.036us  1.8623ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=5, int=8, int=8, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.50%  22.593ms        72  313.80us  57.614us  632.63us  void cudnn::detail::explicit_convolve_sgemm<float, int, int=128, int=6, int=7, int=3, int=3, int=5, int=0, bool=1>(int, int, int, float const *, int, float const , int, cudnn::detail::explicit_convolve_sgemm<float, int, int=128, int=6, int=7, int=3, int=3, int=5, int=0, bool=1>*, kernel_conv_params, int, int, float, float, int, float const *, float const *)
+                    0.50%  22.547ms        44  512.44us  79.616us  1.8950ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=8, int=5, int=8, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.50%  22.500ms        64  351.56us  16.109us  2.6019ms  void cudnn::detail::explicit_convolve_sgemm<float, int, int=1024, int=5, int=5, int=3, int=3, int=3, int=0, bool=1>(int, int, int, float const *, int, float const , int, cudnn::detail::explicit_convolve_sgemm<float, int, int=1024, int=5, int=5, int=3, int=3, int=3, int=0, bool=1>*, kernel_conv_params, int, int, float, float, int, float const *, float const *)
+                    0.50%  22.307ms        46  484.94us  163.23us  1.5586ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=5, int=7, int=2, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.49%  22.045ms        42  524.89us  40.160us  2.4194ms  void cudnn::detail::implicit_convolve_sgemm<float, float, int=1024, int=5, int=5, int=3, int=3, int=3, int=1, bool=1, bool=0, bool=1>(int, int, int, float const *, int, float*, cudnn::detail::implicit_convolve_sgemm<float, float, int=1024, int=5, int=5, int=3, int=3, int=3, int=1, bool=1, bool=0, bool=1>*, kernel_conv_params, int, float, float, int, float, float, int, int)
+                    0.49%  21.989ms        48  458.10us  85.989us  1.5650ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=7, int=7, int=2, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.49%  21.709ms        48  452.27us  79.968us  1.5556ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=6, int=8, int=2, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.48%  21.442ms        46  466.13us  93.675us  1.5654ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=5, int=7, int=4, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.47%  21.185ms        48  441.36us  78.911us  1.5823ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=7, int=7, int=4, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.47%  21.148ms       124  170.55us  37.149us  920.22us  maxwell_scudnn_winograd_128x128_ldg1_ldg4_tile148n_nt
+                    0.47%  20.894ms        36  580.40us  77.982us  1.7234ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=7, int=8, int=8, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.45%  20.320ms        68  298.82us  138.03us  1.4484ms  trtwell_scudnn_128x128_relu_small_nn
+                    0.45%  20.052ms        94  213.32us  41.473us  1.0504ms  trt_maxwell_scudnn_winograd_128x128_ldg1_ldg4_relu_tile148t_nt_v1
+                    0.45%  19.946ms        48  415.55us  73.210us  1.4109ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=8, int=5, int=2, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.44%  19.893ms        48  414.44us  66.613us  1.5711ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=4, int=7, int=2, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.44%  19.837ms        46  431.24us  145.20us  1.3391ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=6, int=5, int=2, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.44%  19.663ms        48  409.64us  70.969us  1.5219ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=8, int=7, int=4, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.44%  19.600ms        48  408.34us  68.343us  1.4088ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=5, int=7, int=2, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.44%  19.599ms        94  208.50us  38.591us  989.17us  trt_maxwell_scudnn_winograd_128x128_ldg1_ldg4_relu_tile148m_nt_v1
+                    0.44%  19.583ms        48  407.98us  68.886us  1.2998ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=4, int=7, int=1, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.43%  19.446ms        48  405.12us  65.781us  1.6381ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=5, int=7, int=4, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.43%  19.176ms        46  416.88us  115.13us  1.2748ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=4, int=8, int=2, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.43%  19.087ms        48  397.65us  65.653us  1.4294ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=8, int=5, int=4, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.42%  19.015ms        11  1.7286ms  1.7234ms  1.7477ms  void cudnn::detail::softmax_fw_kernel<int=2, float, float, int=256, int=1, int=1, int=0>(cudnnTensorStruct, float const *, cudnn::detail::softmax_fw_kernel<int=2, float, float, int=256, int=1, int=1, int=0>, cudnnTensorStruct*, int, float, cudnnTensorStruct*, int, int)
+                    0.42%  18.779ms        46  408.24us  87.077us  1.3219ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=4, int=7, int=4, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.41%  18.494ms        46  402.04us  76.509us  1.2861ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=4, int=8, int=4, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.38%  16.813ms        46  365.50us  65.172us  1.2273ms  void cudnn::detail::explicit_convolve_sgemm<float, int, int=128, int=5, int=5, int=3, int=3, int=3, int=0, bool=1>(int, int, int, float const *, int, float const , int, cudnn::detail::explicit_convolve_sgemm<float, int, int=128, int=5, int=5, int=3, int=3, int=3, int=0, bool=1>*, kernel_conv_params, int, int, float, float, int, float const *, float const *)
+                    0.36%  15.908ms      2198  7.2370us  4.8360us  27.510us  void fft2d_c2r_32x32<float, bool=1, bool=0, unsigned int=0, bool=0, bool=0>(float*, float2 const *, int, int, int, int, int, int, int, int, int, float, float, cudnn::reduced_divisor, bool, float*, float*, int2, int, int)
+                    0.36%  15.886ms        92  172.67us  22.802us  459.76us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=4>, fused::KpqkPtrWriter<float, int=1, int=4>, float, float, int=3, int=7, int=8, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=4, int=1Type>, float)
+                    0.34%  15.123ms       229  66.041us  17.357us  186.87us  trt_maxwell_scudnn_128x64_relu_interior_nn_v1
+                    0.33%  14.834ms        28  529.78us  69.175us  1.7543ms  void cudnn::detail::explicit_convolve_sgemm<float, int, int=512, int=6, int=8, int=3, int=3, int=5, int=0, bool=1>(int, int, int, float const *, int, float const , int, cudnn::detail::explicit_convolve_sgemm<float, int, int=512, int=6, int=8, int=3, int=3, int=5, int=0, bool=1>*, kernel_conv_params, int, int, float, float, int, float const *, float const *)
+                    0.31%  13.767ms        30  458.90us  159.14us  1.1823ms  trtwell_scudnn_128x64_relu_small_nn
+                    0.30%  13.583ms        30  452.76us  158.78us  1.1631ms  maxwell_scudnn_128x64_relu_small_nn
+                    0.30%  13.222ms        96  137.73us  44.227us  299.53us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=2, int=10, int=1, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.27%  12.190ms        92  132.50us  29.656us  383.95us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=4, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=5, int=5, int=2, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.27%  12.112ms        16  756.99us  18.959us  1.5429ms  void fft2d_r2c_16x16<float>(float2*, float const *, int, int, int, int, int, int, int, int)
+                    0.26%  11.634ms        80  145.43us  62.866us  362.72us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=4, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=4, int=7, int=8, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.26%  11.571ms        40  289.28us  33.178us  1.3686ms  void cudnn::detail::implicit_convolve_sgemm<float, float, int=128, int=5, int=5, int=3, int=3, int=3, int=1, bool=1, bool=0, bool=1>(int, int, int, float const *, int, float*, cudnn::detail::implicit_convolve_sgemm<float, float, int=128, int=5, int=5, int=3, int=3, int=3, int=1, bool=1, bool=0, bool=1>*, kernel_conv_params, int, float, float, int, float, float, int, int)
+                    0.26%  11.433ms        96  119.09us  33.659us  314.46us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=3, int=10, int=2, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.25%  11.358ms        84  135.21us  79.551us  310.49us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=2, int=8, int=8, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.25%  11.037ms       100  110.37us  5.6040us  1.2822ms  [CUDA memcpy DtoH]
+                    0.25%  10.972ms        92  119.26us  26.549us  313.72us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=4, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=4, int=7, int=2, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.24%  10.777ms        48  224.52us  91.657us  491.37us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=7, int=4, int=1, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.24%  10.743ms        16  671.41us  650.50us  710.77us  void cudnn::detail::implicit_convolve_sgemm<float, float, int=512, int=6, int=8, int=3, int=3, int=5, int=1, bool=1, bool=0, bool=0>(int, int, int, float const *, int, float*, cudnn::detail::implicit_convolve_sgemm<float, float, int=512, int=6, int=8, int=3, int=3, int=5, int=1, bool=1, bool=0, bool=0>*, kernel_conv_params, int, float, float, int, float, float, int, int)
+                    0.24%  10.519ms        46  228.68us  28.887us  736.01us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=4, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=7, int=2, int=2, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.23%  10.302ms        84  122.65us  56.236us  309.88us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=4, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=4, int=7, int=4, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.21%  9.6138ms        48  200.29us  71.321us  328.90us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=4>, fused::KpqkPtrWriter<float, int=1, int=4>, float, float, int=5, int=5, int=1, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=4, int=1Type>, float)
+                    0.21%  9.2311ms        46  200.68us  24.115us  657.48us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=4, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=1, int=8, int=2, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.20%  9.1267ms        46  198.41us  36.381us  604.03us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=4, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=8, int=2, int=2, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.20%  9.0058ms        48  187.62us  32.570us  628.95us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=4, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=1, int=7, int=1, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.20%  8.8979ms        48  185.37us  41.633us  346.26us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=4>, fused::KpqkPtrWriter<float, int=1, int=4>, float, float, int=1, int=10, int=2, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=4, int=1Type>, float)
+                    0.19%  8.5848ms        48  178.85us  42.754us  535.56us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=1, int=7, int=1, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.19%  8.4301ms        48  175.63us  32.474us  404.45us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=4>, fused::KpqkPtrWriter<float, int=1, int=4>, float, float, int=4, int=7, int=4, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=4, int=1Type>, float)
+                    0.19%  8.3499ms        97  86.081us  49.831us  345.43us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=4, int=8, int=8, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.18%  8.2120ms        46  178.52us  22.258us  476.96us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=4>, fused::KpqkPtrWriter<float, int=1, int=4>, float, float, int=4, int=5, int=8, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=4, int=1Type>, float)
+                    0.18%  8.1774ms        46  177.77us  20.497us  470.68us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=7, int=2, int=4, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.18%  8.1399ms        20  407.00us  103.76us  645.12us  trtwell_scudnn_128x32_relu_small_nn
+                    0.18%  8.1074ms        48  168.90us  27.926us  381.23us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=4>, fused::KpqkPtrWriter<float, int=1, int=4>, float, float, int=3, int=7, int=4, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=4, int=1Type>, float)
+                    0.18%  8.0778ms        48  168.29us  33.082us  479.17us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=7, int=2, int=2, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.18%  7.8421ms        20  392.11us  93.450us  618.89us  maxwell_scudnn_128x32_relu_small_nn
+                    0.17%  7.6743ms        48  159.88us  28.311us  355.29us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=4>, fused::KpqkPtrWriter<float, int=1, int=4>, float, float, int=2, int=7, int=4, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=4, int=1Type>, float)
+                    0.17%  7.5085ms        42  178.77us  96.973us  435.55us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=8, int=2, int=8, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.16%  7.2908ms        48  151.89us  47.557us  344.21us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=4>, fused::KpqkPtrWriter<float, int=1, int=4>, float, float, int=3, int=8, int=2, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=4, int=1Type>, float)
+                    0.16%  7.2575ms        48  151.20us  45.637us  378.09us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=4>, fused::KpqkPtrWriter<float, int=1, int=4>, float, float, int=6, int=5, int=2, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=4, int=1Type>, float)
+                    0.16%  7.2431ms        48  150.90us  30.425us  402.37us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=4>, fused::KpqkPtrWriter<float, int=1, int=4>, float, float, int=6, int=5, int=4, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=4, int=1Type>, float)
+                    0.16%  7.1312ms        48  148.57us  31.706us  392.92us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=4>, fused::KpqkPtrWriter<float, int=1, int=4>, float, float, int=3, int=10, int=4, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=4, int=1Type>, float)
+                    0.16%  7.0277ms        46  152.78us  34.139us  480.32us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=4, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=4, int=4, int=2, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.16%  7.0218ms        48  146.29us  49.319us  318.33us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=5, int=5, int=1, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.15%  6.9030ms        80  86.287us  20.401us  203.20us  trt_maxwell_scudnn_128x128_relu_interior_nn_v1
+                    0.15%  6.8139ms        48  141.96us  45.636us  303.06us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=3, int=8, int=1, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.15%  6.8024ms        48  141.72us  46.949us  325.16us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=3, int=10, int=1, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.15%  6.7245ms        48  140.09us  43.907us  333.16us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=4, int=4, int=1, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.15%  6.6889ms        46  145.41us  34.523us  456.56us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=4, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=2, int=8, int=2, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.15%  6.6433ms        46  144.42us  27.126us  451.75us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=4, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=2, int=7, int=2, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.15%  6.4945ms        42  154.63us  65.236us  450.18us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=4, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=2, int=7, int=4, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.14%  6.4873ms        48  135.15us  45.636us  301.36us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=2, int=9, int=1, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.14%  6.4849ms        48  135.10us  41.985us  320.03us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=2, int=7, int=1, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.14%  6.4231ms        68  94.457us  27.062us  312.51us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=3, int=10, int=4, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.14%  6.3717ms        48  132.74us  30.809us  405.41us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=4, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=2, int=7, int=1, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.14%  6.2505ms        40  156.26us  63.315us  408.81us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=4, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=7, int=4, int=8, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.14%  6.1741ms        42  147.00us  82.562us  333.99us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=7, int=4, int=8, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.14%  6.1265ms        46  133.19us  22.258us  318.65us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=3, int=7, int=8, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.14%  6.0921ms        46  132.44us  28.663us  381.20us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=4, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=4, int=5, int=2, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.13%  6.0344ms        46  131.18us  24.083us  360.90us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=3, int=10, int=8, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.13%  6.0088ms       119  50.494us  1.9540us  338.83us  void cask::generateWinogradTilesKernel<int=0, cask::Element<float>, cask::Element<float>, cask::Element<float>>(cask::GenerateWinogradTilesParams)
+                    0.13%  5.9241ms        42  141.05us  79.775us  332.68us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=4, int=4, int=8, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.13%  5.9145ms        48  123.22us  27.766us  341.81us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=4, int=4, int=2, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.13%  5.8143ms        71  81.891us  20.176us  229.91us  trt_maxwell_scudnn_128x32_relu_interior_nn_v1
+                    0.13%  5.7841ms        42  137.72us  59.311us  367.53us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=4, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=5, int=5, int=4, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.13%  5.7615ms        48  120.03us  29.656us  332.87us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=2, int=7, int=2, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.13%  5.7325ms       146  39.263us  17.646us  60.656us  void fft1d_r2c_32<float, float, float2, bool=0, bool=0>(float2*, float const *, int, int3, int3, int2, int2)
+                    0.13%  5.7041ms        42  135.81us  58.607us  356.19us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=4, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=7, int=4, int=4, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.13%  5.6835ms        46  123.56us  22.033us  314.59us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=7, int=4, int=4, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.13%  5.6725ms        56  101.29us  19.471us  303.12us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=2, int=8, int=4, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.13%  5.6414ms        46  122.64us  19.888us  326.50us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=2, int=7, int=4, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.13%  5.6193ms        21  267.58us  47.141us  421.01us  void nvinfer1::tiled_pooling::poolCHW_PQT<int=2, int=2, int=2, int=2, int=2, int=16, int=128, int=5, int=1, bool=1, nvinfer1::ITiledPooling::PoolingMode, bool=0>(nvinfer1::TiledPoolingParams, int)
+                    0.13%  5.6028ms        42  133.40us  80.896us  296.24us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=4, int=7, int=8, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.13%  5.6016ms        48  116.70us  27.606us  318.37us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=2, int=8, int=2, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.12%  5.5160ms        42  131.33us  80.769us  292.49us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=3, int=9, int=8, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.12%  5.3520ms        40  133.80us  53.227us  342.32us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=4, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=4, int=8, int=8, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.12%  5.3500ms        48  111.46us  31.385us  260.62us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=3, int=10, int=2, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.12%  5.3111ms        46  115.46us  20.849us  279.46us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=4, int=7, int=4, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.12%  5.2368ms        42  124.69us  73.371us  285.83us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=3, int=10, int=8, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.12%  5.1565ms        48  107.43us  28.631us  265.91us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=2, int=9, int=2, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.12%  5.1482ms        42  122.58us  55.629us  314.30us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=4, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=3, int=9, int=4, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.11%  5.0043ms        46  108.79us  20.080us  260.72us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=2, int=9, int=4, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.10%  4.2530ms       143  29.740us  4.3870us  297.36us  void nvinfer1::plugin::permuteKernel<unsigned int=512>(int, nvinfer1::plugin::Quadruple, nvinfer1::plugin::permuteKernel<unsigned int=512>, nvinfer1::plugin::permuteKernel<unsigned int=512>, float const *, float*)
+                    0.09%  4.0713ms        20  203.57us  46.565us  334.96us  void nvinfer1::tiled_pooling::poolCHW_PQT<int=2, int=2, int=2, int=2, int=2, int=32, int=256, int=5, int=1, bool=1, nvinfer1::ITiledPooling::PoolingMode, bool=0>(nvinfer1::TiledPoolingParams, int)
+                    0.09%  3.8641ms        21  184.00us  54.572us  332.84us  void nvinfer1::tiled_pooling::poolCHW_PQT<int=2, int=2, int=2, int=2, int=2, int=32, int=256, int=2, int=1, bool=1, nvinfer1::ITiledPooling::PoolingMode, bool=0>(nvinfer1::TiledPoolingParams, int)
+                    0.09%  3.8039ms        12  316.99us  179.57us  510.30us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=7, int=4, int=1, int=3, int=3, int=2, int=2>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.08%  3.8029ms        16  237.68us  143.38us  330.60us  void flip_filter<float, float>(float*, float const *, int, int, int, int)
+                    0.07%  3.3090ms        32  103.41us  44.388us  333.39us  void nvinfer1::tiled_pooling::poolCHW_PQT<int=2, int=2, int=2, int=2, int=2, int=32, int=256, int=6, int=1, bool=1, nvinfer1::ITiledPooling::PoolingMode, bool=0>(nvinfer1::TiledPoolingParams, int)
+                    0.07%  3.1203ms        46  67.833us  19.247us  368.10us  void fft1d_r2c_32<float, float, float2, bool=1, bool=0>(float2*, float const *, int, int3, int3, int2, int2)
+                    0.06%  2.6301ms         4  657.53us  143.47us  1.1759ms  void DSE::vector_fft<int=0, int=1, int=256, int=16, int=16, int=1, float, float, float2>(float2*, float2, int, int3, float2*)
+                    0.06%  2.6009ms         6  433.48us  20.848us  1.1484ms  void transpose_readWrite_alignment_kernel<float2, float2, int=1, bool=0, int=6, int=4, int=4>(cublasTransposeParams<float2>, float2 const *, float2*, float2 const *)
+                    0.06%  2.4761ms        47  52.682us  6.0530us  336.43us  void cask::generateWinogradTilesKernel<int=1, cask::Element<float>, cask::Element<float>, cask::Element<float>>(cask::GenerateWinogradTilesParams)
+                    0.06%  2.4747ms       126  19.640us  2.4020us  129.42us  void cudnn::winograd::generateWinogradTilesKernel<int=0, float, float>(cudnn::winograd::GenerateWinogradTilesParams<float, float>)
+                    0.05%  2.3158ms        10  231.58us  61.233us  451.18us  void nvinfer1::tiled_pooling::poolCHW_PQT<int=2, int=2, int=2, int=2, int=2, int=32, int=256, int=1, int=1, bool=1, nvinfer1::ITiledPooling::PoolingMode, bool=0>(nvinfer1::TiledPoolingParams, int)
+                    0.05%  2.2803ms        10  228.03us  218.70us  242.91us  apollo::perception::camera::get_object_kernel(int, float const *, float const *, float const *, float const *, float const *, float const *, float const *, float const *, float const *, float const *, float const *, float const *, float const *, float const *, float const *, float const *, float const *, float const *, int, int, int, int, float, float, float, bool, bool, bool, bool, bool, int, float*, float*, int, int)
+                    0.05%  2.2145ms        10  221.45us  59.888us  410.09us  void nvinfer1::tiled_pooling::poolCHW_PQT<int=2, int=2, int=2, int=2, int=2, int=16, int=128, int=1, int=1, bool=1, nvinfer1::ITiledPooling::PoolingMode, bool=0>(nvinfer1::TiledPoolingParams, int)
+                    0.05%  2.1569ms        10  215.69us  52.778us  412.68us  void cudnn::detail::pooling_fw_4d_kernel<float, float, cudnn::detail::maxpooling_func<float, cudnnNanPropagation_t=0>, int=0, bool=0>(cudnnTensorStruct, float const *, cudnn::detail::pooling_fw_4d_kernel<float, float, cudnn::detail::maxpooling_func<float, cudnnNanPropagation_t=0>, int=0, bool=0>, cudnnTensorStruct*, cudnnPoolingStruct, float, cudnnPoolingStruct, int, cudnn::reduced_divisor, float)
+                    0.04%  1.9859ms        20  99.296us  75.805us  186.77us  trtwell_scudnn_128x32_relu_interior_nn
+                    0.04%  1.9053ms        51  37.359us  4.2920us  123.84us  void cuScale::scale<float, float, cuScale::Mode, bool=0, int=4, cuScale::FusedActivationType>(float const *, cuScale::scale<float, float, cuScale::Mode, bool=0, int=4, cuScale::FusedActivationType>*, cuScale::KernelParameters<cuScale::scale<float, float, cuScale::Mode, bool=0, int=4, cuScale::FusedActivationType>>, nvinfer1::rt::reduced_divisor, nvinfer1::rt, nvinfer1::rt)
+                    0.04%  1.8502ms        10  185.02us  47.526us  333.93us  void nvinfer1::tiled_pooling::poolCHW_PQT<int=2, int=2, int=2, int=2, int=2, int=16, int=128, int=7, int=1, bool=1, nvinfer1::ITiledPooling::PoolingMode, bool=0>(nvinfer1::TiledPoolingParams, int)
+                    0.04%  1.8498ms        10  184.98us  47.302us  334.35us  void nvinfer1::tiled_pooling::poolCHW_PQT<int=2, int=2, int=2, int=2, int=2, int=16, int=128, int=8, int=1, bool=1, nvinfer1::ITiledPooling::PoolingMode, bool=0>(nvinfer1::TiledPoolingParams, int)
+                    0.04%  1.8427ms        10  184.27us  47.622us  334.99us  void nvinfer1::tiled_pooling::poolCHW_PQT<int=2, int=2, int=2, int=2, int=2, int=16, int=128, int=4, int=1, bool=1, nvinfer1::ITiledPooling::PoolingMode, bool=0>(nvinfer1::TiledPoolingParams, int)
+                    0.04%  1.8427ms        10  184.27us  47.142us  333.67us  void nvinfer1::tiled_pooling::poolCHW_PQT<int=2, int=2, int=2, int=2, int=2, int=16, int=128, int=6, int=1, bool=1, nvinfer1::ITiledPooling::PoolingMode, bool=0>(nvinfer1::TiledPoolingParams, int)
+                    0.04%  1.8276ms        10  182.76us  46.853us  332.52us  void nvinfer1::tiled_pooling::poolCHW_PQT<int=2, int=2, int=2, int=2, int=2, int=16, int=128, int=3, int=1, bool=1, nvinfer1::ITiledPooling::PoolingMode, bool=0>(nvinfer1::TiledPoolingParams, int)
+                    0.04%  1.8108ms        10  181.08us  47.238us  328.77us  void nvinfer1::tiled_pooling::poolCHW_PQT<int=2, int=2, int=2, int=2, int=2, int=16, int=128, int=2, int=1, bool=1, nvinfer1::ITiledPooling::PoolingMode, bool=0>(nvinfer1::TiledPoolingParams, int)
+                    0.04%  1.7558ms        10  175.58us  44.708us  336.65us  void nvinfer1::tiled_pooling::poolCHW_PQT<int=2, int=2, int=2, int=2, int=2, int=32, int=256, int=7, int=1, bool=1, nvinfer1::ITiledPooling::PoolingMode, bool=0>(nvinfer1::TiledPoolingParams, int)
+                    0.04%  1.7541ms        10  175.41us  45.252us  335.76us  void nvinfer1::tiled_pooling::poolCHW_PQT<int=2, int=2, int=2, int=2, int=2, int=32, int=256, int=8, int=1, bool=1, nvinfer1::ITiledPooling::PoolingMode, bool=0>(nvinfer1::TiledPoolingParams, int)
+                    0.04%  1.7503ms        10  175.03us  46.180us  335.60us  void nvinfer1::tiled_pooling::poolCHW_PQT<int=2, int=2, int=2, int=2, int=2, int=32, int=256, int=4, int=1, bool=1, nvinfer1::ITiledPooling::PoolingMode, bool=0>(nvinfer1::TiledPoolingParams, int)
+                    0.04%  1.7396ms        10  173.96us  44.356us  335.82us  void nvinfer1::tiled_pooling::poolCHW_PQT<int=2, int=2, int=2, int=2, int=2, int=32, int=256, int=3, int=1, bool=1, nvinfer1::ITiledPooling::PoolingMode, bool=0>(nvinfer1::TiledPoolingParams, int)
+                    0.04%  1.7260ms        22  78.456us  23.507us  185.33us  trtwell_scudnn_128x128_relu_interior_nn
+                    0.04%  1.7072ms         2  853.61us  853.32us  853.90us  void fermiPlusCgemmLDS128_batched<bool=1, bool=0, bool=0, bool=0, int=4, int=4, int=4, int=3, int=3, bool=1, bool=0>(float2* const *, float2* const *, float2* const *, float2*, float2 const *, float2 const *, int, int, int, int, int, int, __int64, __int64, __int64, float2 const *, float2 const *, float2, float2, int)
+                    0.04%  1.7031ms         2  851.56us  845.92us  857.19us  maxwell_scudnn_winograd_128x128_ldg1_ldg4_tile148t_nt
+                    0.04%  1.6566ms        22  75.299us  19.151us  180.59us  maxwell_scudnn_128x128_relu_interior_nn
+                    0.04%  1.6532ms        20  82.659us  66.133us  129.51us  maxwell_scudnn_128x32_relu_interior_nn
+                    0.04%  1.6303ms        18  90.571us  32.826us  227.16us  trtwell_scudnn_128x64_relu_interior_nn
+                    0.04%  1.6285ms       857  1.9000us     896ns  29.848us  cask::computeOffsetsKernel(cask::ComputeOffsetsParams)
+                    0.03%  1.5546ms       146  10.647us  2.8510us  47.430us  void fft1d_c2r_32<float2, float, float, bool=0, bool=1, bool=0, bool=0>(float*, float2 const *, int, int3, int3, int2, int, float, float, float*, float*)
+                    0.03%  1.4456ms        14  103.25us  42.433us  277.02us  maxwell_gcgemm_64x32_nt
+                    0.03%  1.4175ms         4  354.39us  111.29us  597.50us  void DSE::regular_fft_pad<int=0, int=1, int=256, int=16, int=16, int=1, float, float, float2>(float2*, float*, int, int3, float*, int, float*, float*, int, int, int, int, int, bool)
+                    0.03%  1.3459ms        18  74.772us  26.741us  126.28us  maxwell_scudnn_128x64_relu_interior_nn
+                    0.03%  1.3456ms        48  28.034us  3.0750us  84.323us  void cuEltwise::eltwise<cuEltwise::SimpleAlgo<float, float>, cuEltwise::Compute<nvinfer1::ElementWiseOperation>>(cuEltwise::LaunchParams)
+                    0.03%  1.2594ms      1460     862ns     640ns  2.4020us  [CUDA memset]
+                    0.02%  1.1070ms        64  17.297us  6.4690us  37.406us  void fft2d_r2c_32x32<float, bool=1, unsigned int=0, bool=0>(float2*, float const *, int, int, int, int, int, int, int, int, int, cudnn::reduced_divisor, bool, int2, int, int)
+                    0.02%  1.1044ms        48  23.007us  1.9220us  69.848us  nhwkuv_to_nkpq_ker(float*, float const *, int, int, int, int, int, int, nvinfer1::rt::reduced_divisor, int, int, nvinfer1::rt::reduced_divisor, nvinfer1::rt::reduced_divisor, int, int, int, float const *, float const *)
+                    0.02%  1.0035ms         8  125.44us  90.344us  163.46us  void fft1d_r2c_256<float, float, float2, bool=0, bool=0>(float2*, float const *, int3, int3, int2, int2)
+                    0.02%  933.70us        24  38.904us  29.464us  46.501us  maxwell_sgemm_128x64_nn
+                    0.02%  873.11us        10  87.311us  86.693us  88.166us  apollo::perception::inference::resize_linear_kernel(unsigned char const *, float*, int, int, int, int, int, int, float, float)
+                    0.02%  846.72us        10  84.672us  83.106us  87.910us  void apollo::perception::inference::resize_linear_kernel_mean<float>(unsigned char const *, float*, int, int, int, int, int, int, float, float, float, float*, float*, bool, float)
+                    0.02%  772.77us        40  19.319us  4.2910us  50.280us  void cuScale::scale<float, float, cuScale::Mode, bool=0, int=4, cuScale::FusedActivationType>(float const *, cuScale::scale<float, float, cuScale::Mode, bool=0, int=4, cuScale::FusedActivationType>*, cuScale::KernelParameters<cuScale::scale<float, float, cuScale::Mode, bool=0, int=4, cuScale::FusedActivationType>>, nvinfer1::rt::reduced_divisor, nvinfer1::rt, nvinfer1::rt)
+                    0.02%  724.48us         6  120.75us  89.992us  179.92us  void cudnn::detail::dgrad_engine<float, int=128, int=6, int=8, int=3, int=3, int=5, bool=1>(int, int, int, float const *, int, float const , int, cudnn::detail::dgrad_engine<float, int=128, int=6, int=8, int=3, int=3, int=5, bool=1>*, kernel_grad_params, int, int, float, int, int, int)
+                    0.02%  716.38us        12  59.698us  54.187us  62.322us  sgemm_128x128x8_NN_vec
+                    0.01%  654.60us         8  81.825us  50.216us  118.27us  void fft1d_c2r_256<float2, float, float, bool=0, bool=1, bool=0, bool=0>(float*, float2 const *, int3, int3, int2, int, float, float, float*, float*)
+                    0.01%  565.31us        10  56.531us  28.342us  99.599us  void apollo::perception::inference::ROIPoolForward<float>(int, float const *, bool, apollo::perception::inference::ROIPoolForward<float>, int, int, int, int, int, float const , apollo::perception::inference::ROIPoolForward<float>*, int*)
+                    0.01%  497.64us        48  10.367us  2.1450us  26.901us  void nchw_to_nhwcin_ker<unsigned int>(unsigned int*, unsigned int const *, int, int, nvinfer1::rt::reduced_divisor, nvinfer1::rt::reduced_divisor, int, nvinfer1::rt::reduced_divisor, int, int, int, int, int, int)
+                    0.01%  441.09us         4  110.27us  107.06us  114.24us  cudnn_maxwell_cgemm_64x64_nt_batched
+                    0.01%  428.82us        22  19.492us  18.734us  21.137us  void fft2d_c2r_32x32<float, bool=0, bool=0, unsigned int=1, bool=0, bool=0>(float*, float2 const *, int, int, int, int, int, int, int, int, int, float, float, cudnn::reduced_divisor, bool, float*, float*, int2, int, int)
+                    0.01%  382.15us       210  1.8190us     929ns  24.531us  cudnn::maxwell::gemm::computeOffsetsKernel(cudnn::maxwell::gemm::ComputeOffsetsParams)
+                    0.01%  369.51us        12  30.792us  24.147us  40.800us  cudnn_maxwell_cgemm_64x32_nt_batched
+                    0.01%  361.24us       167  2.1630us     993ns  29.239us  dit::computeOffsetsKernel(dit::ComputeOffsetsParams)
+                    0.01%  329.67us        33  9.9890us  3.1380us  18.991us  void apollo::perception::inference::Slice<float>(int, float const *, int, int, int, int, int, apollo::perception::inference::Slice<float>*)
+                    0.01%  320.10us        50  6.4010us  4.6760us  8.9030us  void gemmSN_TN_kernel<float, float, float, int=128, int=16, int=2, int=4, int=4, int=4, bool=0>(int, int, int, float const *, int, float const *, int, float*, int, float const *, float const *, float, float, int, int)
+                    0.01%  293.93us        12  24.494us  21.585us  25.172us  sgemm_32x32x32_NN_vec
+                    0.01%  286.85us         8  35.856us  11.561us  86.789us  void cuEltwise::eltwise<cuEltwise::StripMineAlgo<float, float>, cuEltwise::Compute<nvinfer1::ElementWiseOperation>>(cuEltwise::LaunchParams)
+                    0.00%  195.52us         2  97.757us  94.731us  100.78us  void ForEachPixelNaive<unsigned char, int=3, PointwiseFunctor<unsigned char, int=3, unsigned char, int=3, SwapChannels<unsigned char, int=3, int=3>>>(Image<unsigned char, int=3>, NppiSize, unsigned char)
+                    0.00%  185.88us         4  46.469us  40.064us  55.244us  void fft1d_r2c_256<float, float, float2, bool=1, bool=0>(float2*, float const *, int3, int3, int2, int2)
+                    0.00%  165.19us        33  5.0050us  3.8110us  6.0850us  void op_generic_tensor_kernel<int=2, float, float, float, int=256, cudnnGenericOp_t=6, cudnnNanPropagation_t=0, cudnnDimOrder_t=0, int=1>(cudnnTensorStruct, float*, cudnnTensorStruct, float const *, cudnnTensorStruct, float const *, float, float, float, float, dimArray, reducedDivisorArray, bool)
+                    0.00%  137.58us         2  68.791us  68.663us  68.919us  void ForEachPixelNaive<unsigned char, int=3, PointwiseFunctor<unsigned char, int=1, unsigned char, int=3, DupOperator<unsigned char, int=3>>>(Image<unsigned char, int=3>, NppiSize, unsigned char)
+                    0.00%  114.62us         2  57.309us  56.717us  57.902us  void ForEachPixelByte<unsigned char, int=1, ColorToGrayFunctor<unsigned char, int=3>>(Pixel<unsigned char, int=1>*, int, int, int, int, int, int, unsigned char)
+                    0.00%  112.79us        18  6.2660us  1.3130us  43.490us  compute_gemm_pointers(float2**, float2 const *, int, float2 const *, int, float2 const *, int, int)
+                    0.00%  108.66us         2  54.331us  49.095us  59.568us  void cudnn::detail::dgrad_engine<float, int=512, int=6, int=5, int=3, int=3, int=3, bool=1>(int, int, int, float const *, int, float const , int, cudnn::detail::dgrad_engine<float, int=512, int=6, int=5, int=3, int=3, int=3, bool=1>*, kernel_grad_params, int, int, float, int, int, int)
+                    0.00%  82.400us         8  10.300us  9.7030us  10.920us  void fft2d_c2r_16x16<float, bool=0>(float*, float2*, int, int, int, int, int, int, int, int, int, int, float, float, int, float*, float*)
+                    0.00%  79.038us        11  7.1850us  4.9320us  9.2230us  void gemmSN_TN_kernel<float, float, float, int=128, int=16, int=2, int=4, int=4, int=4, bool=1>(int, int, int, float const *, int, float const *, int, float*, int, float const *, float const *, float, float, int, int)
+                    0.00%  68.120us         8  8.5150us  1.6980us  24.180us  void scalePackedTensor_kernel<float, float>(cudnnTensor4dStruct, float*, float)
+                    0.00%  53.834us         2  26.917us  26.645us  27.189us  void DSE::regular_fft_clip<int=1, int=2, int=256, int=16, int=16, int=1, float, float, float2>(float*, float2*, int, int3, float2*, int, float2*, float2*, int, int, int, int, int, float, float, bool, int, float, float)
+                    0.00%  49.447us         2  24.723us  24.211us  25.236us  void DSE::vector_fft<int=1, int=2, int=256, int=16, int=16, int=1, float, float, float2>(float2*, float2, int, int3, float2*)
+                    0.00%  44.480us        25  1.7790us     768ns  2.7860us  apollo::perception::camera::compute_overlapped_by_idx_kernel(int, float const *, int, float, int const *, int, bool*)
+                    0.00%  38.719us         4  9.6790us  5.6690us  11.369us  sgemm_32x32x32_NT_vec
+                    0.00%  15.788us        10  1.5780us  1.5370us  1.6330us  apollo::perception::inference::sqrt_kernel(float*, int, int)
+                    0.00%  11.113us        10  1.1110us  1.0890us  1.1210us  apollo::perception::inference::multi_scale_kernel(float const *, float const *, float*, int, int)
+                    0.00%  10.986us        10  1.0980us  1.0570us  1.3450us  apollo::perception::inference::mul_kernel(int, float const *, float const *, float*)
+                    0.00%  10.474us        10  1.0470us  1.0250us  1.1530us  apollo::perception::inference::set_kernel(int, float, float*)
+      API calls:   77.15%  20.5950s      8144  2.5289ms  1.8712ms  48.281ms  cudaEventSynchronize
+                    5.55%  1.48247s     12717  116.57us  1.7220us  9.4382ms  cudaMalloc
+                    4.16%  1.11038s     12711  87.355us     400ns  225.15ms  cudaFree
+                    3.25%  867.94ms        56  15.499ms     961ns  867.66ms  cudaStreamCreateWithFlags
+                    2.83%  754.59ms       400  1.8865ms  1.1610us  9.9649ms  cudaStreamSynchronize
+                    2.07%  553.25ms     16802  32.927us  2.6920us  11.115ms  cudaMemcpyAsync
+                    1.51%  404.38ms      2672  151.34us  84.781us  10.039ms  cudaGetDeviceProperties
+                    1.27%  337.93ms     34519  9.7890us  3.8300us  33.572ms  cudaLaunchKernel
+                    1.21%  323.40ms         5  64.679ms  5.3650us  323.35ms  cudaStreamCreate
+                    0.26%  70.156ms     18746  3.7420us     469ns  274.92us  cudaEventRecord
+                    0.20%  53.142ms      8144  6.5250us  2.0800us  113.61us  cudaStreamAddCallback
+                    0.09%  23.256ms       363  64.065us  4.5350us  1.4808ms  cudaMemcpy
+                    0.08%  22.266ms      1441  15.451us  2.2020us  45.202us  cudaMemsetAsync
+                    0.08%  20.251ms      8144  2.4860us  1.1200us  292.77us  cudaEventElapsedTime
+                    0.06%  15.494ms      2658  5.8290us  1.8820us  28.748us  cudaCreateTextureObject
+                    0.04%  11.265ms     10744  1.0480us     500ns  273.82us  cudaStreamWaitEvent
+                    0.03%  8.5397ms      2648  3.2240us  1.4220us  286.07us  cudaDestroyTextureObject
+                    0.03%  8.4645ms     33399     253ns     100ns  274.07us  cudaGetLastError
+                    0.03%  6.8672ms       160  42.919us  1.0610us  5.2184ms  cudaDeviceSynchronize
+                    0.02%  6.3419ms      1529  4.1470us  2.0500us  22.120us  cudaFuncGetAttributes
+                    0.01%  3.7804ms      4246     890ns     320ns  16.608us  cudaGetDevice
+                    0.01%  3.5274ms      6407     550ns     260ns  9.5300us  cudaDeviceGetAttribute
+                    0.01%  2.3236ms       662  3.5090us  1.1910us  9.3300us  cudaBindTexture
+                    0.01%  1.4958ms      1424  1.0500us     370ns  65.527us  cudaEventDestroy
+                    0.01%  1.4651ms      1529     958ns     410ns  17.956us  cudaOccupancyMaxActiveBlocksPerMultiprocessorWithFlags
+                    0.00%  1.3140ms      1250  1.0510us     410ns  3.8130us  cudaEventCreateWithFlags
+                    0.00%  1.0652ms         7  152.18us  8.5280us  522.99us  cudaHostAlloc
+                    0.00%  976.42us         6  162.74us  151.74us  173.02us  cuDeviceTotalMem
+                    0.00%  896.03us       561  1.5970us     110ns  184.65us  cuDeviceGetAttribute
+                    0.00%  706.05us       662  1.0660us     450ns  1.6420us  cudaUnbindTexture
+                    0.00%  659.92us      2658     248ns     100ns  1.0110us  cudaCreateChannelDesc
+                    0.00%  466.04us       218  2.1370us  1.0310us  5.4250us  cudaEventCreate
+                    0.00%  357.46us        10  35.746us  5.1040us  273.22us  cudaFreeHost
+                    0.00%  269.52us        33  8.1670us  5.9550us  12.301us  cudaMemcpy2DAsync
+                    0.00%  184.09us        77  2.3900us  1.3210us  10.999us  cudaStreamDestroy
+                    0.00%  133.69us         6  22.281us  13.048us  43.914us  cuDeviceGetName
+                    0.00%  119.00us        28  4.2490us  1.0310us  86.223us  cudaStreamCreateWithPriority
+                    0.00%  118.38us        19  6.2300us  2.6720us  38.123us  cudaMemset
+                    0.00%  58.146us        45  1.2920us     450ns  9.9090us  cudaSetDevice
+                    0.00%  44.380us         4  11.095us  7.4170us  16.865us  cudaMallocHost
+                    0.00%  37.825us         2  18.912us  17.976us  19.849us  cudaMemGetInfo
+                    0.00%  7.6520us         5  1.5300us     890ns  2.5300us  cuInit
+                    0.00%  6.6660us         7     952ns     741ns  1.2600us  cudaHostGetDevicePointer
+                    0.00%  6.3540us         7     907ns     530ns  1.3700us  cudaDeviceGetStreamPriorityRange
+                    0.00%  5.4200us         5  1.0840us     560ns  2.6190us  cuDriverGetVersion
+                    0.00%  2.7410us         8     342ns     160ns     569ns  cudaGetDeviceCount
+                    0.00%  2.7300us         1  2.7300us  2.7300us  2.7300us  cuDeviceGetPCIBusId
+                    0.00%  2.5790us         8     322ns     150ns     619ns  cuDeviceGetCount
+                    0.00%  2.5300us         7     361ns     140ns     539ns  cuDeviceGet
+                    0.00%  1.1400us         6     190ns     170ns     210ns  cuDeviceGetUuid
