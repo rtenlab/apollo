@@ -27,6 +27,18 @@ cc_library(
         "//modules/perception/lidar/lib/pointcloud_preprocessor",
         "//modules/perception/lidar/lib/scene_manager",
         "//modules/perception/proto:perception_config_schema_proto",
+        # YIDI:
+        "//modules/perception/lidar/lib/segmentation/cnnseg:cnn_segmentation",
+        "//modules/perception/lidar/lib/object_filter_bank/roi_boundary_filter",
+        "//modules/perception/lidar/lib/roi_filter/hdmap_roi_filter",
+        "//modules/perception/lidar/lib/tracker/multi_lidar_fusion:mlf_engine",
+        "//modules/perception/lidar/lib/tracker/multi_lidar_fusion:mlf_track_object_matcher",
+        "//modules/perception/lidar/lib/tracker/multi_lidar_fusion:mlf_tracker",
+        "//modules/perception/lidar/lib/classifier/fused_classifier",
+        "//modules/perception/lidar/lib/classifier/fused_classifier:ccrf_type_fusion",
+        "//modules/perception/lidar/lib/ground_detector/spatio_temporal_ground_detector",
+        "//modules/perception/lidar/lib/scene_manager/ground_service",
+        "//modules/perception/common/sensor_manager",
         "@eigen",
     ],
 )

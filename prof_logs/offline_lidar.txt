@@ -1,0 +1,370 @@
+==27461== NVPROF is profiling process 27461, command: ./offline_lidar_obstacle_perception --work_root=/apollo/modules/perception/production --pcd_path=/apollo/modules/perception/production/data/perception/lidar/files --output_path=output
+[NVBLAS] NVBLAS_CONFIG_FILE environment variable is NOT set : relying on default config filename 'nvblas.conf'
+[NVBLAS] Cannot open default config file 'nvblas.conf'
+[NVBLAS] Config parsed
+[NVBLAS] CPU Blas library need to be provided
+I0417 13:41:16.856199 27461 config_manager.cc:60] []WORK_ROOT: /apollo/modules/perception/production config_root_path: /apollo/modules/perception/production/./conf
+I0417 13:41:16.856890 27461 config_manager.cc:210] []reset ModelConfig. model_name: HDMapInput integer_param_map's size: 1 string_param_map's size: 1 double_param_map's size: 0 float_param_map's size: 0 bool_param_map's size: 0 array_integer_param_map's size: 0 array_string_param_map's size: 0 array_double_param_map's size: 0 array_float_param_map's size: 0 array_bool_param_map's size: 0
+I0417 13:41:16.856897 27461 config_manager.cc:95] []load ModelConfig succ. name: HDMapInput
+I0417 13:41:16.856922 27461 config_manager.cc:210] []reset ModelConfig. model_name: ContiArsPreprocessor integer_param_map's size: 0 string_param_map's size: 0 double_param_map's size: 0 float_param_map's size: 1 bool_param_map's size: 0 array_integer_param_map's size: 0 array_string_param_map's size: 0 array_double_param_map's size: 0 array_float_param_map's size: 0 array_bool_param_map's size: 0
+I0417 13:41:16.856926 27461 config_manager.cc:95] []load ModelConfig succ. name: ContiArsPreprocessor
+I0417 13:41:16.856950 27461 config_manager.cc:210] []reset ModelConfig. model_name: ContiArsTracker integer_param_map's size: 1 string_param_map's size: 2 double_param_map's size: 1 float_param_map's size: 0 bool_param_map's size: 1 array_integer_param_map's size: 0 array_string_param_map's size: 0 array_double_param_map's size: 0 array_float_param_map's size: 0 array_bool_param_map's size: 0
+I0417 13:41:16.856953 27461 config_manager.cc:95] []load ModelConfig succ. name: ContiArsTracker
+I0417 13:41:16.856966 27461 config_manager.cc:210] []reset ModelConfig. model_name: HMMatcher integer_param_map's size: 0 string_param_map's size: 1 double_param_map's size: 0 float_param_map's size: 0 bool_param_map's size: 0 array_integer_param_map's size: 0 array_string_param_map's size: 0 array_double_param_map's size: 0 array_float_param_map's size: 0 array_bool_param_map's size: 0
+I0417 13:41:16.856968 27461 config_manager.cc:95] []load ModelConfig succ. name: HMMatcher
+I0417 13:41:16.856983 27461 config_manager.cc:210] []reset ModelConfig. model_name: FrontRadarPipeline integer_param_map's size: 0 string_param_map's size: 3 double_param_map's size: 0 float_param_map's size: 0 bool_param_map's size: 0 array_integer_param_map's size: 0 array_string_param_map's size: 0 array_double_param_map's size: 0 array_float_param_map's size: 0 array_bool_param_map's size: 0
+I0417 13:41:16.856986 27461 config_manager.cc:95] []load ModelConfig succ. name: FrontRadarPipeline
+I0417 13:41:16.857003 27461 config_manager.cc:210] []reset ModelConfig. model_name: RearRadarPipeline integer_param_map's size: 0 string_param_map's size: 3 double_param_map's size: 0 float_param_map's size: 0 bool_param_map's size: 0 array_integer_param_map's size: 0 array_string_param_map's size: 0 array_double_param_map's size: 0 array_float_param_map's size: 0 array_bool_param_map's size: 0
+I0417 13:41:16.857007 27461 config_manager.cc:95] []load ModelConfig succ. name: RearRadarPipeline
+I0417 13:41:16.857033 27461 config_manager.cc:210] []reset ModelConfig. model_name: MapManager integer_param_map's size: 0 string_param_map's size: 1 double_param_map's size: 0 float_param_map's size: 0 bool_param_map's size: 0 array_integer_param_map's size: 0 array_string_param_map's size: 0 array_double_param_map's size: 0 array_float_param_map's size: 0 array_bool_param_map's size: 0
+I0417 13:41:16.857036 27461 config_manager.cc:95] []load ModelConfig succ. name: MapManager
+I0417 13:41:16.857048 27461 config_manager.cc:210] []reset ModelConfig. model_name: SceneManager integer_param_map's size: 0 string_param_map's size: 1 double_param_map's size: 0 float_param_map's size: 0 bool_param_map's size: 0 array_integer_param_map's size: 0 array_string_param_map's size: 0 array_double_param_map's size: 0 array_float_param_map's size: 0 array_bool_param_map's size: 0
+I0417 13:41:16.857055 27461 config_manager.cc:95] []load ModelConfig succ. name: SceneManager
+I0417 13:41:16.857066 27461 config_manager.cc:210] []reset ModelConfig. model_name: ObjectFilterBank integer_param_map's size: 0 string_param_map's size: 1 double_param_map's size: 0 float_param_map's size: 0 bool_param_map's size: 0 array_integer_param_map's size: 0 array_string_param_map's size: 0 array_double_param_map's size: 0 array_float_param_map's size: 0 array_bool_param_map's size: 0
+I0417 13:41:16.857075 27461 config_manager.cc:95] []load ModelConfig succ. name: ObjectFilterBank
+I0417 13:41:16.857086 27461 config_manager.cc:210] []reset ModelConfig. model_name: PointCloudPreprocessor integer_param_map's size: 0 string_param_map's size: 1 double_param_map's size: 0 float_param_map's size: 0 bool_param_map's size: 0 array_integer_param_map's size: 0 array_string_param_map's size: 0 array_double_param_map's size: 0 array_float_param_map's size: 0 array_bool_param_map's size: 0
+I0417 13:41:16.857089 27461 config_manager.cc:95] []load ModelConfig succ. name: PointCloudPreprocessor
+I0417 13:41:16.857100 27461 config_manager.cc:210] []reset ModelConfig. model_name: ROIBoundaryFilter integer_param_map's size: 0 string_param_map's size: 1 double_param_map's size: 0 float_param_map's size: 0 bool_param_map's size: 0 array_integer_param_map's size: 0 array_string_param_map's size: 0 array_double_param_map's size: 0 array_float_param_map's size: 0 array_bool_param_map's size: 0
+I0417 13:41:16.857102 27461 config_manager.cc:95] []load ModelConfig succ. name: ROIBoundaryFilter
+I0417 13:41:16.857113 27461 config_manager.cc:210] []reset ModelConfig. model_name: HdmapROIFilter integer_param_map's size: 0 string_param_map's size: 1 double_param_map's size: 0 float_param_map's size: 0 bool_param_map's size: 0 array_integer_param_map's size: 0 array_string_param_map's size: 0 array_double_param_map's size: 0 array_float_param_map's size: 0 array_bool_param_map's size: 0
+I0417 13:41:16.857116 27461 config_manager.cc:95] []load ModelConfig succ. name: HdmapROIFilter
+I0417 13:41:16.857126 27461 config_manager.cc:210] []reset ModelConfig. model_name: CNNSegmentation integer_param_map's size: 0 string_param_map's size: 1 double_param_map's size: 0 float_param_map's size: 0 bool_param_map's size: 0 array_integer_param_map's size: 0 array_string_param_map's size: 0 array_double_param_map's size: 0 array_float_param_map's size: 0 array_bool_param_map's size: 0
+I0417 13:41:16.857129 27461 config_manager.cc:95] []load ModelConfig succ. name: CNNSegmentation
+I0417 13:41:16.857139 27461 config_manager.cc:210] []reset ModelConfig. model_name: NCutSegmentation integer_param_map's size: 0 string_param_map's size: 1 double_param_map's size: 0 float_param_map's size: 0 bool_param_map's size: 0 array_integer_param_map's size: 0 array_string_param_map's size: 0 array_double_param_map's size: 0 array_float_param_map's size: 0 array_bool_param_map's size: 0
+I0417 13:41:16.857142 27461 config_manager.cc:95] []load ModelConfig succ. name: NCutSegmentation
+I0417 13:41:16.857156 27461 config_manager.cc:210] []reset ModelConfig. model_name: SpatioTemporalGroundDetector integer_param_map's size: 0 string_param_map's size: 1 double_param_map's size: 0 float_param_map's size: 0 bool_param_map's size: 0 array_integer_param_map's size: 0 array_string_param_map's size: 0 array_double_param_map's size: 0 array_float_param_map's size: 0 array_bool_param_map's size: 0
+I0417 13:41:16.857158 27461 config_manager.cc:95] []load ModelConfig succ. name: SpatioTemporalGroundDetector
+I0417 13:41:16.857174 27461 config_manager.cc:210] []reset ModelConfig. model_name: LidarObstacleSegmentation integer_param_map's size: 0 string_param_map's size: 1 double_param_map's size: 0 float_param_map's size: 0 bool_param_map's size: 0 array_integer_param_map's size: 0 array_string_param_map's size: 0 array_double_param_map's size: 0 array_float_param_map's size: 0 array_bool_param_map's size: 0
+I0417 13:41:16.857179 27461 config_manager.cc:95] []load ModelConfig succ. name: LidarObstacleSegmentation
+I0417 13:41:16.857182 27461 config_manager.cc:210] []reset ModelConfig. model_name: LidarObstacleTracking integer_param_map's size: 0 string_param_map's size: 1 double_param_map's size: 0 float_param_map's size: 0 bool_param_map's size: 0 array_integer_param_map's size: 0 array_string_param_map's size: 0 array_double_param_map's size: 0 array_float_param_map's size: 0 array_bool_param_map's size: 0
+I0417 13:41:16.857187 27461 config_manager.cc:95] []load ModelConfig succ. name: LidarObstacleTracking
+I0417 13:41:16.857208 27461 config_manager.cc:210] []reset ModelConfig. model_name: FusedClassifier integer_param_map's size: 0 string_param_map's size: 1 double_param_map's size: 0 float_param_map's size: 0 bool_param_map's size: 0 array_integer_param_map's size: 0 array_string_param_map's size: 0 array_double_param_map's size: 0 array_float_param_map's size: 0 array_bool_param_map's size: 0
+I0417 13:41:16.857211 27461 config_manager.cc:95] []load ModelConfig succ. name: FusedClassifier
+I0417 13:41:16.857214 27461 config_manager.cc:210] []reset ModelConfig. model_name: CCRFOneShotTypeFusion integer_param_map's size: 0 string_param_map's size: 1 double_param_map's size: 0 float_param_map's size: 0 bool_param_map's size: 0 array_integer_param_map's size: 0 array_string_param_map's size: 0 array_double_param_map's size: 0 array_float_param_map's size: 0 array_bool_param_map's size: 0
+I0417 13:41:16.857218 27461 config_manager.cc:95] []load ModelConfig succ. name: CCRFOneShotTypeFusion
+I0417 13:41:16.857219 27461 config_manager.cc:210] []reset ModelConfig. model_name: CCRFSequenceTypeFusion integer_param_map's size: 0 string_param_map's size: 1 double_param_map's size: 0 float_param_map's size: 0 bool_param_map's size: 0 array_integer_param_map's size: 0 array_string_param_map's size: 0 array_double_param_map's size: 0 array_float_param_map's size: 0 array_bool_param_map's size: 0
+I0417 13:41:16.857223 27461 config_manager.cc:95] []load ModelConfig succ. name: CCRFSequenceTypeFusion
+I0417 13:41:16.857262 27461 config_manager.cc:210] []reset ModelConfig. model_name: MlfEngine integer_param_map's size: 0 string_param_map's size: 1 double_param_map's size: 0 float_param_map's size: 0 bool_param_map's size: 0 array_integer_param_map's size: 0 array_string_param_map's size: 0 array_double_param_map's size: 0 array_float_param_map's size: 0 array_bool_param_map's size: 0
+I0417 13:41:16.857265 27461 config_manager.cc:95] []load ModelConfig succ. name: MlfEngine
+I0417 13:41:16.857268 27461 config_manager.cc:210] []reset ModelConfig. model_name: MlfTrackObjectDistance integer_param_map's size: 0 string_param_map's size: 1 double_param_map's size: 0 float_param_map's size: 0 bool_param_map's size: 0 array_integer_param_map's size: 0 array_string_param_map's size: 0 array_double_param_map's size: 0 array_float_param_map's size: 0 array_bool_param_map's size: 0
+I0417 13:41:16.857270 27461 config_manager.cc:95] []load ModelConfig succ. name: MlfTrackObjectDistance
+I0417 13:41:16.857275 27461 config_manager.cc:210] []reset ModelConfig. model_name: MlfTrackObjectMatcher integer_param_map's size: 0 string_param_map's size: 1 double_param_map's size: 0 float_param_map's size: 0 bool_param_map's size: 0 array_integer_param_map's size: 0 array_string_param_map's size: 0 array_double_param_map's size: 0 array_float_param_map's size: 0 array_bool_param_map's size: 0
+I0417 13:41:16.857277 27461 config_manager.cc:95] []load ModelConfig succ. name: MlfTrackObjectMatcher
+I0417 13:41:16.857280 27461 config_manager.cc:210] []reset ModelConfig. model_name: MlfTracker integer_param_map's size: 0 string_param_map's size: 1 double_param_map's size: 0 float_param_map's size: 0 bool_param_map's size: 0 array_integer_param_map's size: 0 array_string_param_map's size: 0 array_double_param_map's size: 0 array_float_param_map's size: 0 array_bool_param_map's size: 0
+I0417 13:41:16.857285 27461 config_manager.cc:95] []load ModelConfig succ. name: MlfTracker
+I0417 13:41:16.857287 27461 config_manager.cc:210] []reset ModelConfig. model_name: MlfMotionFilter integer_param_map's size: 0 string_param_map's size: 1 double_param_map's size: 0 float_param_map's size: 0 bool_param_map's size: 0 array_integer_param_map's size: 0 array_string_param_map's size: 0 array_double_param_map's size: 0 array_float_param_map's size: 0 array_bool_param_map's size: 0
+I0417 13:41:16.857292 27461 config_manager.cc:95] []load ModelConfig succ. name: MlfMotionFilter
+I0417 13:41:16.857295 27461 config_manager.cc:210] []reset ModelConfig. model_name: MlfMotionRefiner integer_param_map's size: 0 string_param_map's size: 1 double_param_map's size: 0 float_param_map's size: 0 bool_param_map's size: 0 array_integer_param_map's size: 0 array_string_param_map's size: 0 array_double_param_map's size: 0 array_float_param_map's size: 0 array_bool_param_map's size: 0
+I0417 13:41:16.857298 27461 config_manager.cc:95] []load ModelConfig succ. name: MlfMotionRefiner
+I0417 13:41:16.857300 27461 config_manager.cc:210] []reset ModelConfig. model_name: MlfShapeFilter integer_param_map's size: 0 string_param_map's size: 1 double_param_map's size: 0 float_param_map's size: 0 bool_param_map's size: 0 array_integer_param_map's size: 0 array_string_param_map's size: 0 array_double_param_map's size: 0 array_float_param_map's size: 0 array_bool_param_map's size: 0
+I0417 13:41:16.857303 27461 config_manager.cc:95] []load ModelConfig succ. name: MlfShapeFilter
+I0417 13:41:16.857317 27461 config_manager.cc:210] []reset ModelConfig. model_name: ROIService integer_param_map's size: 0 string_param_map's size: 1 double_param_map's size: 0 float_param_map's size: 0 bool_param_map's size: 0 array_integer_param_map's size: 0 array_string_param_map's size: 0 array_double_param_map's size: 0 array_float_param_map's size: 0 array_bool_param_map's size: 0
+I0417 13:41:16.857321 27461 config_manager.cc:95] []load ModelConfig succ. name: ROIService
+I0417 13:41:16.857331 27461 config_manager.cc:210] []reset ModelConfig. model_name: GroundService integer_param_map's size: 0 string_param_map's size: 1 double_param_map's size: 0 float_param_map's size: 0 bool_param_map's size: 0 array_integer_param_map's size: 0 array_string_param_map's size: 0 array_double_param_map's size: 0 array_float_param_map's size: 0 array_bool_param_map's size: 0
+I0417 13:41:16.857333 27461 config_manager.cc:95] []load ModelConfig succ. name: GroundService
+I0417 13:41:16.857344 27461 config_manager.cc:210] []reset ModelConfig. model_name: GroundServiceDetector integer_param_map's size: 0 string_param_map's size: 1 double_param_map's size: 0 float_param_map's size: 0 bool_param_map's size: 0 array_integer_param_map's size: 0 array_string_param_map's size: 0 array_double_param_map's size: 0 array_float_param_map's size: 0 array_bool_param_map's size: 0
+I0417 13:41:16.857347 27461 config_manager.cc:95] []load ModelConfig succ. name: GroundServiceDetector
+I0417 13:41:16.857368 27461 config_manager.cc:210] []reset ModelConfig. model_name: PbfGatekeeper integer_param_map's size: 0 string_param_map's size: 2 double_param_map's size: 0 float_param_map's size: 0 bool_param_map's size: 0 array_integer_param_map's size: 0 array_string_param_map's size: 0 array_double_param_map's size: 0 array_float_param_map's size: 0 array_bool_param_map's size: 0
+I0417 13:41:16.857372 27461 config_manager.cc:95] []load ModelConfig succ. name: PbfGatekeeper
+I0417 13:41:16.857384 27461 config_manager.cc:210] []reset ModelConfig. model_name: PbfTracker integer_param_map's size: 0 string_param_map's size: 2 double_param_map's size: 0 float_param_map's size: 0 bool_param_map's size: 0 array_integer_param_map's size: 0 array_string_param_map's size: 0 array_double_param_map's size: 0 array_float_param_map's size: 0 array_bool_param_map's size: 0
+I0417 13:41:16.857389 27461 config_manager.cc:95] []load ModelConfig succ. name: PbfTracker
+I0417 13:41:16.857404 27461 config_manager.cc:210] []reset ModelConfig. model_name: ProbabilisticFusion integer_param_map's size: 0 string_param_map's size: 2 double_param_map's size: 0 float_param_map's size: 0 bool_param_map's size: 0 array_integer_param_map's size: 0 array_string_param_map's size: 0 array_double_param_map's size: 0 array_float_param_map's size: 0 array_bool_param_map's size: 0
+I0417 13:41:16.857408 27461 config_manager.cc:95] []load ModelConfig succ. name: ProbabilisticFusion
+I0417 13:41:16.857421 27461 config_manager.cc:210] []reset ModelConfig. model_name: DstTypeFusion integer_param_map's size: 0 string_param_map's size: 2 double_param_map's size: 0 float_param_map's size: 0 bool_param_map's size: 0 array_integer_param_map's size: 0 array_string_param_map's size: 0 array_double_param_map's size: 0 array_float_param_map's size: 0 array_bool_param_map's size: 0
+I0417 13:41:16.857427 27461 config_manager.cc:95] []load ModelConfig succ. name: DstTypeFusion
+I0417 13:41:16.857441 27461 config_manager.cc:210] []reset ModelConfig. model_name: DstExistanceFusion integer_param_map's size: 0 string_param_map's size: 2 double_param_map's size: 0 float_param_map's size: 0 bool_param_map's size: 0 array_integer_param_map's size: 0 array_string_param_map's size: 0 array_double_param_map's size: 0 array_float_param_map's size: 0 array_bool_param_map's size: 0
+I0417 13:41:16.857445 27461 config_manager.cc:95] []load ModelConfig succ. name: DstExistanceFusion
+I0417 13:41:16.857447 27461 config_manager.cc:107] []finish to load ModelConfigs. NumModels: 35
+I0417 13:41:16.857506 27461 scene_manager.cc:58] []Scene manager add service: GroundService
+I0417 13:41:16.857527 27461 scene_manager.cc:58] []Scene manager add service: ROIService
+I0417 13:41:16.857590 27461 cnn_segmentation.cc:49] []--    param_file: /apollo/modules/perception/production/./data/perception/lidar/models/cnnseg/velodyne64/cnnseg_param.conf
+I0417 13:41:16.857594 27461 cnn_segmentation.cc:50] []--    proto_file: /apollo/modules/perception/production/./data/perception/lidar/models/cnnseg/velodyne64/deploy.prototxt
+I0417 13:41:16.857597 27461 cnn_segmentation.cc:51] []--    weight_file: /apollo/modules/perception/production/./data/perception/lidar/models/cnnseg/velodyne64/deploy.caffemodel
+I0417 13:41:16.857599 27461 cnn_segmentation.cc:52] []--    engine_file: /apollo/modules/perception/production/./data/perception/lidar/models/cnnseg/velodyne64/engine.conf
+==27461== Warning: Profiling results might be incorrect with current version of nvcc compiler used to compile cuda app. Compile with nvcc compiler 9.0 or later version to get correct profiling results. Ignore this warning if code is already compiled with the recommended nvcc version 
+[0;33mW0417 13:41:17.192900 27461 rt_net.cc:467] []unknown layer type:Silence
+[mI0417 13:41:17.195675 27461 rt_net.cc:657] []Device Works on FP32 Mode.
+I0417 13:41:25.768266 27461 hdmap_roi_filter.cc:70] [] HDMap Roi Filter Parameters:  range: 120 cell_size: 0.25 extend_dist: 0 no_edge_table: 0 set_roi_service: 1
+I0417 13:41:25.778234 27461 object_filter_bank.cc:56] []Filter bank add filter: ROIBoundaryFilter
+I0417 13:41:25.778406 27461 mlf_track_object_matcher.cc:46] []MlfTrackObjectMatcher, fg: MultiHmBipartiteGraphMatcher
+I0417 13:41:25.778415 27461 mlf_track_object_matcher.cc:51] []MlfTrackObjectMatcher, bg: GnnBipartiteGraphMatcher
+I0417 13:41:25.778442 27461 mlf_tracker.cc:49] []MlfTracker add filter: MlfShapeFilter
+I0417 13:41:25.778465 27461 mlf_tracker.cc:49] []MlfTracker add filter: MlfMotionFilter
+I0417 13:41:25.778646 27461 ccrf_type_fusion.cc:53] []Source: CNNSegmentation
+I0417 13:41:25.778651 27461 ccrf_type_fusion.cc:54] []
+000.909591 000.367263 000.131413 000.338334
+00.0238024 000.567143 0.00780078 0.00170017
+00.0190019 00.0641936 000.762776 0.00910091
+00.0476048 0.00139986 00.0980098 000.650865
+I0417 13:41:25.778682 27461 ccrf_type_fusion.cc:53] []Source: Confidence
+I0417 13:41:25.778686 27461 ccrf_type_fusion.cc:54] []
+001 0.4 0.4 0.5
+000 0.6 000 000
+000 000 0.6 000
+000 000 000 0.5
+I0417 13:41:25.778715 27461 ccrf_type_fusion.cc:53] []Source: DecisionForestClassifier
+I0417 13:41:25.778717 27461 ccrf_type_fusion.cc:54] []
+0000.7751 00000.251 00.190381 0000.1054
+0000.0298 0000.6802 0.0627937 0000.0003
+0000.0639 0000.0615 00.631337 0000.0038
+0000.1312 0000.0073 00.115488 0000.8905
+I0417 13:41:25.778741 27461 ccrf_type_fusion.cc:63] []Confidence: 
+I0417 13:41:25.778744 27461 ccrf_type_fusion.cc:64] []
+001 0.4 0.4 0.5
+000 0.6 000 000
+000 000 0.6 000
+000 000 000 0.5
+I0417 13:41:25.778790 27461 ccrf_type_fusion.cc:53] []Source: CNNSegmentation
+I0417 13:41:25.778793 27461 ccrf_type_fusion.cc:54] []
+000.909591 000.367263 000.131413 000.338334
+00.0238024 000.567143 0.00780078 0.00170017
+00.0190019 00.0641936 000.762776 0.00910091
+00.0476048 0.00139986 00.0980098 000.650865
+I0417 13:41:25.778817 27461 ccrf_type_fusion.cc:53] []Source: Confidence
+I0417 13:41:25.778827 27461 ccrf_type_fusion.cc:54] []
+001 0.4 0.4 0.5
+000 0.6 000 000
+000 000 0.6 000
+000 000 000 0.5
+I0417 13:41:25.778848 27461 ccrf_type_fusion.cc:53] []Source: DecisionForestClassifier
+I0417 13:41:25.778851 27461 ccrf_type_fusion.cc:54] []
+0000.7751 00000.251 00.190381 0000.1054
+0000.0298 0000.6802 0.0627937 0000.0003
+0000.0639 0000.0615 00.631337 0000.0038
+0000.1312 0000.0073 00.115488 0000.8905
+I0417 13:41:25.778874 27461 ccrf_type_fusion.cc:63] []Confidence: 
+I0417 13:41:25.778877 27461 ccrf_type_fusion.cc:64] []
+001 0.4 0.4 0.5
+000 0.6 000 000
+000 000 0.6 000
+000 000 000 0.5
+I0417 13:41:25.778914 27461 ccrf_type_fusion.cc:146] []transition matrix
+I0417 13:41:25.778916 27461 ccrf_type_fusion.cc:147] []
+000000.34 000000.22 000000.33 00.110001
+0.0300009 00.899997 0.0500008 0.0200009
+0.0300009 0.0500008 00.899997 0.0200009
+0.0600008 00.010001 0.0300009 00.899997
+I0417 13:41:25.778942 27461 ccrf_type_fusion.cc:153] []
+0-1.07881 0-1.51413 0-1.10866 0-2.20727
+0-3.50653 -0.105363 0-2.99572 0-3.91198
+0-3.50653 0-2.99572 -0.105363 0-3.91198
+00-2.8134 0-4.60507 0-3.50653 -0.105363
+I0417 13:41:25.779666 27461 sensor_manager.cc:97] []Init sensor_manager success.
+I0417 13:41:25.779711 27461 offline_lidar_obstacle_perception.cc:118] []***************** Frame 0 ******************
+I0417 13:41:25.779714 27461 offline_lidar_obstacle_perception.cc:119] []/apollo/modules/perception/production/data/perception/lidar/files/0001_00.pcd
+[1;33mFailed to find match for field 'intensity'.
+[0;mI0417 13:41:25.792038 27461 offline_lidar_obstacle_perception.cc:129] []Read point cloud from /apollo/modules/perception/production/data/perception/lidar/files/0001_00.pcd with cloud size: 214833
+I0417 13:41:25.794592 27461 pointcloud_preprocessor.cc:160] []Preprocessor filter points: 214833 to 214833
+I0417 13:41:25.794734 27510 cnn_segmentation.cc:194] []before roi filter
+I0417 13:41:25.794775 27510 cnn_segmentation.cc:202] []Fail to call roi filter, use origin cloud.
+I0417 13:41:25.802443 27510 cnn_segmentation.cc:215] []after roi filter
+I0417 13:41:25.817055 27461 spp_seg_cc_2d.cc:89] []SppSegCC2D: init: 1.36258	sync: 2e-05	traverse: 0.509403	union: 0.345316	collect: 2.9178	#obj: 255
+I0417 13:41:25.818671 27461 spp_engine.cc:116] []SegForeground: sync1 0.74302	detect: 5.20508	sync2: 0.00036	filter: 0.072289	chz: 0.132298	mapping: 1.35861	remove: 0.00106
+I0417 13:41:25.818681 27461 spp_engine.cc:128] []Foreground: 108 clusters
+I0417 13:41:25.819468 27510 spatio_temporal_ground_detector.cc:183] []succeed to call ground detector with non ground points 169277
+I0417 13:41:25.819514 27510 cnn_segmentation.cc:225] []Roi-filter time: 7.78753	Ground-detector time: 17.0761
+I0417 13:41:25.819540 27461 cnn_segmentation.cc:334] []Use origin cloud and copy height
+I0417 13:41:25.822243 27461 cnn_segmentation.cc:312] []CNNSEG: mapping: 0.857718	 feature: 1.33862	 infer: 14.323	 fg-seg: 7.52696	 join: 0.854338	 collect: 2.69819
+I0417 13:41:25.825067 27461 roi_boundary_filter.cc:57] []HDMap struct is nullptr.
+I0417 13:41:25.825073 27461 object_filter_bank.cc:69] []Object filter bank, filtered objects size: from 91 to 91
+I0417 13:41:25.864744 27461 offline_lidar_obstacle_perception.cc:118] []***************** Frame 1 ******************
+I0417 13:41:25.864753 27461 offline_lidar_obstacle_perception.cc:119] []/apollo/modules/perception/production/data/perception/lidar/files/0002_00.pcd
+[1;33mFailed to find match for field 'intensity'.
+[0;mI0417 13:41:25.877372 27461 offline_lidar_obstacle_perception.cc:129] []Read point cloud from /apollo/modules/perception/production/data/perception/lidar/files/0002_00.pcd with cloud size: 213128
+I0417 13:41:25.879873 27461 pointcloud_preprocessor.cc:160] []Preprocessor filter points: 213128 to 213128
+I0417 13:41:25.879916 27510 cnn_segmentation.cc:194] []before roi filter
+I0417 13:41:25.879936 27510 cnn_segmentation.cc:202] []Fail to call roi filter, use origin cloud.
+I0417 13:41:25.882939 27510 cnn_segmentation.cc:215] []after roi filter
+I0417 13:41:25.896802 27461 spp_seg_cc_2d.cc:89] []SppSegCC2D: init: 1.51292	sync: 3e-05	traverse: 0.590022	union: 0.333805	collect: 0.74722	#obj: 215
+I0417 13:41:25.897233 27510 spatio_temporal_ground_detector.cc:183] []succeed to call ground detector with non ground points 186054
+I0417 13:41:25.897300 27510 cnn_segmentation.cc:225] []Roi-filter time: 3.02307	Ground-detector time: 14.3648
+I0417 13:41:25.898139 27461 spp_engine.cc:116] []SegForeground: sync1 0.683131	detect: 3.24722	sync2: 0.00033	filter: 0.065739	chz: 0.141638	mapping: 1.0817	remove: 0.00023
+I0417 13:41:25.898149 27461 spp_engine.cc:128] []Foreground: 106 clusters
+I0417 13:41:25.898152 27461 cnn_segmentation.cc:334] []Use origin cloud and copy height
+I0417 13:41:25.900204 27461 cnn_segmentation.cc:312] []CNNSEG: mapping: 0.633251	 feature: 0.899558	 infer: 11.4857	 fg-seg: 5.23298	 join: 0.00023	 collect: 2.05031
+I0417 13:41:25.903483 27461 roi_boundary_filter.cc:57] []HDMap struct is nullptr.
+I0417 13:41:25.903488 27461 object_filter_bank.cc:69] []Object filter bank, filtered objects size: from 61 to 61
+==27461== Profiling application: ./offline_lidar_obstacle_perception --work_root=/apollo/modules/perception/production --pcd_path=/apollo/modules/perception/production/data/perception/lidar/files --output_path=output
+==27461== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   13.21%  278.78ms      2710  102.87us  48.128us  790.85us  maxwell_gcgemm_32x32_nt
+                   12.14%  256.20ms      2210  115.93us  88.992us  144.26us  maxwell_gcgemm_64x64_nt
+                    4.48%  94.550ms         8  11.819ms  144.26us  45.408ms  void cudnn::detail::dgrad2d_alg1_1<float, int=0, int=6, int=7, int=5, int=4, int=5, bool=1, bool=1>(int, int, int, float const *, int, float const , int, cudnn::detail::dgrad2d_alg1_1<float, int=0, int=6, int=7, int=5, int=4, int=5, bool=1, bool=1>*, kernel_grad_params, int, int, float, int, int)
+                    2.18%  45.984ms      2186  21.035us     736ns  1.2864ms  [CUDA memcpy HtoD]
+                    1.92%  40.539ms        28  1.4478ms  136.26us  6.3342ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=4>, fused::KpqkPtrWriter<float, int=1, int=4>, float, float, int=5, int=7, int=4, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=4, int=1Type>, float)
+                    1.70%  35.952ms      3466  10.372us  5.1520us  24.128us  void fft2d_c2r_32x32<float, bool=0, bool=0, unsigned int=0, bool=0, bool=0>(float*, float2 const *, int, int, int, int, int, int, int, int, int, float, float, cudnn::reduced_divisor, bool, float*, float*, int2, int, int)
+                    1.69%  35.569ms        56  635.16us  135.71us  2.5157ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=7, int=5, int=1, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    1.61%  33.906ms      3380  10.031us  5.8240us  34.976us  void fft2d_r2c_32x32<float, bool=0, unsigned int=0, bool=0>(float2*, float const *, int, int, int, int, int, int, int, int, int, cudnn::reduced_divisor, bool, int2, int, int)
+                    1.53%  32.223ms        56  575.41us  117.06us  2.0819ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=4, int=8, int=1, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    1.48%  31.297ms        40  782.43us  95.488us  3.6406ms  trt_maxwell_scudnn_128x128_relu_medium_nn_v1
+                    1.45%  30.537ms        40  763.43us  92.704us  3.5697ms  trt_maxwell_scudnn_128x128_relu_small_nn_v1
+                    1.43%  30.204ms        28  1.0787ms  121.28us  4.7206ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=4>, fused::KpqkPtrWriter<float, int=1, int=4>, float, float, int=4, int=5, int=2, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=4, int=1Type>, float)
+                    1.42%  29.985ms        38  789.09us  96.064us  3.6487ms  trt_maxwell_scudnn_128x128_relu_large_nn_v1
+                    1.42%  29.866ms        28  1.0667ms  165.57us  4.3720ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=4>, fused::KpqkPtrWriter<float, int=1, int=4>, float, float, int=4, int=5, int=1, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=4, int=1Type>, float)
+                    1.39%  29.272ms        56  522.71us  61.632us  1.9657ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=7, int=8, int=4, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    1.35%  28.401ms        18  1.5779ms  343.07us  4.1264ms  void cudnn::detail::explicit_convolve_sgemm<float, int, int=1024, int=5, int=5, int=3, int=3, int=3, int=0, bool=1>(int, int, int, float const *, int, float const , int, cudnn::detail::explicit_convolve_sgemm<float, int, int=1024, int=5, int=5, int=3, int=3, int=3, int=0, bool=1>*, kernel_conv_params, int, int, float, float, int, float const *, float const *)
+                    1.33%  28.077ms        28  1.0028ms  97.632us  4.1655ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=4>, fused::KpqkPtrWriter<float, int=1, int=4>, float, float, int=2, int=5, int=2, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=4, int=1Type>, float)
+                    1.25%  26.303ms        28  939.40us  82.272us  3.8955ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=4>, fused::KpqkPtrWriter<float, int=1, int=4>, float, float, int=2, int=7, int=2, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=4, int=1Type>, float)
+                    1.22%  25.702ms        28  917.91us  77.792us  4.4503ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=5, int=7, int=8, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    1.16%  24.436ms         2  12.218ms  12.155ms  12.281ms  void cudnn::detail::dgrad2d_alg1_1<float, int=0, int=6, int=6, int=5, int=4, int=4, bool=1, bool=1>(int, int, int, float const *, int, float const , int, cudnn::detail::dgrad2d_alg1_1<float, int=0, int=6, int=6, int=5, int=4, int=4, bool=1, bool=1>*, kernel_grad_params, int, int, float, int, int)
+                    1.06%  22.423ms       216  103.81us  4.0000us  972.06us  void op_generic_tensor_kernel<int=2, float, float, float, int=256, cudnnGenericOp_t=0, cudnnNanPropagation_t=0, cudnnDimOrder_t=0, int=0>(cudnnTensorStruct, float*, cudnnTensorStruct, float const *, cudnnTensorStruct, float const *, float, float, float, float, dimArray, reducedDivisorArray, bool)
+                    1.00%  21.016ms        28  750.59us  62.240us  3.2155ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=3, int=7, int=8, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.99%  20.806ms        26  800.23us  107.36us  3.5855ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=6, int=8, int=8, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.97%  20.389ms        40  509.71us  60.928us  2.4332ms  void im2col4d_kernel<float, int>(im2col4d_params, cudnnConvolutionStruct, cudnnTensor4dStruct, float const *, float*, int)
+                    0.92%  19.506ms        48  406.37us  88.288us  1.8435ms  trt_maxwell_scudnn_128x64_relu_small_nn_v1
+                    0.91%  19.163ms        28  684.39us  76.192us  2.7187ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=7, int=6, int=8, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.90%  19.090ms       204  93.577us  1.8560us  462.27us  void op_generic_tensor_kernel<int=2, float, float, float, int=256, cudnnGenericOp_t=8, cudnnNanPropagation_t=1, cudnnDimOrder_t=0, int=1>(cudnnTensorStruct, float*, cudnnTensorStruct, float const *, cudnnTensorStruct, float const *, float, float, float, float, dimArray, reducedDivisorArray, bool)
+                    0.89%  18.845ms        42  448.69us  94.656us  1.8871ms  trt_maxwell_scudnn_128x64_relu_medium_nn_v1
+                    0.88%  18.595ms        28  664.10us  140.77us  2.4377ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=5, int=7, int=1, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.88%  18.566ms        40  464.14us  109.54us  2.0234ms  trt_maxwell_scudnn_128x32_relu_medium_nn_v1
+                    0.87%  18.440ms        28  658.57us  100.13us  2.8165ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=5, int=7, int=2, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.87%  18.432ms        38  485.06us  112.64us  2.0516ms  trt_maxwell_scudnn_128x32_relu_large_nn_v1
+                    0.86%  18.190ms        28  649.65us  68.416us  2.8893ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=5, int=7, int=4, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.85%  17.971ms        38  472.92us  96.704us  1.9148ms  trt_maxwell_scudnn_128x64_relu_large_nn_v1
+                    0.85%  17.898ms        28  639.20us  72.064us  2.4175ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=8, int=5, int=8, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.83%  17.530ms        28  626.07us  71.904us  2.3734ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=5, int=8, int=8, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.82%  17.402ms        40  435.06us  96.224us  1.9286ms  trt_maxwell_scudnn_128x32_relu_small_nn_v1
+                    0.81%  17.141ms        28  612.19us  54.368us  2.3224ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=7, int=7, int=8, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.80%  16.866ms        28  602.37us  91.040us  2.5160ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=6, int=5, int=2, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.79%  16.746ms        28  598.08us  113.98us  2.0869ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=5, int=5, int=1, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.79%  16.639ms        14  1.1885ms  160.61us  4.0994ms  void cudnn::detail::implicit_convolve_sgemm<float, float, int=1024, int=5, int=5, int=3, int=3, int=3, int=1, bool=1, bool=0, bool=1>(int, int, int, float const *, int, float*, cudnn::detail::implicit_convolve_sgemm<float, float, int=1024, int=5, int=5, int=3, int=3, int=3, int=1, bool=1, bool=0, bool=1>*, kernel_conv_params, int, float, float, int, float, float, int, int)
+                    0.77%  16.169ms        28  577.48us  105.12us  2.0987ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=6, int=8, int=2, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.77%  16.161ms        28  577.19us  115.52us  2.0913ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=4, int=7, int=1, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.76%  16.069ms        28  573.89us  119.55us  1.9923ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=7, int=4, int=1, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.76%  15.989ms        28  571.03us  92.928us  2.1933ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=4, int=8, int=2, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.76%  15.988ms        28  571.01us  59.136us  2.3853ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=4, int=7, int=4, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.75%  15.884ms        28  567.28us  97.824us  1.9230ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=7, int=3, int=1, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.75%  15.750ms        28  562.48us  65.536us  2.2667ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=4, int=8, int=4, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.75%  15.745ms         8  1.9681ms  1.4008ms  2.6456ms  maxwell_cgemm_32x64_tn
+                    0.74%  15.605ms      1538  10.146us  6.1440us  29.216us  void fft2d_r2c_32x32<float, bool=1, unsigned int=0, bool=0>(float2*, float const *, int, int, int, int, int, int, int, int, int, cudnn::reduced_divisor, bool, int2, int, int)
+                    0.73%  15.315ms        28  546.98us  83.136us  2.0885ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=7, int=7, int=2, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.72%  15.107ms        28  539.55us  98.432us  1.9758ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=8, int=5, int=2, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.71%  15.045ms        28  537.33us  58.496us  2.0586ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=7, int=7, int=4, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.71%  14.981ms        28  535.02us  63.104us  1.9993ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=8, int=7, int=4, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.69%  14.600ms        28  521.43us  102.59us  1.9092ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=7, int=4, int=1, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.69%  14.577ms      1444  10.094us  5.6320us  172.58us  void fft2d_c2r_32x32<float, bool=1, bool=0, unsigned int=0, bool=0, bool=0>(float*, float2 const *, int, int, int, int, int, int, int, int, int, float, float, cudnn::reduced_divisor, bool, float*, float*, int2, int, int)
+                    0.69%  14.540ms        28  519.29us  72.704us  1.9335ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=4, int=7, int=2, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.69%  14.523ms        28  518.69us  75.424us  1.9811ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=8, int=5, int=4, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.68%  14.307ms        28  510.98us  79.328us  1.9028ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=5, int=7, int=2, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.67%  14.129ms        28  504.60us  113.31us  1.8829ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=7, int=5, int=1, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.67%  14.107ms        28  503.83us  104.10us  1.8590ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=4, int=7, int=1, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.66%  13.908ms        28  496.71us  64.640us  1.9307ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=5, int=7, int=4, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.62%  13.090ms        38  344.47us  41.888us  1.0487ms  trtwell_scudnn_winograd_128x128_ldg1_ldg4_mobile_relu_tile148t_nt
+                    0.61%  12.904ms        26  496.30us  65.856us  2.1916ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=7, int=8, int=8, int=3, int=3, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.59%  12.382ms        10  1.2382ms  625.98us  2.3197ms  void cudnn::detail::implicit_convolve_sgemm<float, float, int=128, int=5, int=5, int=3, int=3, int=3, int=1, bool=1, bool=0, bool=1>(int, int, int, float const *, int, float*, cudnn::detail::implicit_convolve_sgemm<float, float, int=128, int=5, int=5, int=3, int=3, int=3, int=1, bool=1, bool=0, bool=1>*, kernel_conv_params, int, float, float, int, float, float, int, int)
+                    0.58%  12.218ms        38  321.51us  25.376us  899.07us  void fft2d_r2c_32x32<float, bool=0, unsigned int=1, bool=1>(float2*, float const *, int, int, int, int, int, int, int, int, int, cudnn::reduced_divisor, bool, int2, int, int)
+                    0.57%  12.093ms        46  262.88us  38.240us  1.0659ms  trt_maxwell_scudnn_winograd_128x128_ldg1_ldg4_relu_tile148n_nt_v1
+                    0.54%  11.496ms        12  957.96us  18.432us  3.0292ms  void transpose_readWrite_alignment_kernel<float2, float2, int=1, bool=0, int=6, int=4, int=4>(cublasTransposeParams<float2>, float2 const *, float2*, float2 const *)
+                    0.54%  11.424ms        20  571.18us  156.06us  1.9099ms  trtwell_scudnn_128x64_relu_small_nn
+                    0.52%  11.044ms        20  552.22us  132.61us  1.8807ms  maxwell_scudnn_128x64_relu_small_nn
+                    0.42%  8.8119ms        28  314.71us  43.520us  1.1039ms  trt_maxwell_scudnn_winograd_128x128_ldg1_ldg4_relu_tile148t_nt_v1
+                    0.41%  8.5607ms        28  305.74us  41.504us  1.0448ms  trt_maxwell_scudnn_winograd_128x128_ldg1_ldg4_relu_tile148m_nt_v1
+                    0.40%  8.4158ms        28  300.57us  38.304us  1.0495ms  maxwell_scudnn_winograd_128x128_ldg1_ldg4_tile148n_nt
+                    0.39%  8.2904ms        18  460.58us  135.26us  1.9630ms  [CUDA memcpy DtoH]
+                    0.29%  6.1472ms        16  384.20us  173.09us  915.97us  void cudnn::detail::implicit_convolve_sgemm<float, float, int=128, int=6, int=7, int=3, int=3, int=5, int=1, bool=1, bool=0, bool=1>(int, int, int, float const *, int, float*, cudnn::detail::implicit_convolve_sgemm<float, float, int=128, int=6, int=7, int=3, int=3, int=5, int=1, bool=1, bool=0, bool=1>*, kernel_conv_params, int, float, float, int, float, float, int, int)
+                    0.28%  5.9472ms         8  743.40us  31.072us  1.6575ms  void fft2d_r2c_64x64<float>(float2*, float const *, int, int, int, int, int, int, int, int)
+                    0.27%  5.7146ms        14  408.18us  24.800us  859.30us  void fft2d_r2c_32x32<float, bool=0, unsigned int=1, bool=0>(float2*, float const *, int, int, int, int, int, int, int, int, int, cudnn::reduced_divisor, bool, int2, int, int)
+                    0.27%  5.6007ms        22  254.58us  93.920us  753.22us  void cudnn::detail::explicit_convolve_sgemm<float, int, int=128, int=5, int=5, int=3, int=3, int=3, int=0, bool=1>(int, int, int, float const *, int, float const , int, cudnn::detail::explicit_convolve_sgemm<float, int, int=128, int=5, int=5, int=3, int=3, int=3, int=0, bool=1>*, kernel_conv_params, int, int, float, float, int, float const *, float const *)
+                    0.26%  5.4228ms        20  271.14us  14.720us  862.05us  void nchw_to_nhwcin_ker<unsigned int>(unsigned int*, unsigned int const *, int, int, nvinfer1::rt::reduced_divisor, nvinfer1::rt::reduced_divisor, int, nvinfer1::rt::reduced_divisor, int, int, int, int, int, int)
+                    0.25%  5.1814ms        10  518.14us  187.07us  1.4419ms  trtwell_scudnn_128x32_relu_small_nn
+                    0.23%  4.9200ms      1859  2.6460us     800ns  43.072us  [CUDA memcpy DtoD]
+                    0.23%  4.7937ms        10  479.37us  176.54us  1.2924ms  maxwell_scudnn_128x32_relu_small_nn
+                    0.18%  3.8321ms         4  958.02us  955.17us  960.22us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=2, int=10, int=1, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.17%  3.6065ms        10  360.65us  132.51us  866.21us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=7, int=4, int=1, int=3, int=3, int=2, int=2>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.16%  3.2845ms        12  273.71us  125.50us  495.90us  sgemm_128x128x8_NN_vec
+                    0.13%  2.8408ms         2  1.4204ms  1.4197ms  1.4211ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=4>, fused::KpqkPtrWriter<float, int=1, int=4>, float, float, int=6, int=5, int=2, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=4, int=1Type>, float)
+                    0.13%  2.7002ms        20  135.01us  7.3600us  289.25us  nhwkuv_to_nkpq_ker(float*, float const *, int, int, int, int, int, int, nvinfer1::rt::reduced_divisor, int, int, nvinfer1::rt::reduced_divisor, nvinfer1::rt::reduced_divisor, int, int, int, float const *, float const *)
+                    0.12%  2.5498ms         4  637.44us  632.32us  641.44us  sgemm_32x32x32_NN_vec
+                    0.12%  2.5378ms         2  1.2689ms  1.2683ms  1.2694ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=4>, fused::KpqkPtrWriter<float, int=1, int=4>, float, float, int=1, int=10, int=2, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=4, int=1Type>, float)
+                    0.12%  2.5312ms         2  1.2656ms  1.2620ms  1.2692ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=4>, fused::KpqkPtrWriter<float, int=1, int=4>, float, float, int=3, int=8, int=2, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=4, int=1Type>, float)
+                    0.10%  2.1701ms         2  1.0850ms  837.44us  1.3326ms  void apollo::perception::lidar::MapKernel<float>(int, apollo::perception::base::Point<float> const *, float*, float, float, float, int*)
+                    0.10%  2.0859ms         2  1.0429ms  1.0422ms  1.0436ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=7, int=4, int=1, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.10%  2.0558ms         2  1.0279ms  1.0269ms  1.0289ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=1>, fused::KpqkPtrWriter<float, int=1, int=1>, float, float, int=3, int=10, int=1, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=1, int=1Type>, float)
+                    0.10%  2.0315ms         2  1.0158ms  1.0154ms  1.0161ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=1, int=7, int=1, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.09%  1.9961ms         2  998.05us  994.30us  1.0018ms  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=1, int=4>, fused::KpqkPtrWriter<float, int=1, int=4>, float, float, int=5, int=5, int=1, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=4, int=1Type>, float)
+                    0.09%  1.9444ms         2  972.22us  970.21us  974.24us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=5, int=5, int=1, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.09%  1.9368ms         2  968.41us  966.81us  970.01us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=4, int=4, int=1, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.09%  1.9276ms         2  963.82us  963.23us  964.41us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=2, int=7, int=1, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.09%  1.9131ms         2  956.53us  956.00us  957.06us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=2, int=9, int=1, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.09%  1.9044ms         2  952.19us  950.81us  953.57us  void fused::fusedConvolutionReluKernel<fused::SrcChwcPtr_FltTex_Reader<float, int=1, int=2, int=2>, fused::KpqkPtrWriter<float, int=1, int=2>, float, float, int=3, int=8, int=1, int=1, int=1, int=1, int=1>(fused::ConvolutionParams<floatSrcType, int=2, int=1Type>, float)
+                    0.06%  1.3035ms         2  651.76us  647.39us  656.13us  trt_maxwell_scudnn_128x128_relu_interior_nn_v1
+                    0.06%  1.2130ms         4  303.26us  295.04us  307.33us  trt_maxwell_scudnn_128x32_relu_interior_nn_v1
+                    0.06%  1.2057ms         8  150.71us  96.640us  252.19us  trtwell_scudnn_128x128_relu_small_nn
+                    0.05%  1.1434ms         6  190.57us  169.60us  206.62us  void fft1d_c2r_256<float2, float, float, bool=0, bool=1, bool=0, bool=0>(float*, float2 const *, int3, int3, int2, int, float, float, float*, float*)
+                    0.05%  1.1074ms         8  138.43us  93.600us  233.98us  maxwell_scudnn_128x128_relu_small_nn
+                    0.04%  752.03us        37  20.325us  4.4480us  51.296us  void cask::generateWinogradTilesKernel<int=0, cask::Element<float>, cask::Element<float>, cask::Element<float>>(cask::GenerateWinogradTilesParams)
+                    0.03%  714.65us         2  357.33us  354.11us  360.54us  trt_maxwell_scudnn_128x64_relu_interior_nn_v1
+                    0.03%  668.86us        16  41.804us  18.720us  92.384us  void apollo::perception::inference::Slice<float>(int, float const *, int, int, int, int, int, apollo::perception::inference::Slice<float>*)
+                    0.03%  648.00us       186  3.4830us     960ns  16.480us  cask::computeOffsetsKernel(cask::ComputeOffsetsParams)
+                    0.03%  637.06us         2  318.53us  313.70us  323.36us  trtwell_scudnn_128x32_relu_interior_nn
+                    0.03%  628.70us         2  314.35us  312.32us  316.38us  maxwell_scudnn_128x32_relu_interior_nn
+                    0.03%  554.46us        10  55.446us  3.2640us  121.28us  void scalePackedTensor_kernel<float, float>(cudnnTensor4dStruct, float*, float)
+                    0.02%  520.06us         6  86.677us  78.304us  97.152us  void fft1d_r2c_256<float, float, float2, bool=0, bool=0>(float2*, float const *, int3, int3, int2, int2)
+                    0.01%  314.21us         4  78.552us  73.952us  80.480us  maxwell_sgemm_128x64_nn
+                    0.01%  312.16us       379     823ns     704ns  1.7920us  [CUDA memset]
+                    0.01%  296.61us         8  37.076us  22.752us  51.456us  void flip_filter<float, float>(float*, float const *, int, int, int, int)
+                    0.01%  273.44us         6  45.573us  20.832us  94.304us  void op_generic_tensor_kernel<int=2, float, float, float, int=256, cudnnGenericOp_t=6, cudnnNanPropagation_t=0, cudnnDimOrder_t=0, int=1>(cudnnTensorStruct, float*, cudnnTensorStruct, float const *, cudnnTensorStruct, float const *, float, float, float, float, dimArray, reducedDivisorArray, bool)
+                    0.01%  272.67us        14  19.476us  6.5280us  49.312us  void cask::generateWinogradTilesKernel<int=1, cask::Element<float>, cask::Element<float>, cask::Element<float>>(cask::GenerateWinogradTilesParams)
+                    0.01%  233.18us        28  8.3270us  3.0720us  18.464us  void cudnn::winograd::generateWinogradTilesKernel<int=0, float, float>(cudnn::winograd::GenerateWinogradTilesParams<float, float>)
+                    0.01%  137.92us         8  17.240us  16.992us  18.016us  void fft2d_c2r_32x32<float, bool=0, bool=0, unsigned int=1, bool=0, bool=0>(float*, float2 const *, int, int, int, int, int, int, int, int, int, float, float, cudnn::reduced_divisor, bool, float*, float*, int2, int, int)
+                    0.01%  134.14us        40  3.3530us  1.1520us  15.744us  dit::computeOffsetsKernel(dit::ComputeOffsetsParams)
+                    0.01%  126.94us        40  3.1730us     928ns  14.624us  cudnn::maxwell::gemm::computeOffsetsKernel(cudnn::maxwell::gemm::ComputeOffsetsParams)
+                    0.01%  115.20us         4  28.800us  28.448us  29.248us  void cuEltwise::eltwise<cuEltwise::SimpleAlgo<float, float>, cuEltwise::Compute<nvinfer1::ElementWiseOperation>>(cuEltwise::LaunchParams)
+                    0.01%  108.51us         4  27.128us  26.976us  27.328us  void fft2d_c2r_64x64<float, bool=0>(float*, float2*, int, int, int, int, int, int, int, int, int, int, float, float, int, float*, float*)
+                    0.00%  73.152us         2  36.576us  34.624us  38.528us  void apollo::perception::lidar::AverageKernel<float>(int, float*, float, float, float, float, float, int)
+                    0.00%  65.152us         2  32.576us  32.096us  33.056us  void cuEltwise::eltwise<cuEltwise::StripMineAlgo<float, float>, cuEltwise::Compute<nvinfer1::ElementWiseOperation>>(cuEltwise::LaunchParams)
+                    0.00%  60.032us         2  30.016us  29.376us  30.656us  void apollo::perception::lidar::TopIntensityKernel<float>(int, float*, apollo::perception::base::Point<float>*, float, int*)
+                    0.00%  48.672us         2  24.336us  24.096us  24.576us  void fft1d_r2c_256<float, float, float2, bool=1, bool=0>(float2*, float const *, int3, int3, int2, int2)
+                    0.00%  22.880us         8  2.8600us  1.8560us  3.8720us  compute_gemm_pointers(float2**, float2 const *, int, float2 const *, int, float2 const *, int, int)
+                    0.00%  12.768us         2  6.3840us  5.8880us  6.8800us  void apollo::perception::lidar::SetKernel<float>(int, float, apollo::perception::lidar::SetKernel<float>*)
+      API calls:   66.04%  5.94163s      1952  3.0439ms  2.0132ms  73.453ms  cudaEventSynchronize
+                    9.77%  879.30ms        24  36.638ms  1.0300us  879.10ms  cudaStreamCreateWithFlags
+                    5.87%  528.50ms      3070  172.15us     390ns  229.01ms  cudaFree
+                    4.47%  402.41ms      3065  131.29us  1.5500us  5.2574ms  cudaMalloc
+                    3.50%  315.12ms       404  779.99us  2.0800us  30.387ms  cuModuleUnload
+                    3.50%  315.08ms         2  157.54ms  10.160us  315.07ms  cudaStreamCreate
+                    2.37%  213.33ms        77  2.7705ms  2.6300us  10.898ms  cudaStreamSynchronize
+                    1.45%  130.85ms     17701  7.3910us  3.8400us  273.13us  cudaLaunchKernel
+                    1.01%  90.617ms       612  148.07us  98.489us  289.13us  cudaGetDeviceProperties
+                    0.91%  82.227ms      4028  20.413us  2.7800us  2.1982ms  cudaMemcpyAsync
+                    0.21%  19.297ms        35  551.35us  5.0500us  2.3343ms  cudaMemcpy
+                    0.18%  16.051ms      4440  3.6150us     460ns  246.27us  cudaEventRecord
+                    0.15%  13.692ms      1952  7.0140us  2.2700us  97.059us  cudaStreamAddCallback
+                    0.09%  8.1993ms         4  2.0498ms  12.340us  8.1278ms  cuDeviceGetName
+                    0.07%  6.1824ms       368  16.799us  2.1500us  68.249us  cudaMemsetAsync
+                    0.07%  5.9475ms      5748  1.0340us     460ns  316.32us  cudaStreamWaitEvent
+                    0.06%  5.4380ms      1952  2.7850us  1.1000us  14.890us  cudaEventElapsedTime
+                    0.05%  4.9412ms         3  1.6471ms  465.16us  3.9500ms  cudaHostAlloc
+                    0.04%  3.7464ms     17550     213ns     100ns  1.2700us  cudaGetLastError
+                    0.04%  3.5161ms       605  5.8110us  3.3500us  14.190us  cudaCreateTextureObject
+                    0.02%  1.9489ms       605  3.2210us  1.9100us  7.8800us  cudaDestroyTextureObject
+                    0.02%  1.7785ms       426  4.1740us  2.0400us  15.870us  cudaFuncGetAttributes
+                    0.01%  983.90us      1824     539ns     250ns  2.6300us  cudaDeviceGetAttribute
+                    0.01%  963.08us      1048     918ns     330ns  6.9300us  cudaGetDevice
+                    0.01%  750.87us       375  2.0020us     110ns  170.85us  cuDeviceGetAttribute
+                    0.01%  749.31us         3  249.77us  202.59us  277.07us  cudaFreeHost
+                    0.01%  700.75us         4  175.19us  152.14us  213.64us  cuDeviceTotalMem
+                    0.01%  575.50us       140  4.1100us  1.4100us  14.490us  cudaBindTexture
+                    0.00%  442.93us       464     954ns     360ns  3.9400us  cudaEventDestroy
+                    0.00%  423.84us       414  1.0230us     390ns  6.4200us  cudaEventCreateWithFlags
+                    0.00%  410.96us       426     964ns     400ns  2.2000us  cudaOccupancyMaxActiveBlocksPerMultiprocessorWithFlags
+                    0.00%  143.13us       605     236ns     120ns     400ns  cudaCreateChannelDesc
+                    0.00%  140.99us       140  1.0070us     450ns  1.5200us  cudaUnbindTexture
+                    0.00%  127.72us        50  2.5540us  1.0800us  4.3100us  cudaEventCreate
+                    0.00%  100.48us        11  9.1340us  4.6800us  28.929us  cudaMemset
+                    0.00%  83.220us        38  2.1900us  1.2800us  9.7600us  cudaStreamDestroy
+                    0.00%  62.279us        48  1.2970us  1.0600us  3.3000us  cudaDeviceSynchronize
+                    0.00%  27.999us         6  4.6660us     540ns  11.379us  cudaSetDevice
+                    0.00%  18.419us         1  18.419us  18.419us  18.419us  cudaMemGetInfo
+                    0.00%  14.019us        12  1.1680us     970ns  1.5700us  cudaStreamCreateWithPriority
+                    0.00%  12.050us         4  3.0120us  2.4500us  3.4100us  cudaEventQuery
+                    0.00%  3.4990us         3  1.1660us     700ns  1.9700us  cuInit
+                    0.00%  3.4500us         3  1.1500us  1.0100us  1.3000us  cudaHostGetDevicePointer
+                    0.00%  3.2700us         3  1.0900us     420ns  2.2200us  cuDriverGetVersion
+                    0.00%  2.9200us         6     486ns     200ns  1.4600us  cuDeviceGetCount
+                    0.00%  2.8200us         1  2.8200us  2.8200us  2.8200us  cuDeviceGetPCIBusId
+                    0.00%  2.8100us         3     936ns     530ns  1.2600us  cudaDeviceGetStreamPriorityRange
+                    0.00%  2.1100us         5     422ns     220ns     610ns  cuDeviceGet
+                    0.00%  1.8000us         2     900ns     590ns  1.2100us  cuDevicePrimaryCtxRelease
+                    0.00%  1.4700us         4     367ns     190ns     760ns  cudaGetDeviceCount
+                    0.00%     880ns         4     220ns     180ns     270ns  cuDeviceGetUuid

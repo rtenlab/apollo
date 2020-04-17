@@ -116,8 +116,6 @@ TEST(ObstacleCameraPerceptionTest, perception_test) {
   }
   int frame_id = -1;
 
-  std::cout << "222222222222222222222222222222222222222222222222222222222222" << std::endl;
-
   std::ifstream fin;
   fin.open(
       "/apollo/modules/perception/testdata/"

@@ -124,7 +124,8 @@ class OfflineLidarObstaclePerception {
       if (frame_->cloud == nullptr) {
         frame_->cloud = base::PointFCloudPool::Instance().Get();
       }
-      LoadPCLPCD(pcd_folder + "/" + file_name + ".pcd", frame_->cloud.get());
+      // LoadPCLPCD(pcd_folder + "/" + file_name + ".pcd", frame_->cloud.get());
+      LoadPCLPCD(pcd_folder + "/" + file_name, frame_->cloud.get());
       AINFO << "Read point cloud from " << pcd_file_names[i]
             << " with cloud size: " << frame_->cloud->size();
       if (pose_folder != "") {

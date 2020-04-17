@@ -146,7 +146,6 @@ laneline_reject_dist_thresh: 50
 I0416 22:04:25.667137 31187 obstacle_camera_perception.cc:232] []lane_postprocessor: DenselineLanePostprocessor
 I0416 22:04:25.667172 31187 obstacle_camera_perception.cc:277] []calibration_service: OnlineCalibrationService
 I0416 22:04:25.667421 31187 object_template_manager.cc:174] []Init object_template_manager success.
-222222222222222222222222222222222222222222222222222222222222
 I0416 22:04:25.724593 31187 camera_app_obstacle_camera_perception_test.cc:137] []image: 0
 I0416 22:04:25.733187 31187 data_provider.cc:146] []Fill in GPU mode ...
 I0416 22:04:25.733666 31187 data_provider.cc:186] []Done! (1)
