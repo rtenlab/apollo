@@ -17,6 +17,7 @@
 #define private public
 #define protected public
 #include "modules/perception/common/sensor_manager/sensor_manager.h"
+#include "gtest/gtest.h"
 
 namespace apollo {
 namespace perception {

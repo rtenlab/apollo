@@ -22,6 +22,9 @@
 #include "modules/perception/lidar/common/lidar_error_code.h"
 // #include "modules/perception/lidar/common/pcl_util.h"
 
+#include "cyber/common/file.h"
+#include "modules/perception/lidar/common/pcl_util.h"
+
 namespace apollo {
 namespace perception {
 namespace lib {
@@ -29,6 +32,8 @@ namespace lib {
 }
 
 namespace lidar {
+
+using cyber::common::GetFileName;
 
 class LidarAppPipelineTest : public testing::Test {
  protected:
@@ -63,7 +68,7 @@ void ToMessage(const base::PointFCloud& cloud,
 }
 #endif
 
-/*
+
 TEST_F(LidarAppPipelineTest, lidar_app_pipeline_test) {
   std::string pcd_path =
       "/apollo/modules/perception/testdata/lidar/app/data/perception/lidar/files/";
@@ -89,7 +94,8 @@ TEST_F(LidarAppPipelineTest, lidar_app_pipeline_test) {
   for (size_t i = 0; i < pcd_file_names.size(); ++i) {
     int frame_id = 0;
     double timestamp = 0.0;
-    lib::FileUtil::GetFileName(pcd_file_names[i], &file_name);
+    // lib::FileUtil::GetFileName(pcd_file_names[i], &file_name);
+    GetFileName(pcd_file_names[i], &file_name);
     std::shared_ptr<LidarFrame> frame(new LidarFrame);
     frame->cloud = base::PointFCloudPool::Instance().Get();
     EXPECT_TRUE(
@@ -108,6 +114,7 @@ TEST_F(LidarAppPipelineTest, lidar_app_pipeline_test) {
   }
 }
 
+/*
 #ifdef PERCEPTION_LIDAR_USE_COMMON_MESSAGE
 TEST_F(LidarAppPipelineTest, lidar_app_pipeline_test2) {
   std::string pcd_path = "./data/perception/lidar/files/";

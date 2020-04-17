@@ -23,24 +23,25 @@ cc_test(
     ],
 )
 
-#cc_test(
-#    name = "camera_app_traffic_light_camera_perception_test",
-#    srcs = ["camera_app_traffic_light_camera_perception_test.cc"],
-#    linkopts = [
-#        "-lnvinfer_plugin",
-#    ],
-#    deps = [
-#        "//modules/perception/camera/app:traffic_light_camera_perception",
-#        "//modules/perception/inference:inference_factory_lib",
-#        "//modules/perception/inference/operators:perception_inference_operators",
-#        "@caffe",
-#        "@com_google_protobuf//:protobuf",
-#        "@opencv",
-#        "@tensorrt",
-#        "@gtest//:main",
-#        "@yaml_cpp//:yaml",
-#    ],
-#)
+cc_test(
+    name = "camera_app_traffic_light_camera_perception_test",
+    srcs = ["camera_app_traffic_light_camera_perception_test.cc"],
+    linkopts = [
+        "-lnvinfer_plugin",
+    ],
+    deps = [
+        "//modules/perception/camera/app:traffic_light_camera_perception",
+        "//modules/perception/inference:inference_factory_lib",
+        "//modules/perception/inference/operators:perception_inference_operators",
+        "@caffe",
+        "@com_google_protobuf//:protobuf",
+        "@opencv",
+        "@tensorrt",
+        "@gtest//:main",
+        "@yaml_cpp//:yaml",
+    ],
+)
+
 cc_test(
     name = "camera_common_camera_ground_plane_test",
     size = "small",

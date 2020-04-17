@@ -52,6 +52,7 @@ bool TrafficLightCameraPerception::Init(
   detector_.reset(BaseTrafficLightDetectorRegisterer::GetInstanceByName(
       plugin_param.name()));
   CHECK(detector_ != nullptr);
+  // YIDI: now the options go to instance of "detector_"
   if (!detector_->Init(init_options)) {
     AERROR << "tl detector init failed";
     return false;
@@ -90,10 +91,11 @@ bool TrafficLightCameraPerception::Init(
 
 bool TrafficLightCameraPerception::Perception(
     const CameraPerceptionOptions &options, CameraFrame *frame) {
+      // YIDI: the "options" argument seems to be needless. no reference of this
   PERCEPTION_PERF_FUNCTION();
   PERCEPTION_PERF_BLOCK_START();
   TrafficLightDetectorOptions detector_options;
-  if (!detector_->Detect(detector_options, frame)) {
+  if (!detector_->Detect(detector_options, frame)) {  // YIDI: this "detector_options" is again useless, the info is already in detector_
     AERROR << "tl failed to detect.";
     return false;
   }
