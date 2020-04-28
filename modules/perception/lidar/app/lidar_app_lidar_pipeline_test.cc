@@ -13,22 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *****************************************************************************/
-#include "gtest/gtest.h"
-#include "gflags/gflags.h"
+#include <gtest/gtest.h>
 
-#include "modules/perception/common/sensor_manager/sensor_manager.h"
 #include "modules/perception/common/io/io_util.h"
 #include "modules/perception/common/perception_gflags.h"
 #include "modules/perception/lidar/app/lidar_obstacle_segmentation.h"
 #include "modules/perception/lidar/app/lidar_obstacle_tracking.h"
 #include "modules/perception/lidar/common/lidar_error_code.h"
 // #include "modules/perception/lidar/common/pcl_util.h"
-
-#include "cyber/common/file.h"
-#include "modules/perception/lidar/common/pcl_util.h"
-
-DEFINE_string(pose_path, "", "pose path");
-DEFINE_string(sensor_name, "velodyne64", "sensor name");
 
 namespace apollo {
 namespace perception {
@@ -38,8 +30,6 @@ namespace lib {
 
 namespace lidar {
 
-using cyber::common::GetFileName;
-
 class LidarAppPipelineTest : public testing::Test {
  protected:
   void SetUp() {
@@ -47,15 +37,13 @@ class LidarAppPipelineTest : public testing::Test {
     putenv(cyber_path);
     char module_path[100] = "MODULE_PATH=";
     putenv(module_path);
-    // FLAGS_work_root = "/apollo/modules/perception/testdata/lidar/app";
-    FLAGS_work_root = "/apollo/modules/perception/production";
+    FLAGS_work_root = "/apollo/modules/perception/testdata/lidar/app";
   }
 
   void TearDown() {}
 
   LidarObstacleSegmentation segmentation_;
   LidarObstacleTracking tracking_;
-  base::SensorInfo sensor_info_;
 };  // class DecisionForestClassifierTest
 
 #ifdef PERCEPTION_LIDAR_USE_COMMON_MESSAGE
@@ -75,76 +63,41 @@ void ToMessage(const base::PointFCloud& cloud,
 }
 #endif
 
-
+/*
 TEST_F(LidarAppPipelineTest, lidar_app_pipeline_test) {
   std::string pcd_path =
       "/apollo/modules/perception/testdata/lidar/app/data/perception/lidar/files/";
-  std::string pose_path = FLAGS_pose_path;
-      // "modules/perception/testdata/lidar/app/data/perception/lidar/poses/";
+  std::string pose_path =
+      "modules/perception/testdata/lidar/app/data/perception/lidar/poses/";
   std::vector<std::string> pcd_file_names;
-  if (!common::GetFileList(pcd_path, ".pcd", &pcd_file_names)) {
-    AERROR << "pcd_folder: " << pcd_path << " get file list error.";
-  }
+  common::GetFileList(pcd_path, ".pcd", &pcd_file_names);
   std::string file_name;
-  // std::sort(pcd_file_names.begin(), pcd_file_names.end(),
-  //           [](const std::string& lhs, const std::string& rhs) {
-  //             if (lhs.length() < rhs.length()) {
-  //               return true;
-  //             } else if (lhs.length() == rhs.length()) {
-  //               return lhs <= rhs;
-  //             } else {
-  //               return false;
-  //             }
-  //           });
   std::sort(pcd_file_names.begin(), pcd_file_names.end(),
-              [](const std::string& lhs, const std::string& rhs) {
-                if (lhs.length() != rhs.length()) {
-                  return lhs.length() < rhs.length();
-                }
+            [](const std::string& lhs, const std::string& rhs) {
+              if (lhs.length() < rhs.length()) {
+                return true;
+              } else if (lhs.length() == rhs.length()) {
                 return lhs <= rhs;
-              });
-  // init
+              } else {
+                return false;
+              }
+            });
   LidarObstacleSegmentationInitOptions segmentation_init_options;
   LidarObstacleTrackingInitOptions tracking_init_options;
   EXPECT_TRUE(segmentation_.Init(segmentation_init_options));
   EXPECT_TRUE(tracking_.Init(tracking_init_options));
-
-  // get sensor
-  if (!common::SensorManager::Instance()->GetSensorInfo(FLAGS_sensor_name, &sensor_info_))
-    AERROR << "Failed to get sensor info, sensor name: " << FLAGS_sensor_name;
-  else
-    ADEBUG << "Sensor_name: " << sensor_info_.name;
-  
   for (size_t i = 0; i < pcd_file_names.size(); ++i) {
-    std::cout << "***************** Frame " << i << " ******************" << std::endl;
+    int frame_id = 0;
     double timestamp = 0.0;
-    // lib::FileUtil::GetFileName(pcd_file_names[i], &file_name);
-    // GetFileName(pcd_file_names[i], &file_name);
-    file_name = GetFileName(pcd_file_names[i]);
+    lib::FileUtil::GetFileName(pcd_file_names[i], &file_name);
     std::shared_ptr<LidarFrame> frame(new LidarFrame);
     frame->cloud = base::PointFCloudPool::Instance().Get();
-    frame->sensor_info = sensor_info_;
-    // EXPECT_TRUE(LoadPCLPCD(pcd_path + "/" + file_name + ".pcd", frame->cloud.get()));
-    EXPECT_TRUE(LoadPCLPCD(pcd_path + file_name, frame->cloud.get()));
-    AINFO << "Read point cloud from " << pcd_file_names[i] << " with cloud size: " << frame->cloud->size();
-    // FIXME: having error running. but offline lidar file seems to have the same functions
-    // EXPECT_TRUE(common::ReadPoseFile(pose_path + "/" + file_name + ".pose", &frame->lidar2world_pose, &frame_id, &timestamp));
-    if (pose_path != "") {
-      std::string pose_file_name = pose_path + "/" + file_name + ".pose";
-      AINFO << "Pose file: " << pose_file_name;
-      if (!apollo::cyber::common::PathExists(pose_file_name)) {
-        pose_file_name = pose_path + "/" + file_name + ".pcd.pose";
-      }
-      int idt = 0;
-      if (common::ReadPoseFile(pose_file_name, &frame->lidar2world_pose,
-                                &idt, &timestamp)) {
-        AINFO << "[timestamp]: " << std::setprecision(16) << timestamp;
-        frame->timestamp = timestamp;
-      } else {
-        AINFO << "Failed to load pose, disable tracking pipeline.";
-      }
-    }
-    // frame->timestamp = timestamp;
+    EXPECT_TRUE(
+        LoadPCLPCD(pcd_path + "/" + file_name + ".pcd", frame->cloud.get()));
+    EXPECT_TRUE(common::ReadPoseFile(pose_path + "/" + file_name + ".pose",
+                                     &frame->lidar2world_pose, &frame_id,
+                                     &timestamp));
+    frame->timestamp = timestamp;
     LidarObstacleSegmentationOptions segmentation_options;
     EXPECT_EQ(
         segmentation_.Process(segmentation_options, frame.get()).error_code,
@@ -155,7 +108,6 @@ TEST_F(LidarAppPipelineTest, lidar_app_pipeline_test) {
   }
 }
 
-/*
 #ifdef PERCEPTION_LIDAR_USE_COMMON_MESSAGE
 TEST_F(LidarAppPipelineTest, lidar_app_pipeline_test2) {
   std::string pcd_path = "./data/perception/lidar/files/";

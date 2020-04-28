@@ -33,6 +33,7 @@ DEFINE_string(smart_recorder_component_name, "SmartRecorder",
 namespace apollo {
 namespace monitor {
 
+using apollo::common::util::StrCat;
 using apollo::data::RecordingState;
 using apollo::data::SmartRecorderStatus;
 
@@ -72,14 +73,13 @@ void RecorderMonitor::RunOnce(const double current_time) {
       break;
     case RecordingState::TERMINATING:
       SummaryMonitor::EscalateStatus(
-          ComponentStatus::WARN,
-          absl::StrCat("WARNNING: ", status->state_message()),
+          ComponentStatus::WARN, StrCat("WARNNING: ", status->state_message()),
           component_status);
       break;
     case RecordingState::STOPPED:
       SummaryMonitor::EscalateStatus(
-          ComponentStatus::OK,
-          absl::StrCat("STOPPED: ", status->state_message()), component_status);
+          ComponentStatus::OK, StrCat("STOPPED: ", status->state_message()),
+          component_status);
       break;
     default:
       AFATAL << "Unknown recording status: " << status->recording_state();

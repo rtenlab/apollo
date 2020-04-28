@@ -67,12 +67,12 @@ VIDEO_IMAGE_MAP = {
     IMAGE_FRONT_12MM_CHANNEL: IMAGE_FRONT_12MM_CHANNEL,
     IMAGE_REAR_6MM_CHANNEL: IMAGE_REAR_6MM_CHANNEL,
     IMAGE_LEFT_FISHEYE_CHANNEL: IMAGE_LEFT_FISHEYE_CHANNEL,
-    IMAGE_RIGHT_FISHEYE_CHANNEL: IMAGE_RIGHT_FISHEYE_CHANNEL,
+    IMAGE_RIGHT_FISHEYE_CHANNEL: IMAGE_RIGHT_FISHEYE_CHANNEL, 
     VIDEO_FRONT_6MM_CHANNEL: IMAGE_FRONT_6MM_CHANNEL,
     VIDEO_FRONT_12MM_CHANNEL: IMAGE_FRONT_12MM_CHANNEL,
     VIDEO_REAR_6MM_CHANNEL: IMAGE_REAR_6MM_CHANNEL,
     VIDEO_LEFT_FISHEYE_CHANNEL: IMAGE_LEFT_FISHEYE_CHANNEL,
-    VIDEO_RIGHT_FISHEYE_CHANNEL: IMAGE_RIGHT_FISHEYE_CHANNEL,
+    VIDEO_RIGHT_FISHEYE_CHANNEL: IMAGE_RIGHT_FISHEYE_CHANNEL, 
 }
 
 class VideoConverter(object):
@@ -198,7 +198,7 @@ def retrieve_image(image_dir, message):
     return message_proto.SerializeToString()
 
 def get_message_id(timestamp, topic):
-    """Unify the way to get a unique identifier for the given message"""
+    """Unify the way to get an unique identifier for the given message"""
     return '{}{}'.format(timestamp, topic.replace('/', '_'))
 
 def image_message_to_proto(py_message):

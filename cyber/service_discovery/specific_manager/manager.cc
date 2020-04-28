@@ -67,12 +67,9 @@ void Manager::StopDiscovery() {
     return;
   }
 
-  {
-    std::lock_guard<std::mutex> lg(lock_);
-    if (publisher_ != nullptr) {
-      eprosima::fastrtps::Domain::removePublisher(publisher_);
-      publisher_ = nullptr;
-    }
+  if (publisher_ != nullptr) {
+    eprosima::fastrtps::Domain::removePublisher(publisher_);
+    publisher_ = nullptr;
   }
 
   if (subscriber_ != nullptr) {
@@ -203,16 +200,13 @@ void Manager::OnRemoteChange(const std::string& msg_str) {
 bool Manager::Publish(const ChangeMsg& msg) {
   if (!is_discovery_started_.load()) {
     ADEBUG << "discovery is not started.";
-    return false;
+    return true;
   }
 
   apollo::cyber::transport::UnderlayMessage m;
   RETURN_VAL_IF(!message::SerializeToString(msg, &m.data()), false);
-  {
-    std::lock_guard<std::mutex> lg(lock_);
-    if (publisher_ != nullptr) {
-      return publisher_->write(reinterpret_cast<void*>(&m));
-    }
+  if (publisher_ != nullptr) {
+    return publisher_->write(reinterpret_cast<void*>(&m));
   }
   return true;
 }

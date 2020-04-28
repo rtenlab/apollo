@@ -4,7 +4,11 @@ package(default_visibility = ["//visibility:public"])
 
 cc_library(
     name = "i_ransac",
-    hdrs = ["i_ransac.h"],
+    hdrs = [
+        "i_ransac.h",
+    ],
+    deps = [
+    ],
 )
 
 cpplint()

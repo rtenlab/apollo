@@ -14,11 +14,11 @@
  * limitations under the License.
  *****************************************************************************/
 
-#include "cyber/common/environment.h"
-
-#include <cstdlib>
-
 #include "gtest/gtest.h"
+
+#include <stdlib.h>
+
+#include "cyber/common/environment.h"
 
 namespace apollo {
 namespace cyber {

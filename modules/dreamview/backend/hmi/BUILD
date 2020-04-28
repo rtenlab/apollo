@@ -13,7 +13,6 @@ cc_library(
         "//modules/common/util",
         "//modules/common/util:string_util",
         "//modules/dreamview/proto:hmi_config_proto",
-        "@com_google_absl//absl/strings",
     ],
 )
 
@@ -62,6 +61,9 @@ cc_library(
     srcs = ["hmi_worker.cc"],
     hdrs = ["hmi_worker.h"],
     copts = ['-DMODULE_NAME=\\"dreamview\\"'],
+    linkopts = [
+        "-lboost_thread",
+    ],
     deps = [
         ":vehicle_manager",
         "//cyber",
@@ -77,8 +79,6 @@ cc_library(
         "//modules/dreamview/proto:hmi_config_proto",
         "//modules/dreamview/proto:hmi_mode_proto",
         "//modules/dreamview/proto:hmi_status_proto",
-        "@boost",
-        "@com_google_absl//absl/strings",
         "@com_google_protobuf//:protobuf",
     ],
 )

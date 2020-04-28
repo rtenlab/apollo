@@ -16,8 +16,8 @@
 
 #include "modules/localization/msf/common/util/system_utility.h"
 
-#include "boost/filesystem.hpp"
-#include "gtest/gtest.h"
+#include <gtest/gtest.h>
+#include <boost/filesystem.hpp>
 
 namespace apollo {
 namespace localization {

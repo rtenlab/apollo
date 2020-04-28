@@ -19,6 +19,22 @@
 
 #include <string>
 
+namespace adu {
+namespace common {
+
+class Point3D;
+namespace header {
+class Header;
+}  // namespace header
+
+namespace sensor {
+class NovatelHeader;
+class WheelMeasurement;
+}  // namespace sensor
+
+}  // namespace common
+}  // namespace adu
+
 class Screen;
 
 class RenderableMessage {

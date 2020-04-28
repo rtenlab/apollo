@@ -23,7 +23,6 @@
 #include <memory>
 #include <string>
 #include <unordered_map>
-#include <vector>
 
 #include "boost/thread/shared_mutex.hpp"
 #include "gtest/gtest_prod.h"
@@ -39,8 +38,6 @@
  */
 namespace apollo {
 namespace dreamview {
-
-typedef std::vector<Range> Category;
 
 /**
  * @class DataCollectionMonitor
@@ -68,23 +65,13 @@ class DataCollectionMonitor {
   void Stop();
 
   /**
-   * @brief restart monitoring collection progress
-   */
-  void Restart();
-
-  /**
    * @brief return collection progress of categories and overall as json
    */
   nlohmann::json GetProgressAsJson();
 
  private:
   void InitReaders();
-  void LoadConfiguration();
-  void ConstructCategories();
-  void ConstructCategoriesHelper(const std::string& scenario_name,
-                                 const Scenario& scenario, int feature_idx,
-                                 std::string current_category_name,
-                                 const Category& current_category);
+  void LoadConfiguration(const std::string& data_collection_config_path);
   void OnChassis(const std::shared_ptr<apollo::canbus::Chassis>& chassis);
   bool IsCompliedWithCriteria(
       const std::shared_ptr<apollo::canbus::Chassis>& chassis,
@@ -97,11 +84,6 @@ class DataCollectionMonitor {
 
   // The table defines data collection requirements for calibration
   DataCollectionTable data_collection_table_;
-
-  // A map from scenario to its categories. Categories are collections
-  // of ranges from all possible combination of Feature x Range in a Scenario.
-  std::unordered_map<std::string, std::unordered_map<std::string, Category>>
-      scenario_to_categories_;
 
   // Number of frames that has been collected for each (scenario, category)
   std::unordered_map<std::string, std::unordered_map<std::string, size_t>>
@@ -120,7 +102,6 @@ class DataCollectionMonitor {
   boost::shared_mutex mutex_;
 
   FRIEND_TEST(DataCollectionMonitorTest, UpdateCollectionProgress);
-  FRIEND_TEST(DataCollectionMonitorTest, ConstructCategories);
 };
 
 }  // namespace dreamview

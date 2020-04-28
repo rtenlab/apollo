@@ -20,10 +20,11 @@
 
 #include "modules/planning/tasks/optimizers/road_graph/waypoint_sampler.h"
 
+#include <utility>
+
 #include "cyber/common/log.h"
 #include "modules/common/configs/vehicle_config_helper.h"
 #include "modules/common/math/cartesian_frenet_conversion.h"
-#include "modules/common/util/point_factory.h"
 #include "modules/common/util/util.h"
 #include "modules/map/hdmap/hdmap_util.h"
 #include "modules/planning/common/ego_info.h"
@@ -34,6 +35,8 @@
 
 namespace apollo {
 namespace planning {
+
+using apollo::common::SLPoint;
 
 void WaypointSampler::Init(
     const ReferenceLineInfo *reference_line_info,
@@ -62,7 +65,7 @@ bool WaypointSampler::SamplePathWaypoints(
       FLAGS_use_navigation_mode ? config_.navigator_sample_num_each_level()
                                 : config_.sample_points_num_each_level();
 
-  static constexpr double kSamplePointLookForwardTime = 4.0;
+  constexpr double kSamplePointLookForwardTime = 4.0;
   const double level_distance =
       common::math::Clamp(init_point.v() * kSamplePointLookForwardTime,
                           config_.step_length_min(), config_.step_length_max());
@@ -70,14 +73,14 @@ bool WaypointSampler::SamplePathWaypoints(
   double accumulated_s = init_sl_point_.s();
   double prev_s = accumulated_s;
 
-  static constexpr size_t kNumLevel = 3;
+  constexpr size_t kNumLevel = 3;
   for (size_t i = 0; i < kNumLevel && accumulated_s < total_length; ++i) {
     accumulated_s += level_distance;
     if (accumulated_s + level_distance / 2.0 > total_length) {
       accumulated_s = total_length;
     }
     const double s = std::fmin(accumulated_s, total_length);
-    static constexpr double kMinAllowedSampleStep = 1.0;
+    constexpr double kMinAllowedSampleStep = 1.0;
     if (std::fabs(s - prev_s) < kMinAllowedSampleStep) {
       continue;
     }
@@ -88,7 +91,7 @@ bool WaypointSampler::SamplePathWaypoints(
     reference_line_info_->reference_line().GetLaneWidth(s, &left_width,
                                                         &right_width);
 
-    static constexpr double kBoundaryBuff = 0.20;
+    constexpr double kBoundaryBuff = 0.20;
     const double eff_right_width = right_width - half_adc_width - kBoundaryBuff;
     const double eff_left_width = left_width - half_adc_width - kBoundaryBuff;
 
@@ -107,8 +110,8 @@ bool WaypointSampler::SamplePathWaypoints(
     double sample_right_boundary = -eff_right_width;
     double sample_left_boundary = eff_left_width;
 
-    static constexpr double kLargeDeviationL = 1.75;
-    static constexpr double kTwentyMilesPerHour = 8.94;
+    constexpr double kLargeDeviationL = 1.75;
+    constexpr double kTwentyMilesPerHour = 8.94;
     if (reference_line_info_->IsChangeLanePath() ||
         std::fabs(init_sl_point_.l()) > kLargeDeviationL) {
       if (EgoInfo::Instance()->start_point().v() > kTwentyMilesPerHour) {
@@ -138,8 +141,7 @@ bool WaypointSampler::SamplePathWaypoints(
     std::vector<common::SLPoint> level_points;
     planning_internal::SampleLayerDebug sample_layer_debug;
     for (size_t j = 0; j < sample_l.size(); ++j) {
-      common::SLPoint sl =
-          common::util::PointFactory::ToSLPoint(s, sample_l[j]);
+      common::SLPoint sl = common::util::MakeSLPoint(s, sample_l[j]);
       sample_layer_debug.add_sl_point()->CopyFrom(sl);
       level_points.push_back(std::move(sl));
     }

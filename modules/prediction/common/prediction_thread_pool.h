@@ -20,8 +20,11 @@
 
 #pragma once
 
+#include <algorithm>
 #include <future>
+#include <iterator>
 #include <memory>
+#include <string>
 #include <utility>
 #include <vector>
 

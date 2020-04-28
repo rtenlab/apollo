@@ -45,15 +45,15 @@ class PathData {
 
   PathData() = default;
 
-  bool SetDiscretizedPath(DiscretizedPath path);
+  bool SetDiscretizedPath(const DiscretizedPath &path);
 
-  bool SetFrenetPath(FrenetFramePath frenet_path);
+  bool SetFrenetPath(const FrenetFramePath &frenet_path);
 
   void SetReferenceLine(const ReferenceLine *reference_line);
 
   bool SetPathPointDecisionGuide(
-      std::vector<std::tuple<double, PathPointType, double>>
-          path_point_decision_guide);
+      const std::vector<std::tuple<double, PathPointType, double>>
+          &path_point_decision_guide);
 
   const DiscretizedPath &discretized_path() const;
 

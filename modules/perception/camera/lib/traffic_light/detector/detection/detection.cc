@@ -89,7 +89,6 @@ bool TrafficLightDetection::Init(
   const auto &model_type = detection_param_.model_type();
   AINFO << "model_type: " << model_type;
 
-  // YIDI: here, model_type should be "CaffeNet", and this triggers "CreateInferenceByName" to return the constructor of the derived class CaffeNet in caffe_net.cc
   rt_net_.reset(inference::CreateInferenceByName(model_type, proto_file,
                                                  weight_file, net_outputs_,
                                                  net_inputs_, model_root));
@@ -219,7 +218,6 @@ bool TrafficLightDetection::Inference(
     }
   }
   // _detection
-  // YIDI: I don't know how comes the figure 2 in the ECRTS 2019 paper. It seems that the tasks are not allowed to run concurrently in Apollo perception
   cudaDeviceSynchronize();
   rt_net_->Infer();
   cudaDeviceSynchronize();
@@ -236,7 +234,7 @@ bool TrafficLightDetection::Inference(
 
 bool TrafficLightDetection::Detect(const TrafficLightDetectorOptions &options,
                                    CameraFrame *frame) {
-  if (frame->traffic_lights.empty()) {
+  if (frame->traffic_lights.size() <= 0) {
     AINFO << "no lights to detect";
     return true;
   }
@@ -376,10 +374,7 @@ bool TrafficLightDetection::SelectOutputBoxes(
 
 void TrafficLightDetection::ApplyNMS(std::vector<base::TrafficLightPtr> *lights,
                                      double iou_thresh) {
-  if (lights == nullptr) {
-    AERROR << "lights are not available";
-    return;
-  }
+  CHECK_NOTNULL(lights);
 
   // (score, index) pairs sorted by detect score
   std::vector<std::pair<float, int>> score_index_vec(lights->size());

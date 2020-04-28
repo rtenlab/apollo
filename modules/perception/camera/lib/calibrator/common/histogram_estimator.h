@@ -15,8 +15,8 @@
  *****************************************************************************/
 #pragma once
 
+#include <assert.h>
 #include <algorithm>
-#include <cassert>
 #include <vector>
 
 #include "cyber/common/log.h"
@@ -105,9 +105,7 @@ class HistogramEstimator {
       return false;
     }
     int index = GetIndex(val);
-    if (index < 0 || index >= params_.nr_bins_in_histogram) {
-      return false;
-    }
+    assert(index >= 0 && index < params_.nr_bins_in_histogram);
     ++hist_[index];
     val_cur_ = val;
     return true;

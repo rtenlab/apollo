@@ -68,7 +68,8 @@ class TrackData {
   // when abs_idx is large than history size, return farest object close to idx
   std::pair<double, TrackedObjectPtr> GetHistoryObject(int idx);
 
-  std::pair<double, TrackedObjectConstPtr> GetHistoryObject(int idx) const;
+  const std::pair<double, TrackedObjectConstPtr> GetHistoryObject(
+      int idx) const;
 
   virtual void Reset();
 

@@ -93,9 +93,14 @@ class RecordViewer {
   /**
    * @brief The iterator.
    */
-  class Iterator : public std::iterator<std::input_iterator_tag, RecordMessage,
-                                        int, RecordMessage*, RecordMessage&> {
+  class Iterator {
    public:
+    using iterator_category = std::input_iterator_tag;
+    using value_type = RecordMessage;
+    using difference_type = int;
+    using pointer = RecordMessage*;
+    using reference = RecordMessage&;
+
     /**
      * @brief The constructor of iterator with viewer.
      *
@@ -135,21 +140,27 @@ class RecordViewer {
     /**
      * @brief Overloading operator ++.
      *
+     * @param other
+     *
      * @return The result.
      */
-    Iterator& operator++();
+    void operator++();
 
     /**
      * @brief Overloading operator ->.
      *
-     * @return The pointer.
+     * @param other
+     *
+     * @return The result.
      */
     pointer operator->();
 
     /**
      * @brief Overloading operator *.
      *
-     * @return The reference.
+     * @param other
+     *
+     * @return The result.
      */
     reference operator*();
 

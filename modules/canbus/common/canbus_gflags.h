@@ -22,6 +22,8 @@
 DECLARE_string(canbus_node_name);
 DECLARE_string(canbus_module_name);
 
+DECLARE_string(canbus_adapter_config_filename);
+
 // data file
 DECLARE_string(canbus_conf_file);
 

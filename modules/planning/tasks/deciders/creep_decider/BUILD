@@ -4,8 +4,12 @@ package(default_visibility = ["//visibility:public"])
 
 cc_library(
     name = "creep_decider",
-    srcs = ["creep_decider.cc"],
-    hdrs = ["creep_decider.h"],
+    srcs = [
+        "creep_decider.cc",
+    ],
+    hdrs = [
+        "creep_decider.h",
+    ],
     copts = ["-DMODULE_NAME=\\\"planning\\\""],
     deps = [
         "//modules/planning/common:planning_context",
@@ -20,7 +24,9 @@ cc_library(
 cc_test(
     name = "creep_decider_test",
     size = "small",
-    srcs = ["creep_decider_test.cc"],
+    srcs = [
+        "creep_decider_test.cc",
+    ],
     deps = [
         "creep_decider",
         "@gtest//:main",

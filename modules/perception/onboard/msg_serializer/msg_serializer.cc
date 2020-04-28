@@ -19,24 +19,25 @@
 
 #include "cyber/common/log.h"
 
-#include "modules/common/time/time.h"
+#include "modules/perception/lib/utils/time_util.h"
 #include "modules/perception/onboard/common_flags/common_flags.h"
 
 namespace apollo {
 namespace perception {
 namespace onboard {
 
-bool MsgSerializer::SerializeMsg(double timestamp, uint64_t lidar_timestamp,
-                                 int seq_num,
+bool MsgSerializer::SerializeMsg(double timestamp, int seq_num,
                                  const std::vector<base::ObjectPtr> &objects,
                                  const apollo::common::ErrorCode &error_code,
                                  PerceptionObstacles *obstacles) {
-  double publish_time = apollo::common::time::Clock::NowInSeconds();
+  // double publish_time = lib::TimeUtil::GetCurrentTime();
+  double publish_time = cyber::Time::Now().ToSecond();
   ::apollo::common::Header *header = obstacles->mutable_header();
   header->set_timestamp_sec(publish_time);
   header->set_module_name("perception_obstacle");
   header->set_sequence_num(seq_num);
-  header->set_lidar_timestamp(lidar_timestamp);
+  // in nanosecond
+  header->set_lidar_timestamp(static_cast<uint64_t>(timestamp * 1e9));
   header->set_camera_timestamp(0);
   header->set_radar_timestamp(0);
 

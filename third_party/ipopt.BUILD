@@ -12,6 +12,6 @@ cc_library(
         "-lblas",
         "-llapack",
         "-ldl",
-        "-L/usr/lib/gcc/x86_64-linux-gnu/7/ -lgfortran",
+        "-lgfortran",
     ],
 )

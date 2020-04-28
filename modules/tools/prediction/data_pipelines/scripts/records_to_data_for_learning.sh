@@ -36,6 +36,7 @@ fi
     --flagfile=/apollo/modules/prediction/conf/prediction.conf \
     --map_dir=/apollo/modules/map/data/${MAP_DIR} \
     --prediction_offline_mode=2 \
+    --noenable_multi_thread \
     --prediction_offline_bags=${SRC_DIR} \
     --prediction_data_dir=${TARGET_DIR} \
     --noenable_multi_thread

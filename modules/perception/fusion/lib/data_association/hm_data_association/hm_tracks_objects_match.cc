@@ -265,7 +265,8 @@ void HMTrackersObjectsAssociation::ComputeDistance(
           dist_score = track_object_distance_.ComputeLidarCameraSimilarity(
               lidar_object, sensor_objects[measurement_ind_l2g[j]],
               IsLidar(sensor_objects[measurement_ind_l2g[j]]));
-        } else if (radar_object != nullptr) {
+        }
+        if (radar_object != nullptr) {
           dist_score = track_object_distance_.ComputeRadarCameraSimilarity(
               radar_object, sensor_objects[measurement_ind_l2g[j]]);
         }

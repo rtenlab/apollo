@@ -20,6 +20,8 @@
 
 #pragma once
 
+#include <string>
+
 #include "modules/planning/scenarios/stage.h"
 #include "modules/planning/scenarios/traffic_light/protected/traffic_light_protected_scenario.h"
 
@@ -44,6 +46,7 @@ class TrafficLightProtectedStageApproach : public Stage {
   }
 
  private:
+  Stage::StageStatus FinishScenario() override;
   Stage::StageStatus FinishStage();
 
  private:

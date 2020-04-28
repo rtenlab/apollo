@@ -18,6 +18,9 @@
  * @file
  **/
 
+#include <iostream>
+#include <vector>
+
 #include "Eigen/Dense"
 #include "cyber/common/file.h"
 
@@ -32,12 +35,14 @@
 namespace apollo {
 namespace planning {
 
+using apollo::common::math::Box2d;
 using apollo::common::math::Polygon2d;
 using apollo::common::math::Vec2d;
 using apollo::hdmap::HDMapUtil;
 using apollo::hdmap::LaneSegment;
 using apollo::hdmap::ParkingSpaceInfoConstPtr;
 using apollo::hdmap::Path;
+using apollo::hdmap::PathOverlap;
 
 constexpr double kMathEpsilon = 1e-10;
 

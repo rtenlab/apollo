@@ -86,7 +86,7 @@ bool HDMapInput::InitHDMap() {
 
   // Option2: Load own map with different hdmap_sample_step_
   // Load hdmap path from global_flagfile.txt
-  hdmap_file_ = absl::StrCat(FLAGS_map_dir, "/base_map.bin");
+  hdmap_file_ = apollo::common::util::StrCat(FLAGS_map_dir, "/base_map.bin");
   AINFO << "hdmap_file_: " << hdmap_file_;
   if (!apollo::cyber::common::PathExists(hdmap_file_)) {
     AERROR << "Failed to find hadmap file: " << hdmap_file_;
@@ -105,10 +105,7 @@ bool HDMapInput::GetRoiHDMapStruct(
     const base::PointD& pointd, const double distance,
     std::shared_ptr<base::HdmapStruct> hdmap_struct_ptr) {
   lib::MutexLock lock(&mutex_);
-  if (hdmap_.get() == nullptr) {
-    AERROR << "hdmap is not available";
-    return false;
-  }
+  CHECK_NOTNULL(hdmap_.get());
   // Get original road boundary and junction
   std::vector<RoadRoiPtr> road_boundary_vec;
   std::vector<JunctionInfoConstPtr> junctions_vec;
@@ -183,7 +180,7 @@ void HDMapInput::MergeBoundaryJunction(
               road_boundaries_ptr->at(polygons_index).left_boundary[index]);
     }
     ADEBUG << "Left road_boundary downsample size = "
-           << road_boundaries_ptr->at(polygons_index).left_boundary.size();
+           << road_polygons_ptr->at(polygons_index).size();
     temp_cloud->clear();
     const LineBoundary& right_boundary = boundary[i]->right_boundary;
     const std::vector<apollo::common::PointENU>& right_line_points =
@@ -209,7 +206,7 @@ void HDMapInput::MergeBoundaryJunction(
                                          1 - index]);
     }
     ADEBUG << "Right road_boundary downsample size = "
-           << road_boundaries_ptr->at(polygons_index).right_boundary.size();
+           << road_polygons_ptr->at(polygons_index).size();
     ++polygons_index;
   }
 
@@ -408,10 +405,7 @@ bool HDMapInput::GetSignals(const Eigen::Vector3d& pointd,
                             double forward_distance,
                             std::vector<apollo::hdmap::Signal>* signals) {
   lib::MutexLock lock(&mutex_);
-  if (hdmap_.get() == nullptr) {
-    AERROR << "hdmap is not available";
-    return false;
-  }
+  CHECK_NOTNULL(hdmap_.get());
   return GetSignalsFromHDMap(pointd, forward_distance, signals);
 }
 

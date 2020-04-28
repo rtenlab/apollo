@@ -15,8 +15,6 @@
  *****************************************************************************/
 #include "modules/perception/camera/lib/calibrator/laneline/laneline_calibrator.h"
 
-#include "absl/strings/str_cat.h"
-
 namespace apollo {
 namespace perception {
 namespace camera {
@@ -35,10 +33,7 @@ bool LaneLineCalibrator::Init(const CalibratorInitOptions &options) {
 
 bool LaneLineCalibrator::Calibrate(const CalibratorOptions &options,
                                    float *pitch_angle) {
-  if (pitch_angle == nullptr) {
-    AERROR << "pitch_angle is not available";
-    return false;
-  }
+  CHECK(pitch_angle != nullptr);
   EgoLane ego_lane;
   if (!LoadEgoLaneline(*options.lane_objects, &ego_lane)) {
     AINFO << "Failed to get the ego lane.";
@@ -73,9 +68,9 @@ bool LaneLineCalibrator::Calibrate(const CalibratorOptions &options,
     camera::GetYawVelocityInfo(time_diff_, cam_coord_cur_, cam_coord_pre_,
                                cam_coord_pre_pre_, &yaw_rate_, &velocity_);
     std::string timediff_yawrate_velocity_text =
-        absl::StrCat("time_diff_: ", std::to_string(time_diff_).substr(0, 4),
-                     " | yaw_rate_: ", std::to_string(yaw_rate_).substr(0, 4),
-                     " | velocity_: ", std::to_string(velocity_).substr(0, 4));
+        "time_diff_: " + std::to_string(time_diff_).substr(0, 4) + " | " +
+        "yaw_rate_: " + std::to_string(yaw_rate_).substr(0, 4) + " | " +
+        "velocity_: " + std::to_string(velocity_).substr(0, 4);
     ADEBUG << timediff_yawrate_velocity_text << std::endl;
   }
 
@@ -99,11 +94,7 @@ bool LaneLineCalibrator::Calibrate(const CalibratorOptions &options,
 
 bool LaneLineCalibrator::LoadEgoLaneline(
     const std::vector<base::LaneLine> &lane_objects, EgoLane *ego_lane) {
-  if (ego_lane == nullptr) {
-    AERROR << "ego_lane is not available";
-    return false;
-  }
-
+  CHECK(ego_lane != nullptr);
   bool found_ego_left = false;
   bool found_ego_right = false;
   // Using points from model fitting

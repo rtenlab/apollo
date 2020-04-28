@@ -36,6 +36,8 @@
 namespace apollo {
 namespace planning {
 
+using apollo::common::time::Clock;
+
 QpSplineReferenceLineSmoother::QpSplineReferenceLineSmoother(
     const ReferenceLineSmootherConfig& config)
     : ReferenceLineSmoother(config) {

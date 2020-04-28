@@ -14,9 +14,6 @@ message PolygonPoint {
   optional double x = 1;
   optional double y = 2;
   optional double z = 3 [default = 0.0];
-
-  // Gaussian probability information
-  optional apollo.common.GaussianInfo gaussian_info = 4;
 }
 
 // Next-id: 3
@@ -145,8 +142,7 @@ message Object {
   };
 
   optional Type type = 29;  // obstacle type
-  // obstacle sub-type
-  optional apollo.perception.PerceptionObstacle.SubType sub_type = 34;
+  optional apollo.perception.PerceptionObstacle.SubType sub_type = 34; // obstacle sub-type
   repeated Prediction prediction = 30;
 
   // perception confidence level. Range: [0,1]
@@ -201,7 +197,7 @@ message Notification {
   optional apollo.common.monitor.MonitorMessageItem item = 2;
 }
 
-// Next-id: 29
+// Next-id: 27
 message SimulationWorld {
   // Timestamp in milliseconds
   optional double timestamp = 1;
@@ -215,7 +211,7 @@ message SimulationWorld {
   // Autonomous driving cars
   optional Object auto_driving_car = 4;
 
-  // Planning signal
+  // Traffic light status
   optional Object traffic_signal = 5;
 
   // Routing paths
@@ -271,10 +267,4 @@ message SimulationWorld {
 
   // Shadow localization
   optional Object shadow_localization = 26;
-
-  // Perception detected signals
-  repeated Object perceived_signal = 27;
-
-  // A map from a story name to whether it is on
-  map<string, bool> stories = 28;
 }

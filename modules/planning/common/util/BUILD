@@ -4,8 +4,12 @@ package(default_visibility = ["//visibility:public"])
 
 cc_library(
     name = "util_lib",
-    srcs = ["util.cc"],
-    hdrs = ["util.h"],
+    srcs = [
+        "util.cc",
+    ],
+    hdrs = [
+        "util.h",
+    ],
     copts = [
         "-DMODULE_NAME=\\\"planning\\\"",
     ],
@@ -23,8 +27,12 @@ cc_library(
 
 cc_library(
     name = "common_lib",
-    srcs = ["common.cc"],
-    hdrs = ["common.h"],
+    srcs = [
+        "common.cc",
+    ],
+    hdrs = [
+        "common.h",
+    ],
     copts = [
         "-DMODULE_NAME=\\\"planning\\\"",
     ],

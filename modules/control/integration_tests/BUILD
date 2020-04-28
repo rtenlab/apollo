@@ -4,8 +4,12 @@ package(default_visibility = ["//visibility:public"])
 
 cc_library(
     name = "control_test_base",
-    srcs = ["control_test_base.cc"],
-    hdrs = ["control_test_base.h"],
+    srcs = [
+        "control_test_base.cc",
+    ],
+    hdrs = [
+        "control_test_base.h",
+    ],
     deps = [
         "//cyber",
         "//modules/common/proto:geometry_proto",
@@ -20,7 +24,9 @@ cc_library(
 cc_test(
     name = "simple_control_test",
     size = "small",
-    srcs = ["simple_control_test.cc"],
+    srcs = [
+        "simple_control_test.cc",
+    ],
     data = ["//modules/control:control_testdata"],
     deps = [
         ":control_test_base",
@@ -31,7 +37,9 @@ cc_test(
 cc_test(
     name = "relative_position_test",
     size = "small",
-    srcs = ["relative_position_test.cc"],
+    srcs = [
+        "relative_position_test.cc",
+    ],
     data = ["//modules/control:control_testdata"],
     deps = [
         ":control_test_base",
@@ -42,7 +50,9 @@ cc_test(
 cc_test(
     name = "mpc_controller_test",
     size = "small",
-    srcs = ["mpc_controller_test.cc"],
+    srcs = [
+        "mpc_controller_test.cc",
+    ],
     data = ["//modules/control:control_testdata"],
     deps = [
         ":control_test_base",

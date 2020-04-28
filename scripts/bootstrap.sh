@@ -22,11 +22,12 @@ DREAMVIEW_URL="http://localhost:8888"
 cd "${DIR}/.."
 
 # Make sure supervisord has correct coredump file limit.
-ulimit -c unlimited
+ulimit -c 0
 
 source "${DIR}/apollo_base.sh"
 
 function start() {
+    nohup cyber_launch start modules/drivers/tools/image_decompress/launch/image_decompress.launch & 
     ./scripts/monitor.sh start
     ./scripts/dreamview.sh start
     if [ $? -eq 0 ]; then
@@ -43,6 +44,7 @@ function start() {
 function stop() {
     ./scripts/dreamview.sh stop
     ./scripts/monitor.sh stop
+    cyber_launch stop modules/drivers/tools/image_decompress/launch/image_decompress.launch  
 }
 
 case $1 in

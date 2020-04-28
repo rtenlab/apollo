@@ -26,17 +26,6 @@ cc_library(
     ],
 )
 
-cc_test(
-    name = "node_channel_impl_test",
-    size = "small",
-    srcs = ["node_channel_impl_test.cc"],
-    deps = [
-        "//cyber",
-        "//cyber/proto:unit_test_cc_proto",
-        "@gtest//:main",
-    ],
-)
-
 cc_library(
     name = "node_service_impl",
     hdrs = ["node_service_impl.h"],
@@ -53,7 +42,9 @@ cc_library(
 cc_test(
     name = "node_test",
     size = "small",
-    srcs = ["node_test.cc"],
+    srcs = [
+        "node_test.cc",
+    ],
     deps = [
         "//cyber",
         "//cyber/proto:unit_test_cc_proto",
@@ -87,17 +78,6 @@ cc_library(
     ],
 )
 
-cc_test(
-    name = "reader_test",
-    size = "small",
-    srcs = ["reader_test.cc"],
-    deps = [
-        "//cyber",
-        "//cyber/proto:unit_test_cc_proto",
-        "@gtest",
-    ],
-)
-
 cc_library(
     name = "writer",
     hdrs = ["writer.h"],
@@ -126,18 +106,6 @@ cc_test(
     srcs = ["writer_reader_test.cc"],
     deps = [
         "//cyber",
-        "//cyber/proto:unit_test_cc_proto",
-        "@gtest",
-    ],
-)
-
-cc_test(
-    name = "writer_test",
-    size = "small",
-    srcs = ["writer_test.cc"],
-    deps = [
-        "//cyber",
-        "//cyber/node:writer_base",
         "//cyber/proto:unit_test_cc_proto",
         "@gtest",
     ],

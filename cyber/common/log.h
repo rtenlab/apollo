@@ -18,18 +18,16 @@
  * @log
  */
 
-#ifndef CYBER_COMMON_LOG_H_
-#define CYBER_COMMON_LOG_H_
+#pragma once
 
-#include <cstdarg>
-#include <string>
+#include <stdarg.h>
 
 #include "cyber/binary.h"
 #include "glog/logging.h"
 #include "glog/raw_logging.h"
 
 #define LEFT_BRACKET "["
-#define RIGHT_BRACKET "]"
+#define RIGHT_BRACKET "] "
 
 #ifndef MODULE_NAME
 #define MODULE_NAME apollo::cyber::Binary::GetName().c_str()
@@ -85,60 +83,26 @@
 #define AERROR_EVERY(freq) \
   LOG_EVERY_N(ERROR, freq) << LEFT_BRACKET << MODULE_NAME << RIGHT_BRACKET
 
-#if !defined(RETURN_IF_NULL)
 #define RETURN_IF_NULL(ptr)          \
   if (ptr == nullptr) {              \
     AWARN << #ptr << " is nullptr."; \
     return;                          \
   }
-#endif
 
-#if !defined(RETURN_VAL_IF_NULL)
 #define RETURN_VAL_IF_NULL(ptr, val) \
   if (ptr == nullptr) {              \
     AWARN << #ptr << " is nullptr."; \
     return val;                      \
   }
-#endif
 
-#if !defined(RETURN_IF)
-#define RETURN_IF(condition)           \
-  if (condition) {                     \
-    AWARN << #condition << " is met."; \
-    return;                            \
+#define RETURN_IF(condition)               \
+  if (condition) {                         \
+    AWARN << #condition << " is not met."; \
+    return;                                \
   }
-#endif
 
-#if !defined(RETURN_VAL_IF)
-#define RETURN_VAL_IF(condition, val)  \
-  if (condition) {                     \
-    AWARN << #condition << " is met."; \
-    return val;                        \
+#define RETURN_VAL_IF(condition, val)      \
+  if (condition) {                         \
+    AWARN << #condition << " is not met."; \
+    return val;                            \
   }
-#endif
-
-#if !defined(_RETURN_VAL_IF_NULL2__)
-#define _RETURN_VAL_IF_NULL2__
-#define RETURN_VAL_IF_NULL2(ptr, val) \
-  if (ptr == nullptr) {               \
-    return (val);                     \
-  }
-#endif
-
-#if !defined(_RETURN_VAL_IF2__)
-#define _RETURN_VAL_IF2__
-#define RETURN_VAL_IF2(condition, val) \
-  if (condition) {                     \
-    return (val);                      \
-  }
-#endif
-
-#if !defined(_RETURN_IF2__)
-#define _RETURN_IF2__
-#define RETURN_IF2(condition) \
-  if (condition) {            \
-    return;                   \
-  }
-#endif
-
-#endif  // CYBER_COMMON_LOG_H_

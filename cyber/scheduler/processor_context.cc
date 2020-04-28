@@ -20,7 +20,11 @@ namespace apollo {
 namespace cyber {
 namespace scheduler {
 
-void ProcessorContext::Shutdown() { stop_.store(true); }
+void ProcessorContext::Shutdown() {
+  if (!stop_) {
+    stop_ = true;
+  }
+}
 
 }  // namespace scheduler
 }  // namespace cyber

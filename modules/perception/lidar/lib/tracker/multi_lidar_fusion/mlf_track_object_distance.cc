@@ -105,18 +105,15 @@ float MlfTrackObjectDistance::ComputeDistance(
       weights = &iter->second;
     }
   }
-  if (weights == nullptr || weights->size() < 7) {
-    AERROR << "Invalid weights";
-    return 1e+10f;
-  }
+  CHECK(weights != nullptr && weights->size() >= 7);
   float distance = 0.f;
   float delta = 1e-10f;
 
   double current_time = object->object_ptr->latest_tracked_time;
   track->PredictState(current_time);
 
-  double time_diff =
-      track->age_ ? current_time - track->latest_visible_time_ : 0;
+  double time_diff = current_time;
+  // -track->latest_visible_time_;
   if (weights->at(0) > delta) {
     distance +=
         weights->at(0) * LocationDistance(latest_object, track->predict_.state,

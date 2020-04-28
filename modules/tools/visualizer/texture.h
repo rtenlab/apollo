@@ -16,8 +16,8 @@
 
 #pragma once
 
-#include <QtGui/QImage>
-#include <QtGui/QOpenGLBuffer>
+#include <QImage>
+#include <QOpenGLBuffer>
 
 #include "modules/drivers/proto/sensor_image.pb.h"
 

@@ -18,8 +18,8 @@ limitations under the License.
 #include <memory>
 #include <string>
 
-#include "absl/strings/str_cat.h"
 #include "modules/common/configs/config_gflags.h"
+#include "modules/common/util/string_util.h"
 #include "modules/map/hdmap/hdmap.h"
 #include "modules/map/proto/map_id.pb.h"
 #include "modules/map/relative_map/proto/navigation.pb.h"
@@ -55,9 +55,11 @@ std::string RoutingMapFile();
  */
 inline std::string EndWayPointFile() {
   if (FLAGS_use_navigation_mode) {
-    return absl::StrCat(FLAGS_navigation_mode_end_way_point_file);
+    return apollo::common::util::StrCat(
+        FLAGS_navigation_mode_end_way_point_file);
   } else {
-    return absl::StrCat(FLAGS_map_dir, "/", FLAGS_end_way_point_filename);
+    return apollo::common::util::StrCat(FLAGS_map_dir, "/",
+                                        FLAGS_end_way_point_filename);
   }
 }
 

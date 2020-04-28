@@ -21,8 +21,8 @@
 #include "pcl/kdtree/kdtree.h"
 #include "pcl/kdtree/kdtree_flann.h"
 
-#include "absl/strings/str_cat.h"
 #include "cyber/common/file.h"
+#include "modules/common/util/string_util.h"
 #include "modules/perception/base/object.h"
 #include "modules/perception/base/object_types.h"
 #include "modules/perception/base/point_cloud.h"
@@ -124,8 +124,7 @@ class OfflineLidarObstaclePerception {
       if (frame_->cloud == nullptr) {
         frame_->cloud = base::PointFCloudPool::Instance().Get();
       }
-      // LoadPCLPCD(pcd_folder + "/" + file_name + ".pcd", frame_->cloud.get());
-      LoadPCLPCD(pcd_folder + "/" + file_name, frame_->cloud.get());
+      LoadPCLPCD(pcd_folder + "/" + file_name + ".pcd", frame_->cloud.get());
       AINFO << "Read point cloud from " << pcd_file_names[i]
             << " with cloud size: " << frame_->cloud->size();
       if (pose_folder != "") {
@@ -205,7 +204,8 @@ class OfflineLidarObstaclePerception {
       }
       if (!WriteObjectsForNewBenchmark(
               i, filtered_objects,
-              absl::StrCat(output_path, "/", file_name, ".txt"))) {
+              apollo::common::util::StrCat(output_path, "/", file_name,
+                                           ".pcd"))) {
         return false;
       }
     }

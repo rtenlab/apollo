@@ -27,6 +27,10 @@ namespace apollo {
 namespace planning {
 
 using apollo::common::Status;
+using apollo::dreamview::Chart;
+using apollo::planning_internal::SLFrameDebug;
+using apollo::planning_internal::SpeedPlan;
+using apollo::planning_internal::STGraphDebug;
 
 PlanningBase::~PlanningBase() {}
 

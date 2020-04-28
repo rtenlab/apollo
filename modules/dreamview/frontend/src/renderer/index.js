@@ -1,12 +1,9 @@
 import * as THREE from "three";
+import OrbitControls from "three/examples/js/controls/OrbitControls.js";
 import Stats from "stats.js";
-
-import Styles from "styles/main.scss";
-const _ = require('lodash');
 
 import Coordinates from "renderer/coordinates";
 import AutoDrivingCar from "renderer/adc";
-import CheckPoints from "renderer/check_points.js";
 import Ground from "renderer/ground";
 import TileGround from "renderer/tileground";
 import Map from "renderer/map";
@@ -20,6 +17,7 @@ import RoutingEditor from "renderer/routing_editor.js";
 import Gnss from "renderer/gnss.js";
 import PointCloud from "renderer/point_cloud.js";
 
+const _ = require('lodash');
 
 class Renderer {
     constructor() {
@@ -28,14 +26,10 @@ class Renderer {
 
         this.coordinates = new Coordinates();
         this.renderer = new THREE.WebGLRenderer({
-            antialias: useAntialias,
-            // Transparent background
-            alpha: true,
+            antialias: useAntialias
         });
         this.scene = new THREE.Scene();
-        if (OFFLINE_PLAYBACK) {
-            this.scene.background = new THREE.Color(0x000C17);
-        }
+        this.scene.background = new THREE.Color(0x000C17);
 
         // The dimension of the scene
         this.dimension = {
@@ -85,8 +79,6 @@ class Renderer {
 
         this.pointCloud = new PointCloud();
 
-        this.checkPoints = OFFLINE_PLAYBACK && new CheckPoints(this.coordinates, this.scene);
-
         // The Performance Monitor
         this.stats = null;
         if (PARAMETERS.debug.performanceMonitor) {
@@ -102,9 +94,8 @@ class Renderer {
         this.geolocation = { x: 0, y: 0 };
     }
 
-    initialize(canvasId, width, height, options, cameraData) {
+    initialize(canvasId, width, height, options) {
         this.options = options;
-        this.cameraData = cameraData;
         this.canvasId = canvasId;
 
         // Camera
@@ -114,7 +105,7 @@ class Renderer {
             PARAMETERS.camera.laneWidthToViewDistanceRatio);
         this.camera = new THREE.PerspectiveCamera(
             PARAMETERS.camera[this.options.cameraAngle].fov,
-            width / height,
+            window.innerWidth / window.innerHeight,
             PARAMETERS.camera[this.options.cameraAngle].near,
             PARAMETERS.camera[this.options.cameraAngle].far
         );
@@ -161,11 +152,6 @@ class Renderer {
     }
 
     updateDimension(width, height) {
-        if (width < Styles.MIN_MAIN_VIEW_WIDTH / 2 && this.dimension.width >= width) {
-            // Reach minimum, do not update camera/renderer dimension anymore.
-            return;
-        }
-
         this.camera.aspect = width / height;
         this.camera.updateProjectionMatrix();
         this.renderer.setSize(width, height);
@@ -278,28 +264,7 @@ class Renderer {
                 this.enableOrbitControls(true);
             }
             break;
-        case "CameraView": {
-            const { position, rotation } = this.cameraData.get();
-
-            const { x, y, z } = this.coordinates.applyOffset(position);
-            this.camera.position.set(x, y, z);
-
-            // Threejs camera is default facing towards to Z-axis negative direction,
-            // but the actual camera is looking at Z-axis positive direction. So we need
-            // to adjust the camera rotation considering the default camera orientation.
-            this.camera.rotation.set(rotation.x + Math.PI, -rotation.y, -rotation.z);
-
-            this.controls.enabled = false;
-
-            const image = document.getElementById('camera-image');
-            if (image && this.cameraData.imageSrcData) {
-                image.src = this.cameraData.imageSrcData;
-            }
-
-            break;
         }
-        }
-
         this.camera.updateProjectionMatrix();
     }
 
@@ -425,7 +390,6 @@ class Renderer {
         this.prediction.update(world, this.coordinates, this.scene);
         this.updateRouting(world.routingTime, world.routePath);
         this.gnss.update(world, this.coordinates, this.scene);
-        this.map.update(world);
 
         const planningAdcPose = _.get(world, 'planningData.initPoint.pathPoint');
         if (this.planningAdc && planningAdcPose) {
@@ -456,8 +420,8 @@ class Renderer {
         this.ground.updateImage(mapName);
     }
 
-    updateGroundMetadata(mapInfo) {
-        this.ground.initialize(mapInfo);
+    updateGroundMetadata(serverUrl, mapInfo) {
+        this.ground.initialize(serverUrl, mapInfo);
     }
 
     updateMap(newData, removeOldMap = false) {

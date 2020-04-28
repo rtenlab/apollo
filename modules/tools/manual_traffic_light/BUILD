@@ -9,8 +9,6 @@ cc_library(
     deps = [
         "//cyber",
         "//modules/common/adapters:adapter_gflags",
-        "//modules/common/util:color",
-        "//modules/common/util:message_util",
         "//modules/map/hdmap:hdmap_util",
     ],
 )

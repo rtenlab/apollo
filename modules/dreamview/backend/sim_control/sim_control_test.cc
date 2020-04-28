@@ -111,7 +111,8 @@ TEST_F(SimControlTest, Test) {
 
   {
     Clock::SetMode(Clock::MOCK);
-    Clock::SetNowInSeconds(100.01);
+    const auto timestamp = apollo::common::time::From(100.01);
+    Clock::SetNow(timestamp.time_since_epoch());
     sim_control_->RunOnce();
 
     BlockerManager::Instance()->Observe();
@@ -175,7 +176,7 @@ TEST_F(SimControlTest, TestDummyPrediction) {
 
   {
     const double timestamp = 100.01;
-    Clock::SetNowInSeconds(timestamp);
+    Clock::SetNow(apollo::common::time::From(timestamp).time_since_epoch());
     obstacles->mutable_header()->set_timestamp_sec(timestamp);
     obstacles->mutable_header()->set_module_name("NoneSimPrediction");
     sim_control_->OnPredictionObstacles(obstacles);
@@ -193,7 +194,7 @@ TEST_F(SimControlTest, TestDummyPrediction) {
 
   {
     const double timestamp = 100.2;
-    Clock::SetNowInSeconds(timestamp);
+    Clock::SetNow(apollo::common::time::From(timestamp).time_since_epoch());
     obstacles->mutable_header()->set_timestamp_sec(timestamp);
     obstacles->mutable_header()->set_module_name("SimPrediction");
     sim_control_->OnPredictionObstacles(obstacles);

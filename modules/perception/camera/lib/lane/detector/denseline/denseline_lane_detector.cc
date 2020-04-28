@@ -155,20 +155,14 @@ bool DenselineLaneDetector::Detect(const LaneDetectorOptions &options,
   }
 
   auto data_provider = frame->data_provider;
-  if (input_width_ != data_provider->src_width()) {
-    AERROR << "Input size is not correct: " << input_width_ << " vs "
-           << data_provider->src_width();
-    return false;
-  }
-  if (input_height_ != data_provider->src_height()) {
-    AERROR << "Input size is not correct: " << input_height_ << " vs "
-           << data_provider->src_height();
-    return false;
-  }
+  CHECK_EQ(input_width_, data_provider->src_width())
+      << "Input size is not correct: " << input_width_ << " vs "
+      << data_provider->src_width();
+  CHECK_EQ(input_height_, data_provider->src_height())
+      << "Input size is not correct: " << input_height_ << " vs "
+      << data_provider->src_height();
 
-  if (!data_provider->GetImage(data_provider_image_option_, &image_src_)) {
-    return false;
-  }
+  CHECK(data_provider->GetImage(data_provider_image_option_, &image_src_));
 
   //  bottom 0 is data
   auto input_blob = rt_net_->get_blob(net_inputs_[0]);
@@ -178,14 +172,10 @@ bool DenselineLaneDetector::Detect(const LaneDetectorOptions &options,
   AINFO << "input_blob: " << blob_channel << " " << blob_height << " "
         << blob_width << std::endl;
 
-  if (blob_height != resize_height_) {
-    AERROR << "height is not equal" << blob_height << " vs " << resize_height_;
-    return false;
-  }
-  if (blob_width != resize_width_) {
-    AERROR << "width is not equal" << blob_width << " vs " << resize_width_;
-    return false;
-  }
+  CHECK_EQ(blob_height, resize_height_)
+      << "height is not equal" << blob_height << " vs " << resize_height_;
+  CHECK_EQ(blob_width, resize_width_)
+      << "width is not equal" << blob_width << " vs " << resize_width_;
   ADEBUG << "image_blob: " << image_src_.blob()->shape_string();
   ADEBUG << "input_blob: " << input_blob->shape_string();
 

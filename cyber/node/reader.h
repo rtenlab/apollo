@@ -276,7 +276,7 @@ bool Reader<MessageT>::Init() {
       croutine::CreateRoutineFactory<MessageT>(std::move(func), dv);
   if (!sched->CreateTask(factory, croutine_name_)) {
     AERROR << "Create Task Failed!";
-    init_.store(false);
+    init_.exchange(false);
     return false;
   }
 

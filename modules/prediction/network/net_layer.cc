@@ -158,6 +158,7 @@ bool MaxPool1d::Load(const LayerParameter& layer_pb) {
   }
   MaxPool1dParameter maxpool1d_pb = layer_pb.maxpool1d();
   return Load(maxpool1d_pb);
+  return true;
 }
 
 bool MaxPool1d::Load(const MaxPool1dParameter& maxpool1d_pb) {
@@ -201,6 +202,7 @@ bool AvgPool1d::Load(const LayerParameter& layer_pb) {
   }
   AvgPool1dParameter avgpool1d_pb = layer_pb.avgpool1d();
   return Load(avgpool1d_pb);
+  return true;
 }
 
 bool AvgPool1d::Load(const AvgPool1dParameter& avgpool1d_pb) {

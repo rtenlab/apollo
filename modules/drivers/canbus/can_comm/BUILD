@@ -6,6 +6,7 @@ cc_library(
     name = "can_receiver",
     hdrs = ["can_receiver.h"],
     deps = [
+        "//modules/common",
         "//modules/common/proto:error_code_proto",
         "//modules/drivers/canbus/can_client",
         "//modules/drivers/canbus/can_comm:message_manager_base",
@@ -16,6 +17,7 @@ cc_library(
     name = "can_sender",
     hdrs = ["can_sender.h"],
     deps = [
+        "//modules/common",
         "//modules/common/proto:error_code_proto",
         "//modules/drivers/canbus/can_client",
         "//modules/drivers/canbus/can_comm:message_manager_base",
@@ -39,7 +41,9 @@ cc_library(
 cc_test(
     name = "can_sender_test",
     size = "small",
-    srcs = ["can_sender_test.cc"],
+    srcs = [
+        "can_sender_test.cc",
+    ],
     deps = [
         "//cyber",
         "//modules/canbus/proto:canbus_proto",
@@ -53,7 +57,9 @@ cc_test(
 cc_test(
     name = "can_receiver_test",
     size = "small",
-    srcs = ["can_receiver_test.cc"],
+    srcs = [
+        "can_receiver_test.cc",
+    ],
     deps = [
         "//cyber",
         "//modules/canbus/proto:canbus_proto",
@@ -67,7 +73,9 @@ cc_test(
 cc_test(
     name = "protocol_data_test",
     size = "small",
-    srcs = ["protocol_data_test.cc"],
+    srcs = [
+        "protocol_data_test.cc",
+    ],
     deps = [
         "//modules/canbus/proto:canbus_proto",
         "//modules/drivers/canbus/can_comm:message_manager_base",

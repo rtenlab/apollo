@@ -53,7 +53,7 @@ std::pair<double, TrackedObjectPtr> TrackData::GetHistoryObject(int idx) {
   }
 }
 
-std::pair<double, TrackedObjectConstPtr> TrackData::GetHistoryObject(
+const std::pair<double, TrackedObjectConstPtr> TrackData::GetHistoryObject(
     int idx) const {
   if (history_objects_.empty()) {
     AINFO << "no object in track";

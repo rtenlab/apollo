@@ -17,7 +17,7 @@
 #ifndef CYBER_RECORD_RECORD_WRITER_H_
 #define CYBER_RECORD_RECORD_WRITER_H_
 
-#include <cstdint>
+#include <stdint.h>
 #include <memory>
 #include <mutex>
 #include <set>
@@ -26,7 +26,6 @@
 #include <unordered_map>
 
 #include "cyber/common/log.h"
-#include "cyber/message/message_traits.h"
 #include "cyber/message/raw_message.h"
 #include "cyber/proto/record.pb.h"
 #include "cyber/record/file/record_file_writer.h"
@@ -220,7 +219,7 @@ bool RecordWriter::WriteMessage(const std::string& channel_name,
                                 const std::string& proto_desc) {
   const std::string& message_type = GetMessageType(channel_name);
   if (message_type.empty()) {
-    if (!WriteChannel(channel_name, message::GetMessageName<MessageT>(),
+    if (!WriteChannel(channel_name, MessageT::descriptor()->full_name(),
                       proto_desc)) {
       AERROR << "Failed to write meta data to channel [" << channel_name
              << "].";
@@ -229,7 +228,7 @@ bool RecordWriter::WriteMessage(const std::string& channel_name,
   } else {
     if (MessageT::descriptor()->full_name() != message_type) {
       AERROR << "Message type is invalid, expect: " << message_type
-             << ", actual: " << message::GetMessageName<MessageT>();
+             << ", actual: " << MessageT::descriptor()->full_name();
       return false;
     }
   }

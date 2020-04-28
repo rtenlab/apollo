@@ -16,10 +16,9 @@
 
 #include "cyber/parameter/parameter_client.h"
 
+#include <gtest/gtest.h>
 #include <memory>
-#include <thread>
 #include <vector>
-#include "gtest/gtest.h"
 
 #include "cyber/cyber.h"
 #include "cyber/init.h"
@@ -29,16 +28,22 @@
 namespace apollo {
 namespace cyber {
 
+using apollo::cyber::proto::Param;
+using apollo::cyber::proto::ParamType;
+
 class ParameterClientTest : public ::testing::Test {
  protected:
-  ParameterClientTest() {
-    apollo::cyber::Init("parameter_client_test");
-    SetState(STATE_INITIALIZED);
-    node_ = CreateNode("parameter_server");
-  }
+  ParameterClientTest() {}
+  virtual ~ParameterClientTest() {}
+
+  std::shared_ptr<Node> node_;
+  std::shared_ptr<ParameterServer> ps_;
+  std::shared_ptr<ParameterClient> pc_;
 
   virtual void SetUp() {
     // Called before every TEST_F(ParameterClientTest, *)
+    apollo::cyber::Init("parameter_client_test");
+    node_ = CreateNode("parameter_server");
     ps_.reset(new ParameterServer(node_));
     pc_.reset(new ParameterClient(node_, "parameter_server"));
   }
@@ -47,17 +52,13 @@ class ParameterClientTest : public ::testing::Test {
     // Called after every TEST_F(ParameterClientTest, *)
     ps_.reset();
     pc_.reset();
+    node_.reset();
   }
-
- protected:
-  std::shared_ptr<Node> node_;
-  std::unique_ptr<ParameterServer> ps_;
-  std::unique_ptr<ParameterClient> pc_;
 };
 
 TEST_F(ParameterClientTest, set_parameter) {
   EXPECT_TRUE(pc_->SetParameter(Parameter("int", 1)));
-  std::this_thread::sleep_for(std::chrono::milliseconds(100));
+  usleep(100000);
 
   ps_.reset();
   EXPECT_FALSE(pc_->SetParameter(Parameter("int", 1)));
@@ -89,3 +90,10 @@ TEST_F(ParameterClientTest, list_parameter) {
 
 }  // namespace cyber
 }  // namespace apollo
+
+int main(int argc, char** argv) {
+  apollo::cyber::Init(argv[0]);
+  testing::InitGoogleTest(&argc, argv);
+  auto res = RUN_ALL_TESTS();
+  return res;
+}

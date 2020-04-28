@@ -17,7 +17,6 @@
 #include "modules/localization/msf/local_tool/local_visualization/engine/visualization_manager.h"
 
 #include <algorithm>
-#include <thread>
 
 #include "boost/date_time/posix_time/posix_time.hpp"
 #include "boost/filesystem.hpp"
@@ -251,7 +250,7 @@ bool IntepolationMessageBuffer<MessageType>::WaitMessageBufferOk(
 
   while (last_iter->first < timestamp) {
     AINFO << "Waiting new message!";
-    std::this_thread::sleep_for(std::chrono::milliseconds(5));
+    usleep(5000);
     pthread_mutex_lock(&(this->buffer_mutex_));
     msg_list->clear();
     std::copy(this->msg_list_.begin(), this->msg_list_.end(),
@@ -368,7 +367,7 @@ void VisualizationManager::StopVisualization() {
 
 void VisualizationManager::DoVisualize() {
   while (!(stop_visualization_.load())) {
-    std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    usleep(10000);
     // if (!lidar_frame_buffer_.IsEmpty()) {
     if (lidar_frame_buffer_.BufferSize() > 5) {
       LidarVisFrame lidar_frame;

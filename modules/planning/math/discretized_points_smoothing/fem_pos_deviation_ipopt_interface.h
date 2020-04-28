@@ -16,6 +16,7 @@
 
 #pragma once
 
+#include <map>
 #include <utility>
 #include <vector>
 
@@ -42,8 +43,9 @@ namespace planning {
 
 class FemPosDeviationIpoptInterface : public Ipopt::TNLP {
  public:
-  FemPosDeviationIpoptInterface(std::vector<std::pair<double, double>> points,
-                                std::vector<double> bounds);
+  explicit FemPosDeviationIpoptInterface(
+      std::vector<std::pair<double, double>> points,
+      std::vector<double> bounds);
 
   virtual ~FemPosDeviationIpoptInterface() = default;
 

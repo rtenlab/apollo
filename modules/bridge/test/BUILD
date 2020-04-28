@@ -7,8 +7,7 @@ cc_binary(
     srcs = ["bridge_receiver_test.cc"],
     deps = [
         "//cyber",
-        "//modules/bridge:udp_bridge",
-        "//modules/bridge/common:udp_listener",
+        "//cyber/examples/proto:examples_cc_proto",
     ],
 )
 

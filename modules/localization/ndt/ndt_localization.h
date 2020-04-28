@@ -15,12 +15,10 @@
  *****************************************************************************/
 #pragma once
 
+#include <Eigen/Geometry>
 #include <list>
 #include <memory>
 #include <string>
-
-#include "Eigen/Geometry"
-
 #include "modules/drivers/gnss/proto/ins.pb.h"
 #include "modules/drivers/proto/pointcloud.pb.h"
 #include "modules/localization/ndt/localization_pose_buffer.h"

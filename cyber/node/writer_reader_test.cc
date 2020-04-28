@@ -14,11 +14,11 @@
  * limitations under the License.
  *****************************************************************************/
 
+#include <gtest/gtest.h>
 #include <memory>
 #include <string>
 #include <thread>
 #include <vector>
-#include "gtest/gtest.h"
 
 #include "cyber/common/global_data.h"
 #include "cyber/cyber.h"
@@ -223,7 +223,7 @@ TEST(WriterReaderTest, observe) {
   Writer<proto::UnitTest> writer(attr);
   writer.Init();
   writer.Write(msg1);
-  std::this_thread::sleep_for(std::chrono::milliseconds(10));
+  usleep(10000);
   ASSERT_TRUE(reader.HasReceived());
   reader.Observe();
   ASSERT_FALSE(reader.Empty());
@@ -277,13 +277,13 @@ TEST(WriterReaderTest, user_defined_message) {
   msg->content = "message";
 
   writer->Write(msg);
-  std::this_thread::sleep_for(std::chrono::milliseconds(10));
+  usleep(10000);
 
   writer->Write(msg);
-  std::this_thread::sleep_for(std::chrono::milliseconds(10));
+  usleep(10000);
 
   writer->Write(msg);
-  std::this_thread::sleep_for(std::chrono::milliseconds(10));
+  usleep(10000);
 
   reader->Observe();
   ASSERT_TRUE(reader->HasReceived());
@@ -299,5 +299,6 @@ TEST(WriterReaderTest, user_defined_message) {
 int main(int argc, char** argv) {
   testing::InitGoogleTest(&argc, argv);
   apollo::cyber::Init(argv[0]);
-  return RUN_ALL_TESTS();
+  auto res = RUN_ALL_TESTS();
+  return res;
 }

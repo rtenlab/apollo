@@ -24,6 +24,7 @@
 #include "gtest/gtest.h"
 
 #include "cyber/common/log.h"
+#include "modules/common/time/time.h"
 #include "modules/drivers/canbus/common/byte.h"
 
 namespace apollo {
@@ -31,6 +32,8 @@ namespace drivers {
 namespace canbus {
 namespace can {
 
+using Clock = common::time::Clock;
+using micros = common::time::micros;
 using apollo::common::ErrorCode;
 
 class FakeCanClientTest : public ::testing::Test {

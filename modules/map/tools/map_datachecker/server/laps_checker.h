@@ -34,8 +34,8 @@ typedef std::vector<GridMeta> Grid;
 
 class LapsChecker {
  public:
-  LapsChecker(const std::vector<FramePose>& poses, int laps_to_check,
-              std::shared_ptr<JSonConf> sp_conf);
+  explicit LapsChecker(const std::vector<FramePose>& poses, int laps_to_check,
+                       std::shared_ptr<JSonConf> sp_conf);
   ErrorCode Check();
   double GetProgress() const;
   double GetConfidence();

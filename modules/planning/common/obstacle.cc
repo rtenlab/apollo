@@ -100,6 +100,7 @@ Obstacle::Obstacle(const std::string& id,
                    const ObstaclePriority::Priority& obstacle_priority,
                    const bool is_static)
     : Obstacle(id, perception_obstacle, obstacle_priority, is_static) {
+  is_caution_level_obstacle_ = (obstacle_priority == ObstaclePriority::CAUTION);
   trajectory_ = trajectory;
   auto& trajectory_points = *trajectory_.mutable_trajectory_point();
   double cumulative_s = 0.0;
@@ -229,7 +230,7 @@ std::list<std::unique_ptr<Obstacle>> Obstacle::CreateObstacles(
       }
 
       const std::string obstacle_id =
-          absl::StrCat(perception_id, "_", trajectory_index);
+          apollo::common::util::StrCat(perception_id, "_", trajectory_index);
       obstacles.emplace_back(
           new Obstacle(obstacle_id, prediction_obstacle.perception_obstacle(),
                        trajectory, prediction_obstacle.priority().priority(),
@@ -294,7 +295,7 @@ double Obstacle::MinRadiusStopDistance(
   if (min_radius_stop_distance_ > 0) {
     return min_radius_stop_distance_;
   }
-  static constexpr double stop_distance_buffer = 0.5;
+  constexpr double stop_distance_buffer = 0.5;
   const double min_turn_radius = VehicleConfigHelper::MinSafeTurnRadius();
   double lateral_diff =
       vehicle_param.width() / 2.0 + std::max(std::fabs(sl_boundary_.start_l()),
@@ -382,17 +383,16 @@ bool Obstacle::BuildTrajectoryStBoundary(const ReferenceLine& reference_line,
     const auto& first_point = first_traj_point.path_point();
     const auto& second_point = second_traj_point.path_point();
 
-    double object_moving_box_length =
+    double total_length =
         object_length + common::util::DistanceXY(first_point, second_point);
 
     common::math::Vec2d center((first_point.x() + second_point.x()) / 2.0,
                                (first_point.y() + second_point.y()) / 2.0);
-    common::math::Box2d object_moving_box(
-        center, first_point.theta(), object_moving_box_length, object_width);
+    common::math::Box2d object_moving_box(center, first_point.theta(),
+                                          total_length, object_width);
     SLBoundary object_boundary;
     // NOTICE: this method will have errors when the reference line is not
     // straight. Need double loop to cover all corner cases.
-    // roughly skip points that are too close to last_sl_boundary box
     const double distance_xy =
         common::util::DistanceXY(trajectory_points[last_index].path_point(),
                                  trajectory_points[i].path_point());
@@ -419,7 +419,7 @@ bool Obstacle::BuildTrajectoryStBoundary(const ReferenceLine& reference_line,
     last_index = i;
 
     // skip if object is entirely on one side of reference line.
-    static constexpr double kSkipLDistanceFactor = 0.4;
+    constexpr double kSkipLDistanceFactor = 0.4;
     const double skip_l_distance =
         (object_boundary.end_s() - object_boundary.start_s()) *
             kSkipLDistanceFactor +
@@ -437,7 +437,7 @@ bool Obstacle::BuildTrajectoryStBoundary(const ReferenceLine& reference_line,
       // skip if behind reference line
       continue;
     }
-    static constexpr double kSparseMappingS = 20.0;
+    constexpr double kSparseMappingS = 20.0;
     const double st_boundary_delta_s =
         (std::fabs(object_boundary.start_s() - adc_start_s) > kSparseMappingS)
             ? kStBoundarySparseDeltaS
@@ -458,15 +458,13 @@ bool Obstacle::BuildTrajectoryStBoundary(const ReferenceLine& reference_line,
       if (!has_low) {
         auto low_ref = reference_line.GetReferencePoint(low_s);
         has_low = object_moving_box.HasOverlap(
-            {low_ref, low_ref.heading(), adc_length,
-             adc_width + FLAGS_nonstatic_obstacle_nudge_l_buffer});
+            {low_ref, low_ref.heading(), adc_length, adc_width});
         low_s += st_boundary_delta_s;
       }
       if (!has_high) {
         auto high_ref = reference_line.GetReferencePoint(high_s);
         has_high = object_moving_box.HasOverlap(
-            {high_ref, high_ref.heading(), adc_length,
-             adc_width + FLAGS_nonstatic_obstacle_nudge_l_buffer});
+            {high_ref, high_ref.heading(), adc_length, adc_width});
         high_s -= st_boundary_delta_s;
       }
     }
@@ -671,7 +669,7 @@ void Obstacle::AddLateralDecision(const std::string& decider_tag,
   decider_tags_.push_back(decider_tag);
 }
 
-std::string Obstacle::DebugString() const {
+const std::string Obstacle::DebugString() const {
   std::stringstream ss;
   ss << "Obstacle id: " << id_;
   for (size_t i = 0; i < decisions_.size(); ++i) {
@@ -684,7 +682,7 @@ std::string Obstacle::DebugString() const {
   }
   if (longitudinal_decision_.object_tag_case() !=
       ObjectDecisionType::OBJECT_TAG_NOT_SET) {
-    ss << "longitudinal decision: "
+    ss << "longitutional decision: "
        << longitudinal_decision_.ShortDebugString();
   }
   return ss.str();
@@ -696,7 +694,6 @@ const SLBoundary& Obstacle::PerceptionSLBoundary() const {
 
 void Obstacle::set_path_st_boundary(const STBoundary& boundary) {
   path_st_boundary_ = boundary;
-  path_st_boundary_initialized_ = true;
 }
 
 void Obstacle::SetStBoundaryType(const STBoundary::BoundaryType type) {
@@ -749,7 +746,7 @@ void Obstacle::CheckLaneBlocking(const ReferenceLine& reference_line) {
 
   if (reference_line.IsOnLane(sl_boundary_) &&
       driving_width <
-          vehicle_param.width() + FLAGS_static_obstacle_nudge_l_buffer) {
+          vehicle_param.width() + FLAGS_static_decision_nudge_l_buffer) {
     is_lane_blocking_ = true;
     return;
   }

@@ -1,6 +1,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
+import Header from "components/Header";
 import MainView from "components/Layouts/MainView";
 import ToolView from "components/Layouts/ToolView";
 import Loader from "components/common/Loader";
@@ -14,7 +15,7 @@ export default class Offlineview extends React.Component {
         super(props);
 
         this.handleKeyPress = this.handleKeyPress.bind(this);
-        this.updateDimension = this.props.store.dimension.update.bind(this.props.store.dimension);
+        this.updateDimension = this.props.store.updateDimension.bind(this.props.store);
     }
 
     parseQueryString(queryString) {
@@ -28,7 +29,7 @@ export default class Offlineview extends React.Component {
     }
 
     componentWillMount() {
-        this.updateDimension();
+        this.props.store.updateDimension();
     }
 
     componentDidMount() {
@@ -57,7 +58,8 @@ export default class Offlineview extends React.Component {
     }
 
     render() {
-        const { isInitialized, offlineViewErrorMsg } = this.props.store;
+        const { isInitialized, dimension, sceneDimension, options, hmi,
+            offlineViewErrorMsg } = this.props.store;
 
         if (!isInitialized) {
             return (

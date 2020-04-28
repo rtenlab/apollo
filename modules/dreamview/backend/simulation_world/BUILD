@@ -4,8 +4,12 @@ package(default_visibility = ["//visibility:public"])
 
 cc_library(
     name = "simulation_world_service",
-    srcs = ["simulation_world_service.cc"],
-    hdrs = ["simulation_world_service.h"],
+    srcs = [
+        "simulation_world_service.cc",
+    ],
+    hdrs = [
+        "simulation_world_service.h",
+    ],
     copts = ['-DMODULE_NAME=\\"dreamview\\"'],
     deps = [
         "//cyber",
@@ -29,16 +33,16 @@ cc_library(
         "//modules/perception/proto:perception_proto",
         "//modules/planning/proto:planning_proto",
         "//modules/prediction/proto:prediction_proto",
-        "//modules/storytelling/proto:story_proto",
         "//third_party/json",
-        "@com_google_absl//absl/strings",
     ],
 )
 
 cc_test(
     name = "simulation_world_service_test",
     size = "small",
-    srcs = ["simulation_world_service_test.cc"],
+    srcs = [
+        "simulation_world_service_test.cc",
+    ],
     data = [
         "//modules/dreamview/backend/testdata",
     ],
@@ -51,9 +55,16 @@ cc_test(
 
 cc_library(
     name = "simulation_world_updater",
-    srcs = ["simulation_world_updater.cc"],
-    hdrs = ["simulation_world_updater.h"],
+    srcs = [
+        "simulation_world_updater.cc",
+    ],
+    hdrs = [
+        "simulation_world_updater.h",
+    ],
     copts = ['-DMODULE_NAME=\\"dreamview\\"'],
+    linkopts = [
+        "-lboost_thread",
+    ],
     deps = [
         ":simulation_world_service",
         "//modules/common/util:map_util",
@@ -61,9 +72,7 @@ cc_library(
         "//modules/dreamview/backend/data_collection_monitor",
         "//modules/dreamview/backend/handlers:websocket_handler",
         "//modules/dreamview/backend/map:map_service",
-        "//modules/dreamview/backend/perception_camera_updater",
         "//modules/dreamview/backend/sim_control",
-        "@boost",
     ],
 )
 

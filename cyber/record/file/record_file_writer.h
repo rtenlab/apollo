@@ -17,6 +17,9 @@
 #ifndef CYBER_RECORD_FILE_RECORD_FILE_WRITER_H_
 #define CYBER_RECORD_FILE_RECORD_FILE_WRITER_H_
 
+#include <google/protobuf/io/zero_copy_stream_impl.h>
+#include <google/protobuf/message.h>
+#include <google/protobuf/text_format.h>
 #include <condition_variable>
 #include <fstream>
 #include <memory>
@@ -25,10 +28,6 @@
 #include <type_traits>
 #include <unordered_map>
 #include <utility>
-
-#include "google/protobuf/io/zero_copy_stream_impl.h"
-#include "google/protobuf/message.h"
-#include "google/protobuf/text_format.h"
 
 #include "cyber/common/log.h"
 #include "cyber/record/file/record_file_base.h"
@@ -39,20 +38,23 @@ namespace apollo {
 namespace cyber {
 namespace record {
 
+using google::protobuf::io::FileOutputStream;
+using google::protobuf::io::ZeroCopyOutputStream;
+
 struct Chunk {
   Chunk() { clear(); }
 
   inline void clear() {
-    body_.reset(new proto::ChunkBody());
+    body_.reset(new ChunkBody());
     header_.set_begin_time(0);
     header_.set_end_time(0);
     header_.set_message_number(0);
     header_.set_raw_size(0);
   }
 
-  inline void add(const proto::SingleMessage& message) {
+  inline void add(const SingleMessage& message) {
     std::lock_guard<std::mutex> lock(mutex_);
-    proto::SingleMessage* p_message = body_->add_messages();
+    SingleMessage* p_message = body_->add_messages();
     *p_message = message;
     if (header_.begin_time() == 0) {
       header_.set_begin_time(message.time());
@@ -70,8 +72,8 @@ struct Chunk {
   inline bool empty() { return header_.message_number() == 0; }
 
   std::mutex mutex_;
-  proto::ChunkHeader header_;
-  std::unique_ptr<proto::ChunkBody> body_ = nullptr;
+  ChunkHeader header_;
+  std::unique_ptr<ChunkBody> body_ = nullptr;
 };
 
 class RecordFileWriter : public RecordFileBase {
@@ -80,14 +82,13 @@ class RecordFileWriter : public RecordFileBase {
   virtual ~RecordFileWriter();
   bool Open(const std::string& path) override;
   void Close() override;
-  bool WriteHeader(const proto::Header& header);
-  bool WriteChannel(const proto::Channel& channel);
-  bool WriteMessage(const proto::SingleMessage& message);
+  bool WriteHeader(const Header& header);
+  bool WriteChannel(const Channel& channel);
+  bool WriteMessage(const SingleMessage& message);
   uint64_t GetMessageNumber(const std::string& channel_name) const;
 
  private:
-  bool WriteChunk(const proto::ChunkHeader& chunk_header,
-                  const proto::ChunkBody& chunk_body);
+  bool WriteChunk(const ChunkHeader& chunk_header, const ChunkBody& chunk_body);
   template <typename T>
   bool WriteSection(const T& message);
   bool WriteIndex();
@@ -103,29 +104,26 @@ class RecordFileWriter : public RecordFileBase {
 
 template <typename T>
 bool RecordFileWriter::WriteSection(const T& message) {
-  proto::SectionType type;
-  if (std::is_same<T, proto::ChunkHeader>::value) {
-    type = proto::SectionType::SECTION_CHUNK_HEADER;
-  } else if (std::is_same<T, proto::ChunkBody>::value) {
-    type = proto::SectionType::SECTION_CHUNK_BODY;
-  } else if (std::is_same<T, proto::Channel>::value) {
-    type = proto::SectionType::SECTION_CHANNEL;
-  } else if (std::is_same<T, proto::Header>::value) {
-    type = proto::SectionType::SECTION_HEADER;
+  SectionType type;
+  if (std::is_same<T, ChunkHeader>::value) {
+    type = SectionType::SECTION_CHUNK_HEADER;
+  } else if (std::is_same<T, ChunkBody>::value) {
+    type = SectionType::SECTION_CHUNK_BODY;
+  } else if (std::is_same<T, Channel>::value) {
+    type = SectionType::SECTION_CHANNEL;
+  } else if (std::is_same<T, Header>::value) {
+    type = SectionType::SECTION_HEADER;
     if (!SetPosition(0)) {
       AERROR << "Jump to position #0 failed";
       return false;
     }
-  } else if (std::is_same<T, proto::Index>::value) {
-    type = proto::SectionType::SECTION_INDEX;
+  } else if (std::is_same<T, Index>::value) {
+    type = SectionType::SECTION_INDEX;
   } else {
     AERROR << "Do not support this template typename.";
     return false;
   }
-  Section section;
-  /// zero out whole struct even if padded
-  memset(&section, 0, sizeof(section));
-  section = {type, message.ByteSize()};
+  Section section = {type, message.ByteSize()};
   ssize_t count = write(fd_, &section, sizeof(section));
   if (count < 0) {
     AERROR << "Write fd failed, fd: " << fd_ << ", errno: " << errno;
@@ -137,11 +135,10 @@ bool RecordFileWriter::WriteSection(const T& message) {
            << ", actual count: " << count;
     return false;
   }
-  {
-    google::protobuf::io::FileOutputStream raw_output(fd_);
-    message.SerializeToZeroCopyStream(&raw_output);
-  }
-  if (type == proto::SectionType::SECTION_HEADER) {
+  ZeroCopyOutputStream* raw_output = new FileOutputStream(fd_);
+  message.SerializeToZeroCopyStream(raw_output);
+  delete raw_output;
+  if (type == SectionType::SECTION_HEADER) {
     static char blank[HEADER_LENGTH] = {'0'};
     count = write(fd_, &blank, HEADER_LENGTH - message.ByteSize());
     if (count < 0) {

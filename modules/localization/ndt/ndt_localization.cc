@@ -16,8 +16,8 @@
 
 #include "modules/localization/ndt/ndt_localization.h"
 
-#include "Eigen/Geometry"
-#include "yaml-cpp/yaml.h"
+#include <yaml-cpp/yaml.h>
+#include <Eigen/Geometry>
 
 #include "cyber/common/file.h"
 #include "cyber/common/log.h"
@@ -253,11 +253,14 @@ bool NDTLocalization::IsServiceStarted() { return is_service_started_; }
 
 void NDTLocalization::FillLocalizationMsgHeader(
     LocalizationEstimate* localization) {
+  DCHECK_NOTNULL(localization);
+
   auto* header = localization->mutable_header();
   double timestamp = apollo::common::time::Clock::NowInSeconds();
   header->set_module_name(module_name_);
   header->set_timestamp_sec(timestamp);
   header->set_sequence_num(++localization_seq_num_);
+  return;
 }
 
 void NDTLocalization::ComposeLocalizationEstimate(
@@ -526,6 +529,7 @@ void NDTLocalization::LidarMsgTransfer(
           << "][height:" << msg->height() << "][width:" << msg->width()
           << "][point_cnt:" << msg->point_size() << "]";
   }
+  return;
 }
 
 bool NDTLocalization::LoadLidarExtrinsic(const std::string& file_path,

@@ -16,10 +16,10 @@
 
 #pragma once
 
-#include <QtGui/QOpenGLBuffer>
-#include <QtGui/QOpenGLFunctions>
-#include <QtGui/QOpenGLShaderProgram>
-#include <QtGui/QOpenGLVertexArrayObject>
+#include <QOpenGLBuffer>
+#include <QOpenGLFunctions>
+#include <QOpenGLShaderProgram>
+#include <QOpenGLVertexArrayObject>
 #include <memory>
 
 class RenderableObject : protected QOpenGLFunctions {

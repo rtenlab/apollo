@@ -60,13 +60,8 @@ TEST_F(PredictorManagerTest, General) {
   CHECK_NOTNULL(obstacles_container);
   obstacles_container->Insert(perception_obstacles_);
 
-  auto adc_trajectory_container =
-      ContainerManager::Instance()->GetContainer<ADCTrajectoryContainer>(
-          AdapterConfig::PLANNING_TRAJECTORY);
-
-  EvaluatorManager::Instance()->Run(obstacles_container);
-  PredictorManager::Instance()->Run(
-      perception_obstacles_, adc_trajectory_container, obstacles_container);
+  EvaluatorManager::Instance()->Run();
+  PredictorManager::Instance()->Run();
 
   const PredictionObstacles& prediction_obstacles =
       PredictorManager::Instance()->prediction_obstacles();

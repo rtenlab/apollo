@@ -21,8 +21,6 @@
 
 #pragma once
 
-#include "modules/common/math/mpc_osqp.h"
-
 #include <fstream>
 #include <memory>
 #include <string>
@@ -277,9 +275,9 @@ class MPCController : public Controller {
   // term for steering control
   bool enable_mpc_feedforward_compensation_ = false;
 
-  // Limitation for judging if the unconstrained analytical control is close
+  // Limitation for judging if the unconstraint analytical control is close
   // enough to the solver's output with constraint
-  double unconstrained_control_diff_limit_ = 5.0;
+  double unconstraint_control_diff_limit_ = 5.0;
 };
 
 }  // namespace control

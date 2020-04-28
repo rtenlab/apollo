@@ -153,12 +153,6 @@ class VehicleStateProvider {
   double gear() const;
 
   /**
-   * @brief Get the vehicle's steering angle.
-   * @return double
-   */
-  double steering_percentage() const;
-
-  /**
    * @brief Set the vehicle's linear velocity.
    * @param linear_velocity The value to set the vehicle's linear velocity.
    */

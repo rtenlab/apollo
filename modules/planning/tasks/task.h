@@ -37,6 +37,8 @@ class Task {
 
   virtual ~Task() = default;
 
+  void SetName(const std::string& name) { name_ = name; }
+
   const std::string& Name() const;
 
   const TaskConfig& Config() const { return config_; }

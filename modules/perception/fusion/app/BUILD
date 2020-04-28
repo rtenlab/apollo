@@ -4,8 +4,12 @@ package(default_visibility = ["//visibility:public"])
 
 cc_library(
     name = "obstacle_multi_sensor_fusion",
-    srcs = ["obstacle_multi_sensor_fusion.cc"],
-    hdrs = ["obstacle_multi_sensor_fusion.h"],
+    srcs = [
+        "obstacle_multi_sensor_fusion.cc",
+    ],
+    hdrs = [
+        "obstacle_multi_sensor_fusion.h",
+    ],
     deps = [
         "//cyber",
         "//modules/perception/base",

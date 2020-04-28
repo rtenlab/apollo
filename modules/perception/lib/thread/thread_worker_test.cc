@@ -13,11 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *****************************************************************************/
+#include <gtest/gtest.h>
 
 #include "modules/perception/lib/thread/thread_worker.h"
-
-#include <thread>
-#include "gtest/gtest.h"
 
 namespace apollo {
 namespace perception {
@@ -27,7 +25,7 @@ TEST(ThreadWorkerTest, ThreadWorkerTest1) {
   int count = 0;
   ThreadWorker worker;
   worker.Bind([&]() {
-    std::this_thread::sleep_for(std::chrono::seconds(1));
+    usleep(1000000);  // 1s
     return false;
   });
   worker.Start();
@@ -50,7 +48,7 @@ TEST(ThreadWorkerTest, ThreadWorkerTest2) {
   worker.Start();
   for (int i = 0; i < 5; ++i) {
     worker.WakeUp();
-    std::this_thread::sleep_for(std::chrono::seconds(1));
+    usleep(1000000);
     worker.Join();
   }
   worker.Release();

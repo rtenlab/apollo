@@ -27,9 +27,7 @@ namespace apollo {
 namespace perception {
 namespace base {
 
-#ifndef NO_GPU
 #define NO_GPU assert(false)
-#endif
 
 #ifndef PERCEPTION_CPU_ONLY
 

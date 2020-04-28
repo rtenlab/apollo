@@ -4,8 +4,12 @@ package(default_visibility = ["//visibility:public"])
 
 cc_library(
     name = "radar_obstacle_perception",
-    srcs = ["radar_obstacle_perception.cc"],
-    hdrs = ["radar_obstacle_perception.h"],
+    srcs = [
+        "radar_obstacle_perception.cc",
+    ],
+    hdrs = [
+        "radar_obstacle_perception.h",
+    ],
     deps = [
         "//modules/drivers/proto:sensor_proto",
         "//modules/perception/base",
@@ -22,7 +26,6 @@ cc_library(
         "//modules/perception/radar/lib/interface:base_tracker",
         "@eigen",
     ],
-    alwayslink = True,
 )
 
 cpplint()

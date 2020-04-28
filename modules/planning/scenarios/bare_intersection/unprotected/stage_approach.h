@@ -46,7 +46,7 @@ class BareIntersectionUnprotectedStageApproach : public Stage {
   }
 
  private:
-  Stage::StageStatus FinishStage(Frame* frame);
+  Stage::StageStatus FinishStage();
 
  private:
   ScenarioBareIntersectionUnprotectedConfig scenario_config_;

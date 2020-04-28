@@ -33,7 +33,6 @@ class AutotuningFeatureBuilder {
    * @brief: constructor
    */
   AutotuningFeatureBuilder() = default;
-  virtual ~AutotuningFeatureBuilder() = default;
 
   /**
    * @param: raw feature function input

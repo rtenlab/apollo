@@ -111,7 +111,7 @@ bool MlfEngine::Track(const MultiTargetTrackerOptions& options,
   RemoveStaleTrackData("background", frame->timestamp, &background_track_data_);
   AINFO << "MlfEngine publish objects: " << frame->tracked_objects.size()
         << " sensor_name: " << frame->sensor_info.name
-        << " at timestamp: " << frame->timestamp;
+        << " at timestamp: " << std::to_string(frame->timestamp);
   return true;
 }
 
@@ -195,11 +195,8 @@ void MlfEngine::CollectTrackedResult(LidarFrame* frame) {
       if (!output_predict_objects_ && track_data->is_current_state_predicted_) {
         ++num_predict;
       } else {
-        if (!track_data->ToObject(-global_to_local_offset_, frame->timestamp,
-                                  tracked_objects[pos])) {
-          AERROR << "Tracking failed";
-          continue;
-        }
+        CHECK(track_data->ToObject(-global_to_local_offset_, frame->timestamp,
+                                   tracked_objects[pos]));
         ++pos;
       }
     }
@@ -209,10 +206,7 @@ void MlfEngine::CollectTrackedResult(LidarFrame* frame) {
   if (num_predict != 0) {
     AINFO << "MlfEngine, num_predict: " << num_predict
           << " num_objects: " << num_objects;
-    if (num_predict > num_objects) {
-      AERROR << "num_predict > num_objects";
-      return;
-    }
+    CHECK(num_predict <= num_objects);
     tracked_objects.resize(num_objects - num_predict);
   }
 }

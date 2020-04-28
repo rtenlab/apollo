@@ -28,7 +28,7 @@ namespace planning {
 class AutotuningSpeedFeatureBuilder : public AutotuningFeatureBuilder {
  public:
   AutotuningSpeedFeatureBuilder() = default;
-  virtual ~AutotuningSpeedFeatureBuilder() = default;
+  ~AutotuningSpeedFeatureBuilder() = default;
   /**
    * @param: raw feature function input
    * @param: generated model input feature from raw feature, function output

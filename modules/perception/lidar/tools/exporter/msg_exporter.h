@@ -15,12 +15,10 @@
  *****************************************************************************/
 #pragma once
 
+#include <Eigen/Dense>
 #include <memory>
 #include <string>
 #include <vector>
-
-#include "Eigen/Dense"
-
 #include "cyber/cyber.h"
 #include "modules/drivers/proto/pointcloud.pb.h"
 #include "modules/drivers/proto/sensor_image.pb.h"

@@ -102,14 +102,8 @@ Eigen::VectorXd AdaptiveKalmanFilter::UpdateWithObject(
 }
 void AdaptiveKalmanFilter::GetState(Eigen::Vector3d* anchor_point,
                                     Eigen::Vector3d* velocity) {
-  if (anchor_point == nullptr) {
-    AERROR << "anchor_point is not available";
-    return;
-  }
-  if (velocity == nullptr) {
-    AERROR << "velocity is not available";
-    return;
-  }
+  CHECK_NOTNULL(anchor_point);
+  CHECK_NOTNULL(velocity);
   *anchor_point = belief_anchor_point_;
   *velocity = belief_velocity_;
 }

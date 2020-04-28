@@ -50,13 +50,12 @@
  *
  */
 
+#include <pcl/common/common.h>
+#include <pcl/filters/boost.h>
+#include <Eigen/Cholesky>
+#include <Eigen/Dense>
 #include <map>
 #include <vector>
-
-#include "Eigen/Cholesky"
-#include "Eigen/Dense"
-#include "pcl/common/common.h"
-#include "pcl/filters/boost.h"
 
 #include "modules/localization/ndt/ndt_locator/ndt_voxel_grid_covariance.h"
 

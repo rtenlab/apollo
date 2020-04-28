@@ -15,11 +15,10 @@
  *****************************************************************************/
 #include "modules/map/tools/map_datachecker/server/channel_verify.h"
 
+#include <boost/algorithm/string/classification.hpp>
+#include <boost/algorithm/string/split.hpp>
+#include <boost/filesystem.hpp>
 #include <unordered_map>
-
-#include "boost/algorithm/string/classification.hpp"
-#include "boost/algorithm/string/split.hpp"
-#include "boost/filesystem.hpp"
 
 #include "cyber/cyber.h"
 #include "cyber/proto/record.pb.h"
@@ -44,7 +43,7 @@ ErrorCode ChannelVerify::Check(
     const std::string& record_dir_or_record_full_path) {
   std::vector<std::string> records_path;
   records_path = GetRecordsPath(record_dir_or_record_full_path);
-  if (records_path.empty()) {
+  if (records_path.size() == 0) {
     AINFO << "have no data file to check";
     return_state_ = ErrorCode::ERROR_VERIFY_NO_RECORDERS;
     return return_state_;

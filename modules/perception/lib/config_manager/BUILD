@@ -4,8 +4,12 @@ package(default_visibility = ["//visibility:public"])
 
 cc_library(
     name = "config_manager",
-    srcs = ["config_manager.cc"],
-    hdrs = ["config_manager.h"],
+    srcs = [
+        "config_manager.cc",
+    ],
+    hdrs = [
+        "config_manager.h",
+    ],
     deps = [
         "//cyber",
         "//modules/perception/common:perception_gflags",
@@ -19,7 +23,9 @@ cc_library(
 cc_test(
     name = "config_manager_test",
     size = "small",
-    srcs = ["config_manager_test.cc"],
+    srcs = [
+        "config_manager_test.cc",
+    ],
     data = [
         "//modules/perception:perception_testdata",
     ],

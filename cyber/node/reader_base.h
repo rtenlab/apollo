@@ -212,12 +212,12 @@ auto ReceiverManager<MessageT>::GetReceiver(
               (void)msg_info;
               (void)reader_attr;
               PerfEventCache::Instance()->AddTransportEvent(
-                  TransPerf::DISPATCH, reader_attr.channel_id(),
+                  TransPerf::TRANS_TO, reader_attr.channel_id(),
                   msg_info.seq_num());
               data::DataDispatcher<MessageT>::Instance()->Dispatch(
                   reader_attr.channel_id(), msg);
               PerfEventCache::Instance()->AddTransportEvent(
-                  TransPerf::NOTIFY, reader_attr.channel_id(),
+                  TransPerf::WRITE_NOTIFY, reader_attr.channel_id(),
                   msg_info.seq_num());
             });
   }

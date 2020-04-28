@@ -4,8 +4,12 @@ package(default_visibility = ["//visibility:public"])
 
 cc_library(
     name = "object_filter_bank",
-    srcs = ["object_filter_bank.cc"],
-    hdrs = ["object_filter_bank.h"],
+    srcs = [
+        "object_filter_bank.cc",
+    ],
+    hdrs = [
+        "object_filter_bank.h",
+    ],
     deps = [
         "//cyber",
         "//modules/common/util",
@@ -21,7 +25,9 @@ cc_library(
 cc_test(
     name = "object_filter_bank_test",
     size = "small",
-    srcs = ["object_filter_bank_test.cc"],
+    srcs = [
+        "object_filter_bank_test.cc",
+    ],
     deps = [
         ":object_filter_bank",
         "@gtest//:main",

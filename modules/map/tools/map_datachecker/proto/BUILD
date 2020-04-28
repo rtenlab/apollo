@@ -20,7 +20,9 @@ proto_library(
 
 cc_grpc_library(
     name = "map_datachecker_grpc",
-    srcs = ["collection_service.proto"],
+    srcs = [
+        "collection_service.proto",
+    ],
     deps_cc = [
         ":map_datachecker_proto",
     ],

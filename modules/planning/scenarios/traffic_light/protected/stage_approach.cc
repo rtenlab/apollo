@@ -18,6 +18,8 @@
  * @file
  **/
 
+#include <vector>
+
 #include "modules/planning/scenarios/traffic_light/protected/stage_approach.h"
 
 #include "cyber/common/log.h"
@@ -32,9 +34,9 @@ namespace planning {
 namespace scenario {
 namespace traffic_light {
 
-using apollo::common::TrajectoryPoint;
-using apollo::hdmap::PathOverlap;
-using apollo::perception::TrafficLight;
+using common::TrajectoryPoint;
+using hdmap::PathOverlap;
+using perception::TrafficLight;
 
 Stage::StageStatus TrafficLightProtectedStageApproach::Process(
     const TrajectoryPoint& planning_init_point, Frame* frame) {
@@ -45,10 +47,10 @@ Stage::StageStatus TrafficLightProtectedStageApproach::Process(
 
   bool plan_ok = ExecuteTaskOnReferenceLine(planning_init_point, frame);
   if (!plan_ok) {
-    AERROR << "TrafficLightProtectedStageApproach planning error";
+    AERROR << "TrafficLightProtectedStop planning error";
   }
 
-  if (GetContext()->current_traffic_light_overlap_ids.empty()) {
+  if (GetContext()->current_traffic_light_overlap_ids.size() == 0) {
     return FinishScenario();
   }
 
@@ -98,6 +100,13 @@ Stage::StageStatus TrafficLightProtectedStageApproach::Process(
   }
 
   return Stage::RUNNING;
+}
+
+Stage::StageStatus TrafficLightProtectedStageApproach::FinishScenario() {
+  PlanningContext::Instance()->mutable_planning_status()->clear_traffic_light();
+
+  next_stage_ = ScenarioConfig::NO_STAGE;
+  return Stage::FINISHED;
 }
 
 Stage::StageStatus TrafficLightProtectedStageApproach::FinishStage() {

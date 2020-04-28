@@ -20,8 +20,6 @@
 #                   Utils
 #=================================================
 
-DISABLED_CYBER_MODULES="except //cyber/record:record_file_integration_test"
-
 function source_apollo_base() {
   DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
   cd "${DIR}"
@@ -84,7 +82,7 @@ function check_esd_files() {
 
   if [ -f ./third_party/can_card_library/esd_can/include/ntcan.h \
       -a -f ./third_party/can_card_library/esd_can/lib/libntcan.so.4 \
-      -a -f ./third_party/can_card_library/esd_can/lib/libntcan.so.4.0.1 ]; then
+      -a -f ./third_party/can_card_library/esd_can/lib/libntcan.so.4.2.2 ]; then
       USE_ESD_CAN=true
       CAN_CARD="esd_can"
   else
@@ -94,13 +92,13 @@ function check_esd_files() {
 }
 
 function generate_build_targets() {
-  COMMON_TARGETS="//cyber/... union //modules/common/kv_db/... union //modules/dreamview/... $DISABLED_CYBER_MODULES"
+  COMMON_TARGETS="//cyber/... union //modules/common/kv_db/... union //modules/dreamview/..."
   case $BUILD_FILTER in
   cyber)
-    BUILD_TARGETS=`bazel query //cyber/... union //modules/tools/visualizer/...`
+    BUILD_TARGETS=`bazel query //cyber/...`
     ;;
   drivers)
-    BUILD_TARGETS=`bazel query //cyber/... union //modules/tools/visualizer/... union //modules/drivers/... except //modules/drivers/tools/... except //modules/drivers/canbus/... except //modules/drivers/video/...`
+    BUILD_TARGETS=`bazel query //cyber/... union //modules/drivers/... except //modules/drivers/tools/... except //modules/drivers/canbus/... except //modules/drivers/video/...`
     ;;
   control)
     BUILD_TARGETS=`bazel query $COMMON_TARGETS union //modules/control/... `
@@ -118,9 +116,7 @@ function generate_build_targets() {
     BUILD_TARGETS=`bazel query //modules/... except //modules/perception/... union //cyber/...`
     ;;
   *)
-#    BUILD_TARGETS=`bazel query //modules/... union //cyber/...`
-    # FIXME(all): temporarily disable modules doesn't compile in 18.04
-    BUILD_TARGETS=`bazel query //modules/... union //cyber/... except //modules/tools/visualizer/... except //modules/v2x/... except //modules/map/tools/map_datachecker/... $DISABLE_CYBER_MODULES`
+    BUILD_TARGETS=`bazel query //modules/... union //cyber/...`
   esac
 
   if [ $? -ne 0 ]; then
@@ -198,30 +194,27 @@ function cibuild_extended() {
   cd /apollo
   info "Building modules ..."
 
-  JOB_ARG="--jobs=12"
+  JOB_ARG="--jobs=$(nproc)"
   if [ "$MACHINE_ARCH" == 'aarch64' ]; then
     JOB_ARG="--jobs=3"
   fi
 
   info "Building with $JOB_ARG for $MACHINE_ARCH"
-
-  # FIXME(all): temporarily disable modules doesn't compile in 18.04
-  BUILD_TARGETS=`
-    bazel query //cyber/... \
-    union //modules/perception/... \
-    union //modules/dreamview/... \
-    union //modules/drivers/radar/conti_radar/... \
-    union //modules/drivers/radar/racobit_radar/... \
-    union //modules/drivers/radar/ultrasonic_radar/... \
-    union //modules/drivers/gnss/... \
-    union //modules/drivers/velodyne/... \
-    union //modules/drivers/camera/... \
-    union //modules/guardian/... \
-    union //modules/localization/... \
-    union //modules/map/... \
-    union //modules/third_party_perception/... \
-    except //modules/map/tools/map_datachecker/...
-    `
+  BUILD_TARGETS="
+    //cyber/...
+    //modules/perception/...
+    //modules/dreamview/...
+    //modules/drivers/radar/conti_radar/...
+    //modules/drivers/radar/racobit_radar/...
+    //modules/drivers/radar/ultrasonic_radar/...
+    //modules/drivers/gnss/...
+    //modules/drivers/velodyne/...
+    //modules/drivers/camera/...
+    //modules/guardian/...
+    //modules/localization/...
+    //modules/map/...
+    //modules/third_party_perception/...
+    "
 
   bazel build $JOB_ARG $DEFINES $@ $BUILD_TARGETS
 
@@ -237,7 +230,7 @@ function cibuild() {
 
   info "Building modules ..."
 
-  JOB_ARG="--jobs=12"
+  JOB_ARG="--jobs=$(nproc)"
   if [ "$MACHINE_ARCH" == 'aarch64' ]; then
     JOB_ARG="--jobs=3"
   fi
@@ -251,11 +244,6 @@ function cibuild() {
     //modules/prediction/...
     //modules/routing/...
     //modules/transform/..."
-
-  # The data module is lightweight and rarely changed. If it fails, it's
-  # most-likely an environment mess. So we try `bazel clean` and then initial
-  # the building process.
-  bazel build $JOB_ARG $DEFINES $@ "//modules/data/..." || bazel clean
 
   bazel build $JOB_ARG $DEFINES $@ $BUILD_TARGETS
 
@@ -279,9 +267,10 @@ function build_py_proto() {
     rm -rf py_proto
   fi
   mkdir py_proto
-  find modules/ cyber/ -name "*.proto" \
+  PROTOC='./bazel-out/host/bin/external/com_google_protobuf/protoc'
+  find modules/ cyber/ lgsvl_pkgs/ -name "*.proto" \
       | grep -v node_modules \
-      | xargs protoc --python_out=py_proto
+      | xargs ${PROTOC} --python_out=py_proto
   find py_proto/* -type d -exec touch "{}/__init__.py" \;
 }
 
@@ -343,7 +332,7 @@ function release() {
   cd -
 
   # setup cyber binaries and convert from //path:target to path/target
-  CYBERBIN=$(bazel query "kind(cc_binary, //cyber/... //modules/tools/visualizer/...)" | sed 's/^\/\///' | sed 's/:/\//' | sed '/.*.so$/d')
+  CYBERBIN=$(bazel query "kind(cc_binary, //...)" | sed 's/^\/\///' | sed 's/:/\//' | sed '/.*.so$/d')
   for BIN in ${CYBERBIN}; do
     cp -P --parent "bazel-bin/${BIN}" ${APOLLO_RELEASE_DIR}
   done
@@ -498,13 +487,11 @@ function citest_basic() {
   cd /apollo
   source cyber/setup.bash
 
-  # FIXME(all): temporarily disable modules doesn't compile in 18.04
-#   BUILD_TARGETS="
-#    `bazel query //modules/... union //cyber/...`
-#  "
-  BUILD_TARGETS=`bazel query //modules/... union //cyber/... except //modules/tools/visualizer/... except //modules/v2x/... except //modules/drivers/video/tools/decode_video/... except //modules/map/tools/map_datachecker/... `
+  BUILD_TARGETS="
+    `bazel query //modules/... union //cyber/...`
+  "
 
-  JOB_ARG="--jobs=12 --ram_utilization_factor 80"
+  JOB_ARG="--jobs=$(nproc) --ram_utilization_factor 80"
 
   BUILD_TARGETS="`echo "$BUILD_TARGETS" | grep "modules\/" | grep "test" \
           | grep -v "modules\/planning" \
@@ -513,8 +500,6 @@ function citest_basic() {
           | grep -v "modules\/common" \
           | grep -v "can_client" \
           | grep -v "blob_test" \
-          | grep -v "pyramid_map" \
-          | grep -v "ndt_lidar_locator_test" \
           | grep -v "syncedmem_test" | grep -v "blob_test" \
           | grep -v "perception_inference_operators_test" \
           | grep -v "cuda_util_test" \
@@ -539,11 +524,11 @@ function citest_extended() {
   source cyber/setup.bash
 
   BUILD_TARGETS="
-    `bazel query //modules/planning/... union //modules/common/... union //cyber/... $DISABLED_CYBER_MODULES`
+    `bazel query //modules/planning/... union //modules/common/... union //cyber/...`
     `bazel query //modules/prediction/... union //modules/control/...`
   "
 
-  JOB_ARG="--jobs=12 --ram_utilization_factor 80"
+  JOB_ARG="--jobs=$(nproc) --ram_utilization_factor 80"
 
   BUILD_TARGETS="`echo "$BUILD_TARGETS" | grep "test"`"
 
@@ -586,8 +571,7 @@ function run_bash_lint() {
 
 function run_lint() {
   # Add cpplint rule to BUILD files that do not contain it.
-  for file in $(find cyber modules -name BUILD | \
-    grep -v gnss/third_party | grep -v modules/teleop/encoder/nvenc_sdk6 | \
+  for file in $(find cyber modules -name BUILD |  grep -v gnss/third_party | \
     xargs grep -l -E 'cc_library|cc_test|cc_binary' | xargs grep -L 'cpplint()')
   do
     sed -i '1i\load("//tools:cpplint.bzl", "cpplint")\n' $file
@@ -707,7 +691,7 @@ function print_usage() {
   ${BLUE}build_control${NONE}: compile control and its dependencies.
   ${BLUE}build_prediction${NONE}: compile prediction and its dependencies.
   ${BLUE}build_pnc${NONE}: compile pnc and its dependencies.
-  ${BLUE}build_no_perception [dbg|opt]${NONE}: run build, skip building perception module, useful when some perception dependencies are not satisfied, e.g., CUDA, CUDNN, LIDAR, etc.
+  ${BLUE}build_no_perception [dbg|opt]${NONE}: run build, skip building perception module, useful when some perception dependencies are not satisified, e.g., CUDA, CUDNN, LIDAR, etc.
   ${BLUE}build_prof${NONE}: build for gprof support.
   ${BLUE}buildify${NONE}: fix style of BUILD files
   ${BLUE}check${NONE}: run build/lint/test, please make sure it passes before checking in new code
@@ -831,11 +815,6 @@ function main() {
     build_opt_gpu)
       set_use_gpu
       DEFINES="${DEFINES} --copt=-fpic"
-      apollo_build_opt $@
-      ;;
-    build_teleop)
-      set_use_gpu
-      DEFINES="${DEFINES} --copt=-fpic --define WITH_TELEOP=1 --cxxopt=-DTELEOP"
       apollo_build_opt $@
       ;;
     build_fe)

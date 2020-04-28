@@ -19,13 +19,11 @@
 #include <algorithm>
 #include <limits>
 
-#include "absl/strings/str_cat.h"
 #include "google/protobuf/text_format.h"
 
 #include "modules/map/proto/map_id.pb.h"
 
 #include "cyber/common/log.h"
-#include "modules/common/util/point_factory.h"
 #include "modules/common/util/string_util.h"
 #include "modules/common/util/util.h"
 #include "modules/map/hdmap/hdmap_util.h"
@@ -49,8 +47,8 @@ namespace hdmap {
 
 using apollo::common::PointENU;
 using apollo::common::VehicleState;
-using apollo::common::util::PointFactory;
 using apollo::routing::RoutingResponse;
+using common::util::MakePointENU;
 
 namespace {
 
@@ -134,9 +132,16 @@ std::vector<routing::LaneWaypoint> PncMap::FutureRouteWaypoints() const {
 
 void PncMap::UpdateRoutingRange(int adc_index) {
   // Track routing range.
-  range_lane_ids_.clear();
-  range_start_ = std::max(0, adc_index - 1);
-  range_end_ = range_start_;
+  if (range_start_ > adc_index || range_end_ < adc_index) {
+    range_lane_ids_.clear();
+    range_start_ = std::max(0, adc_index - 1);
+    range_end_ = range_start_;
+  }
+  while (range_start_ + 1 < adc_index) {
+    // TODO(Hongyi): Delete this when confirmed
+    // range_lane_ids_.erase(route_indices_[range_start_].segment.lane->id().id());
+    ++range_start_;
+  }
   while (range_end_ < static_cast<int>(route_indices_.size())) {
     const auto &lane_id = route_indices_[range_end_].segment.lane->id().id();
     if (range_lane_ids_.count(lane_id) != 0) {
@@ -149,7 +154,7 @@ void PncMap::UpdateRoutingRange(int adc_index) {
 
 bool PncMap::UpdateVehicleState(const VehicleState &vehicle_state) {
   if (!ValidateRouting(routing_)) {
-    AERROR << "The routing is invalid when updating vehicle state.";
+    AERROR << "The routing is invalid when updatting vehicle state.";
     return false;
   }
   if (!adc_state_.has_x() ||
@@ -186,7 +191,10 @@ bool PncMap::UpdateVehicleState(const VehicleState &vehicle_state) {
     return false;
   }
 
-  if (next_routing_waypoint_index_ == routing_waypoint_index_.size() - 1) {
+  int last_index = GetWaypointIndex(routing_waypoint_index_.back().waypoint);
+  if (next_routing_waypoint_index_ == routing_waypoint_index_.size() - 1 ||
+      (!stop_for_destination_ &&
+       last_index == routing_waypoint_index_.back().index)) {
     stop_for_destination_ = true;
   }
   return true;
@@ -441,10 +449,11 @@ bool PncMap::GetRouteSegments(const VehicleState &vehicle_state,
       ADEBUG << "Failed to convert passage to lane segments.";
       continue;
     }
-    const PointENU nearest_point =
-        index == passage_index
-            ? adc_waypoint_.lane->GetSmoothPoint(adc_waypoint_.s)
-            : PointFactory::ToPointENU(adc_state_);
+    PointENU nearest_point =
+        MakePointENU(adc_state_.x(), adc_state_.y(), adc_state_.z());
+    if (index == passage_index) {
+      nearest_point = adc_waypoint_.lane->GetSmoothPoint(adc_waypoint_.s);
+    }
     common::SLPoint sl;
     LaneWaypoint segment_waypoint;
     if (!segments.GetProjection(nearest_point, &sl, &segment_waypoint)) {
@@ -473,7 +482,8 @@ bool PncMap::GetRouteSegments(const VehicleState &vehicle_state,
     }
     route_segments->back().SetCanExit(passage.can_exit());
     route_segments->back().SetNextAction(passage.change_lane_type());
-    const std::string route_segment_id = absl::StrCat(road_index, "_", index);
+    std::string route_segment_id =
+        std::to_string(road_index) + "_" + std::to_string(index);
     route_segments->back().SetId(route_segment_id);
     route_segments->back().SetStopForDestination(stop_for_destination_);
     if (index == passage_index) {
@@ -491,14 +501,11 @@ bool PncMap::GetRouteSegments(const VehicleState &vehicle_state,
 bool PncMap::GetNearestPointFromRouting(const VehicleState &state,
                                         LaneWaypoint *waypoint) const {
   const double kMaxDistance = 10.0;  // meters.
-  const double kHeadingBuffer = M_PI / 10.0;
   waypoint->lane = nullptr;
   std::vector<LaneInfoConstPtr> lanes;
-  const auto point = PointFactory::ToPointENU(state);
-  const int status =
-      hdmap_->GetLanesWithHeading(point, kMaxDistance, state.heading(),
-                                  M_PI / 2.0 + kHeadingBuffer, &lanes);
-  ADEBUG << "lanes:" << lanes.size();
+  auto point = common::util::MakePointENU(state.x(), state.y(), state.z());
+  const int status = hdmap_->GetLanesWithHeading(
+      point, kMaxDistance, state.heading(), M_PI / 2.0, &lanes);
   if (status < 0) {
     AERROR << "Failed to get lane from point: " << point.ShortDebugString();
     return false;
@@ -520,7 +527,7 @@ bool PncMap::GetNearestPointFromRouting(const VehicleState &state,
                  });
   }
 
-  // Get nearest_waypoints for current position
+  // Get nearest_wayponints for current position
   double min_distance = std::numeric_limits<double>::infinity();
   for (const auto &lane : valid_lanes) {
     if (range_lane_ids_.count(lane->id().id()) == 0) {
@@ -530,11 +537,10 @@ bool PncMap::GetNearestPointFromRouting(const VehicleState &state,
       double s = 0.0;
       double l = 0.0;
       if (!lane->GetProjection({point.x(), point.y()}, &s, &l)) {
-        AERROR << "fail to get projection";
         return false;
       }
       // Use large epsilon to allow projection diff
-      static constexpr double kEpsilon = 0.5;
+      constexpr double kEpsilon = 0.5;
       if (s > (lane->total_length() + kEpsilon) || (s + kEpsilon) < 0.0) {
         continue;
       }
@@ -554,7 +560,6 @@ bool PncMap::GetNearestPointFromRouting(const VehicleState &state,
       waypoint->lane = lane;
       waypoint->s = s;
     }
-    ADEBUG << "distance" << distance;
   }
   if (waypoint->lane == nullptr) {
     AERROR << "Failed to find nearest point: " << point.ShortDebugString();
@@ -563,7 +568,7 @@ bool PncMap::GetNearestPointFromRouting(const VehicleState &state,
 }
 
 LaneInfoConstPtr PncMap::GetRouteSuccessor(LaneInfoConstPtr lane) const {
-  if (lane->lane().successor_id().empty()) {
+  if (lane->lane().successor_id_size() == 0) {
     return nullptr;
   }
   hdmap::Id preferred_id = lane->lane().successor_id(0);
@@ -577,7 +582,7 @@ LaneInfoConstPtr PncMap::GetRouteSuccessor(LaneInfoConstPtr lane) const {
 }
 
 LaneInfoConstPtr PncMap::GetRoutePredecessor(LaneInfoConstPtr lane) const {
-  if (lane->lane().predecessor_id().empty()) {
+  if (lane->lane().predecessor_id_size() == 0) {
     return nullptr;
   }
   hdmap::Id preferred_id = lane->lane().predecessor_id(0);
@@ -619,7 +624,7 @@ bool PncMap::ExtendSegments(const RouteSegments &segments, double start_s,
     return false;
   }
   std::unordered_set<std::string> unique_lanes;
-  static constexpr double kRouteEpsilon = 1e-3;
+  constexpr double kRouteEpsilon = 1e-3;
   // Extend the trajectory towards the start of the trajectory.
   if (start_s < 0) {
     const auto &first_segment = *segments.begin();

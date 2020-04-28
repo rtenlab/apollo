@@ -20,6 +20,8 @@
 
 #pragma once
 
+#include <vector>
+
 #include "modules/common/proto/pnc_point.pb.h"
 #include "modules/planning/proto/dp_poly_path_config.pb.h"
 
@@ -40,7 +42,7 @@ class WaypointSampler {
  public:
   explicit WaypointSampler(const WaypointSamplerConfig &config)
       : config_(config) {}
-  virtual ~WaypointSampler() = default;
+  ~WaypointSampler() = default;
 
   virtual void Init(const ReferenceLineInfo *reference_line_info,
                     const common::SLPoint &init_sl_point_,
@@ -60,6 +62,8 @@ class WaypointSampler {
   common::SLPoint init_sl_point_;
   common::FrenetFramePoint init_frenet_frame_point_;
   apollo::planning_internal::Debug *planning_debug_ = nullptr;
+
+  ObjectSidePass sidepass_;
 };
 
 }  // namespace planning

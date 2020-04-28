@@ -14,12 +14,11 @@
  * limitations under the License.
  *****************************************************************************/
 
-#include "modules/localization/msf/local_pyramid_map/base_map/base_map_matrix.h"
+#include "modules/localization/msf/local_map/base_map/base_map_matrix.h"
 
 namespace apollo {
 namespace localization {
 namespace msf {
-namespace pyramid_map {
 
 BaseMapMatrix::BaseMapMatrix() {}
 
@@ -35,7 +34,6 @@ bool BaseMapMatrix::GetAltitudeImg(cv::Mat* altitude_img) const {
   return false;
 }
 
-}  // namespace pyramid_map
 }  // namespace msf
 }  // namespace localization
 }  // namespace apollo

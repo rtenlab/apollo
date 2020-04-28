@@ -35,12 +35,6 @@ namespace scheduler {
 
 using croutine::CRoutine;
 
-struct Snapshot {
-  std::atomic<uint64_t> execute_start_time = {0};
-  std::atomic<pid_t> processor_id = {0};
-  std::string routine_name;
-};
-
 class Processor {
  public:
   Processor();
@@ -49,10 +43,8 @@ class Processor {
   void Run();
   void Stop();
   void BindContext(const std::shared_ptr<ProcessorContext>& context);
-  std::thread* Thread() { return &thread_; }
-  std::atomic<pid_t>& Tid();
-
-  std::shared_ptr<Snapshot> ProcSnapshot() { return snap_shot_; }
+  void SetSchedAffinity(const std::vector<int>&, const std::string&, int);
+  void SetSchedPolicy(std::string spolicy, int sched_priority);
 
  private:
   std::shared_ptr<ProcessorContext> context_;
@@ -64,8 +56,6 @@ class Processor {
 
   std::atomic<pid_t> tid_{-1};
   std::atomic<bool> running_{false};
-
-  std::shared_ptr<Snapshot> snap_shot_ = std::make_shared<Snapshot>();
 };
 
 }  // namespace scheduler

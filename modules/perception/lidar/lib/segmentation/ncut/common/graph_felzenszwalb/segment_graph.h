@@ -60,7 +60,7 @@ bool operator<(const edge &a, const edge &b) { return a.w < b.w; }
  * num_vertices: number of vertices in graph.
  * num_edges: number of edges in graph
  * edges: array of edges.
- * c: constant for threshold function.
+ * c: constant for treshold function.
  */
 Universe *segment_graph(int num_vertices, int num_edges, edge *edges, float c) {
   // sort edges by weight
@@ -79,7 +79,7 @@ Universe *segment_graph(int num_vertices, int num_edges, edge *edges, float c) {
   for (int i = 0; i < num_edges; i++) {
     edge *pedge = &edges[i];
 
-    // components connected by this edge
+    // components conected by this edge
     int a = u->find(pedge->a);
     int b = u->find(pedge->b);
     if (a != b) {

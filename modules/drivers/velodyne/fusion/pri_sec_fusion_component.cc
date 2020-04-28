@@ -14,10 +14,9 @@
  * limitations under the License.
  *****************************************************************************/
 
-#include "modules/drivers/velodyne/fusion/pri_sec_fusion_component.h"
-
 #include <memory>
-#include <thread>
+
+#include "modules/drivers/velodyne/fusion/pri_sec_fusion_component.h"
 
 namespace apollo {
 namespace drivers {
@@ -62,10 +61,8 @@ bool PriSecFusionComponent::Proc(
         ++itr;
       }
     }
-    std::this_thread::sleep_for(std::chrono::milliseconds(5));
+    usleep(USLEEP_INTERVAL);
   }
-  auto diff = Time::Now().ToNanosecond() - target->header().lidar_timestamp();
-  AINFO << "Pointcloud fusion diff: " << diff / 1000000 << "ms";
   fusion_writer_->Write(target);
 
   return true;

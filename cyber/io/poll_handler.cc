@@ -17,7 +17,6 @@
 #include "cyber/io/poll_handler.h"
 #include "cyber/common/log.h"
 #include "cyber/io/poller.h"
-#include "cyber/scheduler/scheduler_factory.h"
 
 namespace apollo {
 namespace cyber {
@@ -41,7 +40,7 @@ bool PollHandler::Block(int timeout_ms, bool is_read) {
 
   Fill(timeout_ms, is_read);
   if (!Poller::Instance()->Register(request_)) {
-    is_blocking_.store(false);
+    is_blocking_.exchange(false);
     return false;
   }
 
@@ -52,13 +51,13 @@ bool PollHandler::Block(int timeout_ms, bool is_read) {
   if (response_.events & target_events) {
     result = true;
   }
-  is_blocking_.store(false);
+  is_blocking_.exchange(false);
 
   return result;
 }
 
 bool PollHandler::Unblock() {
-  is_blocking_.store(false);
+  is_blocking_.exchange(false);
   return Poller::Instance()->Unregister(request_);
 }
 
@@ -84,7 +83,7 @@ bool PollHandler::Check(int timeout_ms) {
 }
 
 void PollHandler::Fill(int timeout_ms, bool is_read) {
-  is_read_.store(is_read);
+  is_read_.exchange(is_read);
 
   request_.fd = fd_;
   request_.events = EPOLLET | EPOLLONESHOT;
@@ -106,7 +105,7 @@ void PollHandler::ResponseCallback(const PollResponse& rsp) {
   response_ = rsp;
 
   if (routine_->state() == RoutineState::IO_WAIT) {
-    scheduler::Instance()->NotifyTask(routine_->id());
+    routine_->SetUpdateFlag();
   }
 }
 

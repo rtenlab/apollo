@@ -176,6 +176,7 @@ void BaseMap::LoadMapNodes(std::set<MapNodeIndex>* map_ids) {
   lock2.unlock();
 
   CHECK(map_ids->empty());
+  return;
 }
 
 void BaseMap::PreloadMapNodes(std::set<MapNodeIndex>* map_ids) {
@@ -222,6 +223,7 @@ void BaseMap::PreloadMapNodes(std::set<MapNodeIndex>* map_ids) {
         cyber::Async(&BaseMap::LoadMapNodeThreadSafety, this, *itr, false));
     ++itr;
   }
+  return;
 }
 
 void BaseMap::AttachMapNodePool(BaseMapNodePool* map_node_pool) {
@@ -258,6 +260,7 @@ void BaseMap::LoadMapNodeThreadSafety(MapNodeIndex index, bool is_reserved) {
   if (node_remove) {
     map_node_pool_->FreeMapNode(node_remove);
   }
+  return;
 }
 
 void BaseMap::PreloadMapArea(const Eigen::Vector3d& location,
@@ -397,6 +400,7 @@ void BaseMap::PreloadMapArea(const Eigen::Vector3d& location,
   }
 
   this->PreloadMapNodes(&map_ids);
+  return;
 }
 
 bool BaseMap::LoadMapArea(const Eigen::Vector3d& seed_pt3d,

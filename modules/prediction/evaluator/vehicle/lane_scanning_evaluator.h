@@ -16,6 +16,7 @@
 
 #pragma once
 
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -23,8 +24,6 @@
 #include "torch/torch.h"
 
 #include "modules/prediction/evaluator/evaluator.h"
-
-#include "modules/prediction/container/obstacles/obstacles_container.h"
 
 namespace apollo {
 namespace prediction {
@@ -44,18 +43,15 @@ class LaneScanningEvaluator : public Evaluator {
   /**
    * @brief Override Evaluate
    * @param Obstacle pointer
-   * @param Obstacles container
    */
-  bool Evaluate(Obstacle* obstacle_ptr,
-                ObstaclesContainer* obstacles_container) override;
+  bool Evaluate(Obstacle* obstacle_ptr) override;
 
   /**
    * @brief Override Evaluate
    * @param Obstacle pointer
-   * @param Obstacles container
    * @param vector of all Obstacles
    */
-  bool Evaluate(Obstacle* obstacle_ptr, ObstaclesContainer* obstacles_container,
+  bool Evaluate(Obstacle* obstacle_ptr,
                 std::vector<Obstacle*> dynamic_env) override;
 
   /**
@@ -101,12 +97,13 @@ class LaneScanningEvaluator : public Evaluator {
                                 std::vector<double>* feature_values,
                                 std::vector<int>* lane_sequence_idx_to_remove);
 
-  void ModelInference(const std::vector<torch::jit::IValue>& torch_inputs,
-                      torch::jit::script::Module torch_model,
-                      Feature* feature_ptr);
+  void ModelInference(
+      const std::vector<torch::jit::IValue>& torch_inputs,
+      std::shared_ptr<torch::jit::script::Module> torch_model_ptr,
+      Feature* feature_ptr);
 
  private:
-  static const size_t OBSTACLE_FEATURE_SIZE = 20 * (9 + 40);
+  static const size_t OBSTACLE_FEATURE_SIZE = 20 * 9;
   static const size_t INTERACTION_FEATURE_SIZE = 8;
   static const size_t SINGLE_LANE_FEATURE_SIZE = 4;
   static const size_t LANE_POINTS_SIZE = 100;          // 50m
@@ -114,7 +111,8 @@ class LaneScanningEvaluator : public Evaluator {
   static const size_t MAX_NUM_LANE = 10;
   static const size_t SHORT_TERM_TRAJECTORY_SIZE = 10;
 
-  torch::jit::script::Module torch_lane_scanning_model_;
+  std::shared_ptr<torch::jit::script::Module> torch_lane_scanning_model_ptr_ =
+      nullptr;
   torch::Device device_;
 };
 

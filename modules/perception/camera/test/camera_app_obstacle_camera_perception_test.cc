@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *****************************************************************************/
+#include <gtest/gtest.h>
 #include <opencv2/opencv.hpp>
-#include "gtest/gtest.h"
 
 #include "modules/perception/camera/app/obstacle_camera_perception.h"
 
@@ -28,7 +28,7 @@ DECLARE_string(obs_sensor_meta_path);
 DECLARE_string(obs_sensor_intrinsic_path);
 }  // namespace common
 namespace camera {
-/* TEST(ObstacleCameraPerceptionTest, init_all_test) {
+TEST(ObstacleCameraPerceptionTest, init_all_test) {
   unsetenv("MODULE_PATH");
   unsetenv("CYBER_PATH");
 
@@ -48,8 +48,8 @@ namespace camera {
     init_option.conf_file = "obstacle.pt";
     ASSERT_TRUE(perception.Init(init_option));
   }
-} */
-/*
+}
+
 TEST(ObstacleCameraPerceptionTest, init_feature_extractor_test) {
   unsetenv("MODULE_PATH");
   unsetenv("CYBER_PATH");
@@ -78,14 +78,11 @@ TEST(ObstacleCameraPerceptionTest, init_debug_para_test) {
       "camera/app/conf/perception/camera/obstacle";
   init_option.conf_file = "obstacle_no_debug_para.pt";
   ASSERT_TRUE(perception.Init(init_option));
-} */
+}
 
 TEST(ObstacleCameraPerceptionTest, perception_test) {
   unsetenv("MODULE_PATH");
   unsetenv("CYBER_PATH");
-  FLAGS_obs_sensor_intrinsic_path =
-      "/apollo/modules/perception/testdata/"
-      "camera/app/data/perception/camera/params";
   FLAGS_obs_sensor_meta_path =
       "/apollo/modules/perception/testdata/"
       "camera/app/data/perception/camera/sensor_meta_camera.pt";

@@ -14,16 +14,15 @@
  * limitations under the License.
  *****************************************************************************/
 
-#include "modules/localization/msf/local_pyramid_map/base_map/base_map_pool.h"
+#include "modules/localization/msf/local_map/base_map/base_map_pool.h"
 
-#include "modules/localization/msf/local_pyramid_map/base_map/base_map_config.h"
-#include "modules/localization/msf/local_pyramid_map/base_map/base_map_node.h"
-#include "modules/localization/msf/local_pyramid_map/base_map/base_map_node_index.h"
+#include "modules/localization/msf/local_map/base_map/base_map_config.h"
+#include "modules/localization/msf/local_map/base_map/base_map_node.h"
+#include "modules/localization/msf/local_map/base_map/base_map_node_index.h"
 
 namespace apollo {
 namespace localization {
 namespace msf {
-namespace pyramid_map {
 
 BaseMapNodePool::BaseMapNodePool(unsigned int pool_size,
                                  unsigned int thread_size)
@@ -46,14 +45,18 @@ void BaseMapNodePool::Release() {
   if (node_reset_workers_.valid()) {
     node_reset_workers_.get();
   }
-  for (BaseMapNode* node : free_list_) {
-    FinalizeMapNode(node);
-    DellocMapNode(node);
+  typename std::list<BaseMapNode*>::iterator i = free_list_.begin();
+  while (i != free_list_.end()) {
+    FinalizeMapNode(*i);
+    DellocMapNode(*i);
+    i++;
   }
   free_list_.clear();
-  for (BaseMapNode* node : busy_nodes_) {
-    FinalizeMapNode(node);
-    DellocMapNode(node);
+  typename std::set<BaseMapNode*>::iterator j = busy_nodes_.begin();
+  while (j != busy_nodes_.end()) {
+    FinalizeMapNode(*j);
+    DellocMapNode(*j);
+    j++;
   }
   busy_nodes_.clear();
   pool_size_ = 0;
@@ -104,6 +107,7 @@ void BaseMapNodePool::FreeMapNodeTask(BaseMapNode* map_node) {
 
 void BaseMapNodePool::InitNewMapNode(BaseMapNode* node) {
   node->Init(map_config_);
+  return;
 }
 
 void BaseMapNodePool::FinalizeMapNode(BaseMapNode* node) {
@@ -124,7 +128,6 @@ void BaseMapNodePool::ResetMapNode(BaseMapNode* node) {
   }
 }
 
-}  // namespace pyramid_map
 }  // namespace msf
 }  // namespace localization
 }  // namespace apollo

@@ -11,7 +11,11 @@ cc_proto_library(
 
 proto_library(
     name = "ground_service_config_proto_lib",
-    srcs = ["ground_service_config.proto"],
+    srcs = [
+        "ground_service_config.proto",
+    ],
+    deps = [
+    ],
 )
 
 cpplint()

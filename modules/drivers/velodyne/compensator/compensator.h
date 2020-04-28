@@ -16,14 +16,14 @@
 
 #pragma once
 
+#include <Eigen/Eigen>
 #include <memory>
 #include <string>
 
-#include "Eigen/Eigen"
+#include "modules/transform/buffer.h"
 
 #include "modules/drivers/proto/pointcloud.pb.h"
 #include "modules/drivers/velodyne/proto/config.pb.h"
-#include "modules/transform/buffer.h"
 
 namespace apollo {
 namespace drivers {

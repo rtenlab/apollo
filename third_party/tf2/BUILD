@@ -17,5 +17,9 @@ cc_library(
     includes = [
         "include",
     ],
-    linkopts = ["-L/usr/local/apollo/boost/lib -lboost_signals -lboost_system -lboost_thread"],
+    linkopts = [
+        "-lboost_signals",
+        "-lboost_system",
+        "-lboost_thread",
+    ],
 )

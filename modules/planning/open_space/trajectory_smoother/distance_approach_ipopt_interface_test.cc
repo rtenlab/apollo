@@ -19,6 +19,9 @@
  **/
 #include "modules/planning/open_space/trajectory_smoother/distance_approach_ipopt_interface.h"
 
+#include <fstream>
+#include <iostream>
+
 #include "cyber/common/file.h"
 #include "gtest/gtest.h"
 

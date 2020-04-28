@@ -17,6 +17,7 @@
 #include "modules/prediction/evaluator/pedestrian/pedestrian_interaction_evaluator.h"
 
 #include <utility>
+#include <vector>
 
 #include "modules/common/math/vec2d.h"
 #include "modules/prediction/common/feature_output.h"
@@ -30,7 +31,12 @@
 namespace apollo {
 namespace prediction {
 
+using apollo::common::Point3D;
 using apollo::common::TrajectoryPoint;
+using apollo::common::adapter::AdapterConfig;
+using apollo::common::math::Vec2d;
+using apollo::perception::PerceptionObstacle;
+using apollo::perception::PerceptionObstacles;
 
 PedestrianInteractionEvaluator::PedestrianInteractionEvaluator()
     : device_(torch::kCPU) {
@@ -38,7 +44,6 @@ PedestrianInteractionEvaluator::PedestrianInteractionEvaluator()
   LoadModel();
 }
 
-/* TODO(kechxu) figure out if this function is necessary. It is not being used
 void PedestrianInteractionEvaluator::Clear() {
   auto ptr_obstacles_container =
       ContainerManager::Instance()->GetContainer<ObstaclesContainer>(
@@ -55,22 +60,21 @@ void PedestrianInteractionEvaluator::Clear() {
     obstacle_id_lstm_state_map_.erase(key);
   }
 }
-*/
 
 void PedestrianInteractionEvaluator::LoadModel() {
   torch::set_num_threads(1);
-  if (FLAGS_use_cuda && torch::cuda::is_available()) {
-    ADEBUG << "CUDA is available";
-    device_ = torch::Device(torch::kCUDA);
-  }
-
-  torch_position_embedding_ = torch::jit::load(
+  // TODO(all) uncomment the following when cuda issue is resolved
+  // if (torch::cuda::is_available()) {
+  //   AERROR << "CUDA is available for PedestrianInteractionEvaluator!";
+  //   device_ = torch::Device(torch::kCUDA);
+  // }
+  torch_position_embedding_ptr_ = torch::jit::load(
       FLAGS_torch_pedestrian_interaction_position_embedding_file, device_);
-  torch_social_embedding_ = torch::jit::load(
+  torch_social_embedding_ptr_ = torch::jit::load(
       FLAGS_torch_pedestrian_interaction_social_embedding_file, device_);
-  torch_single_lstm_ = torch::jit::load(
+  torch_single_lstm_ptr_ = torch::jit::load(
       FLAGS_torch_pedestrian_interaction_single_lstm_file, device_);
-  torch_prediction_layer_ = torch::jit::load(
+  torch_prediction_layer_ptr_ = torch::jit::load(
       FLAGS_torch_pedestrian_interaction_prediction_layer_file, device_);
 }
 
@@ -79,8 +83,7 @@ torch::Tensor PedestrianInteractionEvaluator::GetSocialPooling() {
   return torch::zeros({1, kGridSize * kGridSize * kHiddenSize});
 }
 
-bool PedestrianInteractionEvaluator::Evaluate(
-    Obstacle* obstacle_ptr, ObstaclesContainer* obstacles_container) {
+bool PedestrianInteractionEvaluator::Evaluate(Obstacle* obstacle_ptr) {
   // Sanity checks.
   CHECK_NOTNULL(obstacle_ptr);
 
@@ -107,16 +110,16 @@ bool PedestrianInteractionEvaluator::Evaluate(
     return true;
   }
 
-  static constexpr double kShortTermPredictionTimeResolution = 0.4;
-  static constexpr int kShortTermPredictionPointNum = 5;
-  static constexpr int kHiddenStateUpdateCycle = 4;
+  constexpr double kShortTermPredictionTimeResolution = 0.4;
+  constexpr int kShortTermPredictionPointNum = 5;
+  constexpr int kHiddenStateUpdateCycle = 4;
 
   // Step 1 Get social embedding
   torch::Tensor social_pooling = GetSocialPooling();
   std::vector<torch::jit::IValue> social_embedding_inputs;
-  social_embedding_inputs.push_back(std::move(social_pooling.to(device_)));
+  social_embedding_inputs.push_back(social_pooling.to(device_));
   torch::Tensor social_embedding =
-      torch_social_embedding_.forward(social_embedding_inputs)
+      torch_social_embedding_ptr_->forward(social_embedding_inputs)
           .toTensor()
           .to(torch::kCPU);
 
@@ -136,9 +139,9 @@ bool PedestrianInteractionEvaluator::Evaluate(
   torch_position[0][0] = rel_x;
   torch_position[0][1] = rel_y;
   std::vector<torch::jit::IValue> position_embedding_inputs;
-  position_embedding_inputs.push_back(std::move(torch_position.to(device_)));
+  position_embedding_inputs.push_back(torch_position.to(device_));
   torch::Tensor position_embedding =
-      torch_position_embedding_.forward(position_embedding_inputs)
+      torch_position_embedding_ptr_->forward(position_embedding_inputs)
           .toTensor()
           .to(torch::kCPU);
 
@@ -167,8 +170,9 @@ bool PedestrianInteractionEvaluator::Evaluate(
     }
 
     std::vector<torch::jit::IValue> lstm_inputs;
-    lstm_inputs.push_back(std::move(lstm_input.to(device_)));
-    auto lstm_out_tuple = torch_single_lstm_.forward(lstm_inputs).toTuple();
+    lstm_inputs.push_back(lstm_input.to(device_));
+    auto lstm_out_tuple =
+        torch_single_lstm_ptr_->forward(lstm_inputs).toTuple();
     auto ht = lstm_out_tuple->elements()[0].toTensor();
     auto ct = lstm_out_tuple->elements()[1].toTensor();
     obstacle_id_lstm_state_map_[id].ht = ht.clone();
@@ -205,9 +209,9 @@ bool PedestrianInteractionEvaluator::Evaluate(
     torch_position[0][0] = curr_rel_x;
     torch_position[0][1] = curr_rel_y;
     std::vector<torch::jit::IValue> position_embedding_inputs;
-    position_embedding_inputs.push_back(std::move(torch_position.to(device_)));
+    position_embedding_inputs.push_back(std::move(torch_position));
     torch::Tensor position_embedding =
-        torch_position_embedding_.forward(position_embedding_inputs)
+        torch_position_embedding_ptr_->forward(position_embedding_inputs)
             .toTensor()
             .to(torch::kCPU);
     torch::Tensor lstm_input =
@@ -224,15 +228,17 @@ bool PedestrianInteractionEvaluator::Evaluate(
       lstm_input[0][kEmbeddingSize + kHiddenSize + i] = ct[0][0][i];
     }
     std::vector<torch::jit::IValue> lstm_inputs;
-    lstm_inputs.push_back(std::move(lstm_input.to(device_)));
-    auto lstm_out_tuple = torch_single_lstm_.forward(lstm_inputs).toTuple();
+    lstm_inputs.push_back(std::move(lstm_input));
+    auto lstm_out_tuple =
+        torch_single_lstm_ptr_->forward(lstm_inputs).toTuple();
     ht = lstm_out_tuple->elements()[0].toTensor();
     ct = lstm_out_tuple->elements()[1].toTensor();
     std::vector<torch::jit::IValue> prediction_inputs;
     prediction_inputs.push_back(ht[0]);
-    auto pred_out_tensor = torch_prediction_layer_.forward(prediction_inputs)
-                               .toTensor()
-                               .to(torch::kCPU);
+    auto pred_out_tensor =
+        torch_prediction_layer_ptr_->forward(prediction_inputs)
+            .toTensor()
+            .to(torch::kCPU);
     auto pred_out = pred_out_tensor.accessor<float, 2>();
     TrajectoryPoint* point = trajectory->add_trajectory_point();
     double curr_x = prev_x + static_cast<double>(pred_out[0][0]);

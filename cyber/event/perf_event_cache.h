@@ -14,19 +14,17 @@
  * limitations under the License.
  *****************************************************************************/
 
-#ifndef CYBER_EVENT_PERF_EVENT_CACHE_H_
-#define CYBER_EVENT_PERF_EVENT_CACHE_H_
+#ifndef CYBER_EVENT_CACHE_H_
+#define CYBER_EVENT_CACHE_H_
 
 #include <chrono>
 #include <fstream>
 #include <memory>
-#include <string>
 #include <thread>
 
 #include "cyber/base/bounded_queue.h"
 #include "cyber/common/macros.h"
 #include "cyber/event/perf_event.h"
-#include "cyber/proto/perf_conf.pb.h"
 
 namespace apollo {
 namespace cyber {
@@ -40,12 +38,7 @@ class PerfEventCache {
   void AddSchedEvent(const SchedPerf event_id, const uint64_t cr_id,
                      const int proc_id, const int cr_state = -1);
   void AddTransportEvent(const TransPerf event_id, const uint64_t channel_id,
-                         const uint64_t msg_seq, const uint64_t stamp = 0,
-                         const std::string& adder = "-");
-
-  std::string PerfFile() { return perf_file_; }
-
-  void Shutdown();
+                         const uint64_t msg_seq);
 
  private:
   void Start();
@@ -54,11 +47,10 @@ class PerfEventCache {
   std::thread io_thread_;
   std::ofstream of_;
 
-  bool enable_ = false;
-  bool shutdown_ = false;
+  bool enable_trans_perf_ = false;
+  bool enable_sched_perf_ = false;
+  std::atomic<bool> shutdown_ = {false};
 
-  proto::PerfConf perf_conf_;
-  std::string perf_file_ = "";
   base::BoundedQueue<EventBasePtr> event_queue_;
 
   const int kFlushSize = 512;
@@ -66,9 +58,8 @@ class PerfEventCache {
 
   DECLARE_SINGLETON(PerfEventCache)
 };
-
 }  // namespace event
 }  // namespace cyber
 }  // namespace apollo
 
-#endif  // CYBER_EVENT_PERF_EVENT_CACHE_H_
+#endif  // CYBER_INIT_H_

@@ -4,8 +4,12 @@ package(default_visibility = ["//visibility:public"])
 
 cc_library(
     name = "sensor_gflags",
-    srcs = ["sensor_gflags.cc"],
-    hdrs = ["sensor_gflags.h"],
+    srcs = [
+        "sensor_gflags.cc",
+    ],
+    hdrs = [
+        "sensor_gflags.h",
+    ],
     deps = [
         "//external:gflags",
     ],
@@ -16,6 +20,7 @@ cc_library(
     hdrs = ["sensor_canbus.h"],
     deps = [
         ":sensor_gflags",
+        "//modules/common",
         "//modules/common/monitor_log",
         "//modules/drivers/canbus/can_client:can_client_factory",
         "//modules/drivers/canbus/can_comm:can_receiver",

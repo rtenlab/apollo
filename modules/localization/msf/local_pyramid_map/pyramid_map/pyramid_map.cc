@@ -14,14 +14,13 @@
  * limitations under the License.
  *****************************************************************************/
 
-#include "modules/localization/msf/local_pyramid_map/pyramid_map/pyramid_map.h"
+#include "modules/localization/msf/local_map/pyramid_map/pyramid_map.h"
 
-#include "modules/localization/msf/local_pyramid_map/pyramid_map/pyramid_map_node.h"
+#include "modules/localization/msf/local_map/pyramid_map/pyramid_map_node.h"
 
 namespace apollo {
 namespace localization {
 namespace msf {
-namespace pyramid_map {
 
 PyramidMap::PyramidMap(PyramidMapConfig* config) : BaseMap(config) {}
 
@@ -91,7 +90,6 @@ unsigned int PyramidMap::GetGroundCountSafe(const Eigen::Vector3d& coordinate,
   return node->GetGroundCountSafe(coordinate, level);
 }
 
-}  // namespace pyramid_map
 }  // namespace msf
 }  // namespace localization
 }  // namespace apollo

@@ -22,7 +22,6 @@
 
 #include <string>
 
-#include "modules/planning/proto/planning_config.pb.h"
 #include "modules/planning/tasks/task.h"
 
 namespace apollo {

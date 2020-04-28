@@ -11,7 +11,9 @@ cc_proto_library(
 
 proto_library(
     name = "navigation_proto_lib",
-    srcs = ["navigation.proto"],
+    srcs = [
+        "navigation.proto",
+    ],
     deps = [
         "//modules/common/proto:header_proto_lib",
         "//modules/common/proto:pnc_point_proto_lib",
@@ -30,7 +32,9 @@ cc_proto_library(
 
 proto_library(
     name = "relative_map_config_proto_lib",
-    srcs = ["relative_map_config.proto"],
+    srcs = [
+        "relative_map_config.proto",
+    ],
 )
 
 cc_proto_library(
@@ -42,7 +46,9 @@ cc_proto_library(
 
 proto_library(
     name = "navigator_config_proto_lib",
-    srcs = ["navigator_config.proto"],
+    srcs = [
+        "navigator_config.proto",
+    ],
 )
 
 cpplint()

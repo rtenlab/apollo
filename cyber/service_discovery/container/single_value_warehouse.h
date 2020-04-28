@@ -17,7 +17,7 @@
 #ifndef CYBER_SERVICE_DISCOVERY_CONTAINER_SINGLE_VALUE_WAREHOUSE_H_
 #define CYBER_SERVICE_DISCOVERY_CONTAINER_SINGLE_VALUE_WAREHOUSE_H_
 
-#include <cstdint>
+#include <stdint.h>
 #include <unordered_map>
 #include <vector>
 

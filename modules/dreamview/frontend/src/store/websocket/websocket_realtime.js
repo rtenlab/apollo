@@ -16,8 +16,6 @@ export default class RealtimeWebSocketEndpoint {
         this.routingTime = undefined;
         this.currentMode = null;
         this.worker = new Worker();
-
-        this.requestHmiStatus = this.requestHmiStatus.bind(this);
     }
 
     initialize() {
@@ -55,25 +53,20 @@ export default class RealtimeWebSocketEndpoint {
 
                     const isNewMode = (this.currentMode &&
                                        this.currentMode !== STORE.hmi.currentMode);
-                    const isNavigationModeInvolved = (this.currentMode === 'Navigation' ||
-                                                    STORE.hmi.currentMode === 'Navigation');
                     this.currentMode = STORE.hmi.currentMode;
-                    if (STORE.hmi.shouldDisplayNavigationMap) {
+                    if (STORE.hmi.inNavigationMode) {
+                        // In navigation mode, the coordinate system is FLU and
+                        // relative position of the ego-car is (0, 0). But,
+                        // absolute position of the ego-car is needed in MAP_NAVIGATOR.
                         if (MAP_NAVIGATOR.isInitialized()) {
                             MAP_NAVIGATOR.update(message);
                         }
+                        message.autoDrivingCar.positionX = 0;
+                        message.autoDrivingCar.positionY = 0;
+                        message.autoDrivingCar.heading = 0;
 
-                        if (STORE.hmi.inNavigationMode) {
-                            // In navigation mode, the coordinate system is FLU and
-                            // relative position of the ego-car is (0, 0). But,
-                            // absolute position of the ego-car is needed in MAP_NAVIGATOR.
-                            message.autoDrivingCar.positionX = 0;
-                            message.autoDrivingCar.positionY = 0;
-                            message.autoDrivingCar.heading = 0;
-
-                            RENDERER.coordinates.setSystem("FLU");
-                            this.mapUpdatePeriodMs = 100;
-                        }
+                        RENDERER.coordinates.setSystem("FLU");
+                        this.mapUpdatePeriodMs = 100;
                     } else {
                         RENDERER.coordinates.setSystem("ENU");
                         this.mapUpdatePeriodMs = 1000;
@@ -83,9 +76,7 @@ export default class RealtimeWebSocketEndpoint {
                     RENDERER.maybeInitializeOffest(
                         message.autoDrivingCar.positionX,
                         message.autoDrivingCar.positionY,
-                        // Updating offset only if navigation mode is involved since
-                        // its coordination system is different from rest of the modes.
-                        isNewMode && isNavigationModeInvolved);
+                        isNewMode);
                     RENDERER.updateWorld(message);
                     this.updateMapIndex(message);
                     if (this.routingTime !== message.routingTime) {
@@ -271,8 +262,6 @@ export default class RealtimeWebSocketEndpoint {
             type: "HMIAction",
             action: action,
         }));
-
-        setTimeout(this.requestHmiStatus, 5000);
     }
 
     executeModuleCommand(moduleName, command) {
@@ -286,8 +275,6 @@ export default class RealtimeWebSocketEndpoint {
             action: command,
             value: moduleName
         }));
-
-        setTimeout(this.requestHmiStatus, 5000);
     }
 
     submitDriveEvent(eventTimeMs, eventMessage, eventTypes, isReportable) {
@@ -297,6 +284,14 @@ export default class RealtimeWebSocketEndpoint {
             event_msg: eventMessage,
             event_type: eventTypes,
             is_reportable: isReportable,
+        }));
+    }
+
+    sendAudioPiece(data) {
+        this.websocket.send(JSON.stringify({
+            type: "HMIAction",
+            action: "RECORD_AUDIO",
+            value: btoa(String.fromCharCode(...data)),
         }));
     }
 
@@ -310,12 +305,6 @@ export default class RealtimeWebSocketEndpoint {
     requestRoutePath() {
         this.websocket.send(JSON.stringify({
             type: "RequestRoutePath",
-        }));
-    }
-
-    requestHmiStatus() {
-        this.websocket.send(JSON.stringify({
-            type: "HMIStatus"
         }));
     }
 

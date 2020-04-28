@@ -30,6 +30,8 @@
 namespace apollo {
 namespace planning {
 
+using apollo::common::time::Clock;
+
 DiscretePointsReferenceLineSmoother::DiscretePointsReferenceLineSmoother(
     const ReferenceLineSmootherConfig& config)
     : ReferenceLineSmoother(config) {}

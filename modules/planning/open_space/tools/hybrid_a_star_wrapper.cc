@@ -18,6 +18,8 @@
  * @file
  */
 
+#include <iostream>
+
 #include "cyber/common/file.h"
 #include "modules/planning/open_space/coarse_trajectory_generator/hybrid_a_star.h"
 
@@ -125,3 +127,5 @@ void GetResult(HybridAResultContainer* result_ptr, double* x, double* y,
 
 }  // namespace planning
 }  // namespace apollo
+
+int main(int32_t argc, char** argv) { return 0; }

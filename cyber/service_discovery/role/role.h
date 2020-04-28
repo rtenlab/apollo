@@ -17,7 +17,7 @@
 #ifndef CYBER_SERVICE_DISCOVERY_ROLE_ROLE_H_
 #define CYBER_SERVICE_DISCOVERY_ROLE_ROLE_H_
 
-#include <cstdint>
+#include <stdint.h>
 #include <memory>
 #include <string>
 

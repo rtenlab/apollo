@@ -4,8 +4,12 @@ package(default_visibility = ["//visibility:public"])
 
 cc_library(
     name = "darkSCNN_lane_detector",
-    srcs = ["darkSCNN_lane_detector.cc"],
-    hdrs = ["darkSCNN_lane_detector.h"],
+    srcs = [
+        "darkSCNN_lane_detector.cc",
+    ],
+    hdrs = [
+        "darkSCNN_lane_detector.h",
+    ],
     deps = [
         "//modules/perception/base",
         "//modules/perception/camera/common",

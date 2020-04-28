@@ -9,5 +9,7 @@ cc_proto_library(
 
 proto_library(
     name = "examples_proto",
-    srcs = ["examples.proto"],
+    srcs = [
+        "examples.proto",
+    ],
 )

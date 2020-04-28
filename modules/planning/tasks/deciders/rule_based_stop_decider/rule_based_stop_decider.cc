@@ -20,8 +20,6 @@
 #include <tuple>
 #include <vector>
 
-#include "modules/common/proto/pnc_point.pb.h"
-
 #include "modules/common/vehicle_state/vehicle_state_provider.h"
 #include "modules/planning/common/planning_context.h"
 #include "modules/planning/common/planning_gflags.h"
@@ -31,8 +29,10 @@
 namespace apollo {
 namespace planning {
 
+using apollo::common::ErrorCode;
 using apollo::common::SLPoint;
 using apollo::common::Status;
+using apollo::common::TrajectoryPoint;
 using apollo::common::math::Vec2d;
 
 namespace {
@@ -45,12 +45,15 @@ RuleBasedStopDecider::RuleBasedStopDecider(const TaskConfig &config)
     : Decider(config) {
   CHECK(config.has_rule_based_stop_decider_config());
   rule_based_stop_decider_config_ = config.rule_based_stop_decider_config();
+  SetName("RuleBasedStopDecider");
 }
 
 apollo::common::Status RuleBasedStopDecider::Process(
     Frame *const frame, ReferenceLineInfo *const reference_line_info) {
   // 1. Rule_based stop for side pass onto reverse lane
-  StopOnSidePass(frame, reference_line_info);
+  if (FLAGS_enable_nonscenario_side_pass) {
+    StopOnSidePass(frame, reference_line_info);
+  }
 
   // 2. Rule_based stop for urgent lane change
   if (FLAGS_enable_lane_change_urgency_checking) {
@@ -91,7 +94,7 @@ void RuleBasedStopDecider::CheckLaneChangeUrgency(Frame *const frame) {
     auto *reference_line = reference_line_info.mutable_reference_line();
     common::SLPoint sl_point;
     // Project the end point to sl_point on current reference lane
-    if (reference_line->XYToSL(point, &sl_point) &&
+    if (reference_line->XYToSL({point.x(), point.y()}, &sl_point) &&
         reference_line->IsOnLane(sl_point)) {
       // Check the distance from ADC to the end point of current routing
       double distance_to_passage_end =
@@ -116,13 +119,12 @@ void RuleBasedStopDecider::CheckLaneChangeUrgency(Frame *const frame) {
 
 void RuleBasedStopDecider::AddPathEndStop(
     Frame *const frame, ReferenceLineInfo *const reference_line_info) {
+  const std::string stop_wall_id = "path_end_stop";
+  std::vector<std::string> wait_for_obstacles;
   if (!reference_line_info->path_data().path_label().empty() &&
       reference_line_info->path_data().frenet_frame_path().back().s() -
               reference_line_info->path_data().frenet_frame_path().front().s() <
           FLAGS_short_path_length_threshold) {
-    const std::string stop_wall_id =
-        PATH_END_VO_ID_PREFIX + reference_line_info->path_data().path_label();
-    std::vector<std::string> wait_for_obstacles;
     util::BuildStopDecision(
         stop_wall_id,
         reference_line_info->path_data().frenet_frame_path().back().s() - 5.0,
@@ -133,24 +135,27 @@ void RuleBasedStopDecider::AddPathEndStop(
 
 void RuleBasedStopDecider::StopOnSidePass(
     Frame *const frame, ReferenceLineInfo *const reference_line_info) {
-  static bool check_clear;
-  static common::PathPoint change_lane_stop_path_point;
-
   const PathData &path_data = reference_line_info->path_data();
   double stop_s_on_pathdata = 0.0;
+  const auto &side_pass_info =
+      PlanningContext::Instance()->planning_status().side_pass_stop();
+  auto *mutable_side_pass_info = PlanningContext::Instance()
+                                     ->mutable_planning_status()
+                                     ->mutable_side_pass_stop();
 
   if (path_data.path_label().find("self") != std::string::npos) {
-    check_clear = false;
-    change_lane_stop_path_point.Clear();
+    mutable_side_pass_info->set_check_clear_flag(false);
+    mutable_side_pass_info->mutable_change_lane_stop_path_point()->Clear();
     return;
   }
 
-  if (check_clear &&
-      CheckClearDone(*reference_line_info, change_lane_stop_path_point)) {
-    check_clear = false;
+  if (side_pass_info.check_clear_flag() &&
+      CheckClearDone(*reference_line_info,
+                     side_pass_info.change_lane_stop_path_point())) {
+    mutable_side_pass_info->set_check_clear_flag(false);
   }
 
-  if (!check_clear &&
+  if (!side_pass_info.check_clear_flag() &&
       CheckSidePassStop(path_data, *reference_line_info, &stop_s_on_pathdata)) {
     if (!LaneChangeDecider::IsPerceptionBlocked(
             *reference_line_info,
@@ -162,14 +167,15 @@ void RuleBasedStopDecider::StopOnSidePass(
       return;
     }
     if (!CheckADCStop(path_data, *reference_line_info, stop_s_on_pathdata)) {
-      if (!BuildSidePassStopFence(path_data, stop_s_on_pathdata,
-                                  &change_lane_stop_path_point, frame,
-                                  reference_line_info)) {
+      if (!BuildSidePassStopFence(
+              path_data, stop_s_on_pathdata,
+              mutable_side_pass_info->mutable_change_lane_stop_path_point(),
+              frame, reference_line_info)) {
         AERROR << "Set side pass stop fail";
       }
     } else {
       if (LaneChangeDecider::IsClearToChangeLane(reference_line_info)) {
-        check_clear = true;
+        mutable_side_pass_info->set_check_clear_flag(true);
       }
     }
   }
@@ -206,8 +212,8 @@ bool RuleBasedStopDecider::CheckSidePassStop(
           shift_vec + Vec2d(stop_pathpoint.x(), stop_pathpoint.y());
       double stop_l_on_pathdata = 0.0;
       const auto &nearby_path = reference_line_info.reference_line().map_path();
-      nearby_path.GetNearestPoint(stop_fence_pose, stop_s_on_pathdata,
-                                  &stop_l_on_pathdata);
+      stop_s_on_pathdata -= nearby_path.GetNearestPoint(
+          stop_fence_pose, stop_s_on_pathdata, &stop_l_on_pathdata);
       return true;
     }
     last_path_point_type = std::get<1>(point_guide);
@@ -294,7 +300,8 @@ bool RuleBasedStopDecider::CheckClearDone(
       (adc_front_edge_s + adc_back_edge_s) / 2.0, &lane_left_width,
       &lane_right_width);
   SLPoint stop_sl_point;
-  reference_line_info.reference_line().XYToSL(stop_point, &stop_sl_point);
+  reference_line_info.reference_line().XYToSL({stop_point.x(), stop_point.y()},
+                                              &stop_sl_point);
   // use distance to last stop point to determine if needed to check clear
   // again
   if (adc_back_edge_s > stop_sl_point.s()) {

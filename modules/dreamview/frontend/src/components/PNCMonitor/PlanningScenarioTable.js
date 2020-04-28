@@ -10,8 +10,8 @@ class PlanningScenarioItem extends React.Component {
         const stage = scenario.stageType ? scenario.stageType.replace(type + '_', '') : '-';
 
         return (
-            <tr className="monitor-table-item">
-                <td className="text time">{timestampMsToTimeString(scenario.timeSec * 1000, true)}</td>
+            <tr className="scenario-history-item">
+                <td className="text time">{timestampMsToTimeString(scenario.time, true)}</td>
                 <td className="text">{type}</td>
                 <td className="text">{stage}</td>
             </tr>
@@ -24,12 +24,12 @@ export default class PlanningScenarioTable extends React.Component {
         const { scenarios } = this.props;
 
         return (
-            <div className="monitor-table-container">
-                <div className="monitor-table-title">Scenario History</div>
-                <table className="monitor-table">
+            <div className="scenario-history-container">
+                <div className="scenario-history-title">Scenario History</div>
+                <table className="scenario-history-table">
                     <tbody>
                         {scenarios.map(scenario => (
-                            <PlanningScenarioItem key={`scenario_${scenario.timeSec}`}
+                            <PlanningScenarioItem key={`scenario_${scenario.time}`}
                                                   scenario={scenario} />
                         ))}
                     </tbody>

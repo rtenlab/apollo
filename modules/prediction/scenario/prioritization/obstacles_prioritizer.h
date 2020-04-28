@@ -30,48 +30,31 @@ namespace prediction {
 
 class ObstaclesPrioritizer {
  public:
+  void PrioritizeObstacles();
+
   void AssignIgnoreLevel();
 
   void AssignCautionLevel();
 
  private:
-  void AssignCautionLevelInJunction(const Obstacle& ego_vehicle,
-                                    ObstaclesContainer* obstacles_container,
-                                    const std::string& junction_id);
+  void AssignCautionLevelCruiseKeepLane();
 
-  void AssignCautionLevelCruiseKeepLane(
-      const Obstacle& ego_vehicle, ObstaclesContainer* obstacles_container);
+  void AssignCautionLevelCruiseChangeLane();
 
-  void AssignCautionLevelCruiseChangeLane(
-      const Obstacle& ego_vehicle, ObstaclesContainer* obstacles_container);
-
-  void AssignCautionLevelByEgoReferenceLine(
-      const Obstacle& ego_vehicle, ObstaclesContainer* obstacles_container);
-
-  void RankingCautionLevelObstacles(const Obstacle& ego_vehicle,
-                                    ObstaclesContainer* obstacles_container);
+  void AssignCautionLevelByEgoReferenceLine();
 
   void AssignCautionByMerge(
-      const Obstacle& ego_vehicle,
       std::shared_ptr<const hdmap::LaneInfo> lane_info_ptr,
-      std::unordered_set<std::string>* const visited_lanes,
-      ObstaclesContainer* obstacles_container);
+      std::unordered_set<std::string>* const visited_lanes);
 
   void AssignCautionByOverlap(
-      const Obstacle& ego_vehicle,
       std::shared_ptr<const hdmap::LaneInfo> lane_info_ptr,
-      std::unordered_set<std::string>* const visited_lanes,
-      ObstaclesContainer* obstacles_container);
+      std::unordered_set<std::string>* const visited_lanes);
 
   void SetCautionBackward(
-      const double distance, const Obstacle& ego_vehicle,
       std::shared_ptr<const hdmap::LaneInfo> start_lane_info_ptr,
-      std::unordered_set<std::string>* const visited_lanes,
-      ObstaclesContainer* obstacles_container);
-
-  void SetCautionIfCloseToEgo(const Obstacle& ego_vehicle,
-                              const double distance_threshold,
-                              Obstacle* obstacle_ptr);
+      const double distance,
+      std::unordered_set<std::string>* const visited_lanes);
 
  private:
   std::unordered_set<std::string> ego_back_lane_id_set_;

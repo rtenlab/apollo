@@ -64,8 +64,6 @@ class PIDController {
    */
   virtual double Control(const double error, const double dt);
 
-  virtual ~PIDController() = default;
-
   /**
    * @brief get saturation status
    * @return saturation status

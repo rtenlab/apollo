@@ -68,7 +68,9 @@ void HMI::RegisterMessageHandlers() {
   // Send current status and vehicle param to newly joined client.
   websocket_->RegisterConnectionReadyHandler(
       [this](WebSocketHandler::Connection* conn) {
-        SendStatus(conn);
+        const auto status_json =
+            JsonUtil::ProtoToTypedJson("HMIStatus", hmi_worker_->GetStatus());
+        websocket_->SendData(conn, status_json.dump());
         SendVehicleParam(conn);
       });
 
@@ -78,7 +80,7 @@ void HMI::RegisterMessageHandlers() {
         // Run HMIWorker::Trigger(action) if json is {action: "<action>"}
         // Run HMIWorker::Trigger(action, value) if "value" field is provided.
         std::string action;
-        if (!JsonUtil::GetString(json, "action", &action)) {
+        if (!JsonUtil::GetStringFromJson(json, "action", &action)) {
           AERROR << "Truncated HMIAction request.";
           return;
         }
@@ -88,7 +90,7 @@ void HMI::RegisterMessageHandlers() {
           return;
         }
         std::string value;
-        if (JsonUtil::GetString(json, "value", &value)) {
+        if (JsonUtil::GetStringFromJson(json, "value", &value)) {
           hmi_worker_->Trigger(hmi_action, value);
         } else {
           hmi_worker_->Trigger(hmi_action);
@@ -103,9 +105,6 @@ void HMI::RegisterMessageHandlers() {
           // Reload lidar params for point cloud service.
           PointCloudUpdater::LoadLidarHeight(FLAGS_lidar_height_yaml);
           SendVehicleParam();
-          if (data_collection_monitor_->IsEnabled()) {
-            data_collection_monitor_->Restart();
-          }
         } else if (hmi_action == HMIAction::CHANGE_MODE) {
           static constexpr char kCalibrationMode[] = "Vehicle Calibration";
           if (value == kCalibrationMode) {
@@ -125,10 +124,13 @@ void HMI::RegisterMessageHandlers() {
         std::string event_msg;
         std::vector<std::string> event_types;
         bool is_reportable;
-        if (JsonUtil::GetNumber(json, "event_time_ms", &event_time_ms) &&
-            JsonUtil::GetString(json, "event_msg", &event_msg) &&
-            JsonUtil::GetStringVector(json, "event_type", &event_types) &&
-            JsonUtil::GetBoolean(json, "is_reportable", &is_reportable)) {
+        if (JsonUtil::GetNumberFromJson(json, "event_time_ms",
+                                        &event_time_ms) &&
+            JsonUtil::GetStringFromJson(json, "event_msg", &event_msg) &&
+            JsonUtil::GetStringVectorFromJson(json, "event_type",
+                                              &event_types) &&
+            JsonUtil::GetBooleanFromJson(json, "is_reportable",
+                                         &is_reportable)) {
           hmi_worker_->SubmitDriveEvent(event_time_ms, event_msg, event_types,
                                         is_reportable);
           monitor_log_buffer_.INFO("Drive event added.");
@@ -136,12 +138,6 @@ void HMI::RegisterMessageHandlers() {
           AERROR << "Truncated SubmitDriveEvent request.";
           monitor_log_buffer_.WARN("Failed to submit a drive event.");
         }
-      });
-
-  websocket_->RegisterMessageHandler(
-      "HMIStatus",
-      [this](const Json& json, WebSocketHandler::Connection* conn) {
-        SendStatus(conn);
       });
 }
 
@@ -159,12 +155,6 @@ void HMI::SendVehicleParam(WebSocketHandler::Connection* conn) {
   } else {
     websocket_->BroadcastData(json_str);
   }
-}
-
-void HMI::SendStatus(WebSocketHandler::Connection* conn) {
-  const auto status_json =
-      JsonUtil::ProtoToTypedJson("HMIStatus", hmi_worker_->GetStatus());
-  websocket_->SendData(conn, status_json.dump());
 }
 
 }  // namespace dreamview

@@ -18,7 +18,9 @@ cc_proto_library(
 
 proto_library(
     name = "camera_proto_lib",
-    srcs = ["config.proto"],
+    srcs = [
+        "config.proto",
+    ],
     deps = [
         "//modules/common/proto:header_proto_lib",
     ],

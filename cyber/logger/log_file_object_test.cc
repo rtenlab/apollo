@@ -16,10 +16,9 @@
 
 #include "cyber/logger/log_file_object.h"
 
+#include <glog/logging.h>
+#include <gtest/gtest.h>
 #include <string>
-
-#include "glog/logging.h"
-#include "gtest/gtest.h"
 
 #include "cyber/cyber.h"
 #include "cyber/time/time.h"

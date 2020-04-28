@@ -33,9 +33,7 @@ SingleLanePredictor::SingleLanePredictor() {
   predictor_type_ = ObstacleConf::SINGLE_LANE_PREDICTOR;
 }
 
-bool SingleLanePredictor::Predict(
-    const ADCTrajectoryContainer* adc_trajectory_container, Obstacle* obstacle,
-    ObstaclesContainer* obstacles_container) {
+void SingleLanePredictor::Predict(Obstacle* obstacle) {
   Clear();
 
   CHECK_NOTNULL(obstacle);
@@ -47,7 +45,7 @@ bool SingleLanePredictor::Predict(
 
   if (!feature.has_lane() || !feature.lane().has_lane_graph()) {
     AERROR << "Obstacle [" << obstacle->id() << "] has no lane graph.";
-    return false;
+    return;
   }
 
   std::string lane_id = "";
@@ -58,7 +56,7 @@ bool SingleLanePredictor::Predict(
 
   for (int i = 0; i < num_lane_sequence; ++i) {
     const LaneSequence& sequence = feature.lane().lane_graph().lane_sequence(i);
-    if (sequence.lane_segment().empty()) {
+    if (sequence.lane_segment_size() <= 0) {
       AERROR << "Empty lane segments.";
       continue;
     }
@@ -81,7 +79,6 @@ bool SingleLanePredictor::Predict(
     obstacle->mutable_latest_feature()->add_predicted_trajectory()->CopyFrom(
         trajectory);
   }
-  return true;
 }
 
 void SingleLanePredictor::GenerateTrajectoryPoints(

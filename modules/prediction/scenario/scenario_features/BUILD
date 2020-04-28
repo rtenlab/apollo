@@ -44,7 +44,9 @@ cc_library(
 cc_test(
     name = "cruise_scenario_features_test",
     size = "small",
-    srcs = ["cruise_scenario_features_test.cc"],
+    srcs = [
+        "cruise_scenario_features_test.cc",
+    ],
     deps = [
         ":cruise_scenario_features",
         "@gtest//:main",

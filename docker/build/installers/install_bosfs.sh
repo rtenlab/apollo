@@ -25,13 +25,14 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 apt-get update -y
 apt-get install -y \
     automake \
-    libcrypto++-dev \
+    autotools-dev \
+    g++ \
     libcurl4-openssl-dev \
     libfuse-dev \
     libssl-dev \
+    make \
     uuid-dev
-
-PACKAGE="bosfs-1.0.0.10.tar.gz"
+PACKAGE="bosfs-1.0.0.9.tar.gz"
 wget http://sdk.bce.baidu.com/console-sdk/${PACKAGE}
 tar zxf ${PACKAGE}
 

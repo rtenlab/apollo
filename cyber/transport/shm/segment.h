@@ -17,6 +17,11 @@
 #ifndef CYBER_TRANSPORT_SHM_SEGMENT_H_
 #define CYBER_TRANSPORT_SHM_SEGMENT_H_
 
+#include <stdint.h>
+#include <sys/ipc.h>
+#include <sys/shm.h>
+#include <sys/types.h>
+#include <cstddef>
 #include <memory>
 #include <mutex>
 #include <string>
@@ -33,6 +38,11 @@ namespace transport {
 class Segment;
 using SegmentPtr = std::shared_ptr<Segment>;
 
+enum ReadWriteMode {
+  READ_ONLY = 0,
+  WRITE_ONLY,
+};
+
 struct WritableBlock {
   uint32_t index = 0;
   Block* block = nullptr;
@@ -40,10 +50,10 @@ struct WritableBlock {
 };
 using ReadableBlock = WritableBlock;
 
-class Segment {
+class Segment final {
  public:
-  explicit Segment(uint64_t channel_id);
-  virtual ~Segment() {}
+  Segment(uint64_t channel_id, const ReadWriteMode& mode);
+  ~Segment();
 
   bool AcquireBlockToWrite(std::size_t msg_size, WritableBlock* writable_block);
   void ReleaseWrittenBlock(const WritableBlock& writable_block);
@@ -51,27 +61,28 @@ class Segment {
   bool AcquireBlockToRead(ReadableBlock* readable_block);
   void ReleaseReadBlock(const ReadableBlock& readable_block);
 
- protected:
-  virtual bool Destroy();
-  virtual void Reset() = 0;
-  virtual bool Remove() = 0;
-  virtual bool OpenOnly() = 0;
-  virtual bool OpenOrCreate() = 0;
+ private:
+  bool Init();
+  bool OpenOrCreate();
+  bool OpenOnly();
+  bool Remove();
+  bool Destroy();
+  void Reset();
+  bool Remap();
+  bool Recreate();
+
+  uint32_t GetNextWritableBlockIndex();
 
   bool init_;
+  key_t id_;
+  ReadWriteMode mode_;
   ShmConf conf_;
-  uint64_t channel_id_;
 
   State* state_;
   Block* blocks_;
   void* managed_shm_;
   std::mutex block_buf_lock_;
   std::unordered_map<uint32_t, uint8_t*> block_buf_addrs_;
-
- private:
-  bool Remap();
-  bool Recreate(const uint64_t& msg_size);
-  uint32_t GetNextWritableBlockIndex();
 };
 
 }  // namespace transport

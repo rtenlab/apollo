@@ -182,7 +182,7 @@ google::protobuf::Message* ProtobufFactory::GetMessageByGeneratedType(
   auto descriptor =
       DescriptorPool::generated_pool()->FindMessageTypeByName(type);
   if (descriptor == nullptr) {
-    // AERROR << "cannot find [" << type << "] descriptor";
+    // LOG_WARN << "cannot find [" << type << "] descriptor";
     return nullptr;
   }
 
@@ -211,9 +211,6 @@ void ErrorCollector::AddError(const std::string& filename,
                               const google::protobuf::Message* descriptor,
                               ErrorLocation location,
                               const std::string& message) {
-  UNUSED(element_name);
-  UNUSED(descriptor);
-  UNUSED(location);
   AWARN << "[" << filename << "] " << message;
 }
 
@@ -222,9 +219,6 @@ void ErrorCollector::AddWarning(const std::string& filename,
                                 const google::protobuf::Message* descriptor,
                                 ErrorLocation location,
                                 const std::string& message) {
-  UNUSED(element_name);
-  UNUSED(descriptor);
-  UNUSED(location);
   AWARN << "[" << filename << "] " << message;
 }
 

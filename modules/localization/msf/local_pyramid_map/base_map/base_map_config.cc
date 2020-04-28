@@ -14,17 +14,15 @@
  * limitations under the License.
  *****************************************************************************/
 
-#include "modules/localization/msf/local_pyramid_map/base_map/base_map_config.h"
+#include "modules/localization/msf/local_map/base_map/base_map_config.h"
 
+#include <boost/foreach.hpp>
 #include <exception>
 #include <iostream>
-
-#include "cyber/common/log.h"
 
 namespace apollo {
 namespace localization {
 namespace msf {
-namespace pyramid_map {
 
 BaseMapConfig::BaseMapConfig(const std::string &map_version) {
   map_version_ = map_version;
@@ -45,10 +43,12 @@ bool BaseMapConfig::Save(const std::string &file_path) {
   bool success = CreateXml(&config);
   if (success) {
     boost::property_tree::write_xml(file_path, config);
-    AINFO << "Saved the map configuration to: " << file_path;
+    std::cerr << "Saved the map configuration to: " << file_path << "."
+              << std::endl;
     return true;
+  } else {
+    return false;
   }
-  return false;
 }
 
 bool BaseMapConfig::Load(const std::string &file_path) {
@@ -57,10 +57,12 @@ bool BaseMapConfig::Load(const std::string &file_path) {
   bool success = LoadXml(config);
 
   if (success) {
-    AINFO << "Loaded the map configuration from: " << file_path;
+    std::cerr << "Loaded the map configuration from: " << file_path << "."
+              << std::endl;
     return true;
+  } else {
+    return false;
   }
-  return false;
 }
 
 bool BaseMapConfig::CreateXml(boost::property_tree::ptree *config) const {
@@ -154,19 +156,20 @@ bool BaseMapConfig::LoadXml(const boost::property_tree::ptree &config) {
 
   auto resolutions = config.get_child_optional("map.map_config.resolutions");
   if (resolutions) {
-    std::for_each(resolutions->begin(), resolutions->end(),
-                  [this](const boost::property_tree::ptree::value_type &v) {
-                    map_resolutions_.push_back(
-                        static_cast<float>(atof(v.second.data().c_str())));
-                    AINFO << "Resolution: " << v.second.data();
-                  });
+    BOOST_FOREACH (const boost::property_tree::ptree::value_type &v,
+                   *resolutions) {
+      map_resolutions_.push_back(
+          static_cast<float>(atof(v.second.data().c_str())));
+      AINFO << "Resolution: " << v.second.data();
+    }
   } else {
     return false;
   }
 
   auto datasets = config.get_child_optional("map.map_record.datasets");
   if (datasets) {
-    for (const boost::property_tree::ptree::value_type &v : *datasets) {
+    BOOST_FOREACH (const boost::property_tree::ptree::value_type &v,
+                   *datasets) {
       map_datasets_.push_back(v.second.data());
       AINFO << "Dataset: " << v.second.data();
     }
@@ -175,14 +178,15 @@ bool BaseMapConfig::LoadXml(const boost::property_tree::ptree &config) {
   // load md5 check info
   auto nodes = config.get_child_optional("map.check_info.nodes");
   if (nodes) {
-    for (const boost::property_tree::ptree::value_type &v : *nodes) {
+    BOOST_FOREACH (const boost::property_tree::ptree::value_type &v, *nodes) {
       const boost::property_tree::ptree &child = v.second;
       auto path = child.get_optional<std::string>("path");
       auto md5 = child.get_optional<std::string>("md5");
       if (!path || !md5) {
-        AERROR << "Lack path or md5.";
+        std::cerr << "Lack path or md5." << std::endl;
         return false;
       }
+
       node_md5_map_[*path] = *md5;
     }
   }
@@ -200,8 +204,9 @@ void BaseMapConfig::ResizeMapRange() {
   double max_x = 0;
   double max_y = 0;
 
+  double max_resolutions = 0.0;
   double max_resolutions =
-      *std::max_element(map_resolutions_.begin(), map_resolutions_.end());
+      std::max_element(map_resolutions_.begin(), map_resolutions_.end());
   int n = 0;
   while (min_x >= map_range_.GetMinX()) {
     ++n;
@@ -287,7 +292,6 @@ MapVersion BaseMapConfig::GetMapVersion() const {
   return MapVersion::UNKNOWN;
 }
 
-}  // namespace pyramid_map
 }  // namespace msf
 }  // namespace localization
 }  // namespace apollo

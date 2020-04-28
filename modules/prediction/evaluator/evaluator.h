@@ -27,8 +27,6 @@
 
 #include "modules/prediction/container/obstacles/obstacle.h"
 
-#include "modules/prediction/container/obstacles/obstacles_container.h"
-
 /**
  * @namespace apollo::prediction
  * @brief apollo::prediction
@@ -54,21 +52,17 @@ class Evaluator {
   /**
    * @brief Evaluate an obstacle
    * @param Obstacle pointer
-   * @param Obstacles container
    */
-  virtual bool Evaluate(Obstacle* obstacle,
-                        ObstaclesContainer* obstacles_container) = 0;
+  virtual bool Evaluate(Obstacle* obstacle) = 0;
 
   /**
    * @brief Evaluate an obstacle
    * @param Obstacle pointer
-   * @param Obstacles container
    * @param vector of all Obstacles
    */
   virtual bool Evaluate(Obstacle* obstacle,
-                        ObstaclesContainer* obstacles_container,
                         std::vector<Obstacle*> dynamic_env) {
-    return Evaluate(obstacle, obstacles_container);
+    return Evaluate(obstacle);
   }
 
   /**

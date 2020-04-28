@@ -17,9 +17,8 @@
 #ifndef CYBER_LOGGER_LOGGER_H_
 #define CYBER_LOGGER_LOGGER_H_
 
+#include <glog/logging.h>
 #include <mutex>
-
-#include "glog/logging.h"
 
 namespace apollo {
 namespace cyber {

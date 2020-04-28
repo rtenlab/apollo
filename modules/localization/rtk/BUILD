@@ -41,7 +41,9 @@ cc_binary(
 cc_test(
     name = "rtk_localization_test",
     size = "small",
-    srcs = ["rtk_localization_test.cc"],
+    srcs = [
+        "rtk_localization_test.cc",
+    ],
     data = ["//modules/localization:localization_testdata"],
     deps = [
         "//cyber",

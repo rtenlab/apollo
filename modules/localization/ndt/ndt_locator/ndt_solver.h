@@ -55,12 +55,11 @@
 
 #pragma once
 
+#include <pcl/registration/registration.h>
 #include <unsupported/Eigen/NonLinearOptimization>
 
 #include <limits>
 #include <vector>
-
-#include "pcl/registration/registration.h"
 
 #include "cyber/common/log.h"
 #include "modules/common/time/timer.h"

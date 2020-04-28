@@ -15,9 +15,8 @@
  *****************************************************************************/
 #include "modules/map/tools/map_datachecker/server/worker.h"
 
+#include <grpc++/grpc++.h>
 #include <memory>
-
-#include "grpc++/grpc++.h"
 
 #include "cyber/cyber.h"
 #include "modules/map/tools/map_datachecker/server/worker_agent.h"

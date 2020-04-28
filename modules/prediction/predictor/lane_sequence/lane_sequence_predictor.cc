@@ -35,9 +35,7 @@ LaneSequencePredictor::LaneSequencePredictor() {
   predictor_type_ = ObstacleConf::LANE_SEQUENCE_PREDICTOR;
 }
 
-bool LaneSequencePredictor::Predict(
-    const ADCTrajectoryContainer* adc_trajectory_container, Obstacle* obstacle,
-    ObstaclesContainer* obstacles_container) {
+void LaneSequencePredictor::Predict(Obstacle* obstacle) {
   Clear();
 
   CHECK_NOTNULL(obstacle);
@@ -49,7 +47,7 @@ bool LaneSequencePredictor::Predict(
 
   if (!feature.has_lane() || !feature.lane().has_lane_graph()) {
     AERROR << "Obstacle [" << obstacle->id() << " has no lane graph.";
-    return false;
+    return;
   }
 
   std::string lane_id = "";
@@ -58,14 +56,11 @@ bool LaneSequencePredictor::Predict(
   }
   int num_lane_sequence = feature.lane().lane_graph().lane_sequence_size();
   std::vector<bool> enable_lane_sequence(num_lane_sequence, true);
-  Obstacle* ego_vehicle_ptr =
-      obstacles_container->GetObstacle(FLAGS_ego_vehicle_id);
-  FilterLaneSequences(feature, lane_id, ego_vehicle_ptr,
-                      adc_trajectory_container, &enable_lane_sequence);
+  FilterLaneSequences(feature, lane_id, &enable_lane_sequence);
 
   for (int i = 0; i < num_lane_sequence; ++i) {
     const LaneSequence& sequence = feature.lane().lane_graph().lane_sequence(i);
-    if (sequence.lane_segment().empty()) {
+    if (sequence.lane_segment_size() <= 0) {
       AERROR << "Empty lane segments.";
       continue;
     }
@@ -114,7 +109,6 @@ bool LaneSequencePredictor::Predict(
     obstacle->mutable_latest_feature()->add_predicted_trajectory()->CopyFrom(
         trajectory);
   }
-  return true;
 }
 
 void LaneSequencePredictor::DrawLaneSequenceTrajectoryPoints(

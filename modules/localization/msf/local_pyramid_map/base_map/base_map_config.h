@@ -15,20 +15,17 @@
  *****************************************************************************/
 #pragma once
 
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/xml_parser.hpp>
 #include <map>
 #include <string>
 #include <vector>
-
-#include "boost/property_tree/ptree.hpp"
-#include "boost/property_tree/xml_parser.hpp"
-
 #include "modules/localization/msf/common/util/rect2d.h"
-#include "modules/localization/msf/local_pyramid_map/base_map/base_map_fwd.h"
+#include "modules/localization/msf/local_map/base_map/base_map_fwd.h"
 
 namespace apollo {
 namespace localization {
 namespace msf {
-namespace pyramid_map {
 
 enum class MapVersion {
   UNKNOWN,
@@ -107,7 +104,6 @@ class BaseMapConfig {
   virtual bool LoadXml(const boost::property_tree::ptree &config);
 };
 
-}  // namespace pyramid_map
 }  // namespace msf
 }  // namespace localization
 }  // namespace apollo

@@ -16,9 +16,9 @@
 
 #include "cyber/message/raw_message.h"
 
-#include <cstring>
+#include <gtest/gtest.h>
+#include <string.h>
 #include <string>
-#include "gtest/gtest.h"
 
 namespace apollo {
 namespace cyber {

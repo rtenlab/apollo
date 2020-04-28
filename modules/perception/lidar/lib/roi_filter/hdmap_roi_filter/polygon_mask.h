@@ -45,10 +45,7 @@ bool DrawPolygonMask(const typename PolygonScanCvter<T>::Polygon& polygon,
   typedef typename PolygonScanCvter<T>::IntervalIn IntervalIn;
   typedef typename PolygonScanCvter<T>::IntervalOut IntervalOut;
   typedef typename PolygonScanCvter<T>::DirectionMajor PolyDirMajor;
-  if (bitmap->Empty()) {
-    AERROR << "bitmap is empty";
-    return false;
-  }
+  CHECK(!bitmap->Empty());
   Eigen::Vector2d poly_min_p, poly_max_p;
   poly_min_p.setConstant(std::numeric_limits<double>::max());
   poly_max_p = -poly_min_p;
@@ -59,19 +56,15 @@ bool DrawPolygonMask(const typename PolygonScanCvter<T>::Polygon& polygon,
     poly_max_p.x() = std::max(pt.x(), poly_max_p.x());
     poly_max_p.y() = std::max(pt.y(), poly_max_p.y());
   }
-  if (poly_max_p.x() <= poly_min_p.x()) {
-    AERROR << "Invalid polygon";
-    return false;
-  }
-  if (poly_max_p.y() <= poly_min_p.y()) {
-    AERROR << "Invalid polygon";
-    return false;
-  }
+  CHECK_GT(poly_max_p.x(), poly_min_p.x());
+  CHECK_GT(poly_max_p.y(), poly_min_p.y());
+
   const Eigen::Vector2d& bitmap_min_range = bitmap->min_range();
   const Eigen::Vector2d& bitmap_max_range = bitmap->max_range();
   const Eigen::Vector2d& cell_size = bitmap->cell_size();
-  const int major_dir = bitmap->dir_major();
-  const int op_major_dir = bitmap->op_dir_major();
+  // TODO(...) maybe confused
+  int major_dir = static_cast<int>(bitmap->dir_major());
+  int op_major_dir = static_cast<int>(bitmap->op_dir_major());
 
   // check major x range
   IntervalIn valid_range;

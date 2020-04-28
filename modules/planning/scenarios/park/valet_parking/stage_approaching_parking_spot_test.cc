@@ -35,13 +35,13 @@ class StageApproachingParkingSpotTest : public ::testing::Test {
 
  protected:
   ScenarioConfig::StageConfig config_;
+  struct ValetParkingContext;
 };
 
 TEST_F(StageApproachingParkingSpotTest, Init) {
   StageApproachingParkingSpot stage_approaching_parking_spot(config_);
   EXPECT_EQ(stage_approaching_parking_spot.Name(),
-            ScenarioConfig::StageType_Name(
-                ScenarioConfig::VALET_PARKING_APPROACHING_PARKING_SPOT));
+            ScenarioConfig::StageType_Name(config_.stage_type()));
 }
 
 }  // namespace valet_parking

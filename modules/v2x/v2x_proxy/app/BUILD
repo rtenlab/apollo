@@ -8,7 +8,9 @@ cc_library(
         "main.cc",
         "v2x_proxy.cc",
     ],
-    hdrs = ["v2x_proxy.h"],
+    hdrs = [
+        "v2x_proxy.h",
+    ],
     deps = [
         "//modules/map/hdmap",
         "//modules/v2x/v2x_proxy/obu_interface:obu_interface_grpc_impl",

@@ -21,8 +21,6 @@
 #include <limits>
 #include <utility>
 
-#include "absl/strings/str_cat.h"
-#include "absl/strings/str_join.h"
 #include "cyber/common/log.h"
 #include "modules/common/math/math_utils.h"
 #include "modules/common/util/string_util.h"
@@ -608,10 +606,10 @@ Polygon2d Polygon2d::ExpandByDistance(const double distance) const {
 }
 
 std::string Polygon2d::DebugString() const {
-  return absl::StrCat("polygon2d (  num_points = ", num_points_, "  points = (",
-                      absl::StrJoin(points_, " ", util::DebugStringFormatter()),
-                      " )  ", is_convex_ ? "convex" : "non-convex",
-                      "  area = ", area_, " )");
+  return util::StrCat("polygon2d (  num_points = ", num_points_, "  points = (",
+                      util::PrintDebugStringIter(points_), " )  ",
+                      is_convex_ ? "convex" : "non-convex", "  area = ", area_,
+                      " )");
 }
 
 }  // namespace math

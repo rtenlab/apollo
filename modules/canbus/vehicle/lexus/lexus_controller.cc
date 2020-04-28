@@ -228,11 +228,6 @@ Chassis LexusController::chassis() {
     Chassis::GearPosition gear_pos = Chassis::GEAR_INVALID;
 
     if (chassis_detail.lexus().shift_rpt_228().output_value() ==
-        Shift_rpt_228::OUTPUT_VALUE_PARK) {
-      gear_pos = Chassis::GEAR_PARKING;
-    }
-
-    if (chassis_detail.lexus().shift_rpt_228().output_value() ==
         Shift_rpt_228::OUTPUT_VALUE_NEUTRAL) {
       gear_pos = Chassis::GEAR_NEUTRAL;
     }
@@ -478,10 +473,10 @@ void LexusController::Acceleration(double acc) {
   // None
 }
 
-// TODO(Yu/QiL): double check the physical range, unit and direction for Lexus
-// lexus default -32.768 ~ 32.767, unit: rad, left:-, right:+ in canbus protocol
-// need to be compatible with control module, so reverse steering
-// angle:-99.99~0.00~99.99, unit: %, left:+, right:- in control module
+// lexus default, -470 ~ 470, left:+, right:-
+// need to be compatible with control module, so reverse
+// steering with old angle speed
+// angle:-99.99~0.00~99.99, unit:, left:-, right:+
 void LexusController::Steer(double angle) {
   if (driving_mode() != Chassis::COMPLETE_AUTO_DRIVE &&
       driving_mode() != Chassis::AUTO_STEER_ONLY) {
@@ -489,18 +484,16 @@ void LexusController::Steer(double angle) {
     return;
   }
   const double real_angle = vehicle_params_.max_steer_angle() * angle / 100.0;
-  // TODO(Yu/QiL): double checck to decide if reverse sign needed
+  // reverse sign
+
   steering_cmd_12c_->set_position(real_angle);
   // TODO(QiL) : double check this rate
   steering_cmd_12c_->set_rotation_rate(40);
 }
 
-// TODO(Yu/QiL): double check the physical range, unit and direction for Lexus
-// lexus default -32.768 ~ 32.767, unit: rad, left:-, right:+ in canbus protocol
-// lexus default 0 ~ 65.535, unit: rad/sec, in canbus protocol
 // steering with new angle speed
-// angle:-99.99~0.00~99.99, unit:%, left:+, right:- in control module
-// angle_spd:0.00~99.99, unit:%
+// angle:-99.99~0.00~99.99, unit:, left:-, right:+
+// angle_spd:0.00~99.99, unit:deg/s
 void LexusController::Steer(double angle, double angle_spd) {
   if (driving_mode() != Chassis::COMPLETE_AUTO_DRIVE &&
       driving_mode() != Chassis::AUTO_STEER_ONLY) {
@@ -508,14 +501,16 @@ void LexusController::Steer(double angle, double angle_spd) {
     return;
   }
 
-  const double real_angle = vehicle_params_.max_steer_angle() * angle / 100.0;
+  const double real_angle =
+      vehicle_params_.max_steer_angle() / M_PI * 180 * angle / 100.0;
   const double real_angle_spd =
       ProtocolData<::apollo::canbus::ChassisDetail>::BoundedValue(
-          vehicle_params_.min_steer_angle_rate(),
-          vehicle_params_.max_steer_angle_rate(),
-          vehicle_params_.max_steer_angle_rate() * angle_spd / 100.0);
-  // TODO(Yu/QiL): double checck to decide if reverse sign needed
+          vehicle_params_.min_steer_angle_rate() / M_PI * 180,
+          vehicle_params_.max_steer_angle_rate() / M_PI * 180,
+          vehicle_params_.max_steer_angle_rate() / M_PI * 180 * angle_spd /
+              100.0);
   steering_cmd_12c_->set_position(real_angle);
+  // TODO(QiL) : double check this rate
   steering_cmd_12c_->set_rotation_rate(real_angle_spd);
 }
 
@@ -581,7 +576,8 @@ void LexusController::SecurityDogThreadFunc() {
   int64_t start = 0;
   int64_t end = 0;
   while (can_sender_->IsRunning()) {
-    start = absl::ToUnixMicros(::apollo::common::time::Clock::Now());
+    start = ::apollo::common::time::AsInt64<::apollo::common::time::micros>(
+        ::apollo::common::time::Clock::Now());
     const Chassis::DrivingMode mode = driving_mode();
     bool emergency_mode = false;
 
@@ -619,7 +615,8 @@ void LexusController::SecurityDogThreadFunc() {
       set_driving_mode(Chassis::EMERGENCY_MODE);
       message_manager_->ResetSendMessages();
     }
-    end = absl::ToUnixMicros(::apollo::common::time::Clock::Now());
+    end = ::apollo::common::time::AsInt64<::apollo::common::time::micros>(
+        ::apollo::common::time::Clock::Now());
     std::chrono::duration<double, std::micro> elapsed{end - start};
     if (elapsed < default_period) {
       std::this_thread::sleep_for(default_period - elapsed);
@@ -631,53 +628,8 @@ void LexusController::SecurityDogThreadFunc() {
 }
 
 bool LexusController::CheckResponse(const int32_t flags, bool need_wait) {
-  // for Lexus, we assume CheckResponse will take 300ms. We leave a 100ms buffer
-  // for it.
-  // TODO(Yu) : check whether the current retry_num match the assumed time
-  // consumption
-  int32_t retry_num = 20;
-  ChassisDetail chassis_detail;
-  bool is_accel_enabled = false;
-  bool is_brake_enabled = false;
-  bool is_steering_enabled = false;
-
-  do {
-    if (message_manager_->GetSensorData(&chassis_detail) != ErrorCode::OK) {
-      AERROR_EVERY(100) << "Get chassis detail failed.";
-      return false;
-    }
-    bool check_ok = true;
-    if (flags & CHECK_RESPONSE_STEER_UNIT_FLAG) {
-      is_steering_enabled =
-          chassis_detail.lexus().has_steering_rpt_22c() &&
-          chassis_detail.lexus().steering_rpt_22c().has_enabled() &&
-          chassis_detail.lexus().steering_rpt_22c().enabled();
-      check_ok = check_ok && is_steering_enabled;
-    }
-
-    if (flags & CHECK_RESPONSE_SPEED_UNIT_FLAG) {
-      is_brake_enabled = chassis_detail.lexus().has_brake_rpt_204() &&
-                         chassis_detail.lexus().brake_rpt_204().has_enabled() &&
-                         chassis_detail.lexus().brake_rpt_204().enabled();
-      is_accel_enabled = chassis_detail.lexus().has_accel_rpt_200() &&
-                         chassis_detail.lexus().accel_rpt_200().has_enabled() &&
-                         chassis_detail.lexus().accel_rpt_200().enabled();
-      check_ok = check_ok && is_brake_enabled && is_accel_enabled;
-    }
-    if (check_ok) {
-      return true;
-    }
-    if (need_wait) {
-      --retry_num;
-      std::this_thread::sleep_for(
-          std::chrono::duration<double, std::milli>(20));
-    }
-  } while (need_wait && retry_num);
-
-  // If check_response fails, then report the specific module failure online
-  AERROR << "check_response fail: is_steering_enabled:" << is_steering_enabled
-         << ", is_brake_enabled:" << is_brake_enabled
-         << ", is_accel_enabled:" << is_accel_enabled;
+  /* ADD YOUR OWN CAR CHASSIS OPERATION
+   */
   return false;
 }
 

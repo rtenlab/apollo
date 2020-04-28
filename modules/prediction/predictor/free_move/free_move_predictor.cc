@@ -16,6 +16,8 @@
 
 #include "modules/prediction/predictor/free_move/free_move_predictor.h"
 
+#include <utility>
+
 #include "modules/prediction/common/prediction_gflags.h"
 #include "modules/prediction/common/prediction_util.h"
 #include "modules/prediction/proto/prediction_conf.pb.h"
@@ -23,16 +25,14 @@
 namespace apollo {
 namespace prediction {
 
-using apollo::common::TrajectoryPoint;
-using apollo::perception::PerceptionObstacle;
+using ::apollo::common::TrajectoryPoint;
+using ::apollo::perception::PerceptionObstacle;
 
 FreeMovePredictor::FreeMovePredictor() {
   predictor_type_ = ObstacleConf::FREE_MOVE_PREDICTOR;
 }
 
-bool FreeMovePredictor::Predict(
-    const ADCTrajectoryContainer* adc_trajectory_container, Obstacle* obstacle,
-    ObstaclesContainer* obstacles_container) {
+void FreeMovePredictor::Predict(Obstacle* obstacle) {
   Clear();
 
   CHECK_NOTNULL(obstacle);
@@ -46,7 +46,7 @@ bool FreeMovePredictor::Predict(
       !feature.position().has_x() || !feature.position().has_y()) {
     AERROR << "Obstacle [" << obstacle->id()
            << " is missing position or velocity";
-    return false;
+    return;
   }
 
   double prediction_total_time = FLAGS_prediction_trajectory_time_length;
@@ -100,7 +100,6 @@ bool FreeMovePredictor::Predict(
       }
     }
   }
-  return true;
 }
 
 void FreeMovePredictor::DrawFreeMoveTrajectoryPoints(

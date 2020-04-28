@@ -11,7 +11,9 @@ cc_proto_library(
 
 proto_library(
     name = "roi_service_proto_lib",
-    srcs = ["roi_service.proto"],
+    srcs = [
+        "roi_service.proto",
+    ],
 )
 
 cpplint()

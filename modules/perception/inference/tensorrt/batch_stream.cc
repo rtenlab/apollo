@@ -18,7 +18,6 @@
 
 #include <algorithm>
 
-#include "absl/strings/str_cat.h"
 #include "cyber/common/log.h"
 
 namespace apollo {
@@ -91,7 +90,7 @@ void BatchStream::skip(int skipCount) {
 }
 
 bool BatchStream::update() {
-  std::string inputFileName = absl::StrCat(mPath, "Batch", mFileCount++);
+  std::string inputFileName = mPath + "Batch" + std::to_string(mFileCount++);
   FILE *file = fopen(inputFileName.c_str(), "rb");
   if (file == nullptr) {
     return false;

@@ -21,6 +21,7 @@
 #pragma once
 
 #include <limits>
+#include <utility>
 #include <vector>
 
 #include "Eigen/Dense"
@@ -64,7 +65,6 @@ class DualVariableWarmStartOSQPInterface {
                       const Eigen::MatrixXd& n_warm_up);
 
  private:
-  OSQPConfig osqp_config_;
   int num_of_variables_;
   int num_of_constraints_;
   int horizon_;

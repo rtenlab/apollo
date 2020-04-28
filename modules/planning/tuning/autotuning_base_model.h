@@ -28,8 +28,15 @@ namespace planning {
 
 class AutotuningBaseModel {
  public:
+  /**
+   * @brief constructor
+   */
   AutotuningBaseModel() = default;
-  virtual ~AutotuningBaseModel() = default;
+
+  /**
+   * @brief destructor
+   */
+  ~AutotuningBaseModel() = default;
 
   /**
    * @brief set mlp model as well as feature builder

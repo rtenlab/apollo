@@ -16,10 +16,11 @@
 
 #include "modules/drivers/canbus/can_client/hermes_can/hermes_can_client.h"
 
-#include <cstdio>
-#include <cstring>
-#include <iostream>
+#include <stdio.h>
+#include <string.h>
 #include <vector>
+
+#include <iostream>
 
 namespace apollo {
 namespace drivers {

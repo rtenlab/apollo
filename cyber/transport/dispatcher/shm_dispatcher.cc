@@ -51,7 +51,7 @@ void ShmDispatcher::AddSegment(const RoleAttributes& self_attr) {
   if (segments_.count(channel_id) > 0) {
     return;
   }
-  auto segment = SegmentFactory::CreateSegment(channel_id);
+  auto segment = std::make_shared<Segment>(channel_id, READ_ONLY);
   segments_[channel_id] = segment;
   previous_indexes_[channel_id] = UINT32_MAX;
 }

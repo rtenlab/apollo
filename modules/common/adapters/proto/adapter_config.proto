@@ -84,8 +84,6 @@ message AdapterConfig {
     CAMERA_IMAGE_SHORT = 73;
 
     PLANNING_PAD = 74;
-
-    STORYTELLING = 75;
   }
   enum Mode {
     RECEIVE_ONLY = 0;

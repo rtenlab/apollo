@@ -38,10 +38,16 @@ const char car_img_path[3][1024] = {
 
 // =================VisualizationEngine=================
 bool MapImageKey::operator<(const MapImageKey &key) const {
-  // Compare elements by priority.
-  return std::forward_as_tuple(level, zone_id, node_north_id, node_east_id) <
-         std::forward_as_tuple(key.level, key.zone_id, key.node_north_id,
-                               key.node_east_id);
+  if (level != key.level) {
+    return level < key.level;
+  }
+  if (zone_id != key.zone_id) {
+    return zone_id < key.zone_id;
+  }
+  if (node_north_id != key.node_north_id) {
+    return node_north_id < key.node_north_id;
+  }
+  return node_east_id < key.node_east_id;
 }
 
 // =================MapImageCache=================
@@ -566,12 +572,9 @@ void VisualizationEngine::DrawTips() {
 }
 
 void VisualizationEngine::UpdateLevel() {
-  if (cur_scale_ > max_stride_ * 1.5) {
-    SetScale(max_stride_ * 1.5);
-  }
-  if (cur_scale_ < 0.5) {
-    SetScale(0.5);
-  }
+  if (cur_scale_ > max_stride_ * 1.5) SetScale(max_stride_ * 1.5);
+  if (cur_scale_ < 0.5) SetScale(0.5);
+
   // calculate which image level to use
   cur_level_ = 0;
   cur_stride_ = 1;
@@ -672,6 +675,7 @@ void VisualizationEngine::GenerateMutiResolutionImages(
               image_visual_path_dst.length() - dst_folder.length() - 3)
        << std::endl;
   outf.close();
+  return;
 }
 
 bool VisualizationEngine::InitOtherParams(const std::string &params_file) {
@@ -790,15 +794,11 @@ void VisualizationEngine::CoordToImageKey(const Eigen::Vector2d &coord,
   }
 
   m = static_cast<int>(key->node_north_id) - lt_node_index_.y;
-  if (m < 0) {
-    m = m - (cur_stride_ - 1);
-  }
+  if (m < 0) m = m - (cur_stride_ - 1);
   key->node_north_id = m / cur_stride_ * cur_stride_ + lt_node_index_.y;
 
   n = static_cast<int>(key->node_east_id) - lt_node_index_.x;
-  if (n < 0) {
-    n = n - (cur_stride_ - 1);
-  }
+  if (n < 0) n = n - (cur_stride_ - 1);
   key->node_east_id = n / cur_stride_ * cur_stride_ + lt_node_index_.x;
 }
 

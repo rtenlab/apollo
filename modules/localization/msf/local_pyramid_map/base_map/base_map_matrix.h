@@ -15,16 +15,14 @@
  *****************************************************************************/
 #pragma once
 
-#include <cassert>
+#include <assert.h>
 #include <vector>
+#include "modules/localization/msf/local_map/base_map/base_map_fwd.h"
 #include "opencv2/opencv.hpp"
-
-#include "modules/localization/msf/local_pyramid_map/base_map/base_map_fwd.h"
 
 namespace apollo {
 namespace localization {
 namespace msf {
-namespace pyramid_map {
 
 /**@brief The data structure of the map cells in a map node. */
 class BaseMapMatrix {
@@ -45,7 +43,6 @@ class BaseMapMatrix {
   virtual bool GetAltitudeImg(cv::Mat* altitude_img) const;
 };
 
-}  // namespace pyramid_map
 }  // namespace msf
 }  // namespace localization
 }  // namespace apollo

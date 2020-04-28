@@ -96,8 +96,7 @@ inline void Trajectory1dGenerator::GenerateTrajectory1DBundle<4>(
   CHECK_NOTNULL(ptr_trajectory_bundle);
   CHECK(!end_conditions.empty());
 
-  ptr_trajectory_bundle->reserve(ptr_trajectory_bundle->size() +
-                                 end_conditions.size());
+  ptr_trajectory_bundle->reserve(end_conditions.size());
   for (const auto& end_condition : end_conditions) {
     auto ptr_trajectory1d = std::make_shared<LatticeTrajectory1d>(
         std::shared_ptr<Curve1d>(new QuarticPolynomialCurve1d(
@@ -118,8 +117,7 @@ inline void Trajectory1dGenerator::GenerateTrajectory1DBundle<5>(
   CHECK_NOTNULL(ptr_trajectory_bundle);
   CHECK(!end_conditions.empty());
 
-  ptr_trajectory_bundle->reserve(ptr_trajectory_bundle->size() +
-                                 end_conditions.size());
+  ptr_trajectory_bundle->reserve(end_conditions.size());
   for (const auto& end_condition : end_conditions) {
     auto ptr_trajectory1d = std::make_shared<LatticeTrajectory1d>(
         std::shared_ptr<Curve1d>(new QuinticPolynomialCurve1d(

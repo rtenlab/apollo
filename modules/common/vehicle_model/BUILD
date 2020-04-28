@@ -4,8 +4,12 @@ package(default_visibility = ["//visibility:public"])
 
 cc_library(
     name = "vehicle_model",
-    srcs = ["vehicle_model.cc"],
-    hdrs = ["vehicle_model.h"],
+    srcs = [
+        "vehicle_model.cc",
+    ],
+    hdrs = [
+        "vehicle_model.h",
+    ],
     deps = [
         "//cyber/common:file",
         "//modules/common/configs:config_gflags",
@@ -18,7 +22,9 @@ cc_library(
 cc_test(
     name = "vehicle_model_test",
     size = "small",
-    srcs = ["vehicle_model_test.cc"],
+    srcs = [
+        "vehicle_model_test.cc",
+    ],
     data = [
         "//modules/common/testdata:vehicle_model_testdata",
     ],

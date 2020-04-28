@@ -51,10 +51,7 @@ void MlfTrackData::PushTrackedObjectToTrack(TrackedObjectPtr obj) {
     sensor_history_objects_[obj->sensor_info.name].insert(pair);
     age_++;
     if (age_ == 1) {  // the first timestamp
-      if (obj->is_fake) {
-        AERROR << "obj is fake";
-        return;
-      }
+      CHECK(!obj->is_fake);
       latest_visible_time_ = timestamp;
       first_tracked_time_ = timestamp;
     }

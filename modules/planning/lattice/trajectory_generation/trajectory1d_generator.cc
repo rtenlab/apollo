@@ -55,6 +55,7 @@ void Trajectory1dGenerator::GenerateTrajectoryBundles(
                                        ptr_lon_trajectory_bundle);
 
   GenerateLateralTrajectoryBundle(ptr_lat_trajectory_bundle);
+  return;
 }
 
 void Trajectory1dGenerator::GenerateSpeedProfilesForCruising(

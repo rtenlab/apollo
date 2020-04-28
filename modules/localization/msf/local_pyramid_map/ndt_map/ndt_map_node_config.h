@@ -16,13 +16,11 @@
 
 #pragma once
 
-#include <memory>
-#include "modules/localization/msf/local_pyramid_map/base_map/base_map_node_config.h"
+#include "modules/localization/msf/local_map/base_map/base_map_node_config.h"
 
 namespace apollo {
 namespace localization {
 namespace msf {
-namespace pyramid_map {
 
 class NdtMapNodeConfig : public BaseMapNodeConfig {
  public:
@@ -32,7 +30,6 @@ class NdtMapNodeConfig : public BaseMapNodeConfig {
   std::shared_ptr<BaseMapNodeConfig> Clone();
 };
 
-}  // namespace pyramid_map
 }  // namespace msf
 }  // namespace localization
 }  // namespace apollo

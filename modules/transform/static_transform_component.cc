@@ -19,7 +19,6 @@
 #include "yaml-cpp/yaml.h"
 
 #include "modules/common/adapters/adapter_gflags.h"
-#include "modules/common/util/message_util.h"
 
 namespace apollo {
 namespace transform {
@@ -57,7 +56,7 @@ void StaticTransformComponent::SendTransforms() {
 bool StaticTransformComponent::ParseFromYaml(
     const std::string& file_path, TransformStamped* transform_stamped) {
   if (!cyber::common::PathExists(file_path)) {
-    AERROR << "Extrinsic yaml file does not exist: " << file_path;
+    AERROR << "Extrinsic yaml file is noe exists: " << file_path;
     return false;
   }
   YAML::Node tf = YAML::LoadFile(file_path);
@@ -100,9 +99,7 @@ void StaticTransformComponent::SendTransform(
       *transform_stampeds_.add_transforms() = *it_in;
     }
   }
-
-  common::util::FillHeader(node_->Name(), &transform_stampeds_);
-  writer_->Write(transform_stampeds_);
+  writer_->Write(std::make_shared<TransformStampeds>(transform_stampeds_));
 }
 
 }  // namespace transform

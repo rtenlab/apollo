@@ -78,6 +78,7 @@ void ConnectedComponent::AddPixel(int x, int y) {
   bbox_.ymin = std::min(y, bbox_.ymin);
   bbox_.ymax = std::max(y, bbox_.ymax);
   pixel_count_++;
+  return;
 }
 
 bool FindCC(const std::vector<unsigned char>& src, int width, int height,

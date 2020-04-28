@@ -17,7 +17,7 @@
 #ifndef CYBER_TOOLS_CYBER_RECORDER_PLAYER_PLAY_TASK_BUFFER_H_
 #define CYBER_TOOLS_CYBER_RECORDER_PLAYER_PLAY_TASK_BUFFER_H_
 
-#include <cstdint>
+#include <stdint.h>
 #include <map>
 #include <memory>
 #include <mutex>

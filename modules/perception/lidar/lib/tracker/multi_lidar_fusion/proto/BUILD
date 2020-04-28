@@ -11,7 +11,9 @@ cc_proto_library(
 
 proto_library(
     name = "multi_lidar_fusion_config_lib",
-    srcs = ["multi_lidar_fusion_config.proto"],
+    srcs = [
+        "multi_lidar_fusion_config.proto",
+    ],
 )
 
 cpplint()

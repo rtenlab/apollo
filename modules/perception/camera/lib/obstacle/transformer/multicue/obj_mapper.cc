@@ -49,10 +49,7 @@ bool ObjMapper::SolveCenterFromNearestVerticalEdge(const float *bbox,
   center[0] = center[1] = center[2] = 0.0f;
   float height_bbox = bbox[3] - bbox[1];
   float width_bbox = bbox[2] - bbox[0];
-  if (width_bbox <= 0.0f || height_bbox <= 0.0f) {
-    AERROR << "width or height of bbox is 0";
-    return false;
-  }
+  CHECK(width_bbox > 0.0f && height_bbox > 0.0f);
 
   if (common::IRound(bbox[3]) >= height_ - 1) {
     height_bbox /= params_.occ_ratio;

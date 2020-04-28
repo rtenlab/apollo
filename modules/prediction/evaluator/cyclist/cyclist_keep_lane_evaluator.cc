@@ -23,8 +23,7 @@ CyclistKeepLaneEvaluator::CyclistKeepLaneEvaluator() {
   evaluator_type_ = ObstacleConf::CYCLIST_KEEP_LANE_EVALUATOR;
 }
 
-bool CyclistKeepLaneEvaluator::Evaluate(
-    Obstacle* obstacle_ptr, ObstaclesContainer* obstacles_container) {
+bool CyclistKeepLaneEvaluator::Evaluate(Obstacle* obstacle_ptr) {
   CHECK_NOTNULL(obstacle_ptr);
 
   obstacle_ptr->SetEvaluatorType(evaluator_type_);
@@ -47,7 +46,7 @@ bool CyclistKeepLaneEvaluator::Evaluate(
   LaneGraph* lane_graph_ptr =
       latest_feature_ptr->mutable_lane()->mutable_lane_graph();
   CHECK_NOTNULL(lane_graph_ptr);
-  if (lane_graph_ptr->lane_sequence().empty()) {
+  if (lane_graph_ptr->lane_sequence_size() == 0) {
     AERROR << "Obstacle [" << id << "] has no lane sequences.";
     return false;
   }
@@ -64,7 +63,7 @@ bool CyclistKeepLaneEvaluator::Evaluate(
 
 double CyclistKeepLaneEvaluator::ComputeProbability(
     const std::string& curr_lane_id, const LaneSequence& lane_sequence) {
-  if (lane_sequence.lane_segment().empty()) {
+  if (lane_sequence.lane_segment_size() == 0) {
     AWARN << "Empty lane sequence.";
     return 0.0;
   }

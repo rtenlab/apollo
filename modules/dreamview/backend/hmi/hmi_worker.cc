@@ -16,16 +16,14 @@
 
 #include "modules/dreamview/backend/hmi/hmi_worker.h"
 
-#include "absl/strings/str_cat.h"
-#include "absl/strings/str_join.h"
-#include "absl/strings/str_split.h"
 #include "cyber/common/file.h"
 #include "modules/common/adapters/adapter_gflags.h"
 #include "modules/common/configs/config_gflags.h"
 #include "modules/common/kv_db/kv_db.h"
-#include "modules/common/util/future.h"
 #include "modules/common/util/map_util.h"
 #include "modules/common/util/message_util.h"
+#include "modules/common/util/string_tokenizer.h"
+#include "modules/common/util/string_util.h"
 #include "modules/dreamview/backend/common/dreamview_gflags.h"
 #include "modules/dreamview/backend/hmi/vehicle_manager.h"
 #include "modules/monitor/proto/system_status.pb.h"
@@ -54,6 +52,8 @@ using apollo::canbus::Chassis;
 using apollo::common::DriveEvent;
 using apollo::common::KVDB;
 using apollo::common::time::Clock;
+using apollo::common::util::StrAppend;
+using apollo::common::util::StrCat;
 using apollo::control::DrivingAction;
 using apollo::cyber::Node;
 using apollo::monitor::ComponentStatus;
@@ -65,8 +65,10 @@ using WLock = boost::unique_lock<boost::shared_mutex>;
 constexpr char kNavigationModeName[] = "Navigation";
 
 // Convert a string to be title-like. E.g.: "hello_world" -> "Hello World".
-std::string TitleCase(std::string_view origin) {
-  std::vector<std::string> parts = absl::StrSplit(origin, '_');
+std::string TitleCase(const std::string& origin) {
+  static const std::string kDelimiter = "_";
+  std::vector<std::string> parts =
+      apollo::common::util::StringTokenizer::Split(origin, kDelimiter);
   for (auto& part : parts) {
     if (!part.empty()) {
       // Upper case the first char.
@@ -74,7 +76,7 @@ std::string TitleCase(std::string_view origin) {
     }
   }
 
-  return absl::StrJoin(parts, " ");
+  return apollo::common::util::PrintIter(parts);
 }
 
 // List subdirs and return a dict of {subdir_title: subdir_path}.
@@ -83,17 +85,17 @@ Map<std::string, std::string> ListDirAsDict(const std::string& dir) {
   const auto subdirs = cyber::common::ListSubPaths(dir);
   for (const auto& subdir : subdirs) {
     const auto subdir_title = TitleCase(subdir);
-    const auto subdir_path = absl::StrCat(dir, "/", subdir);
+    const auto subdir_path = StrCat(dir, "/", subdir);
     result.insert({subdir_title, subdir_path});
   }
   return result;
 }
 
 // List files by pattern and return a dict of {file_title: file_path}.
-Map<std::string, std::string> ListFilesAsDict(std::string_view dir,
-                                              std::string_view extension) {
+Map<std::string, std::string> ListFilesAsDict(const std::string& dir,
+                                              const std::string& extension) {
   Map<std::string, std::string> result;
-  const std::string pattern = absl::StrCat(dir, "/*", extension);
+  const std::string pattern = StrCat(dir, "/*", extension);
   for (const std::string& file_path : cyber::common::Glob(pattern)) {
     // Remove the extension and convert to title case as the file title.
     const std::string filename = cyber::common::GetFileName(file_path);
@@ -105,7 +107,7 @@ Map<std::string, std::string> ListFilesAsDict(std::string_view dir,
 }
 
 template <class FlagType, class ValueType>
-void SetGlobalFlag(std::string_view flag_name, const ValueType& value,
+void SetGlobalFlag(const std::string& flag_name, const ValueType& value,
                    FlagType* flag) {
   static constexpr char kGlobalFlagfile[] =
       "/apollo/modules/common/data/global_flagfile.txt";
@@ -118,8 +120,8 @@ void SetGlobalFlag(std::string_view flag_name, const ValueType& value,
   }
 }
 
-void System(std::string_view cmd) {
-  const int ret = std::system(cmd.data());
+void System(const std::string& cmd) {
+  const int ret = std::system(cmd.c_str());
   if (ret == 0) {
     AINFO << "SUCCESS: " << cmd;
   } else {
@@ -187,16 +189,16 @@ HMIMode HMIWorker::LoadMode(const std::string& mode_config_path) {
     module.set_start_command("nohup mainboard");
     const auto& process_group = cyber_module.process_group();
     if (!process_group.empty()) {
-      absl::StrAppend(module.mutable_start_command(), " -p ", process_group);
+      StrAppend(module.mutable_start_command(), " -p ", process_group);
     }
     for (const std::string& dag : cyber_module.dag_files()) {
-      absl::StrAppend(module.mutable_start_command(), " -d ", dag);
+      StrAppend(module.mutable_start_command(), " -d ", dag);
     }
-    absl::StrAppend(module.mutable_start_command(), " &");
+    StrAppend(module.mutable_start_command(), " &");
 
     // Construct stop_command: pkill -f '<dag[0]>'
     const std::string& first_dag = cyber_module.dag_files(0);
-    module.set_stop_command(absl::StrCat("pkill -f \"", first_dag, "\""));
+    module.set_stop_command(StrCat("pkill -f \"", first_dag, "\""));
     // Construct process_monitor_config.
     module.mutable_process_monitor_config()->add_command_keywords("mainboard");
     module.mutable_process_monitor_config()->add_command_keywords(first_dag);
@@ -237,8 +239,7 @@ void HMIWorker::InitStatus() {
   //   2. CachedMode if it's stored in KV database.
   //   3. default_hmi_mode if it is available.
   //   4. Pick the first available mode.
-  const std::string cached_mode =
-      KVDB::Get(FLAGS_current_mode_db_key).value_or("");
+  const std::string cached_mode = KVDB::Get(FLAGS_current_mode_db_key);
   if (FLAGS_use_navigation_mode && ContainsKey(modes, kNavigationModeName)) {
     ChangeMode(kNavigationModeName);
   } else if (ContainsKey(modes, cached_mode)) {
@@ -255,6 +256,8 @@ void HMIWorker::InitReadersAndWriters() {
   pad_writer_ = node_->CreateWriter<control::PadMessage>(FLAGS_pad_topic);
   drive_event_writer_ =
       node_->CreateWriter<DriveEvent>(FLAGS_drive_event_topic);
+  audio_capture_writer_ =
+      node_->CreateWriter<AudioCapture>(FLAGS_audio_capture_topic);
 
   node_->CreateReader<SystemStatus>(
       FLAGS_system_status_topic,
@@ -351,6 +354,9 @@ bool HMIWorker::Trigger(const HMIAction action, const std::string& value) {
     case HMIAction::STOP_MODULE:
       StopModule(value);
       break;
+    case HMIAction::RECORD_AUDIO:
+      RecordAudio(value);
+      break;
     default:
       AERROR << "HMIAction not implemented, yet!";
       return false;
@@ -405,8 +411,8 @@ bool HMIWorker::ChangeDrivingMode(const Chassis::DrivingMode mode) {
       return false;
   }
 
-  static constexpr int kMaxTries = 3;
-  static constexpr auto kTryInterval = std::chrono::milliseconds(500);
+  constexpr int kMaxTries = 3;
+  constexpr auto kTryInterval = std::chrono::milliseconds(500);
   for (int i = 0; i < kMaxTries; ++i) {
     // Send driving action periodically until entering target driving mode.
     common::util::FillHeader("HMI", pad.get());
@@ -535,6 +541,12 @@ void HMIWorker::ResetMode() const {
   for (const auto& iter : current_mode_.modules()) {
     System(iter.second.stop_command());
   }
+}
+
+void HMIWorker::RecordAudio(const std::string& data) {
+  AudioCapture audio;
+  audio.set_wav_stream(apollo::common::util::DecodeBase64(data));
+  audio_capture_writer_->Write(audio);
 }
 
 void HMIWorker::StatusUpdateThreadLoop() {

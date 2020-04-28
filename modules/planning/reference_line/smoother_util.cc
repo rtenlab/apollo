@@ -23,7 +23,6 @@
 #include "gflags/gflags.h"
 
 #include "modules/common/math/vec2d.h"
-#include "modules/common/util/future.h"
 #include "modules/common/util/util.h"
 #include "modules/map/pnc_map/path.h"
 #include "modules/planning/common/planning_gflags.h"
@@ -38,10 +37,10 @@ DEFINE_double(smooth_length, 200, "Smooth this amount of length ");
 namespace apollo {
 namespace planning {
 
-using apollo::common::math::LineSegment2d;
-using apollo::common::math::Vec2d;
-using apollo::common::util::DistanceXY;
-using apollo::hdmap::MapPathPoint;
+using common::math::LineSegment2d;
+using common::math::Vec2d;
+using common::util::DistanceXY;
+using hdmap::MapPathPoint;
 
 class SmootherUtil {
  public:
@@ -170,7 +169,7 @@ class SmootherUtil {
     common::util::uniform_slice(0.0, ref_line.Length(), num_of_anchors - 1,
                                 &anchor_s);
     common::SLPoint sl;
-    if (!ref_line.XYToSL(init_point, &sl)) {
+    if (!ref_line.XYToSL(Vec2d(init_point.x(), init_point.y()), &sl)) {
       AERROR << "Failed to project init point to reference line";
       return anchor_points;
     }

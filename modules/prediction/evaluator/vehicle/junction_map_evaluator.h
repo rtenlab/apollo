@@ -16,15 +16,14 @@
 
 #pragma once
 
+#include <memory>
 #include <string>
 #include <vector>
 
-#include "torch/extension.h"
 #include "torch/script.h"
+#include "torch/torch.h"
 
 #include "modules/prediction/evaluator/evaluator.h"
-
-#include "modules/prediction/container/obstacles/obstacles_container.h"
 
 namespace apollo {
 namespace prediction {
@@ -49,10 +48,8 @@ class JunctionMapEvaluator : public Evaluator {
   /**
    * @brief Override Evaluate
    * @param Obstacle pointer
-   * @param Obstacles container
    */
-  bool Evaluate(Obstacle* obstacle_ptr,
-                ObstaclesContainer* obstacles_container) override;
+  bool Evaluate(Obstacle* obstacle_ptr) override;
 
   /**
    * @brief Extract feature vector
@@ -76,7 +73,7 @@ class JunctionMapEvaluator : public Evaluator {
  private:
   // junction exit mask
   static const size_t JUNCTION_FEATURE_SIZE = 12;
-  torch::jit::script::Module torch_model_;
+  std::shared_ptr<torch::jit::script::Module> torch_model_ptr_ = nullptr;
   torch::Device device_;
 };
 

@@ -16,10 +16,9 @@
 
 #include "cyber/task/task.h"
 
+#include <gtest/gtest.h>
 #include <memory>
-#include <thread>
 #include <vector>
-#include "gtest/gtest.h"
 
 #include "cyber/common/log.h"
 #include "cyber/cyber.h"
@@ -46,7 +45,7 @@ struct Message {
 void Task1() { ADEBUG << "Task1 running"; }
 
 void Task2(const Message& input) {
-  std::this_thread::sleep_for(std::chrono::milliseconds(10));
+  usleep(10000);
   ADEBUG << "Task2 running";
 }
 
@@ -104,5 +103,6 @@ TEST(AsyncTest, run_member_function) {
 int main(int argc, char** argv) {
   testing::InitGoogleTest(&argc, argv);
   apollo::cyber::Init(argv[0]);
-  return RUN_ALL_TESTS();
+  auto res = RUN_ALL_TESTS();
+  return res;
 }

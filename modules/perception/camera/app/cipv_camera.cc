@@ -933,9 +933,7 @@ bool Cipv::DetermineCipv(const std::vector<base::LaneLine> &lane_objects,
 bool Cipv::TranformPoint(const Eigen::VectorXf &in,
                          const Eigen::Matrix4f &motion_matrix,
                          Eigen::Vector3d *out) {
-  if (in.rows() != motion_matrix.cols()) {
-    AERROR << "Matrix mismatch";
-  }
+  CHECK(in.rows() == motion_matrix.cols());
   Eigen::VectorXf trans_pt = motion_matrix * in;
   if (fabs(trans_pt(3)) < kFloatEpsilon) {
     return false;
@@ -974,7 +972,7 @@ bool Cipv::CollectDrops(const base::MotionBufferPtr &motion_buffer,
     // }
 
     // If it is the first object, set capacity.
-    if (object_trackjectories_[cur_id].empty()) {
+    if (object_trackjectories_[cur_id].size() == 0) {
       object_trackjectories_[cur_id].set_capacity(kDropsHistorySize);
     }
 

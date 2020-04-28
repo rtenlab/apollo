@@ -16,7 +16,7 @@
 
 #include "modules/routing/routing.h"
 
-#include "modules/common/util/point_factory.h"
+#include "modules/common/util/util.h"
 #include "modules/routing/common/routing_gflags.h"
 
 namespace apollo {
@@ -64,8 +64,9 @@ RoutingRequest Routing::FillLaneInfoIfMissing(
     if (lane_waypoint.has_id()) {
       continue;
     }
-    const auto point =
-        common::util::PointFactory::ToPointENU(lane_waypoint.pose());
+    auto point = common::util::MakePointENU(lane_waypoint.pose().x(),
+                                            lane_waypoint.pose().y(),
+                                            lane_waypoint.pose().z());
 
     double s = 0.0;
     double l = 0.0;

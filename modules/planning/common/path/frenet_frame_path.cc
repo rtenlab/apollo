@@ -30,8 +30,8 @@ namespace planning {
 
 using apollo::common::FrenetFramePoint;
 
-FrenetFramePath::FrenetFramePath(std::vector<FrenetFramePoint> points)
-    : std::vector<FrenetFramePoint>(std::move(points)) {}
+FrenetFramePath::FrenetFramePath(const std::vector<FrenetFramePoint>& points)
+    : std::vector<FrenetFramePoint>(points) {}
 
 double FrenetFramePath::Length() const {
   if (empty()) {

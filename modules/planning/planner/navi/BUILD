@@ -4,8 +4,12 @@ package(default_visibility = ["//visibility:public"])
 
 cc_library(
     name = "navi_planner",
-    srcs = ["navi_planner.cc"],
-    hdrs = ["navi_planner.h"],
+    srcs = [
+        "navi_planner.cc",
+    ],
+    hdrs = [
+        "navi_planner.h",
+    ],
     copts = ["-DMODULE_NAME=\\\"planning\\\""],
     deps = [
         "//cyber/common:log",
@@ -33,7 +37,9 @@ cc_library(
 cc_test(
     name = "navi_planner_test",
     size = "small",
-    srcs = ["navi_planner_test.cc"],
+    srcs = [
+        "navi_planner_test.cc",
+    ],
     data = ["//modules/planning:planning_testdata"],
     deps = [
         ":navi_planner",

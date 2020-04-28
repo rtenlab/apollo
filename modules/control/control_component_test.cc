@@ -16,8 +16,6 @@
 
 #include "modules/control/control_component.h"
 
-#include <thread>
-
 #include "cyber/common/file.h"
 #include "cyber/common/log.h"
 #include "cyber/cyber.h"
@@ -33,8 +31,6 @@ namespace control {
 using apollo::canbus::Chassis;
 using apollo::common::monitor::MonitorMessage;
 using apollo::common::time::Clock;
-using apollo::cyber::Reader;
-using apollo::cyber::Writer;
 using apollo::localization::LocalizationEstimate;
 using apollo::planning::ADCTrajectory;
 
@@ -54,12 +50,6 @@ class ControlComponentTest : public ::testing::Test {
     FLAGS_is_control_test_mode = true;
 
     SetupCyber();
-  }
-
-  virtual void TearDown() {
-    if (control_component_) {
-      control_component_->Shutdown();
-    }
   }
 
  protected:
@@ -185,7 +175,7 @@ bool ControlComponentTest::RunControl(const std::string& test_case_name) {
   control_component_.reset(new ControlComponent());
   control_component_->Initialize(component_config_);
 
-  std::this_thread::sleep_for(std::chrono::milliseconds(1));
+  usleep(1000);  // sleep 1ms
 
   // feed topics
   planning_writer_->Write(trajectory_);
@@ -194,12 +184,12 @@ bool ControlComponentTest::RunControl(const std::string& test_case_name) {
   chassis_writer_->Write(chassis_);
   pad_writer_->Write(pad_message_);
 
-  std::this_thread::sleep_for(std::chrono::milliseconds(200));
+  usleep(200000);  // sleep 200ms
 
   TrimControlCommand(&control_command_);
 
   const std::string golden_result_file =
-      absl::StrCat("result_", test_case_name, ".pb.txt");
+      apollo::common::util::StrCat("result_", test_case_name, ".pb.txt");
   std::string tmp_golden_path = "/tmp/" + golden_result_file;
   std::string full_golden_path = FLAGS_test_data_dir + golden_result_file;
   control_command_.Clear();

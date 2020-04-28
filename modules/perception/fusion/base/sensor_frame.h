@@ -55,10 +55,7 @@ class SensorFrame {
   inline double GetTimestamp() const { return header_->timestamp; }
 
   inline bool GetPose(Eigen::Affine3d* pose) const {
-    if (pose == nullptr) {
-      AERROR << "pose is not available";
-      return false;
-    }
+    CHECK_NOTNULL(pose);
     *pose = header_->sensor2world_pose;
     return true;
   }

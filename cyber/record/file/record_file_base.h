@@ -28,23 +28,36 @@ namespace record {
 
 const int HEADER_LENGTH = 2048;
 
+using ::apollo::cyber::proto::Channel;
+using ::apollo::cyber::proto::ChannelCache;
+using ::apollo::cyber::proto::ChunkBody;
+using ::apollo::cyber::proto::ChunkBodyCache;
+using ::apollo::cyber::proto::ChunkHeader;
+using ::apollo::cyber::proto::ChunkHeaderCache;
+using ::apollo::cyber::proto::CompressType;
+using ::apollo::cyber::proto::Header;
+using ::apollo::cyber::proto::Index;
+using ::apollo::cyber::proto::SectionType;
+using ::apollo::cyber::proto::SingleIndex;
+using ::apollo::cyber::proto::SingleMessage;
+
 class RecordFileBase {
  public:
-  RecordFileBase() = default;
-  virtual ~RecordFileBase() = default;
+  RecordFileBase() {}
+  virtual ~RecordFileBase() {}
   virtual bool Open(const std::string& path) = 0;
   virtual void Close() = 0;
-  const std::string& GetPath() const { return path_; }
-  const proto::Header& GetHeader() const { return header_; }
-  const proto::Index& GetIndex() const { return index_; }
+  std::string GetPath() { return path_; }
+  Header GetHeader() { return header_; }
+  Index GetIndex() { return index_; }
   int64_t CurrentPosition();
   bool SetPosition(int64_t position);
 
  protected:
   std::mutex mutex_;
   std::string path_;
-  proto::Header header_;
-  proto::Index index_;
+  Header header_;
+  Index index_;
   int fd_;
 };
 

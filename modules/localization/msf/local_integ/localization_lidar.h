@@ -22,12 +22,12 @@
 #include "cyber/common/log.h"
 #include "include/lidar_locator.h"
 #include "modules/localization/msf/local_integ/localization_params.h"
-#include "modules/localization/msf/local_pyramid_map/base_map/base_map_node_index.h"
-#include "modules/localization/msf/local_pyramid_map/pyramid_map/pyramid_map.h"
-#include "modules/localization/msf/local_pyramid_map/pyramid_map/pyramid_map_config.h"
-#include "modules/localization/msf/local_pyramid_map/pyramid_map/pyramid_map_matrix.h"
-#include "modules/localization/msf/local_pyramid_map/pyramid_map/pyramid_map_node.h"
-#include "modules/localization/msf/local_pyramid_map/pyramid_map/pyramid_map_pool.h"
+#include "modules/localization/msf/local_map/base_map/base_map_node_index.h"
+#include "modules/localization/msf/local_map/lossy_map/lossy_map_2d.h"
+#include "modules/localization/msf/local_map/lossy_map/lossy_map_config_2d.h"
+#include "modules/localization/msf/local_map/lossy_map/lossy_map_matrix_2d.h"
+#include "modules/localization/msf/local_map/lossy_map/lossy_map_node_2d.h"
+#include "modules/localization/msf/local_map/lossy_map/lossy_map_pool_2d.h"
 
 namespace apollo {
 namespace localization {
@@ -70,17 +70,13 @@ struct MapNodeData {
 
 class LocalizationLidar {
  public:
-  typedef apollo::localization::msf::pyramid_map::PyramidMap PyramidMap;
-  typedef apollo::localization::msf::pyramid_map::MapNodeIndex MapNodeIndex;
-  typedef apollo::localization::msf::pyramid_map::PyramidMapNode PyramidMapNode;
-  typedef apollo::localization::msf::pyramid_map::PyramidMapNodePool
-      PyramidMapNodePool;
-  typedef apollo::localization::msf::pyramid_map::PyramidMapMatrix
-      PyramidMapMatrix;
-  typedef apollo::localization::msf::pyramid_map::PyramidMapConfig
-      PyramidMapConfig;
-  typedef apollo::localization::msf::pyramid_map::FloatMatrix FloatMatrix;
-  typedef apollo::localization::msf::pyramid_map::UIntMatrix UIntMatrix;
+  typedef apollo::localization::msf::LossyMap2D LossyMap;
+  typedef apollo::localization::msf::MapNodeIndex MapNodeIndex;
+  typedef apollo::localization::msf::LossyMapNode2D LossyMapNode;
+  typedef apollo::localization::msf::LossyMapNodePool2D LossyMapNodePool;
+  typedef apollo::localization::msf::LossyMapMatrix2D LossyMapMatrix;
+  typedef apollo::localization::msf::LossyMapCell2D LossyMapCell;
+  typedef apollo::localization::msf::LossyMapConfig2D LossyMapConfig;
 
  public:
   /**@brief The constructor. */
@@ -93,7 +89,6 @@ class LocalizationLidar {
             const unsigned int resolution_id = 0);
 
   void SetVelodyneExtrinsic(const Eigen::Affine3d& pose);
-
   void SetVehicleHeight(double height);
 
   void SetValidThreshold(float valid_threashold);
@@ -129,9 +124,9 @@ class LocalizationLidar {
   double resolution_ = 0.125;
   MapNodeData* lidar_map_node_;
 
-  PyramidMapConfig config_;
-  PyramidMap map_;
-  PyramidMapNodePool map_node_pool_;
+  LossyMapConfig config_;
+  LossyMap map_;
+  LossyMapNodePool map_node_pool_;
   Eigen::Vector2d map_left_top_corner_;
   unsigned int resolution_id_ = 0;
   int zone_id_ = 50;

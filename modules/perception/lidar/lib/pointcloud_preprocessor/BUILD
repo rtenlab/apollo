@@ -4,8 +4,12 @@ package(default_visibility = ["//visibility:public"])
 
 cc_library(
     name = "pointcloud_preprocessor",
-    srcs = ["pointcloud_preprocessor.cc"],
-    hdrs = ["pointcloud_preprocessor.h"],
+    srcs = [
+        "pointcloud_preprocessor.cc",
+    ],
+    hdrs = [
+        "pointcloud_preprocessor.h",
+    ],
     deps = [
         "//cyber",
         "//modules/common/configs:vehicle_config_helper",

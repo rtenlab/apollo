@@ -20,11 +20,8 @@
  */
 
 #include "cyber/transport/rtps/underlay_message_type.h"
-
 #include "fastcdr/Cdr.h"
 #include "fastcdr/FastBuffer.h"
-
-#include "cyber/common/log.h"
 
 namespace apollo {
 namespace cyber {
@@ -42,9 +39,7 @@ UnderlayMessageType::UnderlayMessageType() {
 }
 
 UnderlayMessageType::~UnderlayMessageType() {
-  if (m_keyBuffer != nullptr) {
-    free(m_keyBuffer);
-  }
+  if (m_keyBuffer != nullptr) free(m_keyBuffer);
 }
 
 bool UnderlayMessageType::serialize(void* data, SerializedPayload_t* payload) {
@@ -103,7 +98,7 @@ void UnderlayMessageType::deleteData(void* data) {
 }
 
 bool UnderlayMessageType::getKey(void* data, InstanceHandle_t* handle) {
-  RETURN_VAL_IF((!m_isGetKeyDefined), false);
+  if (!m_isGetKeyDefined) return false;
   UnderlayMessage* p_type = reinterpret_cast<UnderlayMessage*>(data);
   eprosima::fastcdr::FastBuffer fastbuffer(
       reinterpret_cast<char*>(m_keyBuffer),

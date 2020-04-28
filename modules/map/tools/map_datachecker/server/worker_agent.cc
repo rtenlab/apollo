@@ -15,9 +15,8 @@
  *****************************************************************************/
 #include "modules/map/tools/map_datachecker/server/worker_agent.h"
 
+#include <grpc++/grpc++.h>
 #include <memory>
-
-#include "grpc++/grpc++.h"
 
 namespace apollo {
 namespace hdmap {

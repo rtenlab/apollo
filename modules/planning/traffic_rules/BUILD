@@ -7,26 +7,28 @@ cc_library(
     srcs = [
         # TODO(all): Split to separate targets to gain better building cache.
         "backside_vehicle.cc",
+        "change_lane.cc",
         "crosswalk.cc",
         "destination.cc",
         "keep_clear.cc",
+        "object_priority.cc",
         "reference_line_end.cc",
         "rerouting.cc",
         "stop_sign.cc",
         "traffic_light.cc",
-        "yield_sign.cc",
     ],
     hdrs = [
         "backside_vehicle.h",
+        "change_lane.h",
         "crosswalk.h",
         "destination.h",
         "keep_clear.h",
+        "object_priority.h",
         "reference_line_end.h",
         "rerouting.h",
         "stop_sign.h",
         "traffic_light.h",
         "traffic_rule.h",
-        "yield_sign.h",
     ],
     copts = ["-DMODULE_NAME=\\\"planning\\\""],
     deps = [
@@ -46,8 +48,12 @@ cc_library(
 
 cc_library(
     name = "traffic_decider",
-    srcs = ["traffic_decider.cc"],
-    hdrs = ["traffic_decider.h"],
+    srcs = [
+        "traffic_decider.cc",
+    ],
+    hdrs = [
+        "traffic_decider.h",
+    ],
     copts = ["-DMODULE_NAME=\\\"planning\\\""],
     deps = [
         ":traffic_rules",

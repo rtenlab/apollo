@@ -32,9 +32,10 @@ namespace planning {
 
 class PredictionQuerier {
  public:
-  PredictionQuerier(const std::vector<const Obstacle*>& obstacles,
-                    const std::shared_ptr<std::vector<common::PathPoint>>&
-                        ptr_reference_line);
+  explicit PredictionQuerier(
+      const std::vector<const Obstacle*>& obstacles,
+      const std::shared_ptr<std::vector<common::PathPoint>>&
+          ptr_reference_line);
 
   virtual ~PredictionQuerier() = default;
 

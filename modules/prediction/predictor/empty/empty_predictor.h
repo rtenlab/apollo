@@ -20,7 +20,6 @@
 
 #pragma once
 
-#include "modules/prediction/container/obstacles/obstacles_container.h"
 #include "modules/prediction/predictor/predictor.h"
 
 namespace apollo {
@@ -41,12 +40,8 @@ class EmptyPredictor : public Predictor {
   /**
    * @brief Make prediction
    * @param Obstacle pointer
-   * @param Obstacles container
-   * @return If predicted successfully
    */
-  bool Predict(const ADCTrajectoryContainer* adc_trajectory_container,
-               Obstacle* obstacle,
-               ObstaclesContainer* obstacles_container) override;
+  void Predict(Obstacle* obstacle) override;
 };
 
 }  // namespace prediction

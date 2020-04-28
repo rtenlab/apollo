@@ -22,20 +22,9 @@
 #include "modules/perception/lidar/common/lidar_log.h"
 #include "modules/perception/lidar/lib/scene_manager/scene_manager.h"
 
-#include "modules/perception/lidar/lib/scene_manager/ground_service/ground_service.h"
-#include "modules/perception/lidar/lib/scene_manager/roi_service/roi_service.h"
-#include "modules/perception/lidar/lib/segmentation/ncut/ncut_segmentation.h"
-#include "modules/perception/lidar/lib/segmentation/cnnseg/cnn_segmentation.h"
-#include "modules/perception/lidar/lib/segmentation/cnnseg/proto/cnnseg_config.pb.h"
-#include "modules/perception/lidar/lib/segmentation/cnnseg/util.h"
-
 namespace apollo {
 namespace perception {
 namespace lidar {
-
-PERCEPTION_REGISTER_SCENESERVICE(GroundService);
-PERCEPTION_REGISTER_SCENESERVICE(ROIService);
-PERCEPTION_REGISTER_SEGMENTATION(CNNSegmentation);
 
 bool LidarObstacleSegmentation::Init(
     const LidarObstacleSegmentationInitOptions& options) {

@@ -14,14 +14,11 @@
  * limitations under the License.
  *****************************************************************************/
 
-#include "modules/localization/msf/local_pyramid_map/base_map/base_map_node_config.h"
-
-#include <memory>
+#include "modules/localization/msf/local_map/base_map/base_map_node_config.h"
 
 namespace apollo {
 namespace localization {
 namespace msf {
-namespace pyramid_map {
 
 BaseMapNodeConfig::BaseMapNodeConfig() {}
 
@@ -157,7 +154,6 @@ unsigned int BaseMapNodeConfig::GetBinarySize() const {
   return static_cast<unsigned int>(binary_size);
 }
 
-}  // namespace pyramid_map
 }  // namespace msf
 }  // namespace localization
 }  // namespace apollo

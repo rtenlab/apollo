@@ -26,8 +26,9 @@ We have offered a unique opportunity through the Data Pipeline tool to communica
    ./apollo.sh build_py
    ```
 
-1. Run the tool.
+1. Activate the Python 3 Conda environment, and run the tool.
 
    ```bash
-   ./submit_job.py --job_config=/path/to/your/job.pb.txt
+   source activate py37
+   python submit_job.py --job_config=/path/to/your/job.pb.txt
    ```

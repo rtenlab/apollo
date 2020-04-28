@@ -61,15 +61,17 @@ namespace planning {
 class Obstacle {
  public:
   Obstacle() = default;
-  Obstacle(const std::string& id,
-           const perception::PerceptionObstacle& perception_obstacle,
-           const prediction::ObstaclePriority::Priority& obstacle_priority,
-           const bool is_static);
-  Obstacle(const std::string& id,
-           const perception::PerceptionObstacle& perception_obstacle,
-           const prediction::Trajectory& trajectory,
-           const prediction::ObstaclePriority::Priority& obstacle_priority,
-           const bool is_static);
+  explicit Obstacle(
+      const std::string& id,
+      const perception::PerceptionObstacle& perception_obstacle,
+      const prediction::ObstaclePriority::Priority& obstacle_priority,
+      const bool is_static);
+  explicit Obstacle(
+      const std::string& id,
+      const perception::PerceptionObstacle& perception_obstacle,
+      const prediction::Trajectory& trajectory,
+      const prediction::ObstaclePriority::Priority& obstacle_priority,
+      const bool is_static);
 
   const std::string& Id() const { return id_; }
   void SetId(const std::string& id) { id_ = id; }
@@ -140,7 +142,7 @@ class Obstacle {
    **/
   const ObjectDecisionType& LongitudinalDecision() const;
 
-  std::string DebugString() const;
+  const std::string DebugString() const;
 
   const SLBoundary& PerceptionSLBoundary() const;
 
@@ -160,10 +162,6 @@ class Obstacle {
   bool HasLateralDecision() const;
 
   void set_path_st_boundary(const STBoundary& boundary);
-
-  bool is_path_st_boundary_initialized() {
-    return path_st_boundary_initialized_;
-  }
 
   void SetStBoundaryType(const STBoundary::BoundaryType type);
 
@@ -241,8 +239,6 @@ class Obstacle {
   bool is_static_ = false;
   bool is_virtual_ = false;
   double speed_ = 0.0;
-
-  bool path_st_boundary_initialized_ = false;
 
   prediction::Trajectory trajectory_;
   perception::PerceptionObstacle perception_obstacle_;

@@ -25,12 +25,11 @@
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 
-#include "modules/common/util/point_factory.h"
 #include "modules/planning/common/planning_gflags.h"
 
 using apollo::common::PathPoint;
 using apollo::common::Status;
-using apollo::common::util::PointFactory;
+using apollo::common::util::MakePathPoint;
 using apollo::perception::PerceptionObstacle;
 using apollo::prediction::ObstaclePriority;
 
@@ -38,7 +37,9 @@ namespace apollo {
 namespace planning {
 
 static PathPoint GenPathPoint(double s, double kappa = 0.0) {
-  return PointFactory::ToPathPoint(s, 0.0, 0.0, s, 0.0, kappa);
+  auto path_point = MakePathPoint(s, 0.0, 0.0, 0.0, kappa, 0.0, 0.0);
+  path_point.set_s(s);
+  return path_point;
 }
 
 TEST(NaviSpeedDeciderTest, CreateSpeedData) {
@@ -80,12 +81,8 @@ TEST(NaviSpeedDeciderTest, CreateSpeedData) {
                               &speed_data));
 
   for (auto& p : speed_data) {
-    if (p.s() > 2.0 && p.s() < 24.0) {
-      EXPECT_NEAR(2.0, p.a(), 0.1);
-    }
-    if (p.s() > 26.0 && p.s() < 60.0) {
-      EXPECT_NEAR(10.0, p.v(), 0.1);
-    }
+    if (p.s() > 2.0 && p.s() < 24.0) EXPECT_NEAR(2.0, p.a(), 0.1);
+    if (p.s() > 26.0 && p.s() < 60.0) EXPECT_NEAR(10.0, p.v(), 0.1);
   }
 }
 
@@ -139,9 +136,7 @@ TEST(NaviSpeedDeciderTest, CreateSpeedDataForStaticObstacle) {
                               },
                               &speed_data));
   for (auto& p : speed_data) {
-    if (p.s() > 16.7) {
-      EXPECT_NEAR(0.0, p.v(), 1.0);
-    }
+    if (p.s() > 16.7) EXPECT_NEAR(0.0, p.v(), 1.0);
   }
 }
 
@@ -207,12 +202,8 @@ TEST(NaviSpeedDeciderTest, CreateSpeedDataForObstacles) {
                               },
                               &speed_data));
   for (auto& p : speed_data) {
-    if (p.s() > 15.0 && p.s() < 26.0) {
-      EXPECT_NEAR(5.0, p.v(), 0.5);
-    }
-    if (p.s() > 37.0) {
-      EXPECT_NEAR(0.0, p.v(), 1.0);
-    }
+    if (p.s() > 15.0 && p.s() < 26.0) EXPECT_NEAR(5.0, p.v(), 0.5);
+    if (p.s() > 37.0) EXPECT_NEAR(0.0, p.v(), 1.0);
   }
 }
 
@@ -285,12 +276,8 @@ TEST(NaviSpeedDeciderTest, CreateSpeedDataForCurve) {
                               },
                               &speed_data));
   for (auto& p : speed_data) {
-    if (p.s() > 56.0 && p.s() < 59.0) {
-      EXPECT_NEAR(2.6, p.v(), 0.1);
-    }
-    if (p.s() > 88.0 && p.s() < 95.0) {
-      EXPECT_NEAR(3.7, p.v(), 0.1);
-    }
+    if (p.s() > 56.0 && p.s() < 59.0) EXPECT_NEAR(2.6, p.v(), 0.1);
+    if (p.s() > 88.0 && p.s() < 95.0) EXPECT_NEAR(3.7, p.v(), 0.1);
   }
 }
 

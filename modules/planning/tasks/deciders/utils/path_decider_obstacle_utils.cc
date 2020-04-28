@@ -16,6 +16,7 @@
 
 #include "modules/planning/tasks/deciders/utils/path_decider_obstacle_utils.h"
 
+#include <cmath>
 #include <limits>
 
 #include "modules/common/math/linear_interpolation.h"

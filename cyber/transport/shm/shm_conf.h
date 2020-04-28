@@ -17,7 +17,7 @@
 #ifndef CYBER_TRANSPORT_SHM_SHM_CONF_H_
 #define CYBER_TRANSPORT_SHM_SHM_CONF_H_
 
-#include <cstdint>
+#include <stdint.h>
 #include <string>
 
 namespace apollo {

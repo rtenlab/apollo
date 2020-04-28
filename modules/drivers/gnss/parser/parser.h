@@ -16,7 +16,7 @@
 
 #pragma once
 
-#include <cstdint>
+#include <stdint.h>
 #include <string>
 
 #include "google/protobuf/message.h"

@@ -13,14 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *****************************************************************************/
-#include "modules/localization/msf/local_pyramid_map/ndt_map/ndt_map_node_config.h"
-
-#include <memory>
+#include "modules/localization/msf/local_map/ndt_map/ndt_map_node_config.h"
 
 namespace apollo {
 namespace localization {
 namespace msf {
-namespace pyramid_map {
 
 NdtMapNodeConfig::NdtMapNodeConfig() {}
 
@@ -38,7 +35,6 @@ std::shared_ptr<BaseMapNodeConfig> NdtMapNodeConfig::Clone() {
   return std::dynamic_pointer_cast<BaseMapNodeConfig>(map_node_config);
 }
 
-}  // namespace pyramid_map
 }  // namespace msf
 }  // namespace localization
 }  // namespace apollo

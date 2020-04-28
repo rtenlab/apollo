@@ -15,17 +15,15 @@
  *****************************************************************************/
 #pragma once
 
-#include <memory>
 #include <vector>
 #include "modules/localization/msf/common/util/rect2d.h"
-#include "modules/localization/msf/local_pyramid_map/base_map/base_map_matrix.h"
-#include "modules/localization/msf/local_pyramid_map/pyramid_map/aligned_matrix.h"
-#include "modules/localization/msf/local_pyramid_map/pyramid_map/pyramid_map_config.h"
+#include "modules/localization/msf/local_map/base_map/base_map_matrix.h"
+#include "modules/localization/msf/local_map/pyramid_map/aligned_matrix.h"
+#include "modules/localization/msf/local_map/pyramid_map/pyramid_map_config.h"
 
 namespace apollo {
 namespace localization {
 namespace msf {
-namespace pyramid_map {
 
 typedef AlignedMatrix<float> FloatMatrix;
 typedef AlignedMatrix<unsigned int> UIntMatrix;
@@ -201,9 +199,8 @@ class PyramidMapMatrix : public BaseMapMatrix {
   double ComputeMeanIntensity(unsigned int level = 0);
 
   /**@brief Combine two PyramidMapMatrix instances (Reduce). */
-  static void Reduce(std::shared_ptr<PyramidMapMatrix> cells,
-                     const PyramidMapMatrix& new_cells, unsigned int level = 0,
-                     unsigned int new_level = 0);
+  static void Reduce(PyramidMapMatrix* cells, const PyramidMapMatrix& new_cells,
+                     unsigned int level = 0, unsigned int new_level = 0);
 
   inline bool HasIntensity() const;
   inline bool HasIntensityVar() const;
@@ -565,7 +562,6 @@ inline const UIntMatrix* PyramidMapMatrix::GetGroundCountMatrix(
   return &ground_count_matrixes_[level];
 }
 
-}  // namespace pyramid_map
 }  // namespace msf
 }  // namespace localization
 }  // namespace apollo

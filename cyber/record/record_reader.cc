@@ -22,10 +22,7 @@ namespace apollo {
 namespace cyber {
 namespace record {
 
-using apollo::cyber::proto::Channel;
-using apollo::cyber::proto::ChunkBody;
-using apollo::cyber::proto::ChunkHeader;
-using apollo::cyber::proto::SectionType;
+using proto::SectionType;
 
 RecordReader::~RecordReader() {}
 

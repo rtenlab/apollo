@@ -11,7 +11,6 @@ cc_library(
     ],
     deps = [
         "//modules/prediction/common:prediction_util",
-        "//modules/prediction/container/obstacles:obstacles_container",
         "//modules/prediction/predictor",
     ],
 )
@@ -19,13 +18,16 @@ cc_library(
 cc_test(
     name = "free_move_predictor_test",
     size = "small",
-    srcs = ["free_move_predictor_test.cc"],
+    srcs = [
+        "free_move_predictor_test.cc",
+    ],
     data = [
         "//modules/prediction:prediction_data",
         "//modules/prediction:prediction_testdata",
     ],
     deps = [
         "//modules/prediction/common:kml_map_based_test",
+        "//modules/prediction/container/obstacles:obstacles_container",
         "//modules/prediction/predictor/free_move:free_move_predictor",
         "@gtest//:main",
     ],

@@ -305,6 +305,7 @@ void GatedHungarianMatcher<T>::UpdateGatingLocalCostsMat(
       }
     }
   }
+  return;
 }
 
 template <typename T>

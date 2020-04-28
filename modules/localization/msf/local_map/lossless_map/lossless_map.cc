@@ -243,6 +243,7 @@ void LosslessMap::PreloadMapArea(const Eigen::Vector3d& location,
                                  unsigned int resolution_id,
                                  unsigned int zone_id) {
   BaseMap::PreloadMapArea(location, trans_diff, resolution_id, zone_id);
+  return;
 }
 
 bool LosslessMap::LoadMapArea(const Eigen::Vector3d& seed_pt3d,

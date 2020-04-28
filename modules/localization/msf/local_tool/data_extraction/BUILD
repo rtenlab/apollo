@@ -14,6 +14,11 @@ cc_library(
         "location_exporter.h",
         "pcd_exporter.h",
     ],
+    linkopts = [
+        "-lboost_filesystem",
+        "-lboost_system",
+        "-lboost_program_options",
+    ],
     deps = [
         "//cyber",
         "//modules/common/math",
@@ -22,7 +27,6 @@ cc_library(
         "//modules/localization/proto:gps_proto",
         "//modules/localization/proto:localization_proto",
         "//modules/localization/proto:measure_proto",
-        "@boost",
         "@eigen",
         "@pcl",
     ],
@@ -30,12 +34,18 @@ cc_library(
 
 cc_binary(
     name = "cyber_record_parser",
-    srcs = ["cyber_record_parser.cc"],
+    srcs = [
+        "cyber_record_parser.cc",
+    ],
+    linkopts = [
+        "-lboost_filesystem",
+        "-lboost_system",
+        "-lboost_program_options",
+    ],
     linkstatic = 0,
     deps = [
         ":data_extraction",
         "//cyber",
-        "@boost",
         "@eigen",
         "@pcl",
     ],
@@ -43,11 +53,18 @@ cc_binary(
 
 cc_binary(
     name = "compare_poses",
-    srcs = ["compare_poses.cc"],
+    srcs = [
+        "compare_poses.cc",
+    ],
+    linkopts = [
+        "-lboost_filesystem",
+        "-lboost_system",
+        "-lboost_program_options",
+    ],
+    linkstatic = 0,
     deps = [
         ":data_extraction",
         "//cyber",
-        "@boost",
         "@eigen",
     ],
 )

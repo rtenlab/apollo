@@ -24,7 +24,9 @@ cc_library(
 
 cc_library(
     name = "driver",
-    srcs = ["driver.cc"],
+    srcs = [
+        "driver.cc",
+    ],
     hdrs = [
         "driver.h",
         "socket_input.h",
@@ -39,7 +41,9 @@ cc_library(
 
 cc_library(
     name = "socket",
-    srcs = ["socket_input.cc"],
+    srcs = [
+        "socket_input.cc",
+    ],
     hdrs = [
         "input.h",
         "socket_input.h",

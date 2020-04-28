@@ -33,7 +33,7 @@ class VehicleModel {
  private:
   static void RearCenteredKinematicBicycleModel(
       const VehicleModelConfig& vehicle_model_config,
-      const double predicted_time_horizon,
+      const VehicleParam& vehicle_param, const double predicted_time_horizon,
       const VehicleState& cur_vehicle_state,
       VehicleState* predicted_vehicle_state);
 };

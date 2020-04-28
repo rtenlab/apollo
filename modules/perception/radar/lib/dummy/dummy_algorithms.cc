@@ -77,10 +77,7 @@ bool DummyPreprocessor::Init() { return true; }
 bool DummyPreprocessor::Preprocess(const drivers::ContiRadar& raw_obstacles,
                                    const PreprocessorOptions& options,
                                    drivers::ContiRadar* corrected_obstacles) {
-  if (corrected_obstacles == nullptr) {
-    AERROR << "corrected_obstacles is not available";
-    return false;
-  }
+  CHECK_NOTNULL(corrected_obstacles);
   *corrected_obstacles = raw_obstacles;
   return true;
 }

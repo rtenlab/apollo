@@ -16,8 +16,6 @@
 
 #include "modules/perception/camera/lib/obstacle/tracker/omt/omt_obstacle_tracker.h"
 
-#include "absl/strings/str_cat.h"
-#include "absl/strings/str_split.h"
 #include "cyber/common/file.h"
 #include "cyber/common/log.h"
 #include "gflags/gflags.h"
@@ -246,8 +244,8 @@ TEST(FusionObstacleTrackerTest, FusionObstacleTracker_test) {
   CHECK(ObjectTemplateManager::Instance()->Init(object_template_init_options));
 
   // Init camera list
-  const std::vector<std::string> camera_names =
-      absl::StrSplit(FLAGS_sensor_name, ',');
+  std::vector<std::string> camera_names;
+  apollo::common::util::Split(FLAGS_sensor_name, ',', &camera_names);
   // Init data provider
   DataProvider::InitOptions data_options;
   data_options.image_height = 1080;
@@ -336,7 +334,8 @@ TEST(FusionObstacleTrackerTest, FusionObstacleTracker_test) {
   fin.open(filename, std::ifstream::in);
   ASSERT_TRUE(fin.is_open());
   while (fin >> line) {
-    const std::vector<std::string> temp_strs = absl::StrSplit(line, '/');
+    std::vector<std::string> temp_strs;
+    apollo::common::util::Split(line, '/', &temp_strs);
     if (temp_strs.size() != 2) {
       AERROR << "invaid format in " << FLAGS_test_list;
     }
@@ -349,8 +348,8 @@ TEST(FusionObstacleTrackerTest, FusionObstacleTracker_test) {
     CameraFrame &frame = frames[frame_num];
 
     // read detections from txt
-    const std::string filename =
-        absl::StrCat(FLAGS_data_root, "/detection_feature/", frame_num, ".txt");
+    std::string filename = FLAGS_data_root + "/detection_feature/" +
+                           std::to_string(frame_num) + ".txt";
     read_detections(filename, FLAGS_feature_length, camera_name, &frame);
     AINFO << "Frame " << frame_num << " has " << frame.detected_objects.size()
           << " detection objects";

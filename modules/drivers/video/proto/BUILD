@@ -18,7 +18,9 @@ cc_proto_library(
 
 proto_library(
     name = "video_proto_lib",
-    srcs = ["video_h265cfg.proto"],
+    srcs = [
+        "video_h265cfg.proto",
+    ],
     deps = [
         "//modules/common/proto:header_proto_lib",
     ],

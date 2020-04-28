@@ -16,6 +16,7 @@
 
 #pragma once
 
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -23,8 +24,6 @@
 #include "torch/torch.h"
 
 #include "modules/prediction/evaluator/evaluator.h"
-
-#include "modules/prediction/container/obstacles/obstacles_container.h"
 
 namespace apollo {
 namespace prediction {
@@ -49,19 +48,15 @@ class JunctionMLPEvaluator : public Evaluator {
   /**
    * @brief Override Evaluate
    * @param Obstacle pointer
-   * @param Obstacles container
    */
-  bool Evaluate(Obstacle* obstacle_ptr,
-                ObstaclesContainer* obstacles_container) override;
+  bool Evaluate(Obstacle* obstacle_ptr) override;
 
   /**
    * @brief Extract feature vector
    * @param Obstacle pointer
-   * @param Obstacles container
-   * @param Feature container in a vector for receiving the feature values
+   *        Feature container in a vector for receiving the feature values
    */
   void ExtractFeatureValues(Obstacle* obstacle_ptr,
-                            ObstaclesContainer* obstacles_container,
                             std::vector<double>* feature_values);
 
   /**
@@ -81,11 +76,9 @@ class JunctionMLPEvaluator : public Evaluator {
   /**
    * @brief Set ego vehicle feature vector
    * @param Obstacle pointer
-   * @param Obstacles container
-   * @param Feature container in a vector for receiving the feature values
+   *        Feature container in a vector for receiving the feature values
    */
   void SetEgoVehicleFeatureValues(Obstacle* obstacle_ptr,
-                                  ObstaclesContainer* obstacles_container,
                                   std::vector<double>* const feature_values);
 
   /**
@@ -109,7 +102,7 @@ class JunctionMLPEvaluator : public Evaluator {
   // junction feature on 12 fan area 8 dim each
   static const size_t JUNCTION_FEATURE_SIZE = 12 * 8;
 
-  torch::jit::script::Module torch_model_;
+  std::shared_ptr<torch::jit::script::Module> torch_model_ptr_ = nullptr;
   torch::Device device_;
 };
 

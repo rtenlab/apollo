@@ -15,11 +15,10 @@
  *****************************************************************************/
 #include "cyber/croutine/croutine.h"
 
-#include "gtest/gtest.h"
-
 #include "cyber/common/global_data.h"
 #include "cyber/cyber.h"
 #include "cyber/init.h"
+#include "gtest/gtest.h"
 
 namespace apollo {
 namespace cyber {

@@ -28,9 +28,6 @@
 #include <utility>
 #include <vector>
 
-#include "boost/thread/locks.hpp"
-#include "boost/thread/shared_mutex.hpp"
-
 #include "cyber/common/log.h"
 
 #include "gtest/gtest_prod.h"
@@ -50,7 +47,6 @@
 #include "modules/planning/proto/planning.pb.h"
 #include "modules/planning/proto/planning_internal.pb.h"
 #include "modules/prediction/proto/prediction_obstacle.pb.h"
-#include "modules/storytelling/proto/story.pb.h"
 
 /**
  * @namespace apollo::dreamview
@@ -293,7 +289,7 @@ class SimulationWorldService {
   void DownsampleSpeedPointsByInterval(const Points &points,
                                        size_t downsampleInterval,
                                        Points *downsampled_points) {
-    if (points.empty()) {
+    if (points.size() == 0) {
       return;
     }
 
@@ -312,7 +308,6 @@ class SimulationWorldService {
   SimulationWorld world_;
 
   // Downsampled route paths to be rendered in frontend.
-  mutable boost::shared_mutex route_paths_mutex_;
   std::vector<RoutePath> route_paths_;
 
   // The handle of MapService, not owned by SimulationWorldService.
@@ -372,8 +367,6 @@ class SimulationWorldService {
       routing_request_reader_;
   std::shared_ptr<cyber::Reader<apollo::routing::RoutingResponse>>
       routing_response_reader_;
-  std::shared_ptr<cyber::Reader<apollo::storytelling::Stories>>
-      storytelling_reader_;
 
   // Writers.
   std::shared_ptr<cyber::Writer<apollo::relative_map::NavigationInfo>>

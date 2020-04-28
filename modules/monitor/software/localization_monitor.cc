@@ -34,6 +34,7 @@ DEFINE_string(localization_component_name, "Localization",
 
 namespace apollo {
 namespace monitor {
+using apollo::common::util::StrCat;
 using apollo::localization::LocalizationStatus;
 using apollo::localization::MeasureState;
 
@@ -73,26 +74,24 @@ void LocalizationMonitor::RunOnce(const double current_time) {
       break;
     case MeasureState::WARNNING:
       SummaryMonitor::EscalateStatus(
-          ComponentStatus::WARN,
-          absl::StrCat("WARNNING: ", status->state_message()),
+          ComponentStatus::WARN, StrCat("WARNNING: ", status->state_message()),
           component_status);
       break;
     case MeasureState::ERROR:
-      SummaryMonitor::EscalateStatus(
-          ComponentStatus::WARN,
-          absl::StrCat("ERROR: ", status->state_message()), component_status);
+      SummaryMonitor::EscalateStatus(ComponentStatus::WARN,
+                                     StrCat("ERROR: ", status->state_message()),
+                                     component_status);
       break;
     case MeasureState::CRITICAL_ERROR:
       SummaryMonitor::EscalateStatus(
           ComponentStatus::ERROR,
-          absl::StrCat("CRITICAL_ERROR: ", status->state_message()),
+          StrCat("CRITICAL_ERROR: ", status->state_message()),
           component_status);
       break;
     case MeasureState::FATAL_ERROR:
       SummaryMonitor::EscalateStatus(
           ComponentStatus::FATAL,
-          absl::StrCat("FATAL_ERROR: ", status->state_message()),
-          component_status);
+          StrCat("FATAL_ERROR: ", status->state_message()), component_status);
       break;
     default:
       AFATAL << "Unknown fusion_status: " << status->fusion_status();

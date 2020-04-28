@@ -20,6 +20,8 @@
 
 #include "modules/planning/tasks/optimizers/piecewise_jerk_path/piecewise_jerk_path_ipopt_solver.h"
 
+#include <utility>
+
 #include "cyber/common/log.h"
 
 namespace apollo {

@@ -41,7 +41,6 @@ class HMI {
  private:
   // Send VehicleParam to the given conn, or broadcast if conn is null.
   void SendVehicleParam(WebSocketHandler::Connection *conn = nullptr);
-  void SendStatus(WebSocketHandler::Connection *conn = nullptr);
 
   void RegisterMessageHandlers();
 

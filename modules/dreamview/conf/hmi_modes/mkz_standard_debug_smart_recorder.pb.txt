@@ -54,12 +54,6 @@ cyber_modules {
   }
 }
 cyber_modules {
-  key: "Storytelling"
-  value: {
-    dag_files: "/apollo/modules/storytelling/dag/storytelling.dag"
-  }
-}
-cyber_modules {
   key: "Prediction"
   value: {
     dag_files: "/apollo/modules/prediction/dag/prediction.dag"

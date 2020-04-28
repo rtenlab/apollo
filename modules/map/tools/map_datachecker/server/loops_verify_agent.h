@@ -15,11 +15,10 @@
  *****************************************************************************/
 #pragma once
 
+#include <grpc++/grpc++.h>
 #include <memory>
 #include <utility>
 #include <vector>
-
-#include "grpc++/grpc++.h"
 
 #include "modules/map/tools/map_datachecker/proto/collection_service.pb.h"
 #include "modules/map/tools/map_datachecker/server/laps_checker.h"

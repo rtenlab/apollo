@@ -18,7 +18,6 @@
 
 #include "cyber/common/file.h"
 #include "modules/prediction/common/kml_map_based_test.h"
-#include "modules/prediction/common/prediction_gflags.h"
 #include "modules/prediction/container/obstacles/obstacles_container.h"
 #include "modules/prediction/evaluator/vehicle/mlp_evaluator.h"
 
@@ -45,14 +44,13 @@ TEST_F(SequencePredictorTest, General) {
   EXPECT_EQ(perception_obstacle.id(), 1);
   MLPEvaluator mlp_evaluator;
   ObstaclesContainer container;
-  ADCTrajectoryContainer adc_trajectory_container;
   container.Insert(perception_obstacles_);
   container.BuildLaneGraph();
   Obstacle* obstacle_ptr = container.GetObstacle(1);
   EXPECT_NE(obstacle_ptr, nullptr);
-  mlp_evaluator.Evaluate(obstacle_ptr, &container);
+  mlp_evaluator.Evaluate(obstacle_ptr);
   SequencePredictor predictor;
-  predictor.Predict(&adc_trajectory_container, obstacle_ptr, &container);
+  predictor.Predict(obstacle_ptr);
   EXPECT_EQ(predictor.NumOfTrajectories(*obstacle_ptr), 0);
   LaneSequence* lane_seq = obstacle_ptr->mutable_latest_feature()
                                ->mutable_lane()
@@ -68,11 +66,9 @@ TEST_F(SequencePredictorTest, General) {
   EXPECT_TRUE(predictor.LaneSequenceWithMaxProb(lane_change_type, 0.5, 0.5));
   EXPECT_FALSE(predictor.LaneChangeWithMaxProb(lane_change_type, 0.5, 0.5));
 
-  Obstacle* ego_vehicle_ptr = container.GetObstacle(FLAGS_ego_vehicle_id);
   std::vector<bool> enable_lane_sequence(3, true);
   predictor.FilterLaneSequences(*obstacle_ptr->mutable_latest_feature(),
                                 lane_seq->mutable_lane_segment(0)->lane_id(),
-                                ego_vehicle_ptr, &adc_trajectory_container,
                                 &enable_lane_sequence);
   EXPECT_TRUE(enable_lane_sequence[0]);
 

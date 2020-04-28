@@ -20,9 +20,8 @@
 
 #include "modules/planning/math/curve1d/cubic_polynomial_curve1d.h"
 
-#include "absl/strings/str_cat.h"
-#include "absl/strings/str_join.h"
 #include "cyber/common/log.h"
+#include "modules/common/util/string_util.h"
 
 namespace apollo {
 namespace planning {
@@ -74,7 +73,8 @@ double CubicPolynomialCurve1d::Evaluate(const std::uint32_t order,
 }
 
 std::string CubicPolynomialCurve1d::ToString() const {
-  return absl::StrCat(absl::StrJoin(coef_, "\t"), param_, "\n");
+  return apollo::common::util::StrCat(
+      apollo::common::util::PrintIter(coef_, "\t"), param_, "\n");
 }
 
 void CubicPolynomialCurve1d::ComputeCoefficients(const double x0,

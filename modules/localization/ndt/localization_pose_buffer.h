@@ -16,10 +16,9 @@
 
 #pragma once
 
+#include <Eigen/Core>
+#include <Eigen/Geometry>
 #include <vector>
-
-#include "Eigen/Core"
-#include "Eigen/Geometry"
 
 namespace apollo {
 namespace localization {

@@ -13,11 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *****************************************************************************/
+#include <gtest/gtest.h>
 
 #include "modules/perception/lib/utils/time_util.h"
-
-#include <thread>
-#include "gtest/gtest.h"
 
 namespace apollo {
 namespace perception {
@@ -49,7 +47,7 @@ TEST(TimeUtilTest, TestGetCurrentTime) {
     if (std::fabs(unix_time - static_cast<double>(current_time)) < 1) {
       return;
     }
-    std::this_thread::sleep_for(std::chrono::milliseconds(50));
+    usleep(50000);  // 50ms
   }
   FAIL();
 }

@@ -15,7 +15,7 @@
  *****************************************************************************/
 
 #include <getopt.h>
-#include <cstddef>
+#include <stddef.h>
 #include <memory>
 #include <stdexcept>
 #include <string>

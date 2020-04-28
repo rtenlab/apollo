@@ -1,4 +1,5 @@
 import STORE from "store";
+import * as THREE from "three";
 
 import carMaterial from "assets/models/car.mtl";
 import carObject from "assets/models/car.obj";

@@ -14,7 +14,9 @@ cc_library(
 cc_test(
     name = "registerer_test",
     size = "small",
-    srcs = ["registerer_test.cc"],
+    srcs = [
+        "registerer_test.cc",
+    ],
     deps = [
         ":registerer",
         "@gtest//:main",

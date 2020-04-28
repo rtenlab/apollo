@@ -1,6 +1,4 @@
-ARG BASE_IMAGE=nvidia/cuda:10.0-cudnn7-devel-ubuntu18.04
-# ARG BASE_IMAGE=ubuntu:18.04
-FROM ${BASE_IMAGE}
+FROM ubuntu:18.04
 
 LABEL version="1.0"
 
@@ -25,14 +23,12 @@ RUN apt update -y && \
     python-dev \
     python3 \
     python3-dev \
-    qt5-default \
     libasio-dev \
     libtinyxml2-6 \
     libtinyxml2-dev \
     libncurses5-dev \
     libavcodec57 \
     libavcodec-dev \
-    libconsole-bridge-dev \
     libswscale4 \
     libswscale-dev \
     libcurl4-nss-dev \
@@ -66,7 +62,6 @@ RUN bash /tmp/installers/install_protobuf.sh
 RUN bash /tmp/installers/install_bazel_packages.sh
 RUN bash /tmp/installers/install_google_styleguide.sh
 RUN bash /tmp/installers/install_osqp.sh
-RUN bash /tmp/installers/install_python_modules.sh
 
 # Add Bionic source
 RUN echo "deb http://us.archive.ubuntu.com/ubuntu/ bionic main restricted" > /etc/apt/sources.list

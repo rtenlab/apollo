@@ -4,8 +4,12 @@ package(default_visibility = ["//visibility:public"])
 
 cc_library(
     name = "pbf_tracker",
-    srcs = ["pbf_tracker.cc"],
-    hdrs = ["pbf_tracker.h"],
+    srcs = [
+        "pbf_tracker.cc",
+    ],
+    hdrs = [
+        "pbf_tracker.h",
+    ],
     deps = [
         "//modules/common/time",
         "//modules/perception/fusion/lib/data_fusion/existance_fusion/dst_existance_fusion",
@@ -20,7 +24,9 @@ cc_library(
 cc_test(
     name = "pbf_tracker_test",
     size = "small",
-    srcs = ["pbf_tracker_test.cc"],
+    srcs = [
+        "pbf_tracker_test.cc",
+    ],
     deps = [
         ":pbf_tracker",
         "//modules/perception/common:perception_gflags",

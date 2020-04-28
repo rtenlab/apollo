@@ -28,9 +28,8 @@
 
 namespace apollo {
 namespace prediction {
-namespace {
 
-using apollo::common::math::Sigmoid;
+namespace {
 
 double ComputeMean(const std::vector<double>& nums, size_t start, size_t end) {
   int count = 0;
@@ -51,8 +50,7 @@ MLPEvaluator::MLPEvaluator() {
 
 void MLPEvaluator::Clear() {}
 
-bool MLPEvaluator::Evaluate(Obstacle* obstacle_ptr,
-                            ObstaclesContainer* obstacles_container) {
+bool MLPEvaluator::Evaluate(Obstacle* obstacle_ptr) {
   Clear();
   CHECK_NOTNULL(obstacle_ptr);
   CHECK_LE(LANE_FEATURE_SIZE, 4 * FLAGS_max_num_lane_point);
@@ -78,7 +76,7 @@ bool MLPEvaluator::Evaluate(Obstacle* obstacle_ptr,
   LaneGraph* lane_graph_ptr =
       latest_feature_ptr->mutable_lane()->mutable_lane_graph();
   CHECK_NOTNULL(lane_graph_ptr);
-  if (lane_graph_ptr->lane_sequence().empty()) {
+  if (lane_graph_ptr->lane_sequence_size() == 0) {
     AERROR << "Obstacle [" << id << "] has no lane sequences.";
     return false;
   }
@@ -403,14 +401,14 @@ double MLPEvaluator::ComputeProbability(
       if (layer.layer_activation_func() == Layer::RELU) {
         neuron_output = apollo::prediction::math_util::Relu(neuron_output);
       } else if (layer.layer_activation_func() == Layer::SIGMOID) {
-        neuron_output = Sigmoid(neuron_output);
+        neuron_output = apollo::prediction::math_util::Sigmoid(neuron_output);
       } else if (layer.layer_activation_func() == Layer::TANH) {
         neuron_output = std::tanh(neuron_output);
       } else {
         AERROR << "Undefined activation function ["
                << layer.layer_activation_func()
                << "]. A default sigmoid will be used instead.";
-        neuron_output = Sigmoid(neuron_output);
+        neuron_output = apollo::prediction::math_util::Sigmoid(neuron_output);
       }
       layer_output.push_back(neuron_output);
     }

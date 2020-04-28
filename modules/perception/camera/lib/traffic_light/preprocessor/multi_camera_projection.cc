@@ -87,11 +87,10 @@ bool MultiCamerasProjection::Project(const CarPose& pose,
   }
 
   Eigen::Matrix4d c2w_pose;
-
-  if (pose.c2w_poses_.find(option.camera_name) == pose.c2w_poses_.end()) {
+  if (!pose.GetCameraPose(option.camera_name, &c2w_pose)) {
+    AERROR << "invalid camera_name: " << option.camera_name;
     return false;
   }
-  c2w_pose = pose.c2w_poses_.at(option.camera_name);
 
   bool ret = false;
   AINFO << "project use camera_name: " << option.camera_name;
@@ -136,15 +135,13 @@ bool MultiCamerasProjection::BoundaryBasedProject(
     const Eigen::Matrix4d& c2w_pose,
     const std::vector<base::PointXYZID>& points,
     base::TrafficLight* light) const {
-  if (camera_model.get() == nullptr) {
-    AERROR << "camera_model is not available.";
-    return false;
-  }
+  CHECK_NOTNULL(camera_model.get());
   int width = static_cast<int>(camera_model->get_width());
   int height = static_cast<int>(camera_model->get_height());
   int bound_size = static_cast<int>(points.size());
+  AINFO << "bound size " << bound_size;
   if (bound_size < 4) {
-    AERROR << "invalid bound_size " << bound_size;
+    AERROR << "invalid bound_size";
     return false;
   }
   std::vector<Eigen::Vector2i> pts2d(bound_size);

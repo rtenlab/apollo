@@ -4,7 +4,9 @@ package(default_visibility = ["//visibility:public"])
 
 cc_library(
     name = "planner",
-    hdrs = ["planner.h"],
+    hdrs = [
+        "planner.h",
+    ],
     copts = ["-DMODULE_NAME=\\\"planning\\\""],
     deps = [
         "//modules/common/proto:pnc_point_proto",
@@ -47,7 +49,9 @@ cc_library(
 cc_test(
     name = "on_lane_planner_dispatcher_test",
     size = "small",
-    srcs = ["on_lane_planner_dispatcher_test.cc"],
+    srcs = [
+        "on_lane_planner_dispatcher_test.cc",
+    ],
     deps = [
         ":planner_dispatcher",
         "@gtest//:main",
@@ -57,7 +61,9 @@ cc_test(
 cc_test(
     name = "navi_planner_dispatcher_test",
     size = "small",
-    srcs = ["navi_planner_dispatcher_test.cc"],
+    srcs = [
+        "navi_planner_dispatcher_test.cc",
+    ],
     deps = [
         ":planner_dispatcher",
         "@gtest//:main",

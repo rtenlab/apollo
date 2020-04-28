@@ -78,7 +78,7 @@ class SenderMessage {
   /**
    * @brief Destructor.
    */
-  virtual ~SenderMessage() = default;
+  ~SenderMessage() = default;
 
   /**
    * @brief Update the current period for sending messages by a difference.
@@ -287,7 +287,8 @@ void CanSender<SensorType>::PowerSendThreadFunc() {
   AINFO << "Can client sender thread starts.";
 
   while (is_running_) {
-    tm_start = absl::ToUnixMicros(common::time::Clock::Now());
+    tm_start =
+        common::time::AsInt64<common::time::micros>(common::time::Clock::Now());
     new_delta_period = INIT_PERIOD;
 
     for (auto &message : send_messages_) {
@@ -309,7 +310,8 @@ void CanSender<SensorType>::PowerSendThreadFunc() {
       }
     }
     delta_period = new_delta_period;
-    tm_end = absl::ToUnixMicros(common::time::Clock::Now());
+    tm_end =
+        common::time::AsInt64<common::time::micros>(common::time::Clock::Now());
     sleep_interval = delta_period - (tm_end - tm_start);
 
     if (sleep_interval > 0) {

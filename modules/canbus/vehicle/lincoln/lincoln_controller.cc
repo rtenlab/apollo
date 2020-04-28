@@ -777,7 +777,8 @@ void LincolnController::SecurityDogThreadFunc() {
   }
 
   std::chrono::duration<double, std::micro> default_period{50000};
-  int64_t start = absl::ToUnixMicros(common::time::Clock::Now());
+  int64_t start =
+      common::time::AsInt64<common::time::micros>(common::time::Clock::Now());
 
   int32_t speed_ctrl_fail = 0;
   int32_t steer_ctrl_fail = 0;
@@ -818,11 +819,13 @@ void LincolnController::SecurityDogThreadFunc() {
     if (emergency_mode && mode != Chassis::EMERGENCY_MODE) {
       Emergency();
     }
-    int64_t end = absl::ToUnixMicros(common::time::Clock::Now());
+    int64_t end =
+        common::time::AsInt64<common::time::micros>(common::time::Clock::Now());
     std::chrono::duration<double, std::micro> elapsed{end - start};
     if (elapsed < default_period) {
       std::this_thread::sleep_for(default_period - elapsed);
-      start = absl::ToUnixMicros(common::time::Clock::Now());
+      start = common::time::AsInt64<common::time::micros>(
+          common::time::Clock::Now());
     } else {
       AERROR_EVERY(100)
           << "Too much time consumption in LincolnController looping process:"

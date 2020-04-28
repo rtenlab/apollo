@@ -29,7 +29,6 @@
 #include "modules/common/vehicle_state/vehicle_state_provider.h"
 #include "modules/planning/common/frame.h"
 #include "modules/planning/common/planning_context.h"
-#include "modules/planning/scenarios/traffic_light/unprotected_left_turn/stage_approach.h"
 #include "modules/planning/scenarios/traffic_light/unprotected_left_turn/stage_creep.h"
 #include "modules/planning/scenarios/traffic_light/unprotected_left_turn/stage_intersection_cruise.h"
 
@@ -38,7 +37,8 @@ namespace planning {
 namespace scenario {
 namespace traffic_light {
 
-using apollo::hdmap::HDMapUtil;
+using hdmap::HDMapUtil;
+using perception::TrafficLight;
 
 void TrafficLightUnprotectedLeftTurnScenario::Init() {
   if (init_) {
@@ -55,7 +55,7 @@ void TrafficLightUnprotectedLeftTurnScenario::Init() {
   const auto& traffic_light_status =
       PlanningContext::Instance()->planning_status().traffic_light();
 
-  if (traffic_light_status.current_traffic_light_overlap_id().empty()) {
+  if (traffic_light_status.current_traffic_light_overlap_id_size() == 0) {
     AERROR << "Could not find traffic-light(s)";
     return;
   }
@@ -88,11 +88,6 @@ void TrafficLightUnprotectedLeftTurnScenario::RegisterStages() {
   if (!s_stage_factory_.Empty()) {
     s_stage_factory_.Clear();
   }
-  s_stage_factory_.Register(
-      ScenarioConfig::TRAFFIC_LIGHT_UNPROTECTED_LEFT_TURN_APPROACH,
-      [](const ScenarioConfig::StageConfig& config) -> Stage* {
-        return new TrafficLightUnprotectedLeftTurnStageApproach(config);
-      });
   s_stage_factory_.Register(
       ScenarioConfig::TRAFFIC_LIGHT_UNPROTECTED_LEFT_TURN_CREEP,
       [](const ScenarioConfig::StageConfig& config) -> Stage* {

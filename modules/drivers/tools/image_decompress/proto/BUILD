@@ -18,7 +18,9 @@ cc_proto_library(
 
 proto_library(
     name = "image_decompress_proto_lib",
-    srcs = ["config.proto"],
+    srcs = [
+        "config.proto",
+    ],
 )
 
 cpplint()

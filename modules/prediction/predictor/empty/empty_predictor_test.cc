@@ -45,13 +45,12 @@ TEST_F(EmptyPredictorTest, General) {
 
   MLPEvaluator evaluator;
   ObstaclesContainer container;
-  ADCTrajectoryContainer adc_trajectory_container;
   container.Insert(perception_obstacles_);
   Obstacle* obstacle_ptr = container.GetObstacle(1);
   EXPECT_NE(obstacle_ptr, nullptr);
-  evaluator.Evaluate(obstacle_ptr, &container);
+  evaluator.Evaluate(obstacle_ptr);
   EmptyPredictor predictor;
-  predictor.Predict(&adc_trajectory_container, obstacle_ptr, &container);
+  predictor.Predict(obstacle_ptr);
   EXPECT_EQ(predictor.NumOfTrajectories(*obstacle_ptr), 0);
 }
 

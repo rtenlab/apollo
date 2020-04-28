@@ -21,6 +21,7 @@
 #pragma once
 
 #include <string>
+#include <tuple>
 #include <vector>
 
 #include "modules/common/configs/proto/vehicle_config.pb.h"

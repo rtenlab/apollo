@@ -28,11 +28,8 @@ namespace base {
 
 Eigen::Vector2f OmnidirectionalCameraDistortionModel::Project(
     const Eigen::Vector3f& point3d) {
-  if (std::isgreater(point3d[2], 0.f)) {
-    AERROR << "The input point (" << point3d
-           << ") should be in front of the camera";
-  }
-
+  CHECK_GT(point3d[2], 0.f)
+      << "the input point should be in front of the camera";
   // rotate:
   // [0 1 0;
   //  1 0 0;

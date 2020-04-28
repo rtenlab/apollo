@@ -14,12 +14,10 @@
  * limitations under the License.
  *****************************************************************************/
 
-#include "modules/perception/lib/utils/timer.h"
-
-#include <thread>
-#include "gtest/gtest.h"
+#include <gtest/gtest.h>
 
 #include "modules/perception/lib/utils/perf.h"
+#include "modules/perception/lib/utils/timer.h"
 
 namespace apollo {
 namespace perception {
@@ -28,7 +26,7 @@ namespace lib {
 TEST(TimerTest, Test) {
   Timer timer;
   timer.Start();
-  std::this_thread::sleep_for(std::chrono::milliseconds(100));
+  usleep(100000);
   const uint64_t elapsed_time = timer.End("TimerTest");
   EXPECT_GE(elapsed_time, 99);
   EXPECT_LE(elapsed_time, 101);
@@ -36,19 +34,19 @@ TEST(TimerTest, Test) {
 
 TEST(TimerWrapperTest, Test) {
   TimerWrapper wrapper("TimerWrapperTest");
-  std::this_thread::sleep_for(std::chrono::milliseconds(200));
+  usleep(200000);
 }
 
 TEST(PerfFunctionTest, Test) {
   PERCEPTION_PERF_FUNCTION();
-  std::this_thread::sleep_for(std::chrono::milliseconds(100));
+  usleep(100000);
 }
 
 TEST(PerfBlockTest, Test) {
   PERCEPTION_PERF_BLOCK_START();
-  std::this_thread::sleep_for(std::chrono::milliseconds(100));
+  usleep(100000);
   PERCEPTION_PERF_BLOCK_END("BLOCK1");
-  std::this_thread::sleep_for(std::chrono::milliseconds(200));
+  usleep(200000);
   PERCEPTION_PERF_BLOCK_END("BLOCK2");
 }
 

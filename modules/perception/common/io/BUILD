@@ -4,16 +4,22 @@ package(default_visibility = ["//visibility:public"])
 
 cc_library(
     name = "io_util",
-    srcs = ["io_util.cc"],
-    hdrs = ["io_util.h"],
+    srcs = [
+        "io_util.cc",
+    ],
+    hdrs = [
+        "io_util.h",
+    ],
+    linkopts = [
+        "-lboost_filesystem",
+    ],
     deps = [
         "//cyber",
+        "//modules/common/util:string_util",
         "//modules/perception/base:camera",
         "//modules/perception/base:distortion_model",
         "//modules/perception/base:omnidirectional_model",
         "//modules/perception/common/geometry:basic",
-        "@boost",
-        "@com_google_absl//absl/strings",
         "@eigen",
         "@yaml_cpp//:yaml",
     ],
@@ -22,7 +28,9 @@ cc_library(
 cc_test(
     name = "io_util_test",
     size = "small",
-    srcs = ["io_util_test.cc"],
+    srcs = [
+        "io_util_test.cc",
+    ],
     data = [
         "//modules/perception:perception_testdata",
     ],

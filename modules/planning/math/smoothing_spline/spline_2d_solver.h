@@ -37,7 +37,7 @@ class Spline2dSolver {
         kernel_(t_knots, order),
         constraint_(t_knots, order) {}
 
-  virtual ~Spline2dSolver() = default;
+  ~Spline2dSolver() = default;
 
   virtual void Reset(const std::vector<double>& t_knots,
                      const uint32_t order) = 0;

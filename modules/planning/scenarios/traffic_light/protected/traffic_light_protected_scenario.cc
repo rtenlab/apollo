@@ -33,7 +33,8 @@ namespace planning {
 namespace scenario {
 namespace traffic_light {
 
-using apollo::hdmap::HDMapUtil;
+using hdmap::HDMapUtil;
+using perception::TrafficLight;
 
 void TrafficLightProtectedScenario::Init() {
   if (init_) {
@@ -50,7 +51,7 @@ void TrafficLightProtectedScenario::Init() {
   const auto& traffic_light_status =
       PlanningContext::Instance()->planning_status().traffic_light();
 
-  if (traffic_light_status.current_traffic_light_overlap_id().empty()) {
+  if (traffic_light_status.current_traffic_light_overlap_id_size() == 0) {
     AERROR << "Could not find traffic-light(s)";
     return;
   }

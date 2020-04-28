@@ -129,7 +129,7 @@ void DestroyClassFactoryObjectsOfLibrary(
       class_factory_object->RemoveOwnedClassLoader(class_loader);
       // when no anybody owner,delete && erase
       if (!class_factory_object->IsOwnedByAnybody()) {
-        itr = class_factory_map->erase(itr);
+        class_factory_map->erase(itr++);
         delete class_factory_object;
       } else {
         ++itr;

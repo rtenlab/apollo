@@ -19,7 +19,6 @@
 #include <string>
 #include <vector>
 
-#include "modules/prediction/container/obstacles/obstacle.h"
 #include "modules/prediction/proto/offline_features.pb.h"
 #include "modules/prediction/proto/prediction_obstacle.pb.h"
 
@@ -73,12 +72,10 @@ class FeatureOutput {
    * @brief Insert a prediction result with predicted trajectories
    * @param Obstacle id
    * @param prediction_obstacle
-   * @param obstacle_conf
-   * @param scenario
    */
   static void InsertPredictionResult(
-      const Obstacle* obstacle, const PredictionObstacle& prediction_obstacle,
-      const ObstacleConf& obstacle_conf, const Scenario& scenario);
+      const int obstacle_id, const PredictionObstacle& prediction_obstacle,
+      const ObstacleConf& obstacle_conf);
 
   /**
    * @brief Insert a frame env

@@ -54,7 +54,7 @@ class RTKReplayPlanner : public PlannerWithReferenceLine {
 
   apollo::common::Status Init(const PlanningConfig& config) override;
 
-  void Stop() override {}
+  virtual void Stop() {}
 
   /**
    * @brief Override function Plan in parent class Planner.

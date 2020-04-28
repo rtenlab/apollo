@@ -142,7 +142,9 @@ bool CCRFSequenceTypeFusion::Init(const TypeFusionInitOption& option) {
   CHECK(util::LoadSingleMatrixFile(transition_property_file_path,
                                    &transition_matrix_));
   transition_matrix_ += Matrixd::Ones() * 1e-6;
-  util::NormalizeRow(&transition_matrix_);
+  for (std::size_t i = 0; i < VALID_OBJECT_TYPE; ++i) {
+    util::NormalizeRow(&transition_matrix_);
+  }
   AINFO << "transition matrix";
   AINFO << std::endl << transition_matrix_;
   for (std::size_t i = 0; i < VALID_OBJECT_TYPE; ++i) {
